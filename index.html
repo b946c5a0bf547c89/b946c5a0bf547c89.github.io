@@ -743,7 +743,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-31 00:05:50" itemprop="dateModified" datetime="2019-12-31T00:05:50+08:00">2019-12-31</time>
+                <time title="Modified: 2019-12-31 00:15:16" itemprop="dateModified" datetime="2019-12-31T00:15:16+08:00">2019-12-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -796,11 +796,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Hardware-driver"><a href="#Hardware-driver" class="headerlink" title="Hardware driver"></a>Hardware driver</h3><h4 id="mpt3sas-mpt2sas-driver-parameter"><a href="#mpt3sas-mpt2sas-driver-parameter" class="headerlink" title="mpt3sas/mpt2sas driver parameter"></a>mpt3sas/mpt2sas driver parameter</h4><p>parm: command_retry_count: Device discovery TUR command retry count: (default=144) (int)</p>
-<h1 id="retry-count-default-was-144-it-‘s-too-large"><a href="#retry-count-default-was-144-it-‘s-too-large" class="headerlink" title="retry count default was 144, it ‘s too large"></a>retry count default was 144, it ‘s too large</h1><p>parm: max_queue_depth: max controller queue depth (int) </p>
+          <h3 id="Hardware-driver"><a href="#Hardware-driver" class="headerlink" title="Hardware driver"></a>Hardware driver</h3><h4 id="mpt3sas-mpt2sas-driver-parameter"><a href="#mpt3sas-mpt2sas-driver-parameter" class="headerlink" title="mpt3sas/mpt2sas driver parameter"></a>mpt3sas/mpt2sas driver parameter</h4><p>parm: command_retry_count: Device discovery TUR command retry count: (default=144) (int)<br>retry count default was 144, it ‘s too large</p>
+<p>parm: max_queue_depth: max controller queue depth (int) </p>
 <p>The Linux “scatter/gather” table size needs to be large enough to allow IO_SIZE IO, if possible. For most drivers, this typically requires a “sg_tablesize” value of 256 or greater for 4MB IO. Different vendors have different defaults for this parameter, and may require a modprobe.conf entry to increase the value. The QLogic driver defaults to a value of 1024. For Emulex, a modeprobe.conf entry needs to be added to increase the value to 256 or greater, such as:<br>options lpfc lpfc_sg_seg_cnt=256</p>
-<p>The LSI SAS driver, “mpt2sas”, uses the parameter named “max_sgl_entries” to control this value.<br>Its maximum value in RHEL 6.x currently only 128<br>options mpt2sas max_sgl_entries=256</p>
-<h2 id="not-make-sure-in-https-www-ibm-com-developerworks-community-forums-html-topic-id-77777777-0000-0000-0000-000014889306-looks-like-the-setting-will-not-work-I-‘m-not-sure-the-driver-has-update"><a href="#not-make-sure-in-https-www-ibm-com-developerworks-community-forums-html-topic-id-77777777-0000-0000-0000-000014889306-looks-like-the-setting-will-not-work-I-‘m-not-sure-the-driver-has-update" class="headerlink" title="not make sure, in https://www.ibm.com/developerworks/community/forums/html/topic?id=77777777-0000-0000-0000-000014889306, looks like the setting will not work, I ‘m not sure the driver has update."></a>not make sure, in <a href="https://www.ibm.com/developerworks/community/forums/html/topic?id=77777777-0000-0000-0000-000014889306" target="_blank" rel="noopener">https://www.ibm.com/developerworks/community/forums/html/topic?id=77777777-0000-0000-0000-000014889306</a>, looks like the setting will not work, I ‘m not sure the driver has update.</h2><p>it ‘s could not be modify, if you want reduce memory overhead, you cold turn it down</p>
+<p>The LSI SAS driver, “mpt2sas”, uses the parameter named “max_sgl_entries” to control this value.<br>Its maximum value in RHEL 6.x currently only 128<br>options mpt2sas max_sgl_entries=256<br><a href="https://www.ibm.com/developerworks/community/forums/html/topic?id=77777777-0000-0000-0000-000014889306" target="_blank" rel="noopener">not make sure</a><br>looks like the setting will not work, I ‘m not sure the driver has update.</p>
+<p>it ‘s could not be modify, if you want reduce memory overhead, you cold turn it down</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ lspci | grep 2308</span><br><span class="line">01:00.0 Serial Attached SCSI controller: LSI Logic &#x2F; Symbios Logic SAS2308 PCI-Express Fusion-MPT SAS-2 (rev 05)</span><br><span class="line">$ cat &#x2F;sys&#x2F;devices&#x2F;pci0000:00&#x2F;0000:00:02.1&#x2F;0000:01:00.0&#x2F;host1&#x2F;scsi_host&#x2F;host1&#x2F;sg_tablesize</span><br><span class="line">128</span><br><span class="line"></span><br><span class="line">echo 256 &gt; &#x2F;sys&#x2F;devices&#x2F;pci0000:00&#x2F;0000:00:02.1&#x2F;0000:01:00.0&#x2F;host1&#x2F;scsi_host&#x2F;host1&#x2F;sg_tablesize</span><br><span class="line">echo: write error: Input&#x2F;output error</span><br></pre></td></tr></table></figure>
 
 <h4 id="Qlogic-driver-setting"><a href="#Qlogic-driver-setting" class="headerlink" title="Qlogic driver setting"></a>Qlogic driver setting</h4><p>Adpater reset time e.g. Qlogic reset time<br>echo options qla2xxx ql2xextended_error_logging=1 qlport_down_retry=10 ql2xloginretrycount=10 &gt;&gt;  /etc/modprobe.d/qlogic.conf<br>Multipath check_timeout  (reduce to 10 seconds from default 60 seconds)</p>
@@ -995,7 +995,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">48 mins.</span>
+    <span title="Reading time total">47 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
