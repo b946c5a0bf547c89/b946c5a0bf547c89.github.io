@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Hardware drivermpt3sas&#x2F;mpt2sas driver parameterparm: command_retry_count: Device discovery TUR command retry count: (default&#x3D;144) (int) retry count default was 144, it ‘s too largeparm: max_queue_dept">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The block device">
+<meta property="og:url" content="http://yoursite.com/2016/08/10/block_device/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="Hardware drivermpt3sas&#x2F;mpt2sas driver parameterparm: command_retry_count: Device discovery TUR command retry count: (default&#x3D;144) (int) retry count default was 144, it ‘s too largeparm: max_queue_dept">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-08-09T16:04:26.000Z">
+<meta property="article:modified_time" content="2019-12-30T16:05:50.095Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="scsi">
+<meta property="article:tag" content="block">
+<meta property="article:tag" content="smart">
+<meta property="article:tag" content="nvme">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2016/08/10/block_device/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>The block device | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/10/block_device/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The block device
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-08-10 00:04:26" itemprop="dateCreated datePublished" datetime="2016-08-10T00:04:26+08:00">2016-08-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-31 00:05:50" itemprop="dateModified" datetime="2019-12-31T00:05:50+08:00">2019-12-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hardware/" itemprop="url" rel="index">
+                    <span itemprop="name">Hardware</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/08/10/block_device/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/10/block_device/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>10 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Hardware-driver"><a href="#Hardware-driver" class="headerlink" title="Hardware driver"></a>Hardware driver</h3><h4 id="mpt3sas-mpt2sas-driver-parameter"><a href="#mpt3sas-mpt2sas-driver-parameter" class="headerlink" title="mpt3sas/mpt2sas driver parameter"></a>mpt3sas/mpt2sas driver parameter</h4><p>parm: command_retry_count: Device discovery TUR command retry count: (default=144) (int)</p>
+<h1 id="retry-count-default-was-144-it-‘s-too-large"><a href="#retry-count-default-was-144-it-‘s-too-large" class="headerlink" title="retry count default was 144, it ‘s too large"></a>retry count default was 144, it ‘s too large</h1><p>parm: max_queue_depth: max controller queue depth (int) </p>
+<p>The Linux “scatter/gather” table size needs to be large enough to allow IO_SIZE IO, if possible. For most drivers, this typically requires a “sg_tablesize” value of 256 or greater for 4MB IO. Different vendors have different defaults for this parameter, and may require a modprobe.conf entry to increase the value. The QLogic driver defaults to a value of 1024. For Emulex, a modeprobe.conf entry needs to be added to increase the value to 256 or greater, such as:<br>options lpfc lpfc_sg_seg_cnt=256</p>
+<p>The LSI SAS driver, “mpt2sas”, uses the parameter named “max_sgl_entries” to control this value.<br>Its maximum value in RHEL 6.x currently only 128<br>options mpt2sas max_sgl_entries=256</p>
+<h2 id="not-make-sure-in-https-www-ibm-com-developerworks-community-forums-html-topic-id-77777777-0000-0000-0000-000014889306-looks-like-the-setting-will-not-work-I-‘m-not-sure-the-driver-has-update"><a href="#not-make-sure-in-https-www-ibm-com-developerworks-community-forums-html-topic-id-77777777-0000-0000-0000-000014889306-looks-like-the-setting-will-not-work-I-‘m-not-sure-the-driver-has-update" class="headerlink" title="not make sure, in https://www.ibm.com/developerworks/community/forums/html/topic?id=77777777-0000-0000-0000-000014889306, looks like the setting will not work, I ‘m not sure the driver has update."></a>not make sure, in <a href="https://www.ibm.com/developerworks/community/forums/html/topic?id=77777777-0000-0000-0000-000014889306" target="_blank" rel="noopener">https://www.ibm.com/developerworks/community/forums/html/topic?id=77777777-0000-0000-0000-000014889306</a>, looks like the setting will not work, I ‘m not sure the driver has update.</h2><p>it ‘s could not be modify, if you want reduce memory overhead, you cold turn it down</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ lspci | grep 2308</span><br><span class="line">01:00.0 Serial Attached SCSI controller: LSI Logic &#x2F; Symbios Logic SAS2308 PCI-Express Fusion-MPT SAS-2 (rev 05)</span><br><span class="line">$ cat &#x2F;sys&#x2F;devices&#x2F;pci0000:00&#x2F;0000:00:02.1&#x2F;0000:01:00.0&#x2F;host1&#x2F;scsi_host&#x2F;host1&#x2F;sg_tablesize</span><br><span class="line">128</span><br><span class="line"></span><br><span class="line">echo 256 &gt; &#x2F;sys&#x2F;devices&#x2F;pci0000:00&#x2F;0000:00:02.1&#x2F;0000:01:00.0&#x2F;host1&#x2F;scsi_host&#x2F;host1&#x2F;sg_tablesize</span><br><span class="line">echo: write error: Input&#x2F;output error</span><br></pre></td></tr></table></figure>
+
+<h4 id="Qlogic-driver-setting"><a href="#Qlogic-driver-setting" class="headerlink" title="Qlogic driver setting"></a>Qlogic driver setting</h4><p>Adpater reset time e.g. Qlogic reset time<br>echo options qla2xxx ql2xextended_error_logging=1 qlport_down_retry=10 ql2xloginretrycount=10 &gt;&gt;  /etc/modprobe.d/qlogic.conf<br>Multipath check_timeout  (reduce to 10 seconds from default 60 seconds)</p>
+<p>Set the max_segments for HBA driver<br>| HBA       | Module Parameter|<br>|———–|:—————:|<br>| LSI       |  max_sgl_entries|<br>| Emulex    |  lpfc_sg_seg_cnt|<br>| ib_srp    |  cmd_sg_entries |<br>| Brocade   |  bfa_io_max_sge |</p>
+<p>Set max_hw_sectors_kb for HBA driver<br>| HBA       | Module Parameter|<br>|———–|:—————:|<br>| LSI       |  max_sectors    |<br>| ib_srp    |  max_sect       |<br>| Brocade   |  max_xfer_size  |</p>
+<p>mpt3sas<br>max_sectors:max sectors, range 64 to 32767  default=32767 (ushort)</p>
+<h4 id="SAN-controller-setting-MD3460"><a href="#SAN-controller-setting-MD3460" class="headerlink" title="SAN controller setting MD3460"></a>SAN controller setting MD3460</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RAID 6               8+2</span><br><span class="line">segment              128K</span><br><span class="line">cache block size     32K</span><br><span class="line">cache flush          90%</span><br><span class="line">Write cache mirror   enabled</span><br><span class="line">Read cache           disabled</span><br></pre></td></tr></table></figure>
+<p>`</p>
+<h3 id="Linux-setting"><a href="#Linux-setting" class="headerlink" title="Linux setting"></a>Linux setting</h3><h4 id="block-driver"><a href="#block-driver" class="headerlink" title="block driver"></a>block driver</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/sys/block/sdz/device/queue_depth</span><br><span class="line"></span><br><span class="line">/sys/block/sda/queue/nomerges </span><br><span class="line"><span class="comment">#set nomerges to 0 for HDDs or to 1 for SSDs</span></span><br><span class="line"></span><br><span class="line">/sys/block/sdd/queue/add_random </span><br><span class="line"><span class="comment">#The default value is 1. Set add_random=0 for SSDs because random entropy pool does not optimize SSD performance</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># check scsi state</span></span><br><span class="line">$ cat /sys/block/sdX/device/state</span><br><span class="line">running</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> 30 &gt; /sys/block/sdX/device/timeout</span><br><span class="line"><span class="comment"># I don 't think set the value too long</span></span><br><span class="line"></span><br><span class="line">$ cat /etc/udev/rules.d/50-udev.rules</span><br><span class="line">ACTION==<span class="string">"add"</span>, SUBSYSTEM==<span class="string">"scsi"</span> , SYSFS&#123;<span class="built_in">type</span>&#125;==<span class="string">"0|7|14"</span>, RUN+=<span class="string">"/bin/sh -c 'echo 60 &gt; /sys$<span class="variable">$DEVPATH</span>/timeout'"</span></span><br><span class="line"><span class="comment"># Note that the default timeout for normal file system commands is 60 seconds when udev is being used. If udev is not in use, the default timeout is 30 seconds.</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="block-driver-2"><a href="#block-driver-2" class="headerlink" title="block driver 2"></a><a href="https://library.netapp.com/ecmdocs/ECMP12404601/html/GUID-436F7286-AD26-4A8D-A2D1-2BC8B5CFC023.html" target="_blank" rel="noopener">block driver 2</a></h4><ul>
+<li><p>max_hw_sectors_kb (RO) - This parameter sets the maximum number of kilobytes that the hardware allows for request.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ubuntu 18.04 server, sas 10TB 512e HDD</span><br><span class="line">$ cat &#x2F;sys&#x2F;block&#x2F;sda&#x2F;queue&#x2F;max_hw_sectors_kb </span><br><span class="line">16383</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>max_sectors_kb (RW) - This parameter sets the maximum number of kilobytes that the block layer allows for a file system request. The value of this parameter must be less than or equal to the maximum size allowed by the hardware. The kernel also places an upper bound on this value with the BLK_DEF_MAX_SECTORS macro. This value varies from distribution to distribution, for example, it is 1024 on RHEL 6.3, 2048 on SLES 11 SP2.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat /sys/block/sda/queue/max_sectors_kb </span><br><span class="line">1280</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>max_segments (RO) - This parameter enables low level driver to set an upper limit on the number of hardware data segments in a request. In the HBA drivers, this is also known as sg_tablesize.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat /sys/block/sda/queue/max_segments</span><br><span class="line">128</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>max_segment_size (RO) - This parameter enables low level driver to set an upper limit on the size of each data segment in an I/O request in bytes. If clustering is enabled on the low level driver it is set to 65536 or it is set to system PAGE_SIZE by default, which is typically 4K. The maximum I/O size is determined by the following:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cat /sys/block/sda/queue/max_segment_size </span><br><span class="line">65536</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>MAX_IO_SIZE_KB = MIN(max_sectors_kb, (max_segment_size * max_segments)/1024)<br> 1280 KB       = MIN(1280, (65536*128)/1024) = MIN(1280, 8192)</p>
+<p>In this command, PAGE_SIZE is architecture independent. It is 4096 for x86_64.</p>
+<h1 id="or-you-could-set-it-from-1280-to-8192"><a href="#or-you-could-set-it-from-1280-to-8192" class="headerlink" title="or you could set it from 1280 to 8192"></a>or you could set it from 1280 to 8192</h1><p>$ echo 8192 &gt; max_sectors_kb</p>
+<h5 id="Hot-plugin-the-scsi-device"><a href="#Hot-plugin-the-scsi-device" class="headerlink" title="Hot plugin the scsi device"></a>Hot plugin the scsi device</h5><p>What is h c t l<br>          h == hostadapter id (first one being 0)<br>          c == SCSI channel on hostadapter (first one being 0)<br>          t == ID (target)<br>          l == LUN (first one being 0)<br>Generic SCSI devices can also be accessed via the bsg driver in Linux.  By default, the bsg driver’s device node names  are  of  the  form ‘/dev/bsg/H:C:T:L’.  So,  for example, the SCSI device shown by this utility on a line starting with the tuple ‘6:0:1:2’ could be accessed via the bsg driver with the ‘/dev/bsg/6:0:1:2’ device node name.</p>
+<h5 id="Add-the-scsi-device"><a href="#Add-the-scsi-device" class="headerlink" title="Add the scsi device"></a>Add the scsi device</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;- - -&quot; &gt; &#x2F;sys&#x2F;class&#x2F;scsi_host&#x2F;host&lt;h&gt;&#x2F;scan</span><br><span class="line">echo &quot;c t l&quot; &gt;  &#x2F;sys&#x2F;class&#x2F;scsi_host&#x2F;host&lt;h&gt;&#x2F;scan</span><br></pre></td></tr></table></figure>
+
+<h5 id="Refresh-the-scsi-device"><a href="#Refresh-the-scsi-device" class="headerlink" title="Refresh the scsi device"></a>Refresh the scsi device</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /sys/block/sdau/device/rescan</span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /sys/class/scsi_device/h:c:t:l/device/rescan</span><br></pre></td></tr></table></figure>
+
+<h5 id="Remove-the-scsi-device"><a href="#Remove-the-scsi-device" class="headerlink" title="Remove the scsi device"></a>Remove the scsi device</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /sys/class/scsi_device/h:c:t:l/device/delete</span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /sys/block/&lt;dev&gt;/device/delete</span><br></pre></td></tr></table></figure>
+
+<h4 id="IO-schdule"><a href="#IO-schdule" class="headerlink" title="IO schdule"></a>IO schdule</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">schdule = deadline</span><br><span class="line">nr_request = 1024</span><br><span class="line">max_sector_kb = 1024</span><br><span class="line">read_ahead_kb = 8192</span><br><span class="line">rq_affinity = 2</span><br><span class="line"><span class="comment"># For storage configurations that need to maximize distribution of completion processing setting this option to '2' forces the completion to run on the requesting cpu (bypassing the "group" aggregation logic).</span></span><br><span class="line"></span><br><span class="line">vm.dirty_ratio = 40</span><br><span class="line"><span class="comment"># dirty_ratio     "Dirty" memory is that waiting to be written to disk. dirty_ratio is the number of memory pages at which a process will start writing out dirty data, expressed as a percentage out of the total free and reclaimable pages. A default of 20 is reasonable. Increase to 40 to improve throughput, decrease it to 5 to 10 to improve latency, even lower on systems with a lot of memory.</span></span><br><span class="line"></span><br><span class="line">vm.dirty_background_ratio = 20</span><br><span class="line"><span class="comment"># dirty_background_ratio  Similar, but this is the number of memory pages at which the kernel background flusher thread will start writing out dirty data, expressed as a percentage out of the total free and reclaimable pages. Set this lower than dirty_ratio, dirty_ratio/2 makes sense and is what the kernel does by default. This page shows that dirty_ratio has the greater effect. Tune dirty_ratio for performance, then set dirty_background_ratio to half that value.</span></span><br><span class="line"></span><br><span class="line">vm.vfs_cache_pressure = 50</span><br><span class="line">This sets the <span class="string">"pressure"</span> or the importance the kernel places upon reclaiming memory used <span class="keyword">for</span> caching directory and inode objects. The default of 100 or relative <span class="string">"fair"</span> is appropriate <span class="keyword">for</span> compute servers. Set to lower than 100 <span class="keyword">for</span> file servers on <span class="built_in">which</span> the cache should be a priority. Set higher, maybe 500 to 1000, <span class="keyword">for</span> interactive systems.</span><br><span class="line"></span><br><span class="line">overcommit_memory       Allows <span class="keyword">for</span> poorly designed programs <span class="built_in">which</span> malloc() huge amounts of memory <span class="string">"just in case"</span> but never really use it. Set this to 0 (disabled) unless you really need it.</span><br></pre></td></tr></table></figure>
+
+<h4 id="deadline-parameters"><a href="#deadline-parameters" class="headerlink" title="deadline parameters"></a><a href="https://cromwell-intl.com/open-source/performance-tuning/disks.html" target="_blank" rel="noopener">deadline parameters</a></h4><p>fifo_batch      Number of read or write operations to issue in one batch.  Lower values may further reduce latency. Higher values can increase throughput on rotating mechanical disks, but at the cost of worse latency. You selected the deadline scheduler to limit latency, so you probably don’t want to increase this, at least not by very much.</p>
+<p>read_expire     Number of milliseconds within which a read request should be served. Reduce this from the default of 500 to 100 on a system with interactive users.</p>
+<p>rite_expire     Number of milliseconds within which a write request should be served.<br>Leave at default of 5000, let write operations be done asynchronously in the background unless your specialized application uses many synchronous writes.</p>
+<p>writes_starved  Number read batches that can be processed before handling a write batch. Increase this from default of 2 to give higher priority to read operations.</p>
+<p>nr_requests     Maximum number of read and write requests that can be queued at one time before the next process requesting a read or write is put to sleep. Default value of 128 means 128 read requests and 128 write requests can be queued at once. Larger values may increase throughput for workloads writing many small files, smaller values increase throughput with larger I/O operations. You could decrease this if you are using latency-sensitive applications, but then you shouldn’t be using NOOP if latency is sensitive!</p>
+<p>read_ahead_kb   Number of kilobytes the kernel will read ahead during a sequential read operation. 128 kbytes by default, if the disk is used with LVM the device mapper may benefit from a higher value. If your workload does a lot of large streaming reads, larger values may improve performance.</p>
+<p>max_sectors_kb  Maximum allowed size of an I/O request in kilobytes, which must be within these bounds:<br>Min value = max(1, logical_block_size/1024)<br>Max value = max_hw_sectors_kb</p>
+<p>rotational      Should be 0 (no) for solid-state disks, but some do not correctly report their status to the kernel. If incorrectly set to 1 for an SSD, set it to 0 to disable unneeded scheduler logic meant to reduce number of seeks.</p>
+<h3 id="scsi-driver-error-handaling-EH"><a href="#scsi-driver-error-handaling-EH" class="headerlink" title="scsi_driver error handaling (EH)"></a>scsi_driver error handaling (EH)</h3><p>scsi driver error Handaling (EH) timeout – eh_timeout (from default 10 second to 5 seconds)<br>HBA reset time - eh_deadline (from disable/0 to 5 seconds, default was off)</p>
+<p>The SCSI error handling (EH) mechanism attempts to perform error recovery on failed SCSI devices. The SCSI host object eh_deadline parameter enables you to configure the maximum amount of time for the recovery. After the configured time expires, SCSI EH stops and resets the entire host bus adapter (HBA).</p>
+<h3 id="iostat"><a href="#iostat" class="headerlink" title="iostat"></a><a href="https://stackoverflow.com/questions/4458183/how-the-util-of-iostat-is-computed" target="_blank" rel="noopener">iostat</a></h3><p>%util = blkio.ticks / deltams * 100%</p>
+<p>deltams is the time elapsed since last snapshot in ms. It uses CPU stats from /proc/stat presumably because it gives better results than to rely on system time, but I don’t know for sure. (Side note: for some reason the times are divided by HZ, while the documentation states it’s in USER_HZ, I don’t understand that.)<br>blkio.ticks is “# of milliseconds spent doing I/Os”, from /proc/diskstats docs:</p>
+<p>Field  9 – # of I/Os currently in progress<br>  The only field that should go to zero. Incremented as requests are<br>  given to appropriate struct request_queue and decremented as they finish.<br>Field 10 – # of milliseconds spent doing I/Os<br>  This field increases so long as field 9 is nonzero.</p>
+<p>struct ext_disk_stats *xds<br>xds-&gt;util</p>
+<p>Hypothesis:<br>Simple understand about util% =  IO time/the time(the clock) , if IO time &gt;= the time, the utils = 100%(in 1s), else, that means some times there is no IO ops in this second.<br>Why no ops in this sec ? maybe something hang, maybe just no any IO loading.</p>
+<p>In SAS arch, there are multiple lane/phy in it, if single lane/phy has full IO loading, the util% will reach 100%.<br>Yes the device could be parallel, there are a lot of lane/phy are free, but the single lane or phy has full. I think the util% was right</p>
+<ol>
+<li>The single path(resource) was full (nvme,sas ssd)</li>
+<li>If the block device ‘s performance is infinity,  All of CPU/Mem/NIC speed behind it. the bottle-neck not in the block device. some of syscall cause the util%=100% too</li>
+<li>Could the util% show the device are busy ? That right, util% is not enough, Could the iostat show the device are busy ? Yes, it can<br>You can watch the await and util%, you could know the device busy or free. it ‘s so easy.</li>
+</ol>
+<p>“iostat was not correct, it just show the wrong value”. That ‘s alarmist for iostat ,and it ‘s so funny</p>
+<p>This guy analyzed the code, but it ‘s not enough, he was not understand the iostat output.<br>The <a href="https://bean-li.github.io/dive-into-iostat/" target="_blank" rel="noopener">example</a> is good.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ID      Time    Ops                                  in_flight  stamp   stamp_delta           io_ticks            time_in_queue</span><br><span class="line">0       100     new request in the queue                0       0       no need caculate          0                 0</span><br><span class="line">1       100.10  another request go to the queue         1       100     100.10-100 &#x3D; 0.1        0.1                 0.1</span><br><span class="line">2       101.20  finish the first request                2       100.10  101.20-100.10 &#x3D; 1.1     1.2(1.1+0.1)        0.1+1.1*2 (total 2x io requests) &#x3D; 2.3</span><br><span class="line">3       103.60  finish the second request               1       101.20  103.60-101.20 &#x3D; 2.4     3.6                 2.3+2.4*1&#x3D;4.7</span><br><span class="line">4       153.60  The third request go to the queue       0       103.60  no need caculate        3.6                 4.7</span><br><span class="line">5       153.90  Finish the third request                1       153.60  153.90 - 153.60 &#x3D; 0.3   3.9                 4.7+0.3 * 1&#x3D; 5</span><br></pre></td></tr></table></figure>
+<p>In 53.9s, All io requests in 3.9s, the other times has no any IO in the queue.<br>io_ticks  –&gt; util %<br>time_in_queue –&gt; avgqu-sz</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/scsi/" rel="tag"><i class="fa fa-tag"></i> scsi</a>
+              <a href="/tags/block/" rel="tag"><i class="fa fa-tag"></i> block</a>
+              <a href="/tags/smart/" rel="tag"><i class="fa fa-tag"></i> smart</a>
+              <a href="/tags/nvme/" rel="tag"><i class="fa fa-tag"></i> nvme</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/24/megaraid/" rel="next" title="Replace megaraid by strocli">
+      Replace megaraid by strocli <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware-driver"><span class="nav-number">1.</span> <span class="nav-text">Hardware driver</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mpt3sas-mpt2sas-driver-parameter"><span class="nav-number">1.1.</span> <span class="nav-text">mpt3sas&#x2F;mpt2sas driver parameter</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#retry-count-default-was-144-it-‘s-too-large"><span class="nav-number"></span> <span class="nav-text">retry count default was 144, it ‘s too large</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#not-make-sure-in-https-www-ibm-com-developerworks-community-forums-html-topic-id-77777777-0000-0000-0000-000014889306-looks-like-the-setting-will-not-work-I-‘m-not-sure-the-driver-has-update"><span class="nav-number"></span> <span class="nav-text">not make sure, in https:&#x2F;&#x2F;www.ibm.com&#x2F;developerworks&#x2F;community&#x2F;forums&#x2F;html&#x2F;topic?id&#x3D;77777777-0000-0000-0000-000014889306, looks like the setting will not work, I ‘m not sure the driver has update.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Qlogic-driver-setting"><span class="nav-number">0.1.</span> <span class="nav-text">Qlogic driver setting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SAN-controller-setting-MD3460"><span class="nav-number">0.2.</span> <span class="nav-text">SAN controller setting MD3460</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-setting"><span class="nav-number">1.</span> <span class="nav-text">Linux setting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#block-driver"><span class="nav-number">1.1.</span> <span class="nav-text">block driver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#block-driver-2"><span class="nav-number">1.2.</span> <span class="nav-text">block driver 2</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#or-you-could-set-it-from-1280-to-8192"><span class="nav-number"></span> <span class="nav-text">or you could set it from 1280 to 8192</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Hot-plugin-the-scsi-device"><span class="nav-number">0.0.1.</span> <span class="nav-text">Hot plugin the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Add-the-scsi-device"><span class="nav-number">0.0.2.</span> <span class="nav-text">Add the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Refresh-the-scsi-device"><span class="nav-number">0.0.3.</span> <span class="nav-text">Refresh the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Remove-the-scsi-device"><span class="nav-number">0.0.4.</span> <span class="nav-text">Remove the scsi device</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IO-schdule"><span class="nav-number">0.1.</span> <span class="nav-text">IO schdule</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deadline-parameters"><span class="nav-number">0.2.</span> <span class="nav-text">deadline parameters</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scsi-driver-error-handaling-EH"><span class="nav-number">1.</span> <span class="nav-text">scsi_driver error handaling (EH)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iostat"><span class="nav-number">2.</span> <span class="nav-text">iostat</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">52k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">48 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2016/08/10/block_device/",
+            identifier: "2016/08/10/block_device/",
+            title: "The block device"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
