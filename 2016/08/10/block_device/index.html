@@ -48,21 +48,21 @@
 
   <meta name="description" content="HardwareWhy use 4K device 4-KB native (4Kn) HDDs* The 4Kn HDD directly maps 4-KB logical sectors (or blocks) to the 4-KB physical sectors. 512-byte emulation (512e) HDDs* The 512e HDD transparently tr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="The scsi block device">
-<meta property="og:url" content="http://yoursite.com/2016/08/10/block_device_scsi/index.html">
+<meta property="og:title" content="The block device">
+<meta property="og:url" content="http://yoursite.com/2016/08/10/block_device/index.html">
 <meta property="og:site_name" content="b946c5a0bf547c89">
 <meta property="og:description" content="HardwareWhy use 4K device 4-KB native (4Kn) HDDs* The 4Kn HDD directly maps 4-KB logical sectors (or blocks) to the 4-KB physical sectors. 512-byte emulation (512e) HDDs* The 512e HDD transparently tr">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/img/GUID_Partition_Table_Scheme.png">
 <meta property="article:published_time" content="2016-08-09T16:04:26.000Z">
-<meta property="article:modified_time" content="2019-12-31T15:22:40.247Z">
+<meta property="article:modified_time" content="2020-01-01T08:26:31.340Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="block">
-<meta property="article:tag" content="io">
+<meta property="article:tag" content="schdule">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/img/GUID_Partition_Table_Scheme.png">
 
-<link rel="canonical" href="http://yoursite.com/2016/08/10/block_device_scsi/">
+<link rel="canonical" href="http://yoursite.com/2016/08/10/block_device/">
 
 
 <script id="page-configurations">
@@ -74,7 +74,7 @@
   };
 </script>
 
-  <title>The scsi block device | b946c5a0bf547c89</title>
+  <title>The block device | b946c5a0bf547c89</title>
   
 
 
@@ -213,7 +213,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/10/block_device_scsi/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/10/block_device/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/logo-4-blog.png">
@@ -226,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          The scsi block device
+          The block device
         </h1>
 
         <div class="post-meta">
@@ -243,7 +243,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-31 23:22:40" itemprop="dateModified" datetime="2019-12-31T23:22:40+08:00">2019-12-31</time>
+                <time title="Modified: 2020-01-01 16:26:31" itemprop="dateModified" datetime="2020-01-01T16:26:31+08:00">2020-01-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,8 +266,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2016/08/10/block_device_scsi/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/10/block_device_scsi/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2016/08/10/block_device/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/10/block_device/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -277,14 +277,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>21k</span>
+              <span>23k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>19 mins.</span>
+              <span>21 mins.</span>
             </span>
 
         </div>
@@ -330,8 +330,8 @@
 <h4 id="mpt3sas-driver-install"><a href="#mpt3sas-driver-install" class="headerlink" title="mpt3sas driver install"></a>mpt3sas driver install</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#compile to local</span><br><span class="line">$ make -j4 CONFIG_DEBUG_INFO&#x3D;1 -C &#x2F;lib&#x2F;modules&#x2F;$(uname -r)&#x2F;build M&#x3D;&#x2F;sources&#x2F;tools&#x2F;dell&#x2F;lsi-9300-8e&#x2F;mpt3sas</span><br><span class="line"></span><br><span class="line">#compile to local kernel </span><br><span class="line">$ make -j4 CONFIG_DEBUG_INFO&#x3D;1 -C &#x2F;lib&#x2F;modules&#x2F;$(uname -r)&#x2F;build M&#x3D;&#x2F;sources&#x2F;tools&#x2F;dell&#x2F;lsi-9300-8e&#x2F;mpt3sas modules_install</span><br></pre></td></tr></table></figure>
 
 <h4 id="Qlogic-driver-setting"><a href="#Qlogic-driver-setting" class="headerlink" title="Qlogic driver setting"></a>Qlogic driver setting</h4><p>Adpater reset time e.g. Qlogic reset time<br>echo options qla2xxx ql2xextended_error_logging=1 qlport_down_retry=10 ql2xloginretrycount=10 &gt;&gt;  /etc/modprobe.d/qlogic.conf<br>Multipath check_timeout  (reduce to 10 seconds from default 60 seconds)</p>
-<p>Set the max_segments for HBA driver<br>| HBA       | Module Parameter|<br>|———–|:—————:|<br>| LSI       |  max_sgl_entries| # could not be modify<br>| Emulex    |  lpfc_sg_seg_cnt|<br>| ib_srp    |  cmd_sg_entries |<br>| Brocade   |  bfa_io_max_sge |</p>
-<p>Set max_hw_sectors_kb for HBA driver<br>| HBA       | Module Parameter|<br>|———–|:—————:|<br>| LSI       |  max_sectors    | # default was maxinum<br>| ib_srp    |  max_sect       |<br>| Brocade   |  max_xfer_size  |</p>
+<p>Set the max_segments for HBA driver<br>| HBA       | Module Parameter|<br>|———–|:—————:|<br>| LSI       |  max_sgl_entries|<br>| Emulex    |  lpfc_sg_seg_cnt|<br>| ib_srp    |  cmd_sg_entries |<br>| Brocade   |  bfa_io_max_sge |</p>
+<p>Set max_hw_sectors_kb for HBA driver<br>| HBA       | Module Parameter|<br>|———–|:—————:|<br>| LSI       |  max_sectors    |<br>| ib_srp    |  max_sect       |<br>| Brocade   |  max_xfer_size  |</p>
 <p>mpt3sas<br>max_sectors:max sectors, range 64 to 32767  default=32767 (ushort)</p>
 <h4 id="SAN-controller-setting-MD3460"><a href="#SAN-controller-setting-MD3460" class="headerlink" title="SAN controller setting MD3460"></a>SAN controller setting MD3460</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RAID 6               8+2</span><br><span class="line">segment              128K</span><br><span class="line">cache block size     32K</span><br><span class="line">cache flush          90%</span><br><span class="line">Write cache mirror   enabled</span><br><span class="line">Read cache           disabled</span><br></pre></td></tr></table></figure>
 
@@ -358,7 +358,7 @@
 </li>
 </ul>
 <p>In this command, PAGE_SIZE is architecture independent. It is 4096 for x86_64.</p>
-<h1 id="or-you-could-set-it-from-1280-to-8192"><a href="#or-you-could-set-it-from-1280-to-8192" class="headerlink" title="or you could set it from 1280 to 8192"></a>or you could set it from 1280 to 8192</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo 8192 &gt; max_sectors_kb</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#or you could set it from 1280 to 8192</span><br><span class="line">$ echo 8192 &gt; max_sectors_kb</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>physical_block_size</p>
@@ -440,15 +440,28 @@
 <h3 id="Advance-reformat-4Kn-SCSI-devs-to-512-Bytes-sector"><a href="#Advance-reformat-4Kn-SCSI-devs-to-512-Bytes-sector" class="headerlink" title="Advance reformat 4Kn SCSI devs to 512 Bytes sector"></a>Advance reformat 4Kn SCSI devs to 512 Bytes sector</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ smartctl -a -d scsi /dev/sdd</span><br><span class="line">smartctl 5.43 2012-06-30 r3573 [x86_64-linux-2.6.32-504.30.3.el6_lustre.x86_64] (<span class="built_in">local</span> build)</span><br><span class="line">Copyright (C) 2002-12 by Bruce Allen, http://smartmontools.sourceforge.net</span><br><span class="line"></span><br><span class="line">Vendor:               HGST</span><br><span class="line">Product:              HUH728080AL4200</span><br><span class="line">Revision:             A7J0</span><br><span class="line">User Capacity:        8,001,563,222,016 bytes [8.00 TB]</span><br><span class="line">Logical block size:   4096 bytes</span><br><span class="line"></span><br><span class="line">$ smartctl -a -d scsi /dev/sdc</span><br><span class="line">smartctl 5.43 2012-06-30 r3573 [x86_64-linux-2.6.32-504.30.3.el6_lustre.x86_64] (<span class="built_in">local</span> build)</span><br><span class="line">Copyright (C) 2002-12 by Bruce Allen, http://smartmontools.sourceforge.net</span><br><span class="line"></span><br><span class="line">Vendor:               HGST</span><br><span class="line">Product:              HUH728080AL4200</span><br><span class="line">Revision:             A7J0</span><br><span class="line">User Capacity:        8,001,563,222,016 bytes [8.00 TB]</span><br><span class="line">Logical block size:   512 bytes</span><br></pre></td></tr></table></figure>
 
 <p>Update: If you have a lot of drives to format, it may take a long time with sg_format as it wait until it finished before doing the next one (with a while loop I mean). Useful tip is to use the “-e” flag with sg_format then monitor operations with sg_turs -p but it may hang you tty as well.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$ cat /sys/class/block/sdc/queue/hw_sector_size</span><br><span class="line">4096</span><br><span class="line"></span><br><span class="line">$ sg_format --format --size=512 /dev/sdc</span><br><span class="line">HGST      HUH728080AL4200   A7J0   peripheral_type: disk [0x0]</span><br><span class="line">&lt;&lt; supports protection information&gt;&gt;</span><br><span class="line">Mode Sense (block descriptor) data, prior to changes:</span><br><span class="line">  Number of blocks=1953506646 [0x74702556]</span><br><span class="line">  Block size=4096 [0x1000]</span><br><span class="line"></span><br><span class="line">A FORMAT will commence <span class="keyword">in</span> 10 seconds</span><br><span class="line">    ALL data on /dev/sdc will be DESTROYED</span><br><span class="line">        Press control-C to abort</span><br><span class="line">A FORMAT will commence <span class="keyword">in</span> 5 seconds</span><br><span class="line">    ALL data on /dev/sdc will be DESTROYED</span><br><span class="line">        Press control-C to abort</span><br><span class="line"></span><br><span class="line">Format has started</span><br><span class="line">FORMAT Complete</span><br><span class="line"></span><br><span class="line">$ sg_turs -v /dev/sdb</span><br><span class="line">   <span class="built_in">test</span> unit ready cdb: 00 00 00 00 00 00</span><br><span class="line">   <span class="built_in">test</span> unit ready:  Descriptor format, current;  Sense key: Not Ready Additional sense: Logical unit not ready, format <span class="keyword">in</span> progress</span><br><span class="line">   Descriptor <span class="built_in">type</span>: Information    00 00 00 00 00 00 00 00 00 00</span><br><span class="line">   Descriptor <span class="built_in">type</span>: Command specific    0x0000000000000000</span><br><span class="line">   device not ready</span><br><span class="line"></span><br><span class="line">cat /sys/class/block/sdc/queue/hw_sector_size</span><br><span class="line">512</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ cat /sys/class/block/sdc/queue/hw_sector_size</span><br><span class="line">4096</span><br><span class="line"></span><br><span class="line">$ sg_format --format --size=512 /dev/sdc</span><br><span class="line">HGST      HUH728080AL4200   A7J0   peripheral_type: disk [0x0]</span><br><span class="line">&lt;&lt; supports protection information&gt;&gt;</span><br><span class="line">Mode Sense (block descriptor) data, prior to changes:</span><br><span class="line">  Number of blocks=1953506646 [0x74702556]</span><br><span class="line">  Block size=4096 [0x1000]</span><br><span class="line"></span><br><span class="line">A FORMAT will commence <span class="keyword">in</span> 10 seconds</span><br><span class="line">    ALL data on /dev/sdc will be DESTROYED</span><br><span class="line">        Press control-C to abort</span><br><span class="line">A FORMAT will commence <span class="keyword">in</span> 5 seconds</span><br><span class="line">    ALL data on /dev/sdc will be DESTROYED</span><br><span class="line">        Press control-C to abort</span><br><span class="line"></span><br><span class="line">Format has started</span><br><span class="line">FORMAT Complete</span><br><span class="line"></span><br><span class="line">$ sg_turs -v /dev/sdb</span><br><span class="line">   <span class="built_in">test</span> unit ready cdb: 00 00 00 00 00 00</span><br><span class="line">   <span class="built_in">test</span> unit ready:  Descriptor format, current;  Sense key: Not Ready Additional sense: Logical unit not ready, format <span class="keyword">in</span> progress</span><br><span class="line">   Descriptor <span class="built_in">type</span>: Information    00 00 00 00 00 00 00 00 00 00</span><br><span class="line">   Descriptor <span class="built_in">type</span>: Command specific    0x0000000000000000</span><br><span class="line">   device not ready</span><br><span class="line"></span><br><span class="line">$ sg_inq -v /dev/sdb</span><br><span class="line"><span class="comment"># it will show the process of percent</span></span><br><span class="line"></span><br><span class="line">$ cat /sys/class/block/sdc/queue/hw_sector_size</span><br><span class="line">512</span><br></pre></td></tr></table></figure>
 
-<h4 id="long-data-sector"><a href="#long-data-sector" class="headerlink" title="long-data-sector"></a>long-data-sector</h4><p>From vendor spec, only SAS device support this feature<br>You could format the driver logic sector to 4096,4112,4116,4224KB or 512,520 Bytes<br>SATA device only support 4096 or 512</p>
+<h4 id="intel-nvme-switch-to-AF"><a href="#intel-nvme-switch-to-AF" class="headerlink" title="intel nvme switch to AF"></a>intel nvme switch to AF</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#change 512 Bytes to 4096 Bytes</span></span><br><span class="line">$ isdct start -intelssd 0 Function=NVMEFormat LBAForma=3 SecureEraseSetting=0 ProtectionInformation=0 MetaDataSetting=0</span><br></pre></td></tr></table></figure>
+
+<h4 id="SATA-only-support-512-and-4096-Bytes"><a href="#SATA-only-support-512-and-4096-Bytes" class="headerlink" title="SATA only support 512 and 4096 Bytes"></a>SATA only support 512 and 4096 Bytes</h4><h4 id="long-data-sector"><a href="#long-data-sector" class="headerlink" title="long-data-sector"></a>long-data-sector</h4><p>From vendor spec, only SAS device support this feature<br>You could format the driver logic sector to 4096,4112,4116,4224KB or 512,520 Bytes<br>SATA device only support 4096 or 512</p>
 <p>You could get the logic sector size(4096,4112,4224), the size could be read from driver</p>
 <h5 id="T10-DIF-PI"><a href="#T10-DIF-PI" class="headerlink" title="T10 DIF/PI"></a><a href="https://www.seagate.com/files/staticfiles/docs/pdf/whitepaper/safeguarding-data-from-corruption-technology-paper-tp621us.pdf" target="_blank" rel="noopener">T10 DIF/PI</a></h5><p>T10 DIF/PI for avoid data corruption from some device no CRC/ECC product, so it check the data consistency from the source to the destination</p>
 <p>The user data in ecc memory(512B) —–&gt; SAS HBA/iscsi driver(520B) -&gt; SAS IO expander/or some very complicated network contains HBA or the others -&gt; Storage medium(520)<br>Because the hardware just check from input or output port from itself</p>
 <p>The risk of corrupted data falling through the inherent cracks in this protection methodology is significant, and the havoc such undetected, silent data corruption could wreak (lost or inaccurate data, significant downtime) is substantial</p>
 <h5 id="About-DIF-520-Bytes"><a href="#About-DIF-520-Bytes" class="headerlink" title="About DIF 520 Bytes"></a><a href="https://lwn.net/Articles/280023/" target="_blank" rel="noopener">About DIF 520 Bytes</a></h5><p>SCSI drives can usually be reformatted to 520-byte sectors, yielding 8 extra bytes per sector.  These 8 bytes have traditionally been used by RAID controllers to store internal protection information.</p>
 <p>DIF (Data Integrity Field) is an extension to the SCSI Block Commands that standardizes the format of the 8 extra bytes and defines ways to interact with the contents at the protocol level.  We refer to the extra information as “integrity metadata” or “IMD”.<br>Each 8-byte DIF tuple is split into three chunks:<br>        * a 16-bit guard tag containing a CRC of the 512-byte data portion of the sector.<br>        * a 16-bit application tag which is up for grabs.<br>        * a 32-bit reference tag which contains an incrementing counter for each sector.  For DIF Type 1 it also needs to match the physical LBA on the drive.<br>There are three types of DIF defined: Type 1, Type 2, and Type 3.  My patches are Type 1 only, although Type 3 devices should work.  Type 2 depends on 32-byte CDBs and is in progress.<br>Since the DIF tuple format is standardized, both initiators and targets (as well as potentially transport switches in-between) to verify the integrity of the data going over the bus.<br>When writing, the HBA will DMA 512-byte sectors from host memory, generate the matching integrity metadata and send out 520-byte sectors on the wire.  The disk will verify the integrity of the data before committing it to stable storage<br>When reading, the drive will send 520-byte sectors to the HBA.  The HBA will verify the data integrity and DMA 512-byte sectors to host memory.<br>IOW, DIF provides means for added integrity protection between HBA and disk</p>
+<h3 id="Security-erasing"><a href="#Security-erasing" class="headerlink" title="Security erasing"></a>Security erasing</h3><p>SAS</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sg_format --format /dev/sdx</span><br></pre></td></tr></table></figure>
+
+<p>SATA</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hdparm --user-master u --security-set-pass password /dev/sdx</span><br></pre></td></tr></table></figure>
+
+<p>NVME</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ nvme list</span><br><span class="line">Node             SN                   Model                                    Namespace Usage                      Format           FW Rev</span><br><span class="line">---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------</span><br><span class="line">/dev/nvme0n1     xxxxxxxxxxxxxxx      INTEL SSDPED1K375GA                      1         375.08  GB / 375.08  GB    512   B +  0 B   E2010324</span><br><span class="line"></span><br><span class="line">$ nvme id-ctrl -H  /dev/nvme0n1 | grep format -i</span><br><span class="line">  [1:1] : 0x1   Format NVM Supported</span><br><span class="line">  [0:0] : 0     Admin Vendor Specific Commands uses Vendor Specific Format</span><br><span class="line">  [0:0] : 0     Format Applies to Single Namespace(s)</span><br><span class="line">  [0:0] : 0     NVM Vendor Specific Commands uses Vendor Specific Format</span><br><span class="line"></span><br><span class="line">$ nvme format /dev/nvme0n1 --ses=1</span><br><span class="line"></span><br><span class="line">$ nvme id-ns /dev/nvme1n1 | grep LBA</span><br><span class="line">LBA Format  0 : Metadata Size: 0   bytes - Data Size: 512 bytes - Relative Performance: 0x1 Better</span><br><span class="line">LBA Format  1 : Metadata Size: 8   bytes - Data Size: 512 bytes - Relative Performance: 0x3 Degraded</span><br><span class="line">LBA Format  2 : Metadata Size: 0   bytes - Data Size: 4096 bytes - Relative Performance: 0 Best  (<span class="keyword">in</span> use)</span><br><span class="line">LBA Format  3 : Metadata Size: 8   bytes - Data Size: 4096 bytes - Relative Performance: 0x2 Good</span><br><span class="line"></span><br><span class="line">$ nvme format /dev/nvme1n1 -l 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="Enable-the-blk-mq-and-scsi-mq"><a href="#Enable-the-blk-mq-and-scsi-mq" class="headerlink" title="Enable the blk_mq and scsi_mq"></a>Enable the blk_mq and scsi_mq</h3><p>scsi-mq:specify scsi_mod.use_blk_mq=y<br>blk-mq infrastructure if the dm_mod.use_blk_mq=y</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ grubby --update-kernel=ALL --args=<span class="string">'scsi_mod.use_blk_mq=y dm_mod.use_blk_mq=y'</span></span><br><span class="line">$ reboot</span><br><span class="line">$ cat /sys/block/dm-X/dm/use_blk_mq</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -460,7 +473,7 @@
           
           <div class="post-tags">
               <a href="/tags/block/" rel="tag"><i class="fa fa-tag"></i> block</a>
-              <a href="/tags/io/" rel="tag"><i class="fa fa-tag"></i> io</a>
+              <a href="/tags/schdule/" rel="tag"><i class="fa fa-tag"></i> schdule</a>
           </div>
 
         
@@ -470,8 +483,8 @@
     <div class="post-nav">
       <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2018/07/08/scsi_dev/" rel="next" title="sas jbod maintain">
-      sas jbod maintain <i class="fa fa-chevron-right"></i>
+    <a href="/2018/07/08/scsi_dev/" rel="next" title="scsi device maintain">
+      scsi device maintain <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -539,7 +552,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware"><span class="nav-number">1.</span> <span class="nav-text">Hardware</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-use-4K-device"><span class="nav-number">1.1.</span> <span class="nav-text">Why use 4K device</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mpt3sas-mpt2sas-driver-parameter"><span class="nav-number">1.2.</span> <span class="nav-text">mpt3sas&#x2F;mpt2sas driver parameter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mpt3sas-driver-install"><span class="nav-number">1.3.</span> <span class="nav-text">mpt3sas driver install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Qlogic-driver-setting"><span class="nav-number">1.4.</span> <span class="nav-text">Qlogic driver setting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SAN-controller-setting-MD3460"><span class="nav-number">1.5.</span> <span class="nav-text">SAN controller setting MD3460</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebuild-feature"><span class="nav-number">2.</span> <span class="nav-text">rebuild feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-setting"><span class="nav-number">3.</span> <span class="nav-text">Linux setting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#block-driver"><span class="nav-number">3.1.</span> <span class="nav-text">block driver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#block-driver-2"><span class="nav-number">3.2.</span> <span class="nav-text">block driver 2</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#or-you-could-set-it-from-1280-to-8192"><span class="nav-number"></span> <span class="nav-text">or you could set it from 1280 to 8192</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#parted-alignment"><span class="nav-number">0.0.1.</span> <span class="nav-text">parted alignment</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hot-plugin-the-scsi-device"><span class="nav-number">0.0.2.</span> <span class="nav-text">Hot plugin the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Add-the-scsi-device"><span class="nav-number">0.0.3.</span> <span class="nav-text">Add the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Refresh-the-scsi-device"><span class="nav-number">0.0.4.</span> <span class="nav-text">Refresh the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Remove-the-scsi-device"><span class="nav-number">0.0.5.</span> <span class="nav-text">Remove the scsi device</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IO-schdule"><span class="nav-number">0.1.</span> <span class="nav-text">IO schdule</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deadline-parameters"><span class="nav-number">0.2.</span> <span class="nav-text">deadline parameters</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scsi-driver-error-handaling-EH"><span class="nav-number">1.</span> <span class="nav-text">scsi_driver error handaling (EH)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iostat"><span class="nav-number">2.</span> <span class="nav-text">iostat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Re-import-LVM"><span class="nav-number">3.</span> <span class="nav-text">Re-import LVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advance-reformat-4Kn-SCSI-devs-to-512-Bytes-sector"><span class="nav-number">4.</span> <span class="nav-text">Advance reformat 4Kn SCSI devs to 512 Bytes sector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#long-data-sector"><span class="nav-number">4.1.</span> <span class="nav-text">long-data-sector</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#T10-DIF-PI"><span class="nav-number">4.1.1.</span> <span class="nav-text">T10 DIF&#x2F;PI</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#About-DIF-520-Bytes"><span class="nav-number">4.1.2.</span> <span class="nav-text">About DIF 520 Bytes</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware"><span class="nav-number">1.</span> <span class="nav-text">Hardware</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-use-4K-device"><span class="nav-number">1.1.</span> <span class="nav-text">Why use 4K device</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mpt3sas-mpt2sas-driver-parameter"><span class="nav-number">1.2.</span> <span class="nav-text">mpt3sas&#x2F;mpt2sas driver parameter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mpt3sas-driver-install"><span class="nav-number">1.3.</span> <span class="nav-text">mpt3sas driver install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Qlogic-driver-setting"><span class="nav-number">1.4.</span> <span class="nav-text">Qlogic driver setting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SAN-controller-setting-MD3460"><span class="nav-number">1.5.</span> <span class="nav-text">SAN controller setting MD3460</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebuild-feature"><span class="nav-number">2.</span> <span class="nav-text">rebuild feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-setting"><span class="nav-number">3.</span> <span class="nav-text">Linux setting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#block-driver"><span class="nav-number">3.1.</span> <span class="nav-text">block driver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#block-driver-2"><span class="nav-number">3.2.</span> <span class="nav-text">block driver 2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#parted-alignment"><span class="nav-number">3.2.1.</span> <span class="nav-text">parted alignment</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hot-plugin-the-scsi-device"><span class="nav-number">3.2.2.</span> <span class="nav-text">Hot plugin the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Add-the-scsi-device"><span class="nav-number">3.2.3.</span> <span class="nav-text">Add the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Refresh-the-scsi-device"><span class="nav-number">3.2.4.</span> <span class="nav-text">Refresh the scsi device</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Remove-the-scsi-device"><span class="nav-number">3.2.5.</span> <span class="nav-text">Remove the scsi device</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IO-schdule"><span class="nav-number">3.3.</span> <span class="nav-text">IO schdule</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#deadline-parameters"><span class="nav-number">3.4.</span> <span class="nav-text">deadline parameters</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scsi-driver-error-handaling-EH"><span class="nav-number">4.</span> <span class="nav-text">scsi_driver error handaling (EH)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iostat"><span class="nav-number">5.</span> <span class="nav-text">iostat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Re-import-LVM"><span class="nav-number">6.</span> <span class="nav-text">Re-import LVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advance-reformat-4Kn-SCSI-devs-to-512-Bytes-sector"><span class="nav-number">7.</span> <span class="nav-text">Advance reformat 4Kn SCSI devs to 512 Bytes sector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#intel-nvme-switch-to-AF"><span class="nav-number">7.1.</span> <span class="nav-text">intel nvme switch to AF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SATA-only-support-512-and-4096-Bytes"><span class="nav-number">7.2.</span> <span class="nav-text">SATA only support 512 and 4096 Bytes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#long-data-sector"><span class="nav-number">7.3.</span> <span class="nav-text">long-data-sector</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#T10-DIF-PI"><span class="nav-number">7.3.1.</span> <span class="nav-text">T10 DIF&#x2F;PI</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#About-DIF-520-Bytes"><span class="nav-number">7.3.2.</span> <span class="nav-text">About DIF 520 Bytes</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Security-erasing"><span class="nav-number">8.</span> <span class="nav-text">Security erasing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-the-blk-mq-and-scsi-mq"><span class="nav-number">9.</span> <span class="nav-text">Enable the blk_mq and scsi_mq</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -555,20 +568,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -603,13 +616,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">66k</span>
+    <span title="Symbols count total">79k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">1:01</span>
+    <span title="Reading time total">1:12</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
@@ -688,9 +701,9 @@
       DISQUS.reset({
         reload: true,
         config: {page: {
-            url: "http://yoursite.com/2016/08/10/block_device_scsi/",
-            identifier: "2016/08/10/block_device_scsi/",
-            title: "The scsi block device"
+            url: "http://yoursite.com/2016/08/10/block_device/",
+            identifier: "2016/08/10/block_device/",
+            title: "The block device"
           }
         }
       });

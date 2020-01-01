@@ -46,19 +46,21 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="Block benchmark trapfio sequential write in the same device block cause the test result too high 12345678910[rw]rw&#x3D;writeioengine&#x3D;posixaioiodepth&#x3D;4nrfiles&#x3D;8bssplit&#x3D;1M&#x2F;100direct&#x3D;1filename&#x3D;&#x2F;dev&#x2F;sdb1numjo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/12/29/hello-world/index.html">
+<meta property="og:title" content="Benchmark">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/benchmark/index.html">
 <meta property="og:site_name" content="b946c5a0bf547c89">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Block benchmark trapfio sequential write in the same device block cause the test result too high 12345678910[rw]rw&#x3D;writeioengine&#x3D;posixaioiodepth&#x3D;4nrfiles&#x3D;8bssplit&#x3D;1M&#x2F;100direct&#x3D;1filename&#x3D;&#x2F;dev&#x2F;sdb1numjo">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2019-12-29T09:57:12.606Z">
-<meta property="article:modified_time" content="2019-12-29T02:15:29.311Z">
+<meta property="article:published_time" content="2018-07-12T02:25:02.000Z">
+<meta property="article:modified_time" content="2020-01-01T02:58:39.242Z">
 <meta property="article:author" content="Ginger">
+<meta property="article:tag" content="test">
+<meta property="article:tag" content="performance">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/29/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2018/07/12/benchmark/">
 
 
 <script id="page-configurations">
@@ -70,7 +72,7 @@
   };
 </script>
 
-  <title>Hello World | b946c5a0bf547c89</title>
+  <title>Benchmark | b946c5a0bf547c89</title>
   
 
 
@@ -209,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/benchmark/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/logo-4-blog.png">
@@ -222,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          Benchmark
         </h1>
 
         <div class="post-meta">
@@ -231,9 +233,26 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-12-29 17:57:12 / Modified: 10:15:29" itemprop="dateCreated datePublished" datetime="2019-12-29T17:57:12+08:00">2019-12-29</time>
+              <time title="Created: 2018-07-12 10:25:02" itemprop="dateCreated datePublished" datetime="2018-07-12T10:25:02+08:00">2018-07-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-01 10:58:39" itemprop="dateModified" datetime="2020-01-01T10:58:39+08:00">2020-01-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/benchmark/" itemprop="url" rel="index">
+                    <span itemprop="name">benchmark</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -245,8 +264,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/12/29/hello-world/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/29/hello-world/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2018/07/12/benchmark/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/12/benchmark/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -256,7 +275,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>357</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -275,19 +294,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h3 id="Block-benchmark-trap"><a href="#Block-benchmark-trap" class="headerlink" title="Block benchmark trap"></a>Block benchmark trap</h3><p>fio sequential write in the same device block cause the test result too high</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[rw]</span><br><span class="line">rw=write</span><br><span class="line">ioengine=posixaio</span><br><span class="line">iodepth=4</span><br><span class="line">nrfiles=8</span><br><span class="line">bssplit=1M/100</span><br><span class="line">direct=1</span><br><span class="line">filename=/dev/sdb1</span><br><span class="line">numjobs=4</span><br><span class="line">size=2000G</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>For avoid this issue, and I don ‘t know why I have to wait after 10% test process, the speed will from 4GB/s down to 1.6GB/s<br>If you use fio test raw device, you ‘d better set numjobs=1, single core is enough</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">rw=write</span><br><span class="line">ioengine=posixaio</span><br><span class="line">iodepth=4</span><br><span class="line">nrfiles=8</span><br><span class="line">bssplit=1M/100</span><br><span class="line">direct=1</span><br><span class="line">filename=/dev/sdb1</span><br><span class="line">numjobs=1</span><br><span class="line">size=2000G</span><br><span class="line">zonemode=strided</span><br><span class="line">zonesize=100G</span><br><span class="line"></span><br><span class="line">[job1]</span><br><span class="line">zoneskip=1000G</span><br><span class="line">[job1]</span><br><span class="line">zoneskip=2000G</span><br><span class="line">[job3]</span><br><span class="line">zoneskip=3000G</span><br><span class="line">[job4]</span><br><span class="line">zoneskip=4000G</span><br><span class="line"></span><br><span class="line">job1: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=posixaio, iodepth=4</span><br><span class="line">job1: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=posixaio, iodepth=4</span><br><span class="line">job3: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=posixaio, iodepth=4</span><br><span class="line">job4: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=posixaio, iodepth=4</span><br><span class="line">fio-3.16</span><br><span class="line">Starting 4 processes</span><br><span class="line">Jobs: 4 (f=4): [W(4)][10.2%][w=1648MiB/s][w=1647 IOPS][eta 49m:02s]</span><br><span class="line"></span><br><span class="line"><span class="comment"># dd version to reproduce</span></span><br><span class="line"><span class="keyword">for</span> ((i=0;i&lt;=3200000; i=i+100000)); <span class="keyword">do</span> dd <span class="keyword">if</span>=/dev/zero of=/dev/sdb1 bs=1M seek=<span class="variable">$i</span> oflag=direct &amp; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>The two test function could help you get diff information</p>
 
     </div>
 
@@ -296,6 +308,11 @@
     
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/test/" rel="tag"><i class="fa fa-tag"></i> test</a>
+              <a href="/tags/performance/" rel="tag"><i class="fa fa-tag"></i> performance</a>
+          </div>
 
         
 
@@ -303,10 +320,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/29/lfs_command/" rel="prev" title="lfs command">
-      <i class="fa fa-chevron-left"></i> lfs command
+    <a href="/2018/07/08/scsi_dev/" rel="prev" title="scsi device maintain">
+      <i class="fa fa-chevron-left"></i> scsi device maintain
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/24/megaraid/" rel="next" title="Replace megaraid by strocli">
+      Replace megaraid by strocli <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -373,7 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Block-benchmark-trap"><span class="nav-number">1.</span> <span class="nav-text">Block benchmark trap</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -522,9 +542,9 @@
       DISQUS.reset({
         reload: true,
         config: {page: {
-            url: "http://yoursite.com/2019/12/29/hello-world/",
-            identifier: "2019/12/29/hello-world/",
-            title: "Hello World"
+            url: "http://yoursite.com/2018/07/12/benchmark/",
+            identifier: "2018/07/12/benchmark/",
+            title: "Benchmark"
           }
         }
       });
