@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Set time1234$ perccli64 &#x2F;call show time$ storcli64 &#x2F;call set time&#x3D;yyyymmdd hh:mm:ss|systemtime$ timedatectl set-timezone Asia&#x2F;XXXXXX$ storcli64 &#x2F;call set time&#x3D;systemtime  Set cache policyDisable write">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Replace megaraid by strocli">
+<meta property="og:url" content="http://yoursite.com/2019/05/24/megaraid/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="Set time1234$ perccli64 &#x2F;call show time$ storcli64 &#x2F;call set time&#x3D;yyyymmdd hh:mm:ss|systemtime$ timedatectl set-timezone Asia&#x2F;XXXXXX$ storcli64 &#x2F;call set time&#x3D;systemtime  Set cache policyDisable write">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/img/lsi-3108-example-20191010.png">
+<meta property="article:published_time" content="2019-05-24T01:26:24.000Z">
+<meta property="article:modified_time" content="2019-12-30T09:20:57.000Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="raid">
+<meta property="article:tag" content="storage">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/img/lsi-3108-example-20191010.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/05/24/megaraid/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Replace megaraid by strocli | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/24/megaraid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Replace megaraid by strocli
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-24 09:26:24" itemprop="dateCreated datePublished" datetime="2019-05-24T09:26:24+08:00">2019-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-30 17:20:57" itemprop="dateModified" datetime="2019-12-30T17:20:57+08:00">2019-12-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/05/24/megaraid/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/24/megaraid/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>24k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>22 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Set-time"><a href="#Set-time" class="headerlink" title="Set time"></a>Set time</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ perccli64 /call show time</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> time=yyyymmdd hh:mm:ss|systemtime</span><br><span class="line">$ timedatectl <span class="built_in">set</span>-timezone Asia/XXXXXX</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> time=systemtime</span><br></pre></td></tr></table></figure>
+
+<h3 id="Set-cache-policy"><a href="#Set-cache-policy" class="headerlink" title="Set cache policy"></a>Set cache policy</h3><p>Disable write back cache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 &#x2F;c0&#x2F;v0 set wrcache&#x3D;wb&#x2F;wt&#x2F;awb rdcache&#x3D;ra iopolicy&#x3D;cached pdcache&#x3D;on</span><br></pre></td></tr></table></figure>
+
+<h3 id="Create-raid10"><a href="#Create-raid10" class="headerlink" title="Create raid10"></a>Create raid10</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /c0 add vd <span class="built_in">type</span>=raid10 drives=252:0-7 pdperarray=2 WT strip=64</span><br><span class="line">$ storcli64 /c0 add vd <span class="built_in">type</span>=raid5 drives=252:0,2,4,6 WT strip=64</span><br><span class="line">$ storcli64 /c0/vXX del force</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://support.huawei.com/enterprise/en/doc/EDOC1000111853?section=j005" target="_blank" rel="noopener">reference</a><br><img src="/img/lsi-3108-example-20191010.png" alt=""><br>Read Policy</p>
+<ul>
+<li>No Read Ahead: disables the Read Ahead function.</li>
+<li>Read Ahead: enables the Read Ahead function. The controller pre-reads sequential data or the data predicted to be used and saves it in the cache.</li>
+</ul>
+<p>Write Policy</p>
+<ul>
+<li>Write Back: After the controller cache receives all data, the controller sends the host a message indicating that data transmission is complete.</li>
+<li>Write Through: After the drive subsystem receives all data, the controller sends the host a message indicating that data transmission is complete.</li>
+<li>Always Write Back: Virtual drive remains in Write Back mode if the capacitor fails or no capacitor exists.</li>
+</ul>
+<p>I/O Policy</p>
+<ul>
+<li>Direct: Data is read directly and is not cached. This is the recommended mode for common configuration.</li>
+<li>Cached: All data is read from cache. This is the recommended mode for CacheCade.</li>
+</ul>
+<p>Access Policy</p>
+<ul>
+<li>Read/Write: Read and write operations are allowed.</li>
+<li>Read Only: The virtual drive is read-only.</li>
+<li>Blocked: The virtual drive is locked from access.</li>
+</ul>
+<p>Drive Cache</p>
+<ul>
+<li>Unchanged: uses the current cache policy.</li>
+<li>Enable: writes data to the cache before writing data to the hard drive. This option improves data write performance. However, data may be lost if there is no protection mechanism against power failures.</li>
+<li>Disable: writes data to a hard drive without caching the data. Data is not lost if power failures occur.</li>
+</ul>
+<p>Emulation Type<br>Set the sector size reported to the OS.<br>50</p>
+<ul>
+<li><p>If the member drive is 512B/512B:</p>
+<ul>
+<li>Default: The logical drive sector is 512B/512B.</li>
+<li>None: The logical drive sector is 512B/512B.</li>
+<li>Force: The logical drive sector is 512B/4KB.</li>
+</ul>
+</li>
+<li><p>If the member drive is 512B/4KB:</p>
+<ul>
+<li>Default: The logical drive sector is 512B/4KB.</li>
+<li>None: The logical drive sector is 512B/512B.</li>
+<li>Force: The logical drive sector is 512B/4KB.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Megaraid-FastPATH-for-SAS-SATA-SSD"><a href="#Megaraid-FastPATH-for-SAS-SATA-SSD" class="headerlink" title="Megaraid FastPATH for SAS/SATA SSD"></a>Megaraid FastPATH for SAS/SATA SSD</h3><h4 id="case-1"><a href="#case-1" class="headerlink" title="case 1"></a><a href="https://lenovopress.com/lp0592.pdf" target="_blank" rel="noopener">case 1</a></h4><p>Suggest RAID5<br>To benefit from FastPath, an array must be defined using these specific parameters:</p>
+<ul>
+<li>Write Through</li>
+<li>Direct IO</li>
+<li>No Read Ahead</li>
+<li>64KB stripe size (for most workloads)</li>
+<li>RAID 5(fastpath support all raid level)</li>
+<li>Disk Cache Policy: This controls the write cache policy for the drives in the arrays (as opposed to the write cache policy of the RAID adapter). Enabling disk write caching can put data at risk.<ul>
+<li>full initialization</li>
+</ul>
+</li>
+</ul>
+<p>With FastPath enabled, and when certain conditions are met, the MegaRAID software stack running on the RAID controller can bypass portions of the software stack, resulting in a highly efficient, streamlined code path that the RAID controller can execute very quickly. This means that the RAID controller can handle more trips though its code in a given amount of time, which equates to higher possible IOPS.</p>
+<p>FastPath is not designed to speed up slow storage. It will not have an effect on storage performance unless the RAID controller is the bottleneck. If the controller itself is limiting storage performance, then enabling FastPath will allow the controller to run faster, raising performance. FastPath is not meant for use with HDD storage nor is it meant for sequential workloads.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /c0 show aso</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Premium Feature Key :</span><br><span class="line">===================</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------</span><br><span class="line">Adv S/W Opt                 Time Remaining  Mode</span><br><span class="line">--------------------------------------------------------------</span><br><span class="line">MegaRAID FastPath           Unlimited       Secured</span><br><span class="line">MegaRAID CacheCade Pro 2.0  Unlimited       Secured</span><br><span class="line">MegaRAID RAID6              Unlimited       Factory Installed</span><br><span class="line">MegaRAID RAID5              Unlimited       Factory Installed</span><br><span class="line">--------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Re-host Information :</span><br><span class="line">===================</span><br><span class="line">Needs Re-hosting = NO</span><br><span class="line">``</span><br><span class="line"></span><br><span class="line"><span class="comment">#### [Case 2: Aerospike Certification Tool](https://www.aerospike.com/docs/operations/plan/ssd/lsi_megacli.html)</span></span><br><span class="line">RAID Level	0</span><br><span class="line">Write Policy	Write Through</span><br><span class="line">Read Policy	No Read Ahead</span><br><span class="line">IO Policy	Direct IO</span><br><span class="line">Other	        No write to cache <span class="keyword">if</span> bad BBU</span><br><span class="line"></span><br><span class="line">Dell R720xd</span><br><span class="line">PERC H710p RAID controller</span><br><span class="line">8 x 200 GB Intel s3700 SSDs</span><br><span class="line"></span><br><span class="line">Latency measures during torture tests (96,000 reads/sec and 48,000 concurrent writes/second).</span><br><span class="line">RAID setting	% &gt;1 ms	% &gt;2 ms	% &gt;4 ms	% &gt;8 ms	% &gt;16 ms</span><br><span class="line">Default	        22.20	13.96	4.29	0.22	0.00</span><br><span class="line">FastPath™	4.31	0.85	0.17	0.00	0.00</span><br><span class="line"></span><br><span class="line">The latencies <span class="keyword">for</span> the FastPath™ are much better. In general better latency results mean much higher threshold <span class="keyword">for</span> throughput.</span><br><span class="line"></span><br><span class="line"><span class="comment">### Storcli replace Megacli</span></span><br><span class="line"><span class="comment">#### BBU info</span></span><br><span class="line">```bash</span><br><span class="line">$ /opt/MegaRAID/MegaCli/MegaCli64 -AdpBbuCmd -getBbuProperties -aALL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">BBU Properties <span class="keyword">for</span> Adapter: 0</span><br><span class="line"></span><br><span class="line">  Auto Learn Period: 30 Days</span><br><span class="line">  Next Learn time: Mon Jun  3 12:02:38 2019</span><br><span class="line"></span><br><span class="line">  Learn Delay Interval:0 Hours</span><br><span class="line">  Auto-Learn Mode: Enabled</span><br><span class="line">  BBU Mode = 4</span><br><span class="line"></span><br><span class="line">$ /opt/MegaRAID/storcli/storcli64 /call/bbu show properties</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">BBU_Properties :</span><br><span class="line">==============</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------</span><br><span class="line">Property             Value</span><br><span class="line">--------------------------------------------------------------</span><br><span class="line">Auto Learn Period    30d (2592000 seconds)</span><br><span class="line">Next Learn time      2019/06/03  12:02:38 (612878558 seconds)</span><br><span class="line">Learn Delay Interval 0 hour(s)</span><br><span class="line">Auto-Learn Mode      Enabled</span><br><span class="line">BBU Mode             4</span><br><span class="line">--------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">$ /opt/MegaRAID/storcli/storcli64 /call/bbu show status</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">BBU_Info :</span><br><span class="line">========</span><br><span class="line"></span><br><span class="line">------------------------------------------------------------------</span><br><span class="line">Property      Value</span><br><span class="line">------------------------------------------------------------------</span><br><span class="line">BatteryType   iBBU08</span><br><span class="line">Voltage       4056 mV</span><br><span class="line">Current       0 mA</span><br><span class="line">Temperature   31 C</span><br><span class="line">Battery State Optimal</span><br><span class="line">Design Mode   1: 12+ Hrs retention with a transparent learn cycle</span><br><span class="line">                 and best service life.</span><br><span class="line">------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">BBU_Firmware_Status :</span><br><span class="line">===================</span><br><span class="line"></span><br><span class="line">-------------------------------------------------</span><br><span class="line">Property                                   Value</span><br><span class="line">-------------------------------------------------</span><br><span class="line">Charging Status                            None</span><br><span class="line">Voltage                                    OK</span><br><span class="line">Temperature                                OK</span><br><span class="line">Learn Cycle Requested                      No</span><br><span class="line">Learn Cycle Active                         No</span><br><span class="line">Learn Cycle Status                         OK</span><br><span class="line">Learn Cycle Timeout                        No</span><br><span class="line">I2C Errors Detected                        No</span><br><span class="line">Battery Pack Missing                       No</span><br><span class="line">Battery Replacement required               No</span><br><span class="line">Remaining Capacity Low                     No</span><br><span class="line">Periodic Learn Required                    No</span><br><span class="line">Transparent Learn                          No</span><br><span class="line">No space to cache offload                  No</span><br><span class="line">Pack is about to fail &amp; should be replaced No</span><br><span class="line">Cache Offload premium feature required     No</span><br><span class="line">Module microcode update required           No</span><br><span class="line">-------------------------------------------------</span><br><span class="line"></span><br><span class="line">GasGaugeStatus :</span><br><span class="line">==============</span><br><span class="line"></span><br><span class="line">--------------------------------------</span><br><span class="line">Property                   Value</span><br><span class="line">--------------------------------------</span><br><span class="line">Fully Discharged           No</span><br><span class="line">Fully Charged              No</span><br><span class="line">Discharging                No</span><br><span class="line">Initialized                Yes</span><br><span class="line">Remaining Time Alarm       No</span><br><span class="line">Terminate Discharge Alarm  No</span><br><span class="line">Over Temperature           No</span><br><span class="line">Charging Terminated        No</span><br><span class="line">Over Charged               No</span><br><span class="line">Relative State of Charge   97%</span><br><span class="line">Charger System State       1</span><br><span class="line">Charger System Ctrl        0</span><br><span class="line">Charging current           0 mA</span><br><span class="line">Absolute state of charge   78%</span><br><span class="line">Max Error                  0%</span><br><span class="line">Battery backup charge time 48 hours +</span><br><span class="line">--------------------------------------</span><br><span class="line"></span><br><span class="line">$ /opt/MegaRAID/storcli/storcli64 /call/bbu show status | grep -i <span class="built_in">type</span></span><br><span class="line">BatteryType   iBBU08</span><br><span class="line"></span><br><span class="line"><span class="comment">#important value</span></span><br><span class="line">Remaining Capacity Low                  : No</span><br><span class="line"></span><br><span class="line"><span class="comment">#design capacity: 1500, max</span></span><br><span class="line">Relative State of Charge ＝ 1055 ／ 1198 ～ 89%</span><br><span class="line">Absolute State of charge ＝ 1055 ／ 1500 ～ 70%</span><br></pre></td></tr></table></figure>
+
+<h4 id="Setting-BBU"><a href="#Setting-BBU" class="headerlink" title="Setting BBU"></a>Setting BBU</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ storcli /cx/bbu <span class="built_in">set</span> learnDelayInterval=168 <span class="comment">#hours</span></span><br><span class="line"></span><br><span class="line">$ /opt/MegaRAID/storcli/storcli64 /call/bbu show modes</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = Get BBU Modes Succeeded.</span><br><span class="line"></span><br><span class="line">Available BBU Modes :</span><br><span class="line">===================</span><br><span class="line">Mode-1 = 12+ Hrs retention with a transparent learn cycle and best service life.</span><br><span class="line">Mode-3 = 24+ Hrs retention with a transparent learn cycle and balanced service life.</span><br><span class="line">Mode-4 = 48+ Hrs retention with a non-transparent learn cycle and balanced service life</span><br><span class="line"></span><br><span class="line">$ storcli /cx/bbu <span class="built_in">set</span> bbuMode=&lt;value&gt;</span><br><span class="line">0 48 hours of retentiona at 60 °C, 1-year Service Life.</span><br><span class="line">a. Indicates how long the battery can hold data <span class="keyword">in</span> the controller<span class="string">'s memory in case of accidental system shutdown.</span></span><br><span class="line"><span class="string">1 12 hours of retention at 45 °C, 5-year Service Life, transparent learn.b</span></span><br><span class="line"><span class="string">b. The controller'</span>s performance is not affected during the battery<span class="string">'s learn cycle.</span></span><br><span class="line"><span class="string">2 12 hours of retention at 55 °C, 3-year Service Life, transparent learn.</span></span><br><span class="line"><span class="string">3 24 hours of retention at 45 °C, 3-year Service Life, transparent learn.</span></span><br><span class="line"><span class="string">4 48 hours of retention at 45 °C, 3-year Service Life.</span></span><br><span class="line"><span class="string">5 48 hours of retention at 55 °C, 1-year Service Life.</span></span><br><span class="line"><span class="string">6 Same as the description for BBU mode 5. The BBU mode 6 enables you to receive events when the battery capacity reaches suboptimal and critical thresholds.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ storcli /cx bbu set autolearnmode=&lt;value&gt;</span></span><br><span class="line"><span class="string">where x= 0 – Enabled, 1 – Disabled, 2 – Warn though event.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Manual learn battery</span></span><br><span class="line"><span class="string">$ storcli /c0/bbu start learn</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Cachevault"><a href="#Cachevault" class="headerlink" title="Cachevault"></a><a href="https://www.thomas-krenn.com/en/wiki/CacheVault_Flash_Cache" target="_blank" rel="noopener">Cachevault</a></h4><p>Here is not install cachevalut, all FLASH devices don’t need it, because fastpath need writethrough mode</p>
+<p>No battery is used with CacheVault technology. The cache content is protected by the following systems:</p>
+<ul>
+<li>A double-layer capacitor is connected to the RAID controller.</li>
+<li>This will be fully loaded automatically during server startup.</li>
+<li>In case of power failure the RAID controller uses the power of the capacitor to write the Flash-Memory to maintain all contents of the cache non-volatile (almost like a USB stick).</li>
+<li>The next time the server is started the RAID controller writes the data from the Flash-Memory to the RAID Array.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /c0/cv show</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Failure</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line">Detailed Status :</span><br><span class="line">===============</span><br><span class="line"></span><br><span class="line">----------------------------------------------------</span><br><span class="line">Ctrl Status Property ErrMsg                   ErrCd</span><br><span class="line">----------------------------------------------------</span><br><span class="line">   0 Failed -        Cachevault doesn<span class="string">'t exist   255</span></span><br><span class="line"><span class="string">----------------------------------------------------</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ storcli64 /c0/cv show all</span></span><br><span class="line"><span class="string">$ storcli64 /c0/cv show learn</span></span><br><span class="line"><span class="string">$ storcli64 /c0/cv show status</span></span><br><span class="line"><span class="string">$ storcli64 /c0/cv start learn</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Get-all-megaraid-log-not-filter"><a href="#Get-all-megaraid-log-not-filter" class="headerlink" title="Get all megaraid log, not filter"></a>Get all megaraid log, not filter</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#shows the history of log files generated</span></span><br><span class="line">$ storcli64  /call show eventloginfo file=logfile</span><br><span class="line">$ MegaCli64 -AdpEventLog -GetEvents -f logfile -aALL</span><br><span class="line"></span><br><span class="line"><span class="comment">#prints the system log</span></span><br><span class="line">$ storcli64 /c0 show events file=megaraid_events.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># shows the firmware logs</span></span><br><span class="line">$ storcli64 /c0 show termlog </span><br><span class="line">$ storcli64 /c0 show termlog <span class="built_in">type</span>=config</span><br><span class="line">$ storcli64 /c0 show termlog <span class="built_in">type</span>=contents</span><br></pre></td></tr></table></figure>
+
+<h4 id="Show-raid-logic-info"><a href="#Show-raid-logic-info" class="headerlink" title="Show raid logic info"></a>Show raid logic info</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /cx/dall show [all]</span><br><span class="line">$ MegaCli64 -cfgdsply -aALL</span><br></pre></td></tr></table></figure>
+
+<h4 id="Import-license"><a href="#Import-license" class="headerlink" title="Import license"></a>Import license</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ storcli /c0 <span class="built_in">set</span> aso key=xxxxxxxxx</span><br></pre></td></tr></table></figure>
+
+<h4 id="Backup-config"><a href="#Backup-config" class="headerlink" title="Backup config"></a>Backup config</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ MegaCli -CfgSave -f filename -aN   </span><br><span class="line">$ MegaCli -CfgRestore -f filename -aN  </span><br><span class="line"></span><br><span class="line">$ storcli64 /c0 <span class="built_in">set</span> config file=raid_adapter0.config</span><br><span class="line">$ storcli64 /c0 get config file=raid_adapter0.config</span><br></pre></td></tr></table></figure>
+
+<h4 id="Interrupt-BGI"><a href="#Interrupt-BGI" class="headerlink" title="Interrupt BGI"></a>Interrupt BGI</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ MegaCli64 -LDBI -Abort -LALL -aALL</span><br><span class="line">$ storcli64 /call/vall <span class="built_in">set</span> autobgi=On|Off</span><br><span class="line">$ storcli64 /call/vall show autobgi</span><br><span class="line">$ storcli64 /call/vall stop bgi</span><br><span class="line">$ storcli64 /call/vall pause bgi</span><br><span class="line">$ storcli64 /call/vall resume bgi</span><br><span class="line">$ storcli64 /call/vall show bgi</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> bgirate=90</span><br></pre></td></tr></table></figure>
+
+<h4 id="Rebuild-Migrate-init"><a href="#Rebuild-Migrate-init" class="headerlink" title="Rebuild/Migrate/init"></a>Rebuild/Migrate/init</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ MegaCli64  -AdpSetProp RebuildRate 50 -a0</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> rebuildrate=50</span><br><span class="line"></span><br><span class="line">$ MegaCli64  -AdpSetProp ReconRate 50 -a0</span><br><span class="line">$ /opt/MegaRAID/MegaCli/MegaCli64 -LDRecon ShowProg L1  -a0</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> migraterate=50</span><br><span class="line">$ storcli /c0/v1 show migrate</span><br><span class="line">$ storcli /c0/v1 start migrate <span class="built_in">type</span>=raidx</span><br><span class="line"></span><br><span class="line"><span class="comment">#  automatic background initialization</span></span><br><span class="line">$ /opt/MegaRAID/MegaCli/MegaCli64 -LDBI -ShowProg -LALL -aALL</span><br><span class="line">$ storcli /call/vall <span class="built_in">set</span> autobgi=on</span><br><span class="line">$ storcli /call/vall show autobgi</span><br><span class="line">$ storcli /call/vall stop bgi</span><br><span class="line">$ storcli /call/vall pause bgi</span><br><span class="line">$ storcli /call/vall resume bgi</span><br><span class="line">$ storcli /call/vall show bgi</span><br><span class="line"></span><br><span class="line"><span class="comment"># virtual drive initialization</span></span><br><span class="line">$ /opt/MegaRAID/MegaCli/MegaCli64 -LDInit ShowProg Lall a0</span><br><span class="line">$ storcli /c0/vall start init</span><br><span class="line">$ storcli /c0/vall stop init</span><br><span class="line">$ storcli /c0/vall show init</span><br></pre></td></tr></table></figure>
+
+<h4 id="Make-device-good"><a href="#Make-device-good" class="headerlink" title="Make device good"></a>Make device good</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ MegaCli64 -PDMakeGood -PhysDrv[20:12] -a0</span><br><span class="line">$ storcli64 /c0/e20/s12 <span class="built_in">set</span> good force</span><br></pre></td></tr></table></figure>
+
+<h4 id="Make-JBOD"><a href="#Make-JBOD" class="headerlink" title="Make JBOD"></a>Make JBOD</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ MegaCli64 -PDMakeJBOD -PhysDrv[E0:S0,E1:S1,...] -aN|-a0,1,2|-aALL</span><br><span class="line">$ storcli64 /c0/e20/s12 <span class="built_in">set</span> jbod</span><br><span class="line"></span><br><span class="line">$ MegaCli -AdpSetProp -EnableJBOD -val -aN|-a0,1,2|-aALL</span><br><span class="line">      val - 0=Disable JBOD mode.</span><br><span class="line">            1=Enable JBOD mode.</span><br><span class="line"></span><br><span class="line">$ storcli64 /c0 <span class="built_in">set</span> jbod=on</span><br></pre></td></tr></table></figure>
+
+<h4 id="Foreign-devices"><a href="#Foreign-devices" class="headerlink" title="Foreign devices"></a>Foreign devices</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ MegaCli64  -CfgForeign -Clear -aALL</span><br><span class="line">$ storcli64 /c0/fall del|delete</span><br><span class="line"></span><br><span class="line">$ storcli64 /c0/fall show</span><br><span class="line">$ storcli64 /c0/fall import</span><br></pre></td></tr></table></figure>
+
+<h3 id="About-Consistency-and-patrol-read"><a href="#About-Consistency-and-patrol-read" class="headerlink" title="About Consistency and patrol read"></a><a href="https://www.digiliant.com/docs/MegaRAID-SAS-Software-User-Guide-12Gbs.pdf" target="_blank" rel="noopener">About Consistency and patrol read</a></h3><h4 id="Patrol-read"><a href="#Patrol-read" class="headerlink" title="Patrol read"></a>Patrol read</h4><p>Patrol read involves the review of your system for possible drive errors that could lead to drive failure and then action to correct errors. The goal is to protect data integrity by detecting drive failure before the failure can damage data. The corrective actions depend on the drive group configuration and the type of errors.<br>Patrol read starts only when the controller is idle for a defined period of time and no other background tasks are active, though it can continue to run during heavy I/O processes.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /c0 show patrolRead</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Controller Properties :</span><br><span class="line">=====================</span><br><span class="line"></span><br><span class="line">---------------------------------------------</span><br><span class="line">Ctrl_Prop               Value</span><br><span class="line">---------------------------------------------</span><br><span class="line">PR Mode                 Auto</span><br><span class="line">PR Execution Delay      168 hours</span><br><span class="line">PR iterations completed 0</span><br><span class="line">PR Next Start time      08/24/2019, 03:00:00</span><br><span class="line">PR on SSD               Disabled</span><br><span class="line">PR on EPD               Disabled</span><br><span class="line">PR Current State        Stopped</span><br><span class="line">---------------------------------------------</span><br><span class="line"><span class="comment"># mode=auto/manual</span></span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> patrolread=on mode=auto includessds=on maxconcurrentpd=255 delay=360 <span class="comment">#255 phy devs ,360 housr(15days)</span></span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> patrolread=on mode=auto starttime=2019/08/24 03</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> patrolread=off</span><br><span class="line"></span><br><span class="line"><span class="comment">##show/stop/start/resume/pause</span></span><br><span class="line">$ storcli64 /call start patrolRead </span><br><span class="line">$ storcli64 /call show patrolRead</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Controller Properties :</span><br><span class="line">=====================</span><br><span class="line"></span><br><span class="line">----------------------------------</span><br><span class="line">Ctrl_Prop               Value</span><br><span class="line">----------------------------------</span><br><span class="line">PR Mode                 Auto</span><br><span class="line">PR Execution Delay      360 hours</span><br><span class="line">PR iterations completed 352</span><br><span class="line">PR on SSD               Enabled</span><br><span class="line">PR Current State        Stopped</span><br><span class="line">----------------------------------</span><br><span class="line"></span><br><span class="line">$ storcli64 /call show prrate</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> prrate=40</span><br></pre></td></tr></table></figure>
+
+<h4 id="Consistency-Check"><a href="#Consistency-Check" class="headerlink" title="Consistency Check"></a>Consistency Check</h4><p>checking consistency means calculating the data on one drive and comparing the results to the contents of the parity drive<br>It is recommended that you perform a consistency check at least once a month.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /c0 show cc</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Controller Properties :</span><br><span class="line">=====================</span><br><span class="line"></span><br><span class="line">-----------------------------------------------</span><br><span class="line">Ctrl_Prop                 Value</span><br><span class="line">-----------------------------------------------</span><br><span class="line">CC Operation Mode         Concurrent</span><br><span class="line">CC Execution Delay        168</span><br><span class="line">CC Next Starttime         08/24/2019, 02:00:00</span><br><span class="line">CC Current State          Stopped</span><br><span class="line">CC Number of iterations   311</span><br><span class="line">CC Number of VD completed 2</span><br><span class="line">CC Excluded VDs           None</span><br><span class="line">-----------------------------------------------</span><br><span class="line"></span><br><span class="line">$ storcli64 /call show ccrate</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> ccrate=50</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#schedule</span></span><br><span class="line">$ storcli64 /call/vall <span class="built_in">set</span> cc=seq </span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> cc=seq starttime=2019/08/31 02 delay=1440  <span class="comment">## check interval 1440 hours ,60 days</span></span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Controller Properties :</span><br><span class="line">=====================</span><br><span class="line"></span><br><span class="line">---------------------------------</span><br><span class="line">Ctrl_Prop    Value</span><br><span class="line">---------------------------------</span><br><span class="line">CC Mode      SEQ</span><br><span class="line">CC Starttime 2019/08/31 02:00:00</span><br><span class="line">CC delay     1440</span><br><span class="line">---------------------------------</span><br><span class="line"></span><br><span class="line"><span class="comment">### if I 'm not set start time</span></span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> cc=seq delay=1440</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Controller Properties :</span><br><span class="line">=====================</span><br><span class="line"></span><br><span class="line">----------------</span><br><span class="line">Ctrl_Prop Value</span><br><span class="line">----------------</span><br><span class="line">CC Mode   SEQ</span><br><span class="line">CC delay  1440</span><br><span class="line">----------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ storcli64 /c0 show cc</span><br><span class="line">CC Operation Mode         Sequential</span><br><span class="line">CC Execution Delay        1440</span><br><span class="line">CC Next Starttime         08/24/2019, 03:00:00 <span class="comment">## first start after about 12 hours</span></span><br><span class="line">CC Current State          Stopped</span><br><span class="line">CC Number of iterations   120</span><br><span class="line">CC Number of VD completed 1</span><br><span class="line">CC Excluded VDs           None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### show again</span></span><br><span class="line">$ storcli64 /c0 show cc</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Controller Properties :</span><br><span class="line">=====================</span><br><span class="line"></span><br><span class="line">-----------------------------------------------</span><br><span class="line">Ctrl_Prop                 Value</span><br><span class="line">-----------------------------------------------</span><br><span class="line">CC Operation Mode         Sequential</span><br><span class="line">CC Execution Delay        1440</span><br><span class="line">CC Next Starttime         08/31/2019, 02:00:00</span><br><span class="line">CC Current State          Stopped</span><br><span class="line">CC Number of iterations   311</span><br><span class="line">CC Number of VD completed 2</span><br><span class="line">CC Excluded VDs           None</span><br><span class="line">-----------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="comment">#manual start and show status</span></span><br><span class="line"><span class="comment">#show/stop/start/resume/pause</span></span><br><span class="line">$ storcli64 /call/vall start cc [force]</span><br><span class="line">$ storcli64 /call/vall show cc</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">VD Operation Status :</span><br><span class="line">===================</span><br><span class="line"></span><br><span class="line">-----------------------------------</span><br><span class="line">VD Operation Progress% Status</span><br><span class="line">-----------------------------------</span><br><span class="line"> 0 CC                0 In progress</span><br><span class="line"> 1 CC                1 In progress</span><br><span class="line">-----------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ storcli64 /call/vall stop cc</span><br></pre></td></tr></table></figure>
+
+<h3 id="Montor-cache-ECC-count"><a href="#Montor-cache-ECC-count" class="headerlink" title="Montor cache ECC count"></a>Montor cache ECC count</h3><p>eccbucketleakrate 0 to 65535 Sets the leak rate of the single-bit bucket in minutes (one entry removed per leak-rate).<br>eccbucketsize 0 to 255 Sets the size of ECC single-bit-error bucket (logs event when full).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /c0 show all | grep Bucket</span><br><span class="line">ECC Bucket Count = 0</span><br><span class="line">ECC Bucket Size = 255</span><br><span class="line">ECC Bucket Leak Rate (hrs) = 4</span><br></pre></td></tr></table></figure>
+
+<h3 id="About-device-write-cache-in-megaraid"><a href="#About-device-write-cache-in-megaraid" class="headerlink" title="About device write cache in megaraid"></a><a href="https://utcc.utoronto.ca/~cks/space/blog/tech/ModernDiskWriteCaches" target="_blank" rel="noopener">About device write cache in megaraid</a></h3><p>drives can also support a write option called ‘Force Unit Access’ (FUA) that bypasses the write cache in order to force what you’re writing to be forced to disk. In general FUA is bundled with another feature called ‘Disable Page Out’ (DPO), which tells the drive that putting the data into cache is not useful.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">$ Virtual Drives = 2</span><br><span class="line"></span><br><span class="line">VD LIST :</span><br><span class="line">=======</span><br><span class="line"></span><br><span class="line">-------------------------------------------------------------</span><br><span class="line">DG/VD TYPE  State Access Consist Cache Cac sCC     Size Name</span><br><span class="line">-------------------------------------------------------------</span><br><span class="line">0/0   RAID1 Optl  RW     Yes     NRWTD -   OFF 223.0 GB R1OS</span><br><span class="line">1/1   RAID5 Optl  RW     Yes     RWTD  -   OFF 1.307 TB</span><br><span class="line">-------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Cac=CacheCade|Rec=Recovery|OfLn=OffLine|Pdgd=Partially Degraded|dgrd=Degraded</span><br><span class="line">Optl=Optimal|RO=Read Only|RW=Read Write|HD=Hidden|B=Blocked|Consist=Consistent|</span><br><span class="line">R=Read Ahead Always|NR=No Read Ahead|WB=WriteBack|</span><br><span class="line">AWB=Always WriteBack|WT=WriteThrough|C=Cached IO|D=Direct IO|sCC=Scheduled</span><br><span class="line">Check Consistency</span><br><span class="line"></span><br><span class="line">Physical Drives = 6</span><br><span class="line"></span><br><span class="line">PD LIST :</span><br><span class="line">=======</span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">EID:Slt DID State DG       Size Intf Med SED PI SeSz Model         Sp</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">32:0      0 Onln   0   223.0 GB SATA SSD N   N  512B THNSF8240CCSE U</span><br><span class="line">32:1      1 Onln   0   223.0 GB SATA SSD N   N  512B THNSF8240CCSE U</span><br><span class="line">32:2      2 Onln   1 446.625 GB SATA SSD N   N  512B MTFDDAK480TDC U</span><br><span class="line">32:3      3 Onln   1 446.625 GB SATA SSD N   N  512B MTFDDAK480TDC U</span><br><span class="line">32:4      4 Onln   1 446.625 GB SATA SSD N   N  512B MTFDDAK480TDC U</span><br><span class="line">32:5      5 Onln   1 446.625 GB SATA SSD N   N  512B MTFDDAK480TDC U</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">$ dmesg -T | grep DPO</span><br><span class="line">[Tue Nov  5 23:21:47 2019] sd 0:2:1:0: [sdb] Write cache: disabled, <span class="built_in">read</span> cache: enabled, supports DPO and FUA</span><br><span class="line">[Tue Nov  5 23:21:47 2019] sd 0:2:0:0: [sda] Write cache: disabled, <span class="built_in">read</span> cache: disabled, supports DPO and FUA</span><br><span class="line"></span><br><span class="line">$ perccli64 /c0/vall <span class="built_in">set</span> wrcache=WT rdcache=nora iopolicy=direct</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line">Detailed Status :</span><br><span class="line">===============</span><br><span class="line"></span><br><span class="line">----------------------------------------</span><br><span class="line">VD Property Value  Status  ErrCd ErrMsg</span><br><span class="line">----------------------------------------</span><br><span class="line"> 0 wrCache  WT     Success     0 -</span><br><span class="line"> 0 rdCache  NoRA   Success     0 -</span><br><span class="line"> 0 IoPolicy Direct Success     0 -</span><br><span class="line"> 1 wrCache  WT     Success     0 -</span><br><span class="line"> 1 rdCache  NoRA   Success     0 -</span><br><span class="line"> 1 IoPolicy Direct Success     0 -</span><br><span class="line">----------------------------------------</span><br><span class="line"></span><br><span class="line">$ reboot</span><br><span class="line"></span><br><span class="line">$ dmesg -T | grep DPO</span><br><span class="line">[Thu Nov  7 02:37:51 2019] sd 0:2:0:0: [sda] Write cache: disabled, <span class="built_in">read</span> cache: disabled, supports DPO and FUA</span><br><span class="line">[Thu Nov  7 02:37:51 2019] sd 0:2:1:0: [sdb] Write cache: disabled, <span class="built_in">read</span> cache: disabled, supports DPO and FUA</span><br><span class="line"></span><br><span class="line">Supported VD Operations :</span><br><span class="line">=======================</span><br><span class="line">Read Policy = Yes</span><br><span class="line">Write Policy = Yes</span><br><span class="line">IO Policy = Yes</span><br><span class="line">Access Policy = Yes</span><br><span class="line">Disk Cache Policy = Yes</span><br><span class="line"></span><br><span class="line">$ perccli64 /c0/v0 <span class="built_in">set</span> wrcache=WB</span><br><span class="line">VD Property Value Status  ErrCd ErrMsg</span><br><span class="line">---------------------------------------</span><br><span class="line"> 0 wrCache  WB    Success     0 -</span><br><span class="line">---------------------------------------</span><br><span class="line"></span><br><span class="line">$ reboot</span><br><span class="line"></span><br><span class="line">$  dmesg -T | grep DPO</span><br><span class="line">[Thu Nov  7 02:53:00 2019] sd 0:2:0:0: [sda] Write cache: disabled, <span class="built_in">read</span> cache: disabled, doesn<span class="string">'t support DPO or FUA</span></span><br><span class="line"><span class="string">[Thu Nov  7 02:53:00 2019] sd 0:2:1:0: [sdb] Write cache: disabled, read cache: disabled, supports DPO and FUA</span></span><br></pre></td></tr></table></figure>
+<p>You could change megaraid cache policy, let the device support DPO and FUA</p>
+<h3 id="Backup-and-restore-config-file"><a href="#Backup-and-restore-config-file" class="headerlink" title="Backup and restore config file"></a>Backup and restore config file</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#backup controller config to file;</span></span><br><span class="line">./storcli64 /c0 get config file=megaraid.cfg</span><br><span class="line">./storcli64 /c0 <span class="built_in">set</span> config file=megaraid.cfg</span><br><span class="line"><span class="comment">#Clear a Configuration; dangerous</span></span><br><span class="line"><span class="comment">###./storcli64 /c0 delete config[force]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Flush-RAID-write-cache"><a href="#Flush-RAID-write-cache" class="headerlink" title="Flush RAID write cache"></a>Flush RAID write cache</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#Cache Flush on Selected Controller</span><br><span class="line">$ MegaCli64 –AdpCacheFlush -aN|-a0,1,2|-aALL</span><br><span class="line">$ storcli64 &#x2F;c0 set flushwriteverify&#x3D;on</span><br><span class="line">$ storcli64 &#x2F;c0 show flushwriteverify </span><br><span class="line">$ storcli64 &#x2F;c0 flushcache</span><br><span class="line"></span><br><span class="line">$ perccli64 &#x2F;c0 flushcache</span><br><span class="line">Controller &#x3D; 0</span><br><span class="line">Status &#x3D; Success</span><br><span class="line">Description &#x3D; Adapter and&#x2F;or disk caches flushed successfully.</span><br><span class="line"></span><br><span class="line"># delete the preserved cache for a particular virtual driver on the controller in missing state</span><br><span class="line">$ perccli64 &#x2F;c0&#x2F;v1 delete preservedCache </span><br><span class="line">$ storcli64 &#x2F;c0&#x2F;v1 delete preservedCache force</span><br><span class="line"></span><br><span class="line">$ storcli64 &#x2F;c0 show preservedCache</span><br><span class="line">Controller &#x3D; 0</span><br><span class="line">Status &#x3D; Success</span><br><span class="line">Description &#x3D; No Virtual Drive has Preserved Cache Data.</span><br></pre></td></tr></table></figure>
+
+<h3 id="show-PHY"><a href="#show-PHY" class="headerlink" title="show PHY"></a>show PHY</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">$ storcli /cx/px|pall <span class="built_in">set</span> linkspeed=0(auto)|1.5|3|6|12</span><br><span class="line">$ perccli64 /c0/pall show</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PhyInfo :</span><br><span class="line">=======</span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">PhyNo SAS_Addr           Phy_Identifier Link_Speed Device_Type   Description</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">    0 0x500056B3BECB2FFF             17 No <span class="built_in">limit</span>   Edge Expander -</span><br><span class="line">    1 0x500056B3BECB2FFF             20 No <span class="built_in">limit</span>   Edge Expander -</span><br><span class="line">    2 0x500056B3BECB2FFF             18 No <span class="built_in">limit</span>   Edge Expander -</span><br><span class="line">    3 0x500056B3BECB2FFF             23 No <span class="built_in">limit</span>   Edge Expander -</span><br><span class="line">    4 0x500056B3BECB2FFF             19 No <span class="built_in">limit</span>   Edge Expander -</span><br><span class="line">    5 0x500056B3BECB2FFF             21 No <span class="built_in">limit</span>   Edge Expander -</span><br><span class="line">    6 0x500056B3BECB2FFF             16 No <span class="built_in">limit</span>   Edge Expander -</span><br><span class="line">    7 0x500056B3BECB2FFF             22 No <span class="built_in">limit</span>   Edge Expander -</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">$ perccli64 /call/eall show</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Properties :</span><br><span class="line">==========</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------------</span><br><span class="line">EID State Slots PD PS Fans TSs Alms SIM Port<span class="comment"># ProdID VendorSpecific</span></span><br><span class="line">--------------------------------------------------------------------</span><br><span class="line"> 32 OK        8  6  0    0   0    0   0 00 x1 BP14G+  !   ?</span><br><span class="line">--------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">EID-Enclosure Device ID |PD-Physical drive count |PS-Power Supply count|</span><br><span class="line">TSs-Temperature sensor count |Alms-Alarm count |SIM-SIM Count</span><br><span class="line"></span><br><span class="line">$ perccli64 /call/eall show status</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"><span class="comment"># upgrade the enclosure</span></span><br><span class="line">$ storcli64 /c0/e32 download src=enclosure_fw.bin</span><br></pre></td></tr></table></figure>
+
+<h3 id="Foreign-configurations"><a href="#Foreign-configurations" class="headerlink" title="Foreign configurations"></a>Foreign configurations</h3><p>NOTE Provide the security key when importing a locked foreign configuration created in a different machine that is encrypted with a security key.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ perccli64 /c0/fall show</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = Couldn<span class="string">'t find any foreign Configuration</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ storcli64 /c0/fall import</span></span><br><span class="line"><span class="string">$ storcli64 /cx/fx|fall show [all][ securitykey=sssssssssss ]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#This command deletes the foreign configuration of a controller.</span></span><br><span class="line"><span class="string">$ ### storcli64 /c0/fall delete</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Dimmer-switch"><a href="#Dimmer-switch" class="headerlink" title="Dimmer switch"></a>Dimmer switch</h3><p>The Dimmer Switch is the power-saving policy for the virtual drive</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$ perccli64 /c0 show ds</span><br><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Controller Properties :</span><br><span class="line">=====================</span><br><span class="line"></span><br><span class="line">-------------------------------</span><br><span class="line">Ctrl_Prop         Value</span><br><span class="line">-------------------------------</span><br><span class="line">SpnDwnUncDrv      Disabled</span><br><span class="line">SpnDwnHS          Disabled</span><br><span class="line">SpnDwnTm          30 minute(s)</span><br><span class="line">SpnDwnCfgDrv      Disabled</span><br><span class="line">DefaultLdPSPolicy None</span><br><span class="line">DsblLdPsInterval  0 hours</span><br><span class="line">DsblLdPsTime      0 minutes</span><br><span class="line">SpnUpEncDly       8 second(s)</span><br><span class="line">spinUpEncDrvCnt   6</span><br><span class="line">-------------------------------</span><br><span class="line"></span><br><span class="line">$ storcli /cx/vx <span class="built_in">set</span> ds=default | auto | none | max | maxnocache</span><br><span class="line">auto: Logical device power savings are managed by the firmware.</span><br><span class="line">none: No power saving policy.</span><br><span class="line">max: Logical device uses maximum power savings.</span><br><span class="line">maxnocache: Logical device does not cache write to maximise power savings.</span><br><span class="line"></span><br><span class="line">$ storcli64  /c0 <span class="built_in">set</span> ds=on <span class="built_in">type</span>=1|2</span><br><span class="line">1: Unconfigured</span><br><span class="line">2: Hot spare</span><br><span class="line">3: Virtual drive</span><br><span class="line">4: All</span><br><span class="line"></span><br><span class="line">$ storcli /cx <span class="built_in">set</span> ds=on [properties]</span><br><span class="line">disableldps: Interval <span class="keyword">in</span> hours or time <span class="keyword">in</span> hh:mm format</span><br><span class="line">spinupdrivecount: Valid enclosure number (0 to 255)</span><br><span class="line">SpinUpEncDelay: Valid time <span class="keyword">in</span> seconds</span><br></pre></td></tr></table></figure>
+
+<h3 id="Device"><a href="#Device" class="headerlink" title="Device"></a>Device</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /cx[/ex]/sx spindown</span><br><span class="line">$ storcli64 /cx[/ex]/sx spinup</span><br><span class="line"></span><br><span class="line">$ storcli64 /cx[/ex]/sx secureerase [force]</span><br><span class="line">$ storcli64 /cx[/ex]/sx start erase [simple|normal|thorough] [erasepatternA=&lt;value1&gt;] [erasepatternB=&lt;value2&gt;]</span><br><span class="line">$ storcli64 /cx[/ex]/sx stop erase</span><br></pre></td></tr></table></figure>
+
+<h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><h4 id="log"><a href="#log" class="headerlink" title="log"></a>log</h4><p>— 0 – NA<br>— 1– SET<br>— 2 – CLEAR<br>— 3 – CLEAR ALL<br>— 4 – DEBUG DUMP</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /call show all logfile=megaraid.cfg</span><br><span class="line">$ storcli64 /c x <span class="built_in">set</span> debug reset all </span><br><span class="line">$ storcli64 /call x <span class="built_in">set</span> debug <span class="built_in">type</span> = &lt;value&gt; option = &lt;value&gt; level = [&lt;value <span class="keyword">in</span> hex&gt;]</span><br><span class="line"><span class="comment">#type – takes the value from 0 – 128, mapping each number to a particular debug variable in the firmware.</span></span><br><span class="line">$ <span class="comment">#storcli64 /call delete events</span></span><br><span class="line">$ <span class="comment">#storcli64 /call delete termlog</span></span><br><span class="line"></span><br><span class="line">$ storcli64 /call show events file=events.log</span><br><span class="line">$ storcli64 /call show termlog <span class="built_in">type</span>=config logfile=termlog.config</span><br><span class="line">$ storcli64 /call show termlog <span class="built_in">type</span>=contents logfile=termlog.contents</span><br><span class="line">$ storcli64 /call show eventloginfo logfile=event.info</span><br><span class="line">$ storcli64 /call show dequeuelog file=dequeue.log</span><br><span class="line">$ storcli64 /call show alilog logfile=ali.log</span><br></pre></td></tr></table></figure>
+<h4 id="Encolsure"><a href="#Encolsure" class="headerlink" title="Encolsure"></a>Encolsure</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ perccli64 /call/eall download src=encolsure.bin</span><br><span class="line">$ perccli64 /call/eall show all</span><br><span class="line">$ perccli64 /call/eall show status</span><br></pre></td></tr></table></figure>
+
+<h4 id="phy-err"><a href="#phy-err" class="headerlink" title="phy err"></a>phy err</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">storcli /cx/px|pall show</span><br><span class="line">storcli /cx/px|pall show all</span><br><span class="line">storcli /cx/ex show phyerrorcounters</span><br><span class="line">storcli /cx[/ex]/sx show phyerrorcounters</span><br><span class="line">storcli /cx[/ex]/sx reset phyerrorcounters</span><br><span class="line">storcli /cx/px|pall <span class="built_in">set</span> linkspeed=0(auto)|1.5|3|6|12</span><br></pre></td></tr></table></figure>
+
+<h4 id="diag-adapter"><a href="#diag-adapter" class="headerlink" title="diag adapter"></a>diag adapter</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ perccli64 /c0 start diag duration=10 logfile=diag.log</span><br></pre></td></tr></table></figure>
+
+<h4 id="Enable-SEP-for-Dell-PERC"><a href="#Enable-SEP-for-Dell-PERC" class="headerlink" title="Enable SEP for Dell PERC"></a>Enable SEP for Dell PERC</h4><p>Configures enclosure detection on a non-SES/expander backplane.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ perccli64 /call <span class="built_in">set</span> backplane mode=0 expose=on</span><br><span class="line">0: Use autodetect logic of backplanes, such as SGPIO and I2C SEP using GPIO pins.</span><br><span class="line">1: Disable autodetect SGPIO.</span><br><span class="line">2: Disable I2C SEP autodetect.</span><br><span class="line">3: Disable both the autodetects.</span><br><span class="line"></span><br><span class="line">backplane expose: Enables or disables device drivers to expose enclosure devices; <span class="keyword">for</span> example, expanders, SEPs.</span><br><span class="line"></span><br><span class="line">$ perccli64 /call <span class="built_in">set</span> sesmonitoring=on</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Enable-JBOD"><a href="#Enable-JBOD" class="headerlink" title="Enable JBOD"></a>Enable JBOD</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /call <span class="built_in">set</span> jbod=on</span><br></pre></td></tr></table></figure>
+
+<h3 id="SAS-loading-balance"><a href="#SAS-loading-balance" class="headerlink" title="SAS loading balance"></a>SAS loading balance</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /cx <span class="built_in">set</span> loadbalancemode=on</span><br></pre></td></tr></table></figure>
+
+<h3 id="Driver-performance"><a href="#Driver-performance" class="headerlink" title="Driver performance"></a>Driver performance</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ storcli64 /call <span class="built_in">set</span> DPM=on</span><br><span class="line"><span class="comment">#Enables or disables drive performance monitoring</span></span><br><span class="line"></span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> ncq=on</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> perfmode=1 <span class="comment">#default was 0</span></span><br><span class="line">0: Tuned to provide best IOPS, currently applicable to non-FastPath</span><br><span class="line">1: Tuned to provide least latency, currently applicable to non-FastPath</span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/raid/" rel="tag"><i class="fa fa-tag"></i> raid</a>
+              <a href="/tags/storage/" rel="tag"><i class="fa fa-tag"></i> storage</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/08/scsi_dev/" rel="prev" title="sas jbod maintain">
+      <i class="fa fa-chevron-left"></i> sas jbod maintain
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/29/lfs_command/" rel="next" title="lfs command">
+      lfs command <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-time"><span class="nav-number">1.</span> <span class="nav-text">Set time</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-cache-policy"><span class="nav-number">2.</span> <span class="nav-text">Set cache policy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-raid10"><span class="nav-number">3.</span> <span class="nav-text">Create raid10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Megaraid-FastPATH-for-SAS-SATA-SSD"><span class="nav-number">4.</span> <span class="nav-text">Megaraid FastPATH for SAS&#x2F;SATA SSD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#case-1"><span class="nav-number">4.1.</span> <span class="nav-text">case 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Setting-BBU"><span class="nav-number">4.2.</span> <span class="nav-text">Setting BBU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cachevault"><span class="nav-number">4.3.</span> <span class="nav-text">Cachevault</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-all-megaraid-log-not-filter"><span class="nav-number">4.4.</span> <span class="nav-text">Get all megaraid log, not filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Show-raid-logic-info"><span class="nav-number">4.5.</span> <span class="nav-text">Show raid logic info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Import-license"><span class="nav-number">4.6.</span> <span class="nav-text">Import license</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backup-config"><span class="nav-number">4.7.</span> <span class="nav-text">Backup config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Interrupt-BGI"><span class="nav-number">4.8.</span> <span class="nav-text">Interrupt BGI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rebuild-Migrate-init"><span class="nav-number">4.9.</span> <span class="nav-text">Rebuild&#x2F;Migrate&#x2F;init</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Make-device-good"><span class="nav-number">4.10.</span> <span class="nav-text">Make device good</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Make-JBOD"><span class="nav-number">4.11.</span> <span class="nav-text">Make JBOD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Foreign-devices"><span class="nav-number">4.12.</span> <span class="nav-text">Foreign devices</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#About-Consistency-and-patrol-read"><span class="nav-number">5.</span> <span class="nav-text">About Consistency and patrol read</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Patrol-read"><span class="nav-number">5.1.</span> <span class="nav-text">Patrol read</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consistency-Check"><span class="nav-number">5.2.</span> <span class="nav-text">Consistency Check</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Montor-cache-ECC-count"><span class="nav-number">6.</span> <span class="nav-text">Montor cache ECC count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#About-device-write-cache-in-megaraid"><span class="nav-number">7.</span> <span class="nav-text">About device write cache in megaraid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backup-and-restore-config-file"><span class="nav-number">8.</span> <span class="nav-text">Backup and restore config file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flush-RAID-write-cache"><span class="nav-number">9.</span> <span class="nav-text">Flush RAID write cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#show-PHY"><span class="nav-number">10.</span> <span class="nav-text">show PHY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Foreign-configurations"><span class="nav-number">11.</span> <span class="nav-text">Foreign configurations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dimmer-switch"><span class="nav-number">12.</span> <span class="nav-text">Dimmer switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Device"><span class="nav-number">13.</span> <span class="nav-text">Device</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debug"><span class="nav-number">14.</span> <span class="nav-text">debug</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#log"><span class="nav-number">14.1.</span> <span class="nav-text">log</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Encolsure"><span class="nav-number">14.2.</span> <span class="nav-text">Encolsure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#phy-err"><span class="nav-number">14.3.</span> <span class="nav-text">phy err</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#diag-adapter"><span class="nav-number">14.4.</span> <span class="nav-text">diag adapter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Enable-SEP-for-Dell-PERC"><span class="nav-number">14.5.</span> <span class="nav-text">Enable SEP for Dell PERC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enable-JBOD"><span class="nav-number">15.</span> <span class="nav-text">Enable JBOD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SAS-loading-balance"><span class="nav-number">16.</span> <span class="nav-text">SAS loading balance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Driver-performance"><span class="nav-number">17.</span> <span class="nav-text">Driver performance</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">66k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">1:01</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2019/05/24/megaraid/",
+            identifier: "2019/05/24/megaraid/",
+            title: "Replace megaraid by strocli"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
