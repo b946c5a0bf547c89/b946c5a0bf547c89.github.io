@@ -74,7 +74,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">lctl set_param osd-zfs.*.osd_obj_sync_delay_us=0</span><br><span class="line"></span><br><span class="line">osd_object_sync_delay_us</span><br><span class="line">To improve fsync() performance until ZIL device,it is possible <span class="built_in">disable</span> the code <span class="built_in">which</span> causes Lustre to block waiting on a TXG to sync</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>file_system</category>
+        <category>filesystem</category>
       </categories>
       <tags>
         <tag>lfs</tag>
