@@ -54,7 +54,7 @@
 <meta property="og:description" content="multipath is not detecting path failures fast enough which results in application failure and system rebootsThere are multiple parameters that affect error detection and failover times:dev_loss_tmofas">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-12-11T13:40:43.000Z">
-<meta property="article:modified_time" content="2020-01-02T14:02:09.000Z">
+<meta property="article:modified_time" content="2020-01-04T05:04:27.151Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="multipath">
 <meta property="article:tag" content="dm">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-02 22:02:09" itemprop="dateModified" datetime="2020-01-02T22:02:09+08:00">2020-01-02</time>
+                <time title="Modified: 2020-01-04 13:04:27" itemprop="dateModified" datetime="2020-01-04T13:04:27+08:00">2020-01-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -296,6 +296,8 @@
       
         <p><a href="https://access.redhat.com/solutions/137073" target="_blank" rel="noopener">multipath is not detecting path failures fast enough which results in application failure and system reboots</a><br>There are multiple parameters that affect error detection and failover times:<br>dev_loss_tmo<br>fast_io_fail_tmo<br>checker_timeout</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#default setting</span><br><span class="line">defaults &#123;</span><br><span class="line">        user_friendly_names yes</span><br><span class="line">        fast_io_fail_tmo 5</span><br><span class="line">        dev_loss_tmo 10</span><br><span class="line">        no_path_retry fail</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <p>The dev_loss_tmo (rport) affects extended link timeout, <code>in-flight I/O is held after a link-down event for seconds before the driver gives up waiting for the port to come back. Default is 30-35s, so in-flight I/O can be held seconds before being killed off. After timeout expiration, rport is put in offline (down) state.</code></p>
 <p>The fast_io_fail_tmo (rport) affects how long io is queued and held while rport is in blocked state.</p>
@@ -472,7 +474,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">4:04</span>
+    <span title="Reading time total">4:05</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

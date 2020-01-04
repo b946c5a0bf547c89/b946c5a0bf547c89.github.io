@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="Block benchmark trapfio sequential write in the same device block cause the test result too high 12345678910[rw]rw&#x3D;writeioengine&#x3D;posixaioiodepth&#x3D;4nrfiles&#x3D;8bssplit&#x3D;1M&#x2F;100direct&#x3D;1filename&#x3D;&#x2F;dev&#x2F;sdb1numjo">
+  <meta name="description" content="Here is my benchmark info">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Benchmark">
 <meta property="og:url" content="http://yoursite.com/2018/07/12/benchmark/index.html">
 <meta property="og:site_name" content="b946c5a0bf547c89">
-<meta property="og:description" content="Block benchmark trapfio sequential write in the same device block cause the test result too high 12345678910[rw]rw&#x3D;writeioengine&#x3D;posixaioiodepth&#x3D;4nrfiles&#x3D;8bssplit&#x3D;1M&#x2F;100direct&#x3D;1filename&#x3D;&#x2F;dev&#x2F;sdb1numjo">
+<meta property="og:description" content="Here is my benchmark info">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-07-12T02:25:02.000Z">
-<meta property="article:modified_time" content="2020-01-01T02:58:39.242Z">
+<meta property="article:modified_time" content="2020-01-04T05:01:26.167Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="test">
 <meta property="article:tag" content="performance">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-01 10:58:39" itemprop="dateModified" datetime="2020-01-01T10:58:39+08:00">2020-01-01</time>
+                <time title="Modified: 2020-01-04 13:01:26" itemprop="dateModified" datetime="2020-01-04T13:01:26+08:00">2020-01-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,7 +294,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="Block-benchmark-trap"><a href="#Block-benchmark-trap" class="headerlink" title="Block benchmark trap"></a>Block benchmark trap</h3><p>fio sequential write in the same device block cause the test result too high</p>
+        <p>Here is my benchmark info</p>
+<a id="more"></a>
+
+<h3 id="Block-benchmark-trap"><a href="#Block-benchmark-trap" class="headerlink" title="Block benchmark trap"></a>Block benchmark trap</h3><p>fio sequential write in the same device block cause the test result too high</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[rw]</span><br><span class="line">rw=write</span><br><span class="line">ioengine=posixaio</span><br><span class="line">iodepth=4</span><br><span class="line">nrfiles=8</span><br><span class="line">bssplit=1M/100</span><br><span class="line">direct=1</span><br><span class="line">filename=/dev/sdb1</span><br><span class="line">numjobs=4</span><br><span class="line">size=2000G</span><br></pre></td></tr></table></figure>
 
 <p>For avoid this issue, and I don ‘t know why I have to wait after 10% test process, the speed will from 4GB/s down to 1.6GB/s<br>If you use fio test raw device, you ‘d better set numjobs=1, single core is enough</p>
@@ -463,7 +466,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">4:04</span>
+    <span title="Reading time total">4:05</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
