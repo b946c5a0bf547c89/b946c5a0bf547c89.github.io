@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="SMcliDiscovery devices1SMcli -A  Got serial number12345SMcli localhost -n $yourstoragename  -c &quot; show storagearray;&quot; | grep -Ei &#39;Chassis Serial Number|Part number|$serial_number&#39;   Chassis Serial Numb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dell command line in linux">
+<meta property="og:url" content="http://yoursite.com/2017/04/13/dell/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="SMcliDiscovery devices1SMcli -A  Got serial number12345SMcli localhost -n $yourstoragename  -c &quot; show storagearray;&quot; | grep -Ei &#39;Chassis Serial Number|Part number|$serial_number&#39;   Chassis Serial Numb">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-04-13T02:39:34.000Z">
+<meta property="article:modified_time" content="2020-01-05T12:19:55.595Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="dell">
+<meta property="article:tag" content="smcli">
+<meta property="article:tag" content="racadm">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/04/13/dell/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Dell command line in linux | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/13/dell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Dell command line in linux
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-04-13 10:39:34" itemprop="dateCreated datePublished" datetime="2017-04-13T10:39:34+08:00">2017-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 20:19:55" itemprop="dateModified" datetime="2020-01-05T20:19:55+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hardware/" itemprop="url" rel="index">
+                    <span itemprop="name">hardware</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/04/13/dell/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/13/dell/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="SMcli"><a href="#SMcli" class="headerlink" title="SMcli"></a>SMcli</h3><h4 id="Discovery-devices"><a href="#Discovery-devices" class="headerlink" title="Discovery devices"></a>Discovery devices</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SMcli -A</span><br></pre></td></tr></table></figure>
+
+<h4 id="Got-serial-number"><a href="#Got-serial-number" class="headerlink" title="Got serial number"></a>Got serial number</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SMcli localhost -n <span class="variable">$yourstoragename</span>  -c <span class="string">" show storagearray;"</span> | grep -Ei <span class="string">'Chassis Serial Number|Part number|$serial_number'</span></span><br><span class="line">   Chassis Serial Number:                     SVC <span class="variable">$serial_number</span></span><br><span class="line">      RAID Controller Module DNS/Network name:   <span class="variable">$serial_number</span></span><br><span class="line">      RAID Controller Module DNS/Network name:   <span class="variable">$serial_number</span></span><br><span class="line">         Part number:                     SVC <span class="variable">$serial_number</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="Get-storage-system-name"><a href="#Get-storage-system-name" class="headerlink" title="Get storage-system-name"></a>Get storage-system-name</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-n means storage-system-name</span><br><span class="line">SMcli localhost</span><br></pre></td></tr></table></figure>
+<h4 id="Get-storage-system-status"><a href="#Get-storage-system-status" class="headerlink" title="Get storage system status"></a>Get storage system status</h4><p>show ip address (ipaddr)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SMcli  -n ControllerA  -c <span class="string">" show storagearray healthstatus;"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Show-all-info"><a href="#Show-all-info" class="headerlink" title="Show all info"></a>Show all info</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SMcli  -n ControllerA  -c <span class="string">"show allControllers  summary;"</span></span><br><span class="line">SMcli -n ControllerA -c <span class="string">"Show allVirtualDisks;"</span></span><br><span class="line">SMcli -n ControllerA -c <span class="string">"show AllPhysicalDisks summary;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#### If no summary , it will output all details for each devices.</span></span><br><span class="line">SMcli -n ControllerA -c <span class="string">"show allcontrollers;"</span> <span class="comment">##NVRAM status, cache mirror</span></span><br><span class="line">SMcli  -n ControllerA  -c <span class="string">"Show allphysicalDisks summary;"</span></span><br><span class="line">SMcli  -n ControllerA  -c <span class="string">"Show allphysicalDisks ;"</span></span><br></pre></td></tr></table></figure>
+<h4 id="Output-controller-log"><a href="#Output-controller-log" class="headerlink" title="Output controller log"></a>Output controller log</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SMcli  -n ControllerA  -c <span class="string">"save storageArray supportdata file=\"/tmp/controller.log\" force=true;"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Reset-controller"><a href="#Reset-controller" class="headerlink" title="Reset controller"></a>Reset controller</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SMcli -n  ControllerA -c <span class="string">"reset controller 0;"</span></span><br><span class="line">SMcli -n  ControllerA -c <span class="string">"reset controller 1;"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Blink-the-device"><a href="#Blink-the-device" class="headerlink" title="Blink the device"></a>Blink the device</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SMcli -n ControllerA -c <span class="string">"start physicalDisk [1,0,11] blink;"</span></span><br><span class="line">SMcli -n ControllerA -c <span class="string">"stop physicalDisk blink;"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Get-battery-status"><a href="#Get-battery-status" class="headerlink" title="Get battery status"></a>Get battery status</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SMcli -n ControllerA -c <span class="string">"show storageArray batteryage;"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Get-battery-status-1"><a href="#Get-battery-status-1" class="headerlink" title="Get battery status"></a>Get battery status</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SMcli -n ControllerA -c <span class="string">"show storageArray powerInfo;"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Dump-all-logs"><a href="#Dump-all-logs" class="headerlink" title="Dump all logs"></a>Dump all logs</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SMcli localhost -n MD3460 -c &#39;save storageArray allEvents file&#x3D;&quot;all_events.log&quot;;&#39;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Enable-media-scan"><a href="#Enable-media-scan" class="headerlink" title="Enable media scan"></a>Enable media scan</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SMcli localhost -n MD3460 -c <span class="string">"show storagearray;"</span>  | grep <span class="string">"frequency"</span> -i</span><br><span class="line">   Media scan frequency:               1 days</span><br><span class="line">      Frequency:                         NA</span><br><span class="line"></span><br><span class="line">SMcli localhost -n MD3460 -c <span class="string">"set storagearray mediaScanRate=1;"</span> <span class="comment">#days, 1 means 1 day, max is 30 days ,defaults is 15 days</span></span><br><span class="line">SMcli localhost -n MD3460 -c <span class="string">"set allVirtualDisks mediaScanEnabled=TRUE;"</span> <span class="comment">#enable all VD media scan</span></span><br><span class="line">SMcli localhost -n MD3460 -c <span class="string">"set allVirtualDisks consistencyCheckEnabled=False;"</span> <span class="comment"># first time, don 't suggest enable consistency check</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Important-check"><a href="#Important-check" class="headerlink" title="Important check"></a>Important check</h4><p><code>Because some of SAN dual controller create diff usable size cause data loss</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2018-10-20 SAN log</span></span><br><span class="line">$ cat storage-array-profile.txt | grep <span class="string">"Usable capacity:         9,118.500"</span> -c</span><br><span class="line">60</span><br><span class="line">$ cat storage-array-profile.txt | grep <span class="string">"Usable capacity:         9,123.500"</span> -c</span><br><span class="line">60</span><br><span class="line"></span><br><span class="line"><span class="comment"># it trigger the SAN bug cause dual controller lockdown</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># after re-import config, 2018-11-09 SAN log</span></span><br><span class="line">cat storage-array-profile.txt | grep <span class="string">"Usable capacity:         9,118.500"</span> -c</span><br><span class="line">120</span><br></pre></td></tr></table></figure>
+
+<h3 id="shmcli"><a href="#shmcli" class="headerlink" title="shmcli"></a>shmcli</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;s&#x2F;CentOS&#x2F;RedHat Enterprise&#x2F;g&#39; &#x2F;etc&#x2F;redhat-release</span><br><span class="line">sed -i &#39;s&#x2F;CentOS&#x2F;RedHat Enterprise&#x2F;g&#39; &#x2F;etc&#x2F;centos-release</span><br><span class="line">.&#x2F;ServerHardwareManager-2.1.1.r3f319ece-RHEL7-installer --mode unattended</span><br></pre></td></tr></table></figure>
+
+<p>Because Dell MD1280 could not blink by sas2ircu</p>
+<h4 id="Found-the-relationship-driver-and-JBOD"><a href="#Found-the-relationship-driver-and-JBOD" class="headerlink" title="Found the relationship driver and JBOD"></a>Found the relationship driver and JBOD</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">$ shmcli list physical enclosures</span><br><span class="line"></span><br><span class="line">list physical enclosures - Executing <span class="built_in">command</span>..</span><br><span class="line">Encl<span class="comment">#            Name     Service Tag Encl Overall Sts              WWN   # Adapters Connected</span></span><br><span class="line">-----            ----     ----------- ----------------              ---   --------------------</span><br><span class="line">    0  EN-8435A-E6EBD     0002000                 OK 50050cc000000001                      1</span><br><span class="line">    1  EN-8435A-E6EBD     0001000                 OK 50050cc000000002                      1</span><br><span class="line"></span><br><span class="line">$ shmcli list drives </span><br><span class="line">WWN                OS Path   Vendor ProductId        Serial   Rev  Size   PredFail              Enclosure                     PPID</span><br><span class="line">5000cca2736726c7 /dev/sg10   HGSTHUH721010AL5200    2000000D  LS14 8.91TB          50050cc000000001 (EN-8435A-E6EBD)  TH007FPRHGT0087F678PA02</span><br><span class="line"></span><br><span class="line"><span class="comment"># you can see /dev/sg10 is attach in 50050cc000000001(JBOD)</span></span><br><span class="line"><span class="comment"># WWN is 5000cca2736726c7 in first column</span></span><br><span class="line"></span><br><span class="line">$ shmcli list drives -verbose</span><br><span class="line"></span><br><span class="line"><span class="comment">#Got high await and util SAS dev</span></span><br><span class="line">[[ ! -f /dev/shm/shmcli_list_drivers ]] &amp;&amp; shmcli list drives -verbose &gt; /dev/shm/shmcli_list_drivers</span><br><span class="line">[[ ! -f /dev/shm/lsscsi.log ]] &amp;&amp; lsscsi -gi &gt; /dev/shm/lsscsi.log</span><br><span class="line">iostat -xm 2 14 | awk <span class="string">'NF==14 &amp;&amp; $1~/sd/&#123;if($NF&gt;80 &amp;&amp; $(NF-4)&gt;80) &#123;a[$1]++&#125;&#125; END&#123;for (i in a) &#123;print "/dev/"i,a[i]&#125;&#125;'</span> &gt; /dev/shm/high-lat-devs</span><br><span class="line"><span class="built_in">echo</span> OS-dev<span class="string">"    "</span>driver-dev<span class="string">"   "</span>dev-type<span class="string">"    "</span>serial<span class="string">" "</span>Firmware<span class="string">" "</span>size<span class="string">"             "</span>JBOD-NO<span class="string">"             "</span>Slot<span class="string">"  "</span>zpool</span><br><span class="line"><span class="built_in">cd</span> /dev/shm &amp;&amp; awk <span class="string">'NF==2 &#123;a[$1]=$2&#125;;NF==6 &amp;&amp; $0~/3500/&#123;b[$(NF-2)]=$(NF)&#125;; NF=18 &#123;c[$2]=$4" "$5" "$6" "$7" "$8" "$9" "$11&#125;;END&#123;for(i in a) &#123;res[b[i]]=i&#125;; for (i in res) &#123;print res[i],i,c[i]&#125;&#125; ;'</span> high-lat-devs lsscsi.log shmcli_list_drivers | <span class="keyword">while</span> <span class="built_in">read</span> line; <span class="keyword">do</span> zfspool=$(zdb -l $(<span class="built_in">echo</span> <span class="variable">$line</span> | awk <span class="string">'&#123;print $1&#125;'</span>)1 | grep ost_); <span class="built_in">echo</span> -n <span class="variable">$line</span><span class="string">" "</span><span class="variable">$zfspool</span>; <span class="built_in">echo</span> ; <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">OS-dev    driver-dev   dev-type    serial Firmware size             JBOD-NO             Slot  zpool</span><br><span class="line">/dev/sddt /dev/sg131 ST10000NM0256 ZA2839LZ TT54 8.91TB 50050cc11ac01694 (EN-8435A-E6EBD)  name: <span class="string">'ost_1'</span></span><br><span class="line">/dev/sddl /dev/sg123 ST10000NM0256 ZA27H764 TT54 8.91TB 50050cc11ac01694 (EN-8435A-E6EBD)  name: <span class="string">'ost_1'</span></span><br><span class="line">/dev/sddv /dev/sg133 ST10000NM0256 ZA27YFPB TT54 8.91TB 50050cc11ac01694 (EN-8435A-E6EBD)  name: <span class="string">'ost_1'</span></span><br><span class="line">/dev/sdde /dev/sg116 ST10000NM0256 ZA27YQLV TT54 8.91TB 50050cc11ac01694 (EN-8435A-E6EBD)  name: <span class="string">'ost_1'</span></span><br><span class="line">/dev/sddf /dev/sg117 ST10000NM0256 ZA27H83K TT54 8.91TB 50050cc11ac01694 (EN-8435A-E6EBD)  name: <span class="string">'ost_1'</span></span><br><span class="line">/dev/sddx /dev/sg136 ST10000NM0256 ZA2839NH TT54 8.91TB 50050cc11ac01694 (EN-8435A-E6EBD)  name: <span class="string">'ost_1'</span></span><br><span class="line">/dev/sddq /dev/sg128 ST10000NM0256 ZA2839VX TT54 8.91TB 50050cc11ac01694 (EN-8435A-E6EBD)  name: <span class="string">'ost_1'</span></span><br><span class="line"></span><br><span class="line">lsscsi -git  | grep sg10</span><br><span class="line">[17:0:8:0]   disk    sas:0x5000cca2736726c5          /dev/sdi   35000cca2736726c4  /dev/sg10</span><br></pre></td></tr></table></figure>
+
+<h4 id="Blink-dev-led"><a href="#Blink-dev-led" class="headerlink" title="Blink dev led"></a>Blink dev led</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ shmcli blink drive -d = 5000cca2736726c7</span><br><span class="line">blink drive - Executing <span class="built_in">command</span>..</span><br><span class="line">Blink drive successful.</span><br><span class="line">blink drive - Command execution complete.</span><br><span class="line"></span><br><span class="line">$ shmcli list drive slots -a = 0 -enc = 0 -verbose | grep 2000000D -i</span><br><span class="line"><span class="comment"># -a = 0 first SAS HBA</span></span><br><span class="line"><span class="comment"># -enc enclosure number</span></span><br><span class="line">Enc Slot Drwr/Slot Status Vendor  ProductId       Serial   Size   Lnk   Rev Blnk? Logical Vols       SAS Connections</span><br><span class="line">65    1 / 23         OK    HGST   HUH721010AL5200 2000000D 8.91TB 6G,6G LS14 YES,  5000cca27330a695,      n/a</span><br><span class="line"><span class="comment"># you can see Blnk filed is YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#disable led</span></span><br><span class="line">$ shmcli blink drive -d = 5000cca2736726c7 -off</span><br></pre></td></tr></table></figure>
+
+<h4 id="Get-JBOD-log"><a href="#Get-JBOD-log" class="headerlink" title="Get JBOD log"></a>Get JBOD log</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">shmcli view <span class="built_in">log</span> -count=1000</span><br><span class="line"></span><br><span class="line">view <span class="built_in">log</span> - Executing <span class="built_in">command</span>..</span><br><span class="line">No valid <span class="built_in">log</span> files found.</span><br></pre></td></tr></table></figure>
+
+<h4 id="Replace-dev"><a href="#Replace-dev" class="headerlink" title="Replace dev"></a>Replace dev</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">[Sat Sep 29 16:14:02 2018] scsi 17:0:178:0: Direct-Access     HGST     HUH721010AL5200  LS03 PQ: 0 ANSI: 6</span><br><span class="line">[Sat Sep 29 16:14:02 2018] scsi 17:0:178:0: SSP: handle(0x00c5), sas_addr(0x5000cca266d6b0ce), phy(12), device_name(0x5000cca266d6b0cf)</span><br><span class="line">[Sat Sep 29 16:14:02 2018] scsi 17:0:178:0: SSP: enclosure_logical_id(0x50050cc11ac01572), slot(56)</span><br><span class="line">[Sat Sep 29 16:14:02 2018] scsi 17:0:178:0: serial_number(7JKU27GC)</span><br><span class="line">[Sat Sep 29 16:14:02 2018] scsi 17:0:178:0: qdepth(254), tagged(1), simple(0), ordered(0), scsi_level(7), cmd_que(1)</span><br><span class="line">[Sat Sep 29 16:14:02 2018] sd 17:0:178:0: Attached scsi generic sg119 type 0</span><br><span class="line">[Sat Sep 29 16:14:02 2018] sd 17:0:178:0: [sddh] Enabling DIF Type 2 protection</span><br><span class="line">[Sat Sep 29 16:14:02 2018] sd 17:0:178:0: [sddh] 19134414848 512-byte logical blocks: (9.79 TB&#x2F;8.91 TiB)</span><br><span class="line">[Sat Sep 29 16:14:02 2018] sd 17:0:178:0: [sddh] 4096-byte physical blocks</span><br><span class="line">[Sat Sep 29 16:14:02 2018] sd 17:0:178:0: [sddh] Write Protect is off</span><br><span class="line">[Sat Sep 29 16:14:02 2018] sd 17:0:178:0: [sddh] Mode Sense: f7 00 10 08</span><br><span class="line">[Sat Sep 29 16:14:03 2018] sd 17:0:178:0: [sddh] Write cache: disabled, read cache: enabled, supports DPO and FUA</span><br><span class="line">[Sat Sep 29 16:14:03 2018] sd 17:0:178:0: [sddh] Attached SCSI disk</span><br><span class="line"></span><br><span class="line">$ zpool status -x</span><br><span class="line">  pool: ost_85</span><br><span class="line"> state: DEGRADED</span><br><span class="line">status: One or more devices has been taken offline by the administrator.</span><br><span class="line">	Sufficient replicas exist for the pool to continue functioning in a</span><br><span class="line">	degraded state.</span><br><span class="line">action: Online the device using &#39;zpool online&#39; or replace the device with</span><br><span class="line">	&#39;zpool replace&#39;.</span><br><span class="line">  scan: scrub repaired 0B in 0h1m with 0 errors on Sat Sep 29 12:01:22 2018</span><br><span class="line">config:</span><br><span class="line"></span><br><span class="line">	NAME                        STATE     READ WRITE CKSUM</span><br><span class="line">	ost_85                      DEGRADED     0     0     0</span><br><span class="line">	  raidz3-0                  DEGRADED     0     0     0</span><br><span class="line">	    sddd                    ONLINE       0     0     0</span><br><span class="line">	    sdde                    ONLINE       0     0     0</span><br><span class="line">	    sddf                    ONLINE       0     0     0</span><br><span class="line">	    sddg                    ONLINE       0     0     0</span><br><span class="line">	    sddh                    OFFLINE      0     0     0</span><br><span class="line">	    sddi                    ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670b2a3  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670cadb  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670cb6f  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670ae37  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670bdb3  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670b0db  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500956f033b  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a675adef  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a65b3f6b  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a663b6b7  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670b6a3  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a65a83d3  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670b0eb  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a66ce193  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a6754c87  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a6754373  ONLINE       0     0     0</span><br><span class="line"></span><br><span class="line">errors: No known data errors</span><br><span class="line">$ zpool replace ost_85 sddh</span><br></pre></td></tr></table></figure>
+
+<h4 id="Online-upgrade-SAS-HDD-firmware"><a href="#Online-upgrade-SAS-HDD-firmware" class="headerlink" title="Online upgrade SAS HDD firmware"></a>Online upgrade SAS HDD firmware</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line">$ zpool status -x</span><br><span class="line">  pool: tank</span><br><span class="line"> state: ONLINE</span><br><span class="line">status: One or more devices is currently being resilvered.  The pool will</span><br><span class="line">	<span class="built_in">continue</span> to <span class="keyword">function</span>, possibly <span class="keyword">in</span> a degraded state.</span><br><span class="line">action: Wait <span class="keyword">for</span> the resilver to complete.</span><br><span class="line">  scan: resilver <span class="keyword">in</span> progress since Sat Apr  6 11:14:31 2019</span><br><span class="line">	56.6T scanned out of 143T at 131M/s, 192h27m to go</span><br><span class="line">	3.14T resilvered, 39.52% <span class="keyword">done</span></span><br><span class="line">config:</span><br><span class="line"></span><br><span class="line">	NAME                        STATE     READ WRITE CKSUM</span><br><span class="line">	tank                       ONLINE       0     0     0</span><br><span class="line">	  raidz3-0                  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a675430f  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a6753f3f  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a6754a27  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670c9f3  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a65b51eb  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a6755097  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a65b327f  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a675682f  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a67547f3  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670cb23  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670c7cf  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a67555db  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a670c717  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a65aa78f  ONLINE       0     0     0</span><br><span class="line">	    sdfm                    ONLINE       0     0     0  (resilvering)</span><br><span class="line">	    scsi-35000c500a675494f  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a65af82f  ONLINE       0     0     0</span><br><span class="line">	    scsi-35000c500a6753f4b  ONLINE       0     0     0</span><br><span class="line"></span><br><span class="line">errors: No known data errors</span><br><span class="line"></span><br><span class="line">$ lsscsi -gi | grep sdfm</span><br><span class="line">[17:0:177:0] disk    SEAGATE  ST10000NM0256    TT54  /dev/sdfm  35000c500a73fd773  /dev/sg179</span><br><span class="line">   h == hostadapter id (first one being 0)</span><br><span class="line">   c == SCSI channel on hostadapter (first one being 0)</span><br><span class="line">   t == ID</span><br><span class="line">   l == LUN (first one being 0)</span><br><span class="line"></span><br><span class="line">$ shmcli list drives | grep sg179</span><br><span class="line">     5000c500a73fd770 /dev/sg179                SEAGATE                            ST10000NM0256            ZA29YQKE     TT54      8.91TB          50050cc11ac01694 (EN-8435A-E6EBD)  TH0YF87JSGT008AN006SA00</span><br><span class="line"></span><br><span class="line">$ shmcli info drive -d = 5000c500a73fd770</span><br><span class="line"></span><br><span class="line">info drive - Executing <span class="built_in">command</span>..</span><br><span class="line"></span><br><span class="line">Product Information :</span><br><span class="line">	ProductId: ST10000NM0256</span><br><span class="line">	Slot Number: 1</span><br><span class="line">	Vendor: SEAGATE</span><br><span class="line">	Size: 19134414847</span><br><span class="line">	Serial: ZA29YQKE</span><br><span class="line">	OS Path: /dev/sg179</span><br><span class="line">	Date: 2018</span><br><span class="line">	Primary Port WWN: 5000c500a73fd770</span><br><span class="line">	Secondary Port WWN: 5000c500a73fd772</span><br><span class="line">	Port SAS Addresses: 5000c500a73fd772, 0000000000000000</span><br><span class="line">	Drive Supported: YES</span><br><span class="line">	Rev: TT54</span><br><span class="line">	Blinking?: NO</span><br><span class="line">	Nominal Form Factor Height: 2540</span><br><span class="line">	Nominal Form Factor Width: 3500</span><br><span class="line"></span><br><span class="line">Predicted Failure: NO</span><br><span class="line"></span><br><span class="line">Logical Volume Info: n.a.,n.a. ()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Logical Drives Count: 0</span><br><span class="line"></span><br><span class="line">Device Speed Information :</span><br><span class="line">	Link Speed (Primary): 6G</span><br><span class="line">	Link Speed (Secondary): 6G</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Enclosure Page 2 :</span><br><span class="line">	Slot Status: OK</span><br><span class="line">	ENCL BYPED A: OFF</span><br><span class="line">	ENCL BYPED B: OFF</span><br><span class="line">	IDENT: OFF</span><br><span class="line">	FAULT REQSTED: OFF</span><br><span class="line">	DEVICE OFF: OFF</span><br><span class="line">	ENABLE BYP A: OFF</span><br><span class="line">	ENABLE BYP A: OFF</span><br><span class="line">	ENABLE BYP A: OFF</span><br><span class="line">	BYP A ENABLE: OFF</span><br><span class="line">	BYP B ENABLE: OFF</span><br><span class="line"></span><br><span class="line">info drive - Command execution complete.</span><br><span class="line"></span><br><span class="line">$ zpool offline tank sdfm</span><br><span class="line">$ shmcli update drive -d = 5000c500a73fd770 -file = ./Seagate_Tatsu_TT55.fwh</span><br><span class="line"></span><br><span class="line">update drive - Executing <span class="built_in">command</span>..</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	(SEAGATE / ST10000NM0256 / ZA29YQKE) - File firmware version = TT55</span><br><span class="line">	(SEAGATE / ST10000NM0256 / ZA29YQKE) - Current drive firmware version = TT54</span><br><span class="line">	(SEAGATE / ST10000NM0256 / ZA29YQKE) - Sending firmware file to device.</span><br><span class="line">        (SEAGATE / ST10000NM0256 / ZA29YQKE) - Firmware successfully sent to drive.</span><br><span class="line">	(SEAGATE / ST10000NM0256 / ZA29YQKE) - After update drive firmware version = TT55</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Drive Update Statistics:</span><br><span class="line">	Total Drives Attempted					 : 1</span><br><span class="line">	Successful Drive update count				 : 1</span><br><span class="line">	FW File transfer failures				 : 0</span><br><span class="line">	FW Update failures despite successful FW file transfer   : 0</span><br><span class="line">	Unsupported Drive count (Non-Dell Drives)		 : 0</span><br><span class="line">	Drives Incompatible with Firmware File			 : 0</span><br><span class="line">	Drives skipped because drive is same version		 : 0</span><br><span class="line">	Drives skipped because drive is newer version		 : 0</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> 1 &gt; /sys/block/sdfm/device/delete</span><br><span class="line"></span><br><span class="line">$ lspci | grep 3008</span><br><span class="line">b3:00.0 Serial Attached SCSI controller: LSI Logic / Symbios Logic SAS3008 PCI-Express Fusion-MPT SAS-3 (rev 02)</span><br><span class="line"></span><br><span class="line">$ ll /sys/class/scsi_host/ | grep b3</span><br><span class="line">lrwxrwxrwx 1 root root 0 Apr 11 17:01 host17 -&gt; ../../devices/pci0000:b2/0000:b2:00.0/0000:b3:00.0/host17/scsi_host/host17</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> 0 177 0  &gt; /sys/class/scsi_host/host17/scan</span><br><span class="line"></span><br><span class="line">$ dmesg -T | tail</span><br><span class="line">[Thu Apr 11 15:24:32 2019] scsi 17:0:177:0: qdepth(254), tagged(1), simple(0), ordered(0), scsi_level(7), cmd_que(1)</span><br><span class="line">[Thu Apr 11 15:24:32 2019] sd 17:0:177:0: Attached scsi generic sg179 <span class="built_in">type</span> 0</span><br><span class="line">[Thu Apr 11 15:24:32 2019] sd 17:0:177:0: [sdfm] Enabling DIF Type 2 protection</span><br><span class="line">[Thu Apr 11 15:24:32 2019] sd 17:0:177:0: [sdfm] 19134414848 512-byte logical blocks: (9.79 TB/8.91 TiB)</span><br><span class="line">[Thu Apr 11 15:24:32 2019] sd 17:0:177:0: [sdfm] 4096-byte physical blocks</span><br><span class="line">[Thu Apr 11 15:24:32 2019] sd 17:0:177:0: [sdfm] Write Protect is off</span><br><span class="line">[Thu Apr 11 15:24:32 2019] sd 17:0:177:0: [sdfm] Mode Sense: d7 00 10 08</span><br><span class="line">[Thu Apr 11 15:24:32 2019] sd 17:0:177:0: [sdfm] Write cache: enabled, <span class="built_in">read</span> cache: enabled, supports DPO and FUA</span><br><span class="line">[Thu Apr 11 15:24:32 2019]  sdfm: sdfm1 sdfm9</span><br><span class="line">[Thu Apr 11 15:24:32 2019] sd 17:0:177:0: [sdfm] Attached SCSI disk</span><br><span class="line">$ zpool online tank sdfm</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://topics-cdn.dell.com/pdf/software-tools_Administrator-Guide_en-us.pdf" target="_blank" rel="noopener">reference</a></p>
+<h3 id="Dell-EMC-OpenManage-Linux-Remote-Access-Utilities-v9-1-2"><a href="#Dell-EMC-OpenManage-Linux-Remote-Access-Utilities-v9-1-2" class="headerlink" title="Dell EMC OpenManage Linux Remote Access Utilities, v9.1.2"></a><a href="https://www.dell.com/support/home/us/en/04/drivers/driversdetails?driverid=f20vm" target="_blank" rel="noopener">Dell EMC OpenManage Linux Remote Access Utilities, v9.1.2</a></h3><p><a href="https://downloads.dell.com/FOLDER05025571M/1/OM-MgmtStat-Dell-Web-LX-9.1.2-2965_A00.tar.gz?uid=38b7ca51-c5a7-476d-355c-5cbbbc9fa1e0&fn=OM-MgmtStat-Dell-Web-LX-9.1.2-2965_A00.tar.gz" target="_blank" rel="noopener">Download</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">racadm supportassist accepteula</span><br><span class="line">racadm techsupreport collect -t SysInfo,TTYLog</span><br><span class="line">racadm techsupreport export -f dell_tsr.zip</span><br><span class="line">SupportAssist collection exported successfully.</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.dell.com/support/manuals/us/en/04/integrated-dell-remote-access-cntrllr-8-with-lifecycle-controller-v2.00.00.00/racadm_idrac_pub-v1/techsupreport?guid=guid-6a1a7b81-683b-4e54-8ed7-b5d779213d07&lang=en-us" target="_blank" rel="noopener">reference</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/dell/" rel="tag"><i class="fa fa-tag"></i> dell</a>
+              <a href="/tags/smcli/" rel="tag"><i class="fa fa-tag"></i> smcli</a>
+              <a href="/tags/racadm/" rel="tag"><i class="fa fa-tag"></i> racadm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/03/09/kvm-command/" rel="prev" title="kvm_tips">
+      <i class="fa fa-chevron-left"></i> kvm_tips
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/26/openzfs-issues/" rel="next" title="openzfs issues">
+      openzfs issues <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SMcli"><span class="nav-number">1.</span> <span class="nav-text">SMcli</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Discovery-devices"><span class="nav-number">1.1.</span> <span class="nav-text">Discovery devices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Got-serial-number"><span class="nav-number">1.2.</span> <span class="nav-text">Got serial number</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-storage-system-name"><span class="nav-number">1.3.</span> <span class="nav-text">Get storage-system-name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-storage-system-status"><span class="nav-number">1.4.</span> <span class="nav-text">Get storage system status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Show-all-info"><span class="nav-number">1.5.</span> <span class="nav-text">Show all info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Output-controller-log"><span class="nav-number">1.6.</span> <span class="nav-text">Output controller log</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reset-controller"><span class="nav-number">1.7.</span> <span class="nav-text">Reset controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Blink-the-device"><span class="nav-number">1.8.</span> <span class="nav-text">Blink the device</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-battery-status"><span class="nav-number">1.9.</span> <span class="nav-text">Get battery status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-battery-status-1"><span class="nav-number">1.10.</span> <span class="nav-text">Get battery status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dump-all-logs"><span class="nav-number">1.11.</span> <span class="nav-text">Dump all logs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Enable-media-scan"><span class="nav-number">1.12.</span> <span class="nav-text">Enable media scan</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Important-check"><span class="nav-number">1.13.</span> <span class="nav-text">Important check</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shmcli"><span class="nav-number">2.</span> <span class="nav-text">shmcli</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Found-the-relationship-driver-and-JBOD"><span class="nav-number">2.1.</span> <span class="nav-text">Found the relationship driver and JBOD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Blink-dev-led"><span class="nav-number">2.2.</span> <span class="nav-text">Blink dev led</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-JBOD-log"><span class="nav-number">2.3.</span> <span class="nav-text">Get JBOD log</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Replace-dev"><span class="nav-number">2.4.</span> <span class="nav-text">Replace dev</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Online-upgrade-SAS-HDD-firmware"><span class="nav-number">2.5.</span> <span class="nav-text">Online upgrade SAS HDD firmware</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dell-EMC-OpenManage-Linux-Remote-Access-Utilities-v9-1-2"><span class="nav-number">3.</span> <span class="nav-text">Dell EMC OpenManage Linux Remote Access Utilities, v9.1.2</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">703k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">10:39</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2017/04/13/dell/",
+            identifier: "2017/04/13/dell/",
+            title: "Dell command line in linux"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

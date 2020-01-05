@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Get it from&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno.h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux_errno">
+<meta property="og:url" content="http://yoursite.com/2017/11/21/linux_errno/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="Get it from&#x2F;usr&#x2F;include&#x2F;asm-generic&#x2F;errno.h">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-11-21T06:03:54.000Z">
+<meta property="article:modified_time" content="2020-01-05T11:59:54.542Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="unix">
+<meta property="article:tag" content="posix">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2017/11/21/linux_errno/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>linux_errno | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/21/linux_errno/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux_errno
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-11-21 14:03:54" itemprop="dateCreated datePublished" datetime="2017-11-21T14:03:54+08:00">2017-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 19:59:54" itemprop="dateModified" datetime="2020-01-05T19:59:54+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/11/21/linux_errno/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/21/linux_errno/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>5.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Get it from<br>/usr/include/asm-generic/errno.h</p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ifndef _ASM_GENERIC_ERRNO_H</span></span><br><span class="line"><span class="comment">#define _ASM_GENERIC_ERRNO_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#include &lt;asm-generic/errno-base.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	EDEADLK		35	/* Resource deadlock would occur */</span></span><br><span class="line"><span class="comment">#define	ENAMETOOLONG	36	/* File name too long */</span></span><br><span class="line"><span class="comment">#define	ENOLCK		37	/* No record locks available */</span></span><br><span class="line"><span class="comment">#define	ENOSYS		38	/* Function not implemented */</span></span><br><span class="line"><span class="comment">#define	ENOTEMPTY	39	/* Directory not empty */</span></span><br><span class="line"><span class="comment">#define	ELOOP		40	/* Too many symbolic links encountered */</span></span><br><span class="line"><span class="comment">#define	EWOULDBLOCK	EAGAIN	/* Operation would block */</span></span><br><span class="line"><span class="comment">#define	ENOMSG		42	/* No message of desired type */</span></span><br><span class="line"><span class="comment">#define	EIDRM		43	/* Identifier removed */</span></span><br><span class="line"><span class="comment">#define	ECHRNG		44	/* Channel number out of range */</span></span><br><span class="line"><span class="comment">#define	EL2NSYNC	45	/* Level 2 not synchronized */</span></span><br><span class="line"><span class="comment">#define	EL3HLT		46	/* Level 3 halted */</span></span><br><span class="line"><span class="comment">#define	EL3RST		47	/* Level 3 reset */</span></span><br><span class="line"><span class="comment">#define	ELNRNG		48	/* Link number out of range */</span></span><br><span class="line"><span class="comment">#define	EUNATCH		49	/* Protocol driver not attached */</span></span><br><span class="line"><span class="comment">#define	ENOCSI		50	/* No CSI structure available */</span></span><br><span class="line"><span class="comment">#define	EL2HLT		51	/* Level 2 halted */</span></span><br><span class="line"><span class="comment">#define	EBADE		52	/* Invalid exchange */</span></span><br><span class="line"><span class="comment">#define	EBADR		53	/* Invalid request descriptor */</span></span><br><span class="line"><span class="comment">#define	EXFULL		54	/* Exchange full */</span></span><br><span class="line"><span class="comment">#define	ENOANO		55	/* No anode */</span></span><br><span class="line"><span class="comment">#define	EBADRQC		56	/* Invalid request code */</span></span><br><span class="line"><span class="comment">#define	EBADSLT		57	/* Invalid slot */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	EDEADLOCK	EDEADLK</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	EBFONT		59	/* Bad font file format */</span></span><br><span class="line"><span class="comment">#define	ENOSTR		60	/* Device not a stream */</span></span><br><span class="line"><span class="comment">#define	ENODATA		61	/* No data available */</span></span><br><span class="line"><span class="comment">#define	ETIME		62	/* Timer expired */</span></span><br><span class="line"><span class="comment">#define	ENOSR		63	/* Out of streams resources */</span></span><br><span class="line"><span class="comment">#define	ENONET		64	/* Machine is not on the network */</span></span><br><span class="line"><span class="comment">#define	ENOPKG		65	/* Package not installed */</span></span><br><span class="line"><span class="comment">#define	EREMOTE		66	/* Object is remote */</span></span><br><span class="line"><span class="comment">#define	ENOLINK		67	/* Link has been severed */</span></span><br><span class="line"><span class="comment">#define	EADV		68	/* Advertise error */</span></span><br><span class="line"><span class="comment">#define	ESRMNT		69	/* Srmount error */</span></span><br><span class="line"><span class="comment">#define	ECOMM		70	/* Communication error on send */</span></span><br><span class="line"><span class="comment">#define	EPROTO		71	/* Protocol error */</span></span><br><span class="line"><span class="comment">#define	EMULTIHOP	72	/* Multihop attempted */</span></span><br><span class="line"><span class="comment">#define	EDOTDOT		73	/* RFS specific error */</span></span><br><span class="line"><span class="comment">#define	EBADMSG		74	/* Not a data message */</span></span><br><span class="line"><span class="comment">#define	EOVERFLOW	75	/* Value too large for defined data type */</span></span><br><span class="line"><span class="comment">#define	ENOTUNIQ	76	/* Name not unique on network */</span></span><br><span class="line"><span class="comment">#define	EBADFD		77	/* File descriptor in bad state */</span></span><br><span class="line"><span class="comment">#define	EREMCHG		78	/* Remote address changed */</span></span><br><span class="line"><span class="comment">#define	ELIBACC		79	/* Can not access a needed shared library */</span></span><br><span class="line"><span class="comment">#define	ELIBBAD		80	/* Accessing a corrupted shared library */</span></span><br><span class="line"><span class="comment">#define	ELIBSCN		81	/* .lib section in a.out corrupted */</span></span><br><span class="line"><span class="comment">#define	ELIBMAX		82	/* Attempting to link in too many shared libraries */</span></span><br><span class="line"><span class="comment">#define	ELIBEXEC	83	/* Cannot exec a shared library directly */</span></span><br><span class="line"><span class="comment">#define	EILSEQ		84	/* Illegal byte sequence */</span></span><br><span class="line"><span class="comment">#define	ERESTART	85	/* Interrupted system call should be restarted */</span></span><br><span class="line"><span class="comment">#define	ESTRPIPE	86	/* Streams pipe error */</span></span><br><span class="line"><span class="comment">#define	EUSERS		87	/* Too many users */</span></span><br><span class="line"><span class="comment">#define	ENOTSOCK	88	/* Socket operation on non-socket */</span></span><br><span class="line"><span class="comment">#define	EDESTADDRREQ	89	/* Destination address required */</span></span><br><span class="line"><span class="comment">#define	EMSGSIZE	90	/* Message too long */</span></span><br><span class="line"><span class="comment">#define	EPROTOTYPE	91	/* Protocol wrong type for socket */</span></span><br><span class="line"><span class="comment">#define	ENOPROTOOPT	92	/* Protocol not available */</span></span><br><span class="line"><span class="comment">#define	EPROTONOSUPPORT	93	/* Protocol not supported */</span></span><br><span class="line"><span class="comment">#define	ESOCKTNOSUPPORT	94	/* Socket type not supported */</span></span><br><span class="line"><span class="comment">#define	EOPNOTSUPP	95	/* Operation not supported on transport endpoint */</span></span><br><span class="line"><span class="comment">#define	EPFNOSUPPORT	96	/* Protocol family not supported */</span></span><br><span class="line"><span class="comment">#define	EAFNOSUPPORT	97	/* Address family not supported by protocol */</span></span><br><span class="line"><span class="comment">#define	EADDRINUSE	98	/* Address already in use */</span></span><br><span class="line"><span class="comment">#define	EADDRNOTAVAIL	99	/* Cannot assign requested address */</span></span><br><span class="line"><span class="comment">#define	ENETDOWN	100	/* Network is down */</span></span><br><span class="line"><span class="comment">#define	ENETUNREACH	101	/* Network is unreachable */</span></span><br><span class="line"><span class="comment">#define	ENETRESET	102	/* Network dropped connection because of reset */</span></span><br><span class="line"><span class="comment">#define	ECONNABORTED	103	/* Software caused connection abort */</span></span><br><span class="line"><span class="comment">#define	ECONNRESET	104	/* Connection reset by peer */</span></span><br><span class="line"><span class="comment">#define	ENOBUFS		105	/* No buffer space available */</span></span><br><span class="line"><span class="comment">#define	EISCONN		106	/* Transport endpoint is already connected */</span></span><br><span class="line"><span class="comment">#define	ENOTCONN	107	/* Transport endpoint is not connected */</span></span><br><span class="line"><span class="comment">#define	ESHUTDOWN	108	/* Cannot send after transport endpoint shutdown */</span></span><br><span class="line"><span class="comment">#define	ETOOMANYREFS	109	/* Too many references: cannot splice */</span></span><br><span class="line"><span class="comment">#define	ETIMEDOUT	110	/* Connection timed out */</span></span><br><span class="line"><span class="comment">#define	ECONNREFUSED	111	/* Connection refused */</span></span><br><span class="line"><span class="comment">#define	EHOSTDOWN	112	/* Host is down */</span></span><br><span class="line"><span class="comment">#define	EHOSTUNREACH	113	/* No route to host */</span></span><br><span class="line"><span class="comment">#define	EALREADY	114	/* Operation already in progress */</span></span><br><span class="line"><span class="comment">#define	EINPROGRESS	115	/* Operation now in progress */</span></span><br><span class="line"><span class="comment">#define	ESTALE		116	/* Stale file handle */</span></span><br><span class="line"><span class="comment">#define	EUCLEAN		117	/* Structure needs cleaning */</span></span><br><span class="line"><span class="comment">#define	ENOTNAM		118	/* Not a XENIX named type file */</span></span><br><span class="line"><span class="comment">#define	ENAVAIL		119	/* No XENIX semaphores available */</span></span><br><span class="line"><span class="comment">#define	EISNAM		120	/* Is a named type file */</span></span><br><span class="line"><span class="comment">#define	EREMOTEIO	121	/* Remote I/O error */</span></span><br><span class="line"><span class="comment">#define	EDQUOT		122	/* Quota exceeded */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	ENOMEDIUM	123	/* No medium found */</span></span><br><span class="line"><span class="comment">#define	EMEDIUMTYPE	124	/* Wrong medium type */</span></span><br><span class="line"><span class="comment">#define	ECANCELED	125	/* Operation Canceled */</span></span><br><span class="line"><span class="comment">#define	ENOKEY		126	/* Required key not available */</span></span><br><span class="line"><span class="comment">#define	EKEYEXPIRED	127	/* Key has expired */</span></span><br><span class="line"><span class="comment">#define	EKEYREVOKED	128	/* Key has been revoked */</span></span><br><span class="line"><span class="comment">#define	EKEYREJECTED	129	/* Key was rejected by service */</span></span><br><span class="line"></span><br><span class="line">/* <span class="keyword">for</span> robust mutexes */</span><br><span class="line"><span class="comment">#define	EOWNERDEAD	130	/* Owner died */</span></span><br><span class="line"><span class="comment">#define	ENOTRECOVERABLE	131	/* State not recoverable */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define ERFKILL		132	/* Operation not possible due to RF-kill */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define EHWPOISON	133	/* Memory page has hardware error */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
+
+<p>/usr/include/asm-generic/errno-base.h</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ifndef _ASM_GENERIC_ERRNO_BASE_H</span></span><br><span class="line"><span class="comment">#define _ASM_GENERIC_ERRNO_BASE_H</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define	EPERM		 1	/* Operation not permitted */</span></span><br><span class="line"><span class="comment">#define	ENOENT		 2	/* No such file or directory */</span></span><br><span class="line"><span class="comment">#define	ESRCH		 3	/* No such process */</span></span><br><span class="line"><span class="comment">#define	EINTR		 4	/* Interrupted system call */</span></span><br><span class="line"><span class="comment">#define	EIO		 5	/* I/O error */</span></span><br><span class="line"><span class="comment">#define	ENXIO		 6	/* No such device or address */</span></span><br><span class="line"><span class="comment">#define	E2BIG		 7	/* Argument list too long */</span></span><br><span class="line"><span class="comment">#define	ENOEXEC		 8	/* Exec format error */</span></span><br><span class="line"><span class="comment">#define	EBADF		 9	/* Bad file number */</span></span><br><span class="line"><span class="comment">#define	ECHILD		10	/* No child processes */</span></span><br><span class="line"><span class="comment">#define	EAGAIN		11	/* Try again */</span></span><br><span class="line"><span class="comment">#define	ENOMEM		12	/* Out of memory */</span></span><br><span class="line"><span class="comment">#define	EACCES		13	/* Permission denied */</span></span><br><span class="line"><span class="comment">#define	EFAULT		14	/* Bad address */</span></span><br><span class="line"><span class="comment">#define	ENOTBLK		15	/* Block device required */</span></span><br><span class="line"><span class="comment">#define	EBUSY		16	/* Device or resource busy */</span></span><br><span class="line"><span class="comment">#define	EEXIST		17	/* File exists */</span></span><br><span class="line"><span class="comment">#define	EXDEV		18	/* Cross-device link */</span></span><br><span class="line"><span class="comment">#define	ENODEV		19	/* No such device */</span></span><br><span class="line"><span class="comment">#define	ENOTDIR		20	/* Not a directory */</span></span><br><span class="line"><span class="comment">#define	EISDIR		21	/* Is a directory */</span></span><br><span class="line"><span class="comment">#define	EINVAL		22	/* Invalid argument */</span></span><br><span class="line"><span class="comment">#define	ENFILE		23	/* File table overflow */</span></span><br><span class="line"><span class="comment">#define	EMFILE		24	/* Too many open files */</span></span><br><span class="line"><span class="comment">#define	ENOTTY		25	/* Not a typewriter */</span></span><br><span class="line"><span class="comment">#define	ETXTBSY		26	/* Text file busy */</span></span><br><span class="line"><span class="comment">#define	EFBIG		27	/* File too large */</span></span><br><span class="line"><span class="comment">#define	ENOSPC		28	/* No space left on device */</span></span><br><span class="line"><span class="comment">#define	ESPIPE		29	/* Illegal seek */</span></span><br><span class="line"><span class="comment">#define	EROFS		30	/* Read-only file system */</span></span><br><span class="line"><span class="comment">#define	EMLINK		31	/* Too many links */</span></span><br><span class="line"><span class="comment">#define	EPIPE		32	/* Broken pipe */</span></span><br><span class="line"><span class="comment">#define	EDOM		33	/* Math argument out of domain of func */</span></span><br><span class="line"><span class="comment">#define	ERANGE		34	/* Math result not representable */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+              <a href="/tags/unix/" rel="tag"><i class="fa fa-tag"></i> unix</a>
+              <a href="/tags/posix/" rel="tag"><i class="fa fa-tag"></i> posix</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/11/09/mdadm/" rel="prev" title="mdadm tips">
+      <i class="fa fa-chevron-left"></i> mdadm tips
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/04/12/ansible/" rel="next" title="Ansible">
+      Ansible <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">703k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">10:39</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2017/11/21/linux_errno/",
+            identifier: "2017/11/21/linux_errno/",
+            title: "linux_errno"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

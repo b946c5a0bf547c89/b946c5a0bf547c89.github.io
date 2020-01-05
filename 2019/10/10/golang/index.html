@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="runtime&#x2F;pprof example">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang">
+<meta property="og:url" content="http://yoursite.com/2019/10/10/golang/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="runtime&#x2F;pprof example">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-10-10T15:38:16.000Z">
+<meta property="article:modified_time" content="2020-01-05T12:33:04.463Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="golang">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/10/10/golang/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>golang | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/golang/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          golang
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-10 23:38:16" itemprop="dateCreated datePublished" datetime="2019-10-10T23:38:16+08:00">2019-10-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 20:33:04" itemprop="dateModified" datetime="2020-01-05T20:33:04+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/10/10/golang/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/10/golang/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="runtime-pprof-example"><a href="#runtime-pprof-example" class="headerlink" title="runtime/pprof example"></a>runtime/pprof example</h3><a id="more"></a>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//pprof</span></span><br><span class="line"><span class="string">"runtime/pprof"</span></span><br><span class="line"><span class="comment">//end</span></span><br><span class="line"></span><br><span class="line"><span class="string">"runtime"</span></span><br><span class="line"><span class="string">"flag"</span></span><br><span class="line"><span class="string">"os"</span></span><br><span class="line"><span class="string">"log"</span></span><br><span class="line"><span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//pprof</span></span><br><span class="line"><span class="keyword">var</span> cpuprofile = flag.String(<span class="string">"cpuprofile"</span>, <span class="string">""</span>, <span class="string">"write cpu profile to file."</span>)</span><br><span class="line"><span class="keyword">var</span> memprofile = flag.String(<span class="string">"memprofile"</span>,<span class="string">""</span>,<span class="string">"write memory profile to `file`"</span>)</span><br><span class="line"><span class="comment">//end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Send the sequence 2, 3, 4, ... to channel 'ch'.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Generate</span><span class="params">(ch <span class="keyword">chan</span>&lt;- <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">2</span>; ;i++ &#123;</span><br><span class="line">          ch &lt;- i <span class="comment">// Send 'i' to channel 'ch'.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Copy the values from channel 'in' to channel 'out',</span></span><br><span class="line"><span class="comment">// removing those divisible by 'prime'.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Filter</span><span class="params">(in &lt;-<span class="keyword">chan</span> <span class="keyword">int</span>, out <span class="keyword">chan</span>&lt;- <span class="keyword">int</span>, prime <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        i := &lt;-in <span class="comment">// Receive value from 'in'.</span></span><br><span class="line">        <span class="keyword">if</span> i%prime != <span class="number">0</span> &#123;</span><br><span class="line">            out &lt;- i <span class="comment">// Send 'i' to 'out'.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The prime sieve: Daisy-chain Filter processes.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//pprof</span></span><br><span class="line">    flag.Parse()</span><br><span class="line">    <span class="keyword">if</span> *cpuprofile != <span class="string">""</span> &#123;</span><br><span class="line">         f,err := os.Create(*cpuprofile)</span><br><span class="line">         <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">             log.Fatal(err)</span><br><span class="line">         &#125;</span><br><span class="line">         pprof.StartCPUProfile(f)</span><br><span class="line">         <span class="keyword">defer</span> pprof.StopCPUProfile()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> *memprofile != <span class="string">""</span> &#123;</span><br><span class="line">         f,err := os.Create(*memprofile)</span><br><span class="line">         <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">             log.Fatal(err)</span><br><span class="line">         &#125;</span><br><span class="line">         runtime.GC()</span><br><span class="line">         <span class="keyword">if</span> err := pprof.WriteHeapProfile(f); err != <span class="literal">nil</span> &#123;</span><br><span class="line">             log.Fatal(err)</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="comment">//f.Close()</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//ch := make(chan int, runtime.NumCPU()) // Create a new channel.</span></span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">128</span>) <span class="comment">// Create a new channel.</span></span><br><span class="line">    <span class="keyword">go</span> Generate(ch)      <span class="comment">// Launch Generate goroutine.</span></span><br><span class="line">    now := time.Now()</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">200000</span>; i++ &#123;</span><br><span class="line">          prime := &lt;-ch</span><br><span class="line">          <span class="keyword">if</span> (i!=<span class="number">0</span> &amp;&amp; i%<span class="number">1000</span>==<span class="number">0</span>) &#123;</span><br><span class="line">            fmt.Println(i)</span><br><span class="line">            fmt.Println(<span class="string">"time consuming:"</span>, time.Since(now))</span><br><span class="line">            now = time.Now()</span><br><span class="line">          &#125;</span><br><span class="line">          ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">128</span>)</span><br><span class="line">          <span class="keyword">go</span> Filter(ch, ch1, prime)</span><br><span class="line">          ch = ch1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ go build prime.go</span><br><span class="line">$ .&#x2F;prime -cpuprofile cpu.prof -memprofile mem.prof</span><br><span class="line">$ go tool pprof prime .&#x2F;cpu.prof</span><br><span class="line">File: prime</span><br><span class="line">Type: cpu</span><br><span class="line">Time: Oct 10, 2019 at 11:46pm (HKT)</span><br><span class="line">Duration: 5.09mins, Total samples &#x3D; 49.93mins (980.06%)</span><br><span class="line">Entering interactive mode (type &quot;help&quot; for commands, &quot;o&quot; for options)</span><br><span class="line">(pprof) top</span><br><span class="line">Showing nodes accounting for 46.37mins, 92.87% of 49.93mins total</span><br><span class="line">Dropped 97 nodes (cum &lt;&#x3D; 0.25mins)</span><br><span class="line">Showing top 10 nodes out of 17</span><br><span class="line">      flat  flat%   sum%        cum   cum%</span><br><span class="line"> 10.78mins 21.59% 21.59%  10.79mins 21.61%  runtime.lock</span><br><span class="line"> 10.64mins 21.31% 42.90%  10.64mins 21.31%  runtime.unlock</span><br><span class="line">  5.78mins 11.58% 54.48%  49.41mins 98.96%  main.Filter</span><br><span class="line">  5.28mins 10.58% 65.06%  22.28mins 44.63%  runtime.chanrecv</span><br><span class="line">  4.19mins  8.38% 73.44%  19.19mins 38.43%  runtime.chansend</span><br><span class="line">  3.03mins  6.06% 79.50%   5.33mins 10.68%  runtime.typedmemmove</span><br><span class="line">  2.31mins  4.62% 84.12%   2.31mins  4.62%  runtime.memmove</span><br><span class="line">  1.70mins  3.40% 87.52%   2.86mins  5.72%  runtime.typedmemclr</span><br><span class="line">  1.46mins  2.92% 90.45%   1.46mins  2.92%  runtime.(*waitq).dequeue</span><br><span class="line">  1.21mins  2.42% 92.87%  20.40mins 40.85%  runtime.chansend1</span><br><span class="line"></span><br><span class="line">$ (pprof) web</span><br><span class="line">failed to execute dot. Is Graphviz installed? Error: exec: &quot;dot&quot;: executable file not found in $PATH</span><br><span class="line"></span><br><span class="line">$ go tool pprof -http&#x3D;:8080 cpu.prof</span><br><span class="line">Failed to execute dot. Is Graphviz installed?</span><br><span class="line">exec: &quot;dot&quot;: executable file not found in $PATH</span><br><span class="line"></span><br><span class="line">$ yum -y install graphviz graphviz-devel</span><br></pre></td></tr></table></figure>
+
+<h3 id="bitwise-operators-example"><a href="#bitwise-operators-example" class="headerlink" title="bitwise operators example"></a>bitwise operators example</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// Use bitwise OR | to get the bits that are in 1 OR 2</span></span><br><span class="line">    <span class="comment">// 1     = 00000001</span></span><br><span class="line">    <span class="comment">// 2     = 00000010</span></span><br><span class="line">    <span class="comment">// 1 | 2 = 00000011 = 3</span></span><br><span class="line">    fmt.Println(<span class="number">1</span> | <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use bitwise OR | to get the bits that are in 1 OR 5</span></span><br><span class="line">    <span class="comment">// 1     = 00000001</span></span><br><span class="line">    <span class="comment">// 5     = 00000101</span></span><br><span class="line">    <span class="comment">// 1 | 5 = 00000101 = 5</span></span><br><span class="line">    fmt.Println(<span class="number">1</span> | <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use bitwise XOR ^ to get the bits that are in 3 OR 6 BUT NOT BOTH</span></span><br><span class="line">    <span class="comment">// 3     = 00000011</span></span><br><span class="line">    <span class="comment">// 6     = 00000110</span></span><br><span class="line">    <span class="comment">// 3 ^ 6 = 00000101 = 5</span></span><br><span class="line">    fmt.Println(<span class="number">3</span> ^ <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use bitwise AND &amp; to get the bits that are in 3 AND 6</span></span><br><span class="line">    <span class="comment">// 3     = 00000011</span></span><br><span class="line">    <span class="comment">// 6     = 00000110</span></span><br><span class="line">    <span class="comment">// 3 &amp; 6 = 00000010 = 2</span></span><br><span class="line">    fmt.Println(<span class="number">3</span> &amp; <span class="number">6</span>)  </span><br><span class="line"></span><br><span class="line">    <span class="comment">// Use bit clear AND NOT &amp;^ to get the bits that are in 3 AND NOT 6 (order matters)</span></span><br><span class="line">    <span class="comment">// 26     = 00011010</span></span><br><span class="line">    <span class="comment">// 6      = 00000110</span></span><br><span class="line">    <span class="comment">// turn          11111001</span></span><br><span class="line">    <span class="comment">// 3 &amp;^ 6 = 00011000 = 1</span></span><br><span class="line">    fmt.Println(<span class="number">26</span> &amp;^ <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5  00000101</span></span><br><span class="line"><span class="comment">//-5  11111010+1=1111011 (two's complement of 5, the value was -5)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 6  00000110</span></span><br><span class="line"><span class="comment">//-6  11111001+1=11111010</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 5  00000101</span></span><br><span class="line"><span class="comment">//-6  11111010 (one's complement of 5, the value was -6)</span></span><br><span class="line"></span><br><span class="line">     fmt.Println(^<span class="number">5</span>) </span><br><span class="line"></span><br><span class="line">     a := <span class="number">1</span></span><br><span class="line">     a |= <span class="number">1</span> &lt;&lt; <span class="number">2</span> </span><br><span class="line">     <span class="comment">// 0000100 | 00000001 = 0000101 =5 </span></span><br><span class="line">     </span><br><span class="line">     fmt.Println(a)</span><br><span class="line">     a |= <span class="number">1</span> &lt;&lt; <span class="number">6</span> </span><br><span class="line">     <span class="comment">// 0000101 | 0100000 = 0100101 =69</span></span><br><span class="line">     </span><br><span class="line">     fmt.Println(a)</span><br><span class="line">     fmt.Println(<span class="number">1</span>&lt;&lt;<span class="number">6</span>) </span><br><span class="line">     <span class="comment">//0000001 &lt;&lt;6 = 1000000 = 64</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">24</span></span><br><span class="line"><span class="number">-6</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">69</span></span><br><span class="line"><span class="number">64</span></span><br></pre></td></tr></table></figure>
+
+<p>###Reader to string</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">buf := <span class="built_in">new</span>(bytes.Buffer)</span><br><span class="line">buf.ReadFrom(yourReader)</span><br><span class="line">s := buf.String() <span class="comment">// Does a complete copy of the bytes in the buffer.</span></span><br><span class="line"></span><br><span class="line">buf := <span class="built_in">new</span>(bytes.Buffer)</span><br><span class="line">buf.ReadFrom(yourReader)</span><br><span class="line">b := buf.Bytes()</span><br><span class="line">s := *(*<span class="keyword">string</span>)(unsafe.Pointer(&amp;b))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> b, err := ioutil.ReadAll(rc); err == <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">string</span>(b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">or gzip the buffer</span><br><span class="line">   raw := bytes.NewBuffer(data)</span><br><span class="line">   unz, err := gzip.NewReader(raw)</span><br><span class="line">   buf, err := ioutil.ReadAll(unz)</span><br><span class="line">   <span class="keyword">return</span> json.Unmarshal(buf, &amp;v)</span><br></pre></td></tr></table></figure>
+
+<h3 id="string-to-reader"><a href="#string-to-reader" class="headerlink" title="string to reader"></a>string to reader</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">	r:=strings.NewReader(<span class="string">"(1,2,34,55,666)"</span>)</span><br><span class="line">	<span class="keyword">var</span> d [<span class="number">5</span>]<span class="keyword">int</span></span><br><span class="line">	fmt.Fscanf(r,<span class="string">"(%d,%d,%d,%d,%d)"</span>,&amp;d[<span class="number">0</span>],&amp;d[<span class="number">1</span>],&amp;d[<span class="number">2</span>],&amp;d[<span class="number">3</span>],&amp;d[<span class="number">4</span>])</span><br><span class="line">	fmt.Println(d)</span><br><span class="line">or </span><br><span class="line"></span><br><span class="line">	buf := bytes.NewBufferString(<span class="string">"R29waGVycyBydWxlIQ=="</span>)</span><br><span class="line">	dec := base64.NewDecoder(base64.StdEncoding, buf)</span><br><span class="line">	io.Copy(os.Stdout, dec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Ouput-to-stdout"><a href="#Ouput-to-stdout" class="headerlink" title="Ouput to stdout"></a>Ouput to stdout</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reader := bufio.NewReader(os.Stdin)</span><br><span class="line">fmt.Print(<span class="string">"What is your name:"</span>)</span><br><span class="line">data, _, _ := reader.ReadLine()</span><br><span class="line">fmt.Printf(<span class="string">"Your name is %s.\r\n"</span>, data)</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://stackoverflow.com/questions/9644139/from-io-reader-to-string-in-go" target="_blank" rel="noopener">reference1</a><br><a href="https://www.datadoghq.com/blog/crossing-streams-love-letter-gos-io-reader/" target="_blank" rel="noopener">reference2</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/golang/" rel="tag"><i class="fa fa-tag"></i> golang</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/09/29/gdb/" rel="prev" title="Rookie try to debug">
+      <i class="fa fa-chevron-left"></i> Rookie try to debug
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/26/smartctl/" rel="next" title="smartctl">
+      smartctl <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime-pprof-example"><span class="nav-number">1.</span> <span class="nav-text">runtime&#x2F;pprof example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bitwise-operators-example"><span class="nav-number">2.</span> <span class="nav-text">bitwise operators example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#string-to-reader"><span class="nav-number">3.</span> <span class="nav-text">string to reader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ouput-to-stdout"><span class="nav-number">4.</span> <span class="nav-text">Ouput to stdout</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">703k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">10:39</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2019/10/10/golang/",
+            identifier: "2019/10/10/golang/",
+            title: "golang"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

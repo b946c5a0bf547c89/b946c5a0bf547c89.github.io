@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="pcsCentOS 7 Initialization123456789101112131415$ scp &#x2F;etc&#x2F;hosts nodeA:&#x2F;etc&#x2F; $ scp &#x2F;etc&#x2F;hosts nodeB:&#x2F;etc&#x2F; $ yum -y install pacemaker corosync fence-agents-all fence-agents-virsh fence-virt  pacemaker-r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="High availability test">
+<meta property="og:url" content="http://yoursite.com/2016/03/22/ha/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="pcsCentOS 7 Initialization123456789101112131415$ scp &#x2F;etc&#x2F;hosts nodeA:&#x2F;etc&#x2F; $ scp &#x2F;etc&#x2F;hosts nodeB:&#x2F;etc&#x2F; $ yum -y install pacemaker corosync fence-agents-all fence-agents-virsh fence-virt  pacemaker-r">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/img/test-arch.png">
+<meta property="article:published_time" content="2016-03-22T07:53:40.000Z">
+<meta property="article:modified_time" content="2020-01-05T12:35:46.173Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="test">
+<meta property="article:tag" content="ha">
+<meta property="article:tag" content="virt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/img/test-arch.png">
+
+<link rel="canonical" href="http://yoursite.com/2016/03/22/ha/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>High availability test | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/22/ha/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          High availability test
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-03-22 15:53:40" itemprop="dateCreated datePublished" datetime="2016-03-22T15:53:40+08:00">2016-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 20:35:46" itemprop="dateModified" datetime="2020-01-05T20:35:46+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ha/" itemprop="url" rel="index">
+                    <span itemprop="name">ha</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/03/22/ha/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/22/ha/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>29k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>27 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="pcs"><a href="#pcs" class="headerlink" title="pcs"></a>pcs</h3><h4 id="CentOS-7-Initialization"><a href="#CentOS-7-Initialization" class="headerlink" title="CentOS 7 Initialization"></a>CentOS 7 Initialization</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ scp /etc/hosts nodeA:/etc/ </span><br><span class="line">$ scp /etc/hosts nodeB:/etc/ </span><br><span class="line"></span><br><span class="line">$ yum -y install pacemaker corosync fence-agents-all fence-agents-virsh fence-virt  pacemaker-remote pcs</span><br><span class="line">$ <span class="built_in">echo</span> hacluster | passwd --stdin hacluster</span><br><span class="line">$ systemctl <span class="built_in">enable</span> pcsd.service</span><br><span class="line">$ systemctl start pcsd.service</span><br><span class="line">$ systemctl is-active pcsd.service</span><br><span class="line">$ pcs cluster auth node01 node02 ….</span><br><span class="line">$ pcs cluster setup --start --name ha-kvm node01 node02 …</span><br><span class="line">$ pcs cluster <span class="built_in">enable</span> --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2 nodes cluster need to disable quorum</span></span><br><span class="line">$ pcs property <span class="built_in">set</span> stonith-enabled=ture</span><br><span class="line">$ pcs property <span class="built_in">set</span> no-quorum-policy=ignore</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<h4 id="Create-fence"><a href="#Create-fence" class="headerlink" title="Create fence"></a>Create fence</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ pcs stonith create NodeB-fencing fence_ipmilan pcmk_host_list=<span class="string">"NodeB"</span> ipaddr=<span class="string">"192.xx.xx.xx"</span> login=ADMIN passwd=ADMIN lanplus=<span class="literal">true</span> power_wait=4 op monitor interval=60s</span><br><span class="line"></span><br><span class="line"><span class="comment"># search fence device metadata</span></span><br><span class="line">$ stonith_admin -M -a fence_ipmilan</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fence the node</span></span><br><span class="line">$ stonith_admin --reboot nodename</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://clusterlabs.org/wiki/Configure_Multiple_Fencing_Devices_Using_pcs" target="_blank" rel="noopener">config fence level</a></p>
+<h4 id="Create-resource"><a href="#Create-resource" class="headerlink" title="Create resource"></a>Create resource</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># VIP</span></span><br><span class="line">$ pcs resource create ClusterIP ocf:heartbeat:IPaddr2 ip=<span class="string">"192.xx.xx.xx"</span> cidr_netmask=32 nic=eth0 op monitor interval=30s</span><br><span class="line"></span><br><span class="line"><span class="comment"># kvm</span></span><br><span class="line">$ pcs resource create vm01 VirtualDomain hypervisor=<span class="string">"qemu:///system"</span> config=<span class="string">"/xx/xx/vm01.xml"</span>  meta remote-node=<span class="string">"vm01"</span>a</span><br><span class="line"></span><br><span class="line"><span class="comment"># filesystem</span></span><br><span class="line">$ pcs resource create Lustre-mgs ocf:heartbeat:Filesystem device=<span class="string">"/dev/sdb1"</span> directory=<span class="string">"/mnt"</span> fstype=<span class="string">"ext4"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NFS</span></span><br><span class="line">$ pcs resource create WebFS ocf:heartbeat:Filesystem device=<span class="string">"192.xx.xx.xx:/mysqldata"</span> directory=<span class="string">"/var/lib/mysql"</span> fstype=<span class="string">"nfs"</span> options=<span class="string">"-o username=your_name,password=your_password"</span> op start timeout=60s op stop timeout=60s op monitor interval=20s timeout=60s</span><br><span class="line"></span><br><span class="line"><span class="comment"># iscsi</span></span><br><span class="line">$ pcs resource create WebData ocf:heartbeat:iscsi portal=<span class="string">"ip.xx.xx.xx"</span> target=<span class="string">"iqn.2008-08.com.starwindsoftware:"</span> op monitor depth=<span class="string">"0"</span> timeout=<span class="string">"30"</span> interval=<span class="string">"120"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Resource-group"><a href="#Resource-group" class="headerlink" title="Resource group"></a>Resource group</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$  pcs resource group add group_name resource_01 resource_02 ...</span><br><span class="line">$  pcs resource group remove group_name resource_01 resource_02 ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># resource1 run on the same machine as resource2</span></span><br><span class="line">$ pcs constraint colocation add myresource1 with myresource2 score=INFINITY</span><br><span class="line"><span class="comment"># myresource1 cannot run on the same machine as myresource2</span></span><br><span class="line">$ pcs constraint colocation add myresource1 with myresource2 score=-INFINITY</span><br><span class="line"><span class="comment"># Remove colocation constraints</span></span><br><span class="line">$  pcs constraint colocation remove &lt;<span class="built_in">source</span> resource id&gt; &lt;target resource id&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Resource priorities</span></span><br><span class="line">$ pcs constraint order resource1 <span class="keyword">then</span> resource2</span><br><span class="line">$ pcs constraint order remove  resource1</span><br><span class="line"></span><br><span class="line"><span class="comment"># Node priorities, the resource prefers run on ServerA , the resource could fail over to ServerB</span></span><br><span class="line">$ pcs constraint location resource_id prefers ServerA=200</span><br><span class="line">$ pcs constraint location resource_id prefers ServerB=0</span><br><span class="line"></span><br><span class="line"><span class="comment"># List all current location, order and colocation constraints</span></span><br><span class="line">$ pcs constraint --full</span><br></pre></td></tr></table></figure>
+
+<h4 id="Backup-Restore-config"><a href="#Backup-Restore-config" class="headerlink" title="Backup/Restore config"></a>Backup/Restore config</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># exprot config</span></span><br><span class="line">$ pcs cluster cib filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># import config</span></span><br><span class="line">$ pcs cluster cib-push filename</span><br></pre></td></tr></table></figure>
+
+<h4 id="Show-config"><a href="#Show-config" class="headerlink" title="Show config"></a>Show config</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pcs config show</span><br><span class="line">$ pcs stonith show stonith-name</span><br><span class="line">$ pcs resource show resource-name</span><br></pre></td></tr></table></figure>
+
+<h4 id="get-default-value"><a href="#get-default-value" class="headerlink" title="get default value"></a>get default value</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ pcs resource defaults</span><br><span class="line"></span><br><span class="line">$ pcs resource defaults migration-threshold=5</span><br><span class="line">$ pcs resource defaults failure-timeout=240s</span><br><span class="line"></span><br><span class="line"><span class="comment"># not switch resource</span></span><br><span class="line">$ pcs resource defaults resource-stickiness=100</span><br><span class="line"></span><br><span class="line"><span class="comment"># resource timeout</span></span><br><span class="line">$ pcs resource op defaults timeout=240s</span><br><span class="line"></span><br><span class="line">$ pcs property <span class="built_in">set</span> stonith-action=reboot</span><br><span class="line"></span><br><span class="line"><span class="comment"># delete</span></span><br><span class="line">$ pcs resource defaults timeouts=</span><br></pre></td></tr></table></figure>
+<h4 id="Switch-and-delete-resource"><a href="#Switch-and-delete-resource" class="headerlink" title="Switch and delete resource"></a>Switch and delete resource</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pcs resource move resource_name HostnameB</span><br><span class="line">$ pcs resource delete resource_name</span><br></pre></td></tr></table></figure>
+
+<h4 id="Get-status"><a href="#Get-status" class="headerlink" title="Get status"></a>Get status</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ pcs status  	</span><br><span class="line">$ pcs status cluster</span><br><span class="line">$ pcs status corosync</span><br><span class="line">$ pcs cluster stop [nodename]  </span><br><span class="line">$ pcs cluster start --all</span><br><span class="line">$ pcs cluster standby nodename</span><br></pre></td></tr></table></figure>
+
+<h4 id="Clean-info"><a href="#Clean-info" class="headerlink" title="Clean info"></a>Clean info</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># clean all error messages and error counts</span></span><br><span class="line">$ pcs resource cleanup resource_id</span><br><span class="line">$ pcs stonith cleanup fence_name</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://clusterlabs.org/wiki/Configure_Multiple_Fencing_Devices_Using_pcs" target="_blank" rel="noopener">reference</a></p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="pacemaker"><a href="#pacemaker" class="headerlink" title="pacemaker"></a>pacemaker</h3><h4 id="clear-all-pacemaker-config"><a href="#clear-all-pacemaker-config" class="headerlink" title="clear all pacemaker config"></a>clear all pacemaker config</h4><p>Delete conf files from all nodes and restart services.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ rm -f /var/lib/pacemaker/cib/*</span><br><span class="line">$ systemctl stop pacemaker</span><br><span class="line">$ systemctl stop corosync</span><br><span class="line">$ systemctl start corosync</span><br><span class="line">$ systemctl start pacemaker</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="corosync"><a href="#corosync" class="headerlink" title="corosync"></a>corosync</h3><h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">$ corosync-cfgtool -s  </span><br><span class="line">Printing ring status.</span><br><span class="line">Local node ID 2</span><br><span class="line">RING ID 0</span><br><span class="line">	id	= 10.xx.xx.xx</span><br><span class="line">	status	= ring 0 active with no faults</span><br><span class="line">RING ID 1</span><br><span class="line">	id	= 172.xx.xx.xx</span><br><span class="line">	status	= ring 1 active with no faults</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ corosync-quorumtool -siH</span><br><span class="line">Quorum information</span><br><span class="line">------------------</span><br><span class="line">Date:             Tue Mar 22 04:07:15 2016</span><br><span class="line">Quorum provider:  corosync_votequorum</span><br><span class="line">Nodes:            3</span><br><span class="line">Node ID:          0x00000002</span><br><span class="line">Ring ID:          656</span><br><span class="line">Quorate:          Yes</span><br><span class="line"></span><br><span class="line">Votequorum information</span><br><span class="line">----------------------</span><br><span class="line">Expected votes:   3</span><br><span class="line">Highest expected: 3</span><br><span class="line">Total votes:      3</span><br><span class="line">Quorum:           2</span><br><span class="line">Flags:            Quorate </span><br><span class="line"></span><br><span class="line">Membership information</span><br><span class="line">----------------------</span><br><span class="line">    Nodeid      Votes Name</span><br><span class="line">0x00000001          1 10.x.x.x</span><br><span class="line">0x00000003          1 10.x.x.x</span><br><span class="line">0x00000002          1 10.x.x.x (<span class="built_in">local</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="3-x-CentOS-7-corosync-conf"><a href="#3-x-CentOS-7-corosync-conf" class="headerlink" title="3 x CentOS 7 corosync.conf"></a>3 x CentOS 7 corosync.conf</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">totem</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">version:</span> <span class="number">2</span></span><br><span class="line">    <span class="attr">secauth:</span> <span class="string">off</span></span><br><span class="line">    <span class="string">rrp_mode:active</span></span><br><span class="line">    <span class="attr">cluster_name:</span> <span class="string">ha-kvm</span></span><br><span class="line">    <span class="attr">transport:</span> <span class="string">udpu</span></span><br><span class="line">    <span class="attr">token:</span> <span class="number">17000</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">nodelist</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="string">node</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">ring0_addr:</span> <span class="string">nic0.serverA.xx.xx</span></span><br><span class="line">        <span class="attr">ring1_addr:</span> <span class="string">nic1.serverA.xx.xx</span></span><br><span class="line">        <span class="attr">nodeid:</span> <span class="number">1</span></span><br><span class="line">       <span class="string">&#125;</span></span><br><span class="line">  <span class="string">node</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">ring0_addr:</span> <span class="string">nic0.serverB.xx.xx</span></span><br><span class="line">        <span class="attr">ring1_addr:</span> <span class="string">nic1.serverB.xx.xx</span></span><br><span class="line">        <span class="attr">nodeid:</span> <span class="number">2</span></span><br><span class="line">       <span class="string">&#125;</span></span><br><span class="line">  <span class="string">node</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">ring0_addr:</span> <span class="string">nic0.serverC.xx.xx</span></span><br><span class="line">        <span class="attr">ring1_addr:</span> <span class="string">nic1.serverC.xx.xx</span></span><br><span class="line">        <span class="attr">nodeid:</span> <span class="number">3</span></span><br><span class="line">       <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">quorum</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">provider:</span> <span class="string">corosync_votequorum</span></span><br><span class="line">    <span class="attr">expected_votes:</span> <span class="number">3</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">logging</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">fileline:</span> <span class="string">off</span></span><br><span class="line">        <span class="attr">to_logfile:</span> <span class="literal">yes</span></span><br><span class="line">        <span class="attr">to_syslog:</span> <span class="literal">yes</span></span><br><span class="line">        <span class="attr">logfile:</span> <span class="string">/var/log/cluster/corosync.log</span></span><br><span class="line">        <span class="attr">timestamp:</span> <span class="string">on</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-x-CentOS6-corosync-conf"><a href="#2-x-CentOS6-corosync-conf" class="headerlink" title="2 x CentOS6 corosync.conf"></a>2 x CentOS6 corosync.conf</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"># Please read the corosync.conf.5 manual page</span><br><span class="line">compatibility: xxxx</span><br><span class="line"></span><br><span class="line">totem &#123;</span><br><span class="line">	version: <span class="number">2</span></span><br><span class="line">	secauth: off</span><br><span class="line">	interface &#123;</span><br><span class="line">		member &#123;</span><br><span class="line">			memberaddr: nic0.serverA.xx.xx</span><br><span class="line">		&#125;</span><br><span class="line">		member &#123;</span><br><span class="line">			memberaddr: nic0.serverB.xx.xx</span><br><span class="line">		&#125;</span><br><span class="line">		ringnumber: <span class="number">0</span></span><br><span class="line">		bindnetaddr: nic0.xx.xx.xx</span><br><span class="line">		mcastport: <span class="number">5406</span></span><br><span class="line">		ttl: <span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line">	interface &#123;</span><br><span class="line">                member &#123;</span><br><span class="line">                        memberaddr: nic1.serverA.xx.xx</span><br><span class="line">                &#125;</span><br><span class="line">                member &#123;</span><br><span class="line">                        memberaddr: nic1.serverB.xx.xx</span><br><span class="line">                &#125;</span><br><span class="line">                ringnumber: <span class="number">1</span></span><br><span class="line">                bindnetaddr: nic1.xx.xx.xx</span><br><span class="line">                mcastport: <span class="number">5406</span></span><br><span class="line">                ttl: <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">	transport: udpu</span><br><span class="line">	token: <span class="number">17000</span></span><br><span class="line">	rrp_mode: passive</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">logging &#123;</span><br><span class="line">	fileline: off</span><br><span class="line">	to_logfile: yes</span><br><span class="line">	to_syslog: yes</span><br><span class="line">	debug: on</span><br><span class="line">	logfile: <span class="regexp">/var/</span>log/cluster/corosync.log</span><br><span class="line">	debug: off</span><br><span class="line">	timestamp: on</span><br><span class="line">	logger_subsys &#123;</span><br><span class="line">		subsys: AMF</span><br><span class="line">		debug: off</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://qiita.com/tukiyo3/items/3f8b99be73798df857fd" target="_blank" rel="noopener">config refence</a></p>
+<h3 id="Create-volume-for-test-env"><a href="#Create-volume-for-test-env" class="headerlink" title="Create volume for test env"></a>Create volume for test env</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gluster volume create test_vol disperse-data 4 redundancy 2 transport tcp server1:/gluster1/glusterfs server1:/gluster2/glusterfs server2:/var/glusterfs/ server3:/var/glusterfs server4:/tank/glusterfs server5:/tank/glusterfs/ force</span><br><span class="line">gluster volume start test_vol</span><br><span class="line">gluster volume <span class="built_in">set</span> test_vol features.cache-invalidation on</span><br></pre></td></tr></table></figure>
+
+<h3 id="glusterfs-in-ha"><a href="#glusterfs-in-ha" class="headerlink" title="glusterfs in ha"></a>glusterfs in ha</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster auth 10.xx.xx.10 10.xx.xx.11 -u hacluster</span><br><span class="line">systemctl start pcsd</span><br><span class="line">pcs cluster setup --name NFS_Server 10.xx.xx.10,192.xx.xx.10 10.xx.xx.11,192.xx.xx.11 --transport udp --rrpmode passive --token 7000 --addr0 10.xx.xx.0 --addr1 192.xx.xx.0 --force</span><br><span class="line">sed -i <span class="string">'s/transport: udp/transport: udpu/g'</span> /etc/corosync/corosync.conf</span><br><span class="line">pcs cluster start 10.xx.xx.10</span><br><span class="line">pcs cluster start 10.xx.xx.11</span><br><span class="line">pcs property <span class="built_in">set</span> no-quorum-policy=ignore</span><br><span class="line">pcs property <span class="built_in">set</span> stonith-enabled=<span class="literal">false</span></span><br><span class="line">pcs resource create virtual_ip1 ocf:heartbeat:IPaddr2 ip=10.xx.xx.10 cidr_netmask=24 op monitor interval=30s --group nfsgroup</span><br><span class="line">pcs resource create glusterfs-mount ocf:heartbeat:Filesystem device=10.xx.xx.10:/test_vol directory=/glusterfs fstype=glusterfs --group nfsgroup</span><br><span class="line">pcs resource create nfs-daemon ocf:heartbeat:nfsserver nfs_shared_infodir=/glusterfs/nfsinfo nfs_no_notify=<span class="literal">true</span> --group nfsgroup</span><br><span class="line">pcs resource create nfs-root ocf:heartbeat:exportfs clientspec=10.0.0.0/255.0.0.0 options=rw,no_root_squash directory=/glusterfs fsid=0 --group nfsgroup</span><br><span class="line">pcs resource create virtual_ip2 ocf:heartbeat:IPaddr2 ip=10.xx.xx.11 cidr_netmask=24 op monitor interval=30s --group dc_nfs</span><br><span class="line">pcs resource create dc-glusterfs ocf:heartbeat:Filesystem device=10.xx.xx.11:/test_vol directory=/sources fstype=glusterfs --group dc_nfs</span><br><span class="line">pcs resource create dc-nfs-daemon ocf:heartbeat:nfsserver nfs_shared_infodir=/glusterfs/nfsinfo nfs_no_notify=<span class="literal">true</span> --group dc_nfs</span><br><span class="line">pcs resource create dc-nfs-root ocf:heartbeat:exportfs clientspec=10.0.0.0/255.0.0.0 options=rw,no_root_squash directory=/sources fsid=1 --group dc_nfs</span><br></pre></td></tr></table></figure>
+
+<h3 id="heal-and-split-brain"><a href="#heal-and-split-brain" class="headerlink" title="heal and split-brain"></a><a href="http://staged-gluster-docs.readthedocs.io/en/release3.7.0beta1/Features/heal-info-and-split-brain-resolution/" target="_blank" rel="noopener">heal and split-brain</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gluster volume heal test_vol info</span><br><span class="line">gluster volume heal test_vol info split-brain</span><br></pre></td></tr></table></figure>
+
+<h3 id="Just-for-test-not-in-my-production-environment-it-is-incomplete"><a href="#Just-for-test-not-in-my-production-environment-it-is-incomplete" class="headerlink" title="Just for test , not in my production environment, it is incomplete"></a>Just for test , not in my production environment, it is incomplete</h3><ul>
+<li>3 nodes linux HA replace 2 nodes</li>
+<li>fence kvm</li>
+</ul>
+<h3 id="Physical-node-OS"><a href="#Physical-node-OS" class="headerlink" title="Physical node OS"></a>Physical node OS</h3><ul>
+<li>CentOS Linux release 7.1.1503 (Core) </li>
+<li>3.10.0-229.14.1.el7.x86_64</li>
+</ul>
+<h3 id="Virtual-machine-OS"><a href="#Virtual-machine-OS" class="headerlink" title="Virtual machine OS"></a>Virtual machine OS</h3><ul>
+<li>CentOS release 6.7 (Final)</li>
+<li>2.6.32-504.30.3.el6_lustre.x86_64</li>
+<li>Not support SR-IOV</li>
+<li>Virtaul disk cache set to none</li>
+</ul>
+<h3 id="Create-linux-HA-3-x-physical-server"><a href="#Create-linux-HA-3-x-physical-server" class="headerlink" title="Create linux HA ,3 x physical server"></a>Create linux HA ,3 x physical server</h3><p>127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4<br>::1         localhost localhost.localdomain localhost6 localhost6.localdomain6<br>10.xx.xx.1 node01<br>10.xx.xx.2 node02<br>10.xx.xx.3 node03</p>
+<h3 id="Share-strorages"><a href="#Share-strorages" class="headerlink" title="Share strorages"></a>Share strorages</h3><p>NFS/Lustre</p>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum -y install pacemaker corosync fence-agents-all fence-agents-virsh \</span></span><br><span class="line">  fence-virt pacemaker-remote pcs fence-virtd resource-agents \</span><br><span class="line">  fence-virtd-libvirt fence-virtd-multicast</span><br></pre></td></tr></table></figure>
+
+<h3 id="Setup-physical-server"><a href="#Setup-physical-server" class="headerlink" title="Setup physical server"></a>Setup physical server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># echo hacluster | passwd --stdin hacluster</span></span><br><span class="line"><span class="comment"># systemctl enable pcsd.service</span></span><br><span class="line"><span class="comment"># systemctl start pcsd.service</span></span><br><span class="line"><span class="comment"># systemctl is-active pcsd.service</span></span><br><span class="line"><span class="comment"># pcs cluster auth node01 node02 node03 ##input hacluster password for auth</span></span><br><span class="line"><span class="comment"># pcs cluster setup --start --name ha-kvm node01 node02 node03</span></span><br><span class="line"><span class="comment"># pcs property set no-quorum-policy=stop</span></span><br></pre></td></tr></table></figure>
+<p>4.1.2 Option no-quorum-policy</p>
+<p>This global option defines what to do when a cluster partition does not have quorum (no majority of nodes is part of the partition).</p>
+<p>Allowed values are:</p>
+<p>ignore<br>The quorum state does not influence the cluster behavior; resource management is continued.</p>
+<p>This setting is useful for the following scenarios:</p>
+<p>Two-node clusters: Since a single node failure would always result in a loss of majority, usually you want the cluster to carry on regardless. Resource integrity is ensured using fencing, which also prevents split brain scenarios.</p>
+<p>Resource-driven clusters: For local clusters with redundant communication channels, a split brain scenario only has a certain probability. Thus, a loss of communication with a node most likely indicates that the node has crashed, and that the surviving nodes should recover and start serving the resources again.</p>
+<p>If no-quorum-policy is set to ignore, a 4-node cluster can sustain concurrent failure of three nodes before service is lost. With the other settings, it would lose quorum after concurrent failure of two nodes.</p>
+<p>freeze<br>If quorum is lost, the cluster partition freezes. Resource management is continued: running resources are not stopped (but possibly restarted in response to monitor events), but no further resources are started within the affected partition.</p>
+<p>This setting is recommended for clusters where certain resources depend on communication with other nodes (for example, OCFS2 mounts). In this case, the default setting no-quorum-policy=stop is not useful, as it would lead to the following scenario: Stopping those resources would not be possible while the peer nodes are unreachable. Instead, an attempt to stop them would eventually time out and cause a stop failure, triggering escalated recovery and fencing.</p>
+<p>stop (default value)<br>If quorum is lost, all resources in the affected cluster partition are stopped in an orderly fashion.</p>
+<p>suicide<br>If quorum is lost, all nodes in the affected cluster partition are fenced.</p>
+<h3 id="Setting-etc-corosync-corosync-conf-for-every-node"><a href="#Setting-etc-corosync-corosync-conf-for-every-node" class="headerlink" title="Setting /etc/corosync/corosync.conf for every node"></a>Setting /etc/corosync/corosync.conf for every node</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">totem &#123;</span><br><span class="line">    version: 2</span><br><span class="line">    secauth: off</span><br><span class="line">    rrp_mode:active</span><br><span class="line">    cluster_name: ha-kvm</span><br><span class="line">    transport: udpu</span><br><span class="line">    token: 17000</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nodelist &#123;</span><br><span class="line">  node &#123;</span><br><span class="line">	ring0_addr: 10.xx.xx.1</span><br><span class="line">        ring1_addr: 172.xx.xx.1</span><br><span class="line">        nodeid: 1</span><br><span class="line">       &#125;</span><br><span class="line">  node &#123;</span><br><span class="line">        ring0_addr: 10.xx.xx.3</span><br><span class="line">        ring1_addr: 172.xx.xx.3</span><br><span class="line">        nodeid: 2</span><br><span class="line">       &#125;</span><br><span class="line">  node &#123;</span><br><span class="line">        ring0_addr: 10.xx.xx.2</span><br><span class="line">        ring1_addr: 172.xx.xx.2</span><br><span class="line">        nodeid: 3</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">quorum &#123;</span><br><span class="line">    provider: corosync_votequorum</span><br><span class="line">    expected_votes: 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">logging &#123;</span><br><span class="line">        fileline: off</span><br><span class="line">        to_logfile: yes</span><br><span class="line">        to_syslog: yes</span><br><span class="line">        logfile: /var/<span class="built_in">log</span>/cluster/corosync.log</span><br><span class="line">        timestamp: on</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Restart-corosync-service-in-each-node"><a href="#Restart-corosync-service-in-each-node" class="headerlink" title="Restart corosync service in each node"></a>Restart corosync service in each node</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># systemctl restart corosync</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Create-stonith-for-physical-server"><a href="#Create-stonith-for-physical-server" class="headerlink" title="Create stonith for physical server"></a>Create stonith for physical server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pcs stonith create node01-fencing fence_ipmilan pcmk_host_list="nod01 node02 node03" \</span></span><br><span class="line">ipaddr=<span class="string">"node1_ipmi_ipaddr"</span> login=ADMIN passwd=ADMIN lanplus=<span class="literal">true</span> power_wait=4 \</span><br><span class="line">op monitor interval=60s</span><br><span class="line"><span class="comment"># pcs stonith create node02-fencing fence_ipmilan pcmk_host_list="nod01 node02 node03" \</span></span><br><span class="line"> ipaddr=<span class="string">"node2_ipmi_ipaddr"</span> login=ADMIN passwd=ADMIN lanplus=<span class="literal">true</span> power_wait=4 \</span><br><span class="line">op monitor interval=60s</span><br><span class="line"><span class="comment"># pcs stonith create node03-fencing fence_ipmilan pcmk_host_list="nod01 node02 node03" \</span></span><br><span class="line">ipaddr=<span class="string">"node3_ipmi_ipaddr"</span> login=ADMIN passwd=ADMIN lanplus=<span class="literal">true</span> power_wait=4 op \</span><br><span class="line">monitor interval=60s</span><br><span class="line"></span><br><span class="line"><span class="comment"># pcs property set stonith-enabled=true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># pcs status</span></span><br><span class="line">Cluster name: ha-kvm</span><br><span class="line">Last updated: Wed Nov 11 16:42:46 2015</span><br><span class="line">Last change: Wed Nov 11 02:48:26 2015 by root via crm_resource on node01</span><br><span class="line">Stack: corosync</span><br><span class="line">Current DC: node01 (version 1.1.13-a14efad) - partition with quorum</span><br><span class="line">3 nodes and 5 resources configured</span><br><span class="line"></span><br><span class="line">Online: [ node02 node03 node01 ]</span><br><span class="line"></span><br><span class="line">Full list of resources:</span><br><span class="line"></span><br><span class="line"> node01-fencing	(stonith:fence_ipmilan):	Started node02</span><br><span class="line"> node03-fencing	(stonith:fence_ipmilan):	Started node01</span><br><span class="line"> node02-fencing	(stonith:fence_ipmilan):	Started node03</span><br><span class="line"></span><br><span class="line">PCSD Status:</span><br><span class="line">  node03: Online</span><br><span class="line">  node01: Online</span><br><span class="line">  node02: Online</span><br><span class="line"></span><br><span class="line">Daemon Status:</span><br><span class="line">  corosync: active/enabled</span><br><span class="line">  pacemaker: active/enabled</span><br><span class="line">  pcsd: active/enabled</span><br></pre></td></tr></table></figure>
+
+<h3 id="Get-quorum-info"><a href="#Get-quorum-info" class="headerlink" title="Get quorum info"></a>Get quorum info</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># corosync-quorumtool -siH</span></span><br><span class="line">Quorum information</span><br><span class="line">------------------</span><br><span class="line">Date:             Thu Nov 12 04:49:31 2015</span><br><span class="line">Quorum provider:  corosync_votequorum</span><br><span class="line">Nodes:            3</span><br><span class="line">Node ID:          0x00000002</span><br><span class="line">Ring ID:          260</span><br><span class="line">Quorate:          Yes</span><br><span class="line"></span><br><span class="line">Votequorum information</span><br><span class="line">----------------------</span><br><span class="line">Expected votes:   3</span><br><span class="line">Highest expected: 3</span><br><span class="line">Total votes:      3</span><br><span class="line">Quorum:           2  </span><br><span class="line">Flags:            Quorate </span><br><span class="line"></span><br><span class="line">Membership information</span><br><span class="line">----------------------</span><br><span class="line">    Nodeid      Votes Name</span><br><span class="line">0x00000003          1 10.0.0.80</span><br><span class="line">0x00000001          1 10.0.10.97</span><br><span class="line">0x00000002          1 10.0.10.106 (<span class="built_in">local</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Install-kvm"><a href="#Install-kvm" class="headerlink" title="Install kvm"></a>Install kvm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install qemu-kvm libcacard qemu-kvm-common libvirt</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Create-HA-resource-for-kvm"><a href="#Create-HA-resource-for-kvm" class="headerlink" title="Create HA resource for kvm"></a>Create HA resource for kvm</h3><p>Delete cpu model in your xml file for prevent virsh start faild.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cpu</span> <span class="attr">mode</span>=<span class="string">'custom'</span> <span class="attr">match</span>=<span class="string">'exact'</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">model</span> <span class="attr">fallback</span>=<span class="string">'allow'</span>&gt;</span>SandyBridge<span class="tag">&lt;/<span class="name">model</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cpu</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cpu</span> <span class="attr">mode</span>=<span class="string">'custom'</span> <span class="attr">match</span>=<span class="string">'exact'</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">model</span> <span class="attr">fallback</span>=<span class="string">'allow'</span>&gt;</span>Westmere<span class="tag">&lt;/<span class="name">model</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cpu</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pcs resource create mds-01 VirtualDomain hypervisor="qemu:///system" \</span></span><br><span class="line">config=<span class="string">"/xxx/mds01.xml"</span>  meta remote-node=<span class="string">"mds-01"</span></span><br><span class="line"><span class="comment"># pcs resource create mds-02 VirtualDomain hypervisor="qemu:///system" \</span></span><br><span class="line">config=<span class="string">"/xxx/mds02.xml"</span>  meta remote-node=<span class="string">"mds-02"</span></span><br></pre></td></tr></table></figure>
+
+<p>###Configure the pysical node for stonith</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install fence-virt fence-virtd fence-virtd-multicast fence-virtd-libvirt</span></span><br><span class="line"><span class="comment"># fence_virtd -c</span></span><br><span class="line">Accept all the defaults except <span class="keyword">for</span> the items listed below, and the multicast IP and TCP port <span class="keyword">if</span> you selected non-default ones:</span><br><span class="line">Setting a preferred interface causes fence_virtd to listen only</span><br><span class="line"> on that interface.  Normally, it listens on all interfaces.</span><br><span class="line"> In environments <span class="built_in">where</span> the virtual machines are using the host</span><br><span class="line"> machine as a gateway, this *must* be <span class="built_in">set</span> (typically to virbr0).</span><br><span class="line"> Set to <span class="string">'none'</span> <span class="keyword">for</span> no interface.</span><br><span class="line"> </span><br><span class="line"> Interface [none]: br1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">You can accept the default (none) <span class="keyword">if</span> the guests have IPs on the <span class="built_in">local</span> LAN. Here, we assume they <span class="keyword">do</span> not.</span><br><span class="line">Key File [none]: /etc/cluster/fence_xvm.key</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">This ensures only machines with the same key can initiate fencing requests.</span><br><span class="line">At the end, it will ask</span><br><span class="line">Replace /etc/fence_virt.conf with the above [y/N]? y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Say yes.</span><br><span class="line">You should end up with a configuration like this <span class="keyword">in</span> /etc/fence_virt.conf:</span><br><span class="line">backends &#123;</span><br><span class="line">         libvirt &#123;</span><br><span class="line">                 uri = <span class="string">"qemu:///system"</span>;</span><br><span class="line">         &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> listeners &#123;</span><br><span class="line">         multicast &#123;</span><br><span class="line">                 key_file = <span class="string">"/etc/cluster/fence_xvm.key"</span>;</span><br><span class="line">                 interface = <span class="string">"virbr0"</span>;</span><br><span class="line">                 port = <span class="string">"1229"</span>;</span><br><span class="line">                 address = <span class="string">"225.0.0.12"</span>;</span><br><span class="line">                 family = <span class="string">"ipv4"</span>;</span><br><span class="line">         &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> fence_virtd &#123;</span><br><span class="line">         backend = <span class="string">"libvirt"</span>;</span><br><span class="line">         listener = <span class="string">"multicast"</span>;</span><br><span class="line">         module_path = <span class="string">"/usr/lib64/fence-virt"</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># mkdir -p /etc/cluster</span></span><br><span class="line"><span class="comment"># dd if=/dev/urandom bs=4k count=1 of=/etc/cluster/fence_xvm.key</span></span><br><span class="line"><span class="comment"># chmod 0600 /etc/cluster/fence_xvm.key</span></span><br></pre></td></tr></table></figure>
+<p>Required changes to the “address” value on both nodes</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    (on node1)</span><br><span class="line">    address = <span class="string">"225.0.1.12"</span>;</span><br><span class="line"></span><br><span class="line">    (on node2)</span><br><span class="line">    address = <span class="string">"225.0.2.12"</span>;</span><br><span class="line"></span><br><span class="line">    (on node3)</span><br><span class="line">    address = <span class="string">"225.0.3.12"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># fence_virtd  #start the daemon</span></span><br><span class="line"><span class="comment"># fence_xvm -o list</span></span><br><span class="line">iml-01               e95b2343-7d31-410d-1398-25c98daaaabd on</span><br><span class="line">manager-kvm          24fa85e3-6cc0-4e1e-b8b5-cdd78aca1eff on</span><br><span class="line">mds-02               e95e6534-7a29-419b-9919-22d8cad8ef4d on</span><br></pre></td></tr></table></figure>
+
+<h3 id="Configure-the-virtual-machine-for-stonith"><a href="#Configure-the-virtual-machine-for-stonith" class="headerlink" title="Configure the virtual machine for stonith"></a>Configure the virtual machine for stonith</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install fence-virt fence-virtd</span></span><br><span class="line"><span class="comment"># mkdir -p /etc/cluster</span></span><br><span class="line">Copy the shared key from the physical host to vm:/etc/cluster/fence_xvm.key</span><br></pre></td></tr></table></figure>
+
+<h3 id="Create-stonith-resource-for-vm"><a href="#Create-stonith-resource-for-vm" class="headerlink" title="Create stonith resource for vm"></a>Create stonith resource for vm</h3><p>Because I do not know which vm would be running in one physical node. Because there are three physical server,<br>so I create three vm fencing for one vm.</p>
+<p>I setup a corosync with pacemaker two node cluster for mds-01 and mds-02</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pcs stonith create xvmfence_mds-01-1 fence_xvm pcmk_host_list="mds-01 mds-02" action="reboot" \</span></span><br><span class="line">key_file=/etc/cluster/fence_xvm.key multicast_address=225.0.1.12</span><br><span class="line"><span class="comment"># pcs stonith create xvmfence_mds-01-2 fence_xvm pcmk_host_list="mds-01 mds-02" action="reboot" \</span></span><br><span class="line">key_file=/etc/cluster/fence_xvm.key multicast_address=225.0.2.12</span><br><span class="line"><span class="comment"># pcs stonith create xvmfence_mds-01-3 fence_xvm pcmk_host_list="mds-01 mds-02" action="reboot" \</span></span><br><span class="line">key_file=/etc/cluster/fence_xvm.key multicast_address=225.0.3.12</span><br><span class="line"><span class="comment"># pcs stonith create xvmfence_mds-02-1 fence_xvm pcmk_host_list="mds-01 mds-02" action="reboot" \</span></span><br><span class="line">key_file=/etc/cluster/fence_xvm.key multicast_address=225.0.1.12</span><br><span class="line"><span class="comment"># pcs stonith create xvmfence_mds-02-2 fence_xvm pcmk_host_list="mds-01 mds-02" action="reboot" \</span></span><br><span class="line">key_file=/etc/cluster/fence_xvm.key multicast_address=225.0.2.12</span><br><span class="line"><span class="comment"># pcs stonith create xvmfence_mds-02-3 fence_xvm pcmk_host_list="mds-01 mds-02" action="reboot" \</span></span><br><span class="line">key_file=/etc/cluster/fence_xvm.key multicast_address=225.0.3.12</span><br><span class="line"></span><br><span class="line"><span class="comment"># pcs status</span></span><br><span class="line">Cluster name: </span><br><span class="line">Last updated: Thu Nov 12 08:36:34 2015</span><br><span class="line">Last change: Thu Nov 12 08:34:47 2015</span><br><span class="line">Stack: classic openais (with plugin)</span><br><span class="line">Current DC: mds-01 - partition with quorum</span><br><span class="line">Version: 1.1.11-97629de</span><br><span class="line">2 Nodes configured, 2 expected votes</span><br><span class="line">6 Resources configured</span><br><span class="line">Online: [ mds-01 mds-02 ]</span><br><span class="line">Full list of resources:</span><br><span class="line"> xvmfence_mds-01-1	(stonith:fence_xvm):	Started mds-01 </span><br><span class="line"> xvmfence_mds-01-2	(stonith:fence_xvm):	Started mds-02 </span><br><span class="line"> xvmfence_mds-01-3	(stonith:fence_xvm):	Started mds-01 </span><br><span class="line"> xvmfence_mds-02-1	(stonith:fence_xvm):	Started mds-02 </span><br><span class="line"> xvmfence_mds-02-2	(stonith:fence_xvm):	Started mds-01 </span><br><span class="line"> xvmfence_mds-02-3	(stonith:fence_xvm):	Started mds-02 </span><br><span class="line"></span><br><span class="line"><span class="comment"># Settting level for clsuter</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># pcs stonith level add 1 mds-01 xvmfence_mds-01-1</span></span><br><span class="line"><span class="comment"># pcs stonith level add 2 mds-01 xvmfence_mds-01-2</span></span><br><span class="line"><span class="comment"># pcs stonith level add 3 mds-01 xvmfence_mds-01-3</span></span><br><span class="line"><span class="comment"># pcs stonith level add 1 mds-01 xvmfence_mds-02-1</span></span><br><span class="line"><span class="comment"># pcs stonith level add 2 mds-01 xvmfence_mds-02-2</span></span><br><span class="line"><span class="comment"># pcs stonith level add 3 mds-01 xvmfence_mds-02-3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Test-vm-stonith"><a href="#Test-vm-stonith" class="headerlink" title="Test vm stonith"></a>Test vm stonith</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@mds-02 ~]<span class="comment"># fence_xvm -a 225.0.3.12 -k /etc/cluster/fence_xvm.key -H mds-01 -o status</span></span><br><span class="line">Status: ON  (It means mds-01 running <span class="keyword">in</span> node3)</span><br><span class="line">[root@mds-02 ~]<span class="comment"># fence_xvm -a 225.0.1.12 -k /etc/cluster/fence_xvm.key -H mds-01 -o status</span></span><br><span class="line">Status: OFF</span><br><span class="line">[root@mds-02 ~]<span class="comment"># fence_xvm -a 225.0.2.12 -k /etc/cluster/fence_xvm.key -H mds-01 -o status</span></span><br><span class="line">Status: OFF</span><br><span class="line"></span><br><span class="line">[root@mds-02 ~]<span class="comment"># fence_xvm -a 225.0.1.12 -k /etc/cluster/fence_xvm.key -H mds-02 -o status</span></span><br><span class="line">Status: ON  (It means mds-02 running <span class="keyword">in</span> node1)</span><br><span class="line">[root@mds-02 ~]<span class="comment"># fence_xvm -a 225.0.2.12 -k /etc/cluster/fence_xvm.key -H mds-02 -o status</span></span><br><span class="line">Status: OFF</span><br><span class="line">[root@mds-02 ~]<span class="comment"># fence_xvm -a 225.0.3.12 -k /etc/cluster/fence_xvm.key -H mds-02 -o status</span></span><br><span class="line">Status: OFF</span><br><span class="line"></span><br><span class="line">fence mds-02</span><br><span class="line">[root@mds-01 ~]<span class="comment"># pcs stonith fence mds-02</span></span><br><span class="line">Node: mds-02 fenced</span><br><span class="line">[root@mds-02 ~]<span class="comment"># Write failed: Broken pipe</span></span><br><span class="line"></span><br><span class="line">fence mds-01</span><br><span class="line">[root@mds-02 ~]<span class="comment"># pcs stonith fence mds-01</span></span><br><span class="line">Node: mds-01 fenced</span><br><span class="line">[root@mds-01 ~]<span class="comment"># Write failed: Broken pipe</span></span><br></pre></td></tr></table></figure>
+<p>There is one Mellanox ConnectX-3 adapter could not work well in my test environment.<br>I checked config again and again until I upgrded the driver, it could work well.<br>Third time to waste my time in Mellanox ethernet adapter, until now I don’t think it’s a good choice.</p>
+<p>Reference<br><a href="http://clusterlabs.org/wiki/Guest_Fencing" target="_blank" rel="noopener">http://clusterlabs.org/wiki/Guest_Fencing</a><br><a href="https://access.redhat.com/solutions/293183" target="_blank" rel="noopener">https://access.redhat.com/solutions/293183</a><br><a href="https://access.redhat.com/solutions/917833" target="_blank" rel="noopener">https://access.redhat.com/solutions/917833</a><br><a href="https://alteeve.ca/w/Fencing_KVM_Virtual_Servers#Configuring_fence_xvm" target="_blank" rel="noopener">https://alteeve.ca/w/Fencing_KVM_Virtual_Servers#Configuring_fence_xvm</a><br><a href="http://people.redhat.com/ccaulfie/docs/Votequorum_Intro.pdf" target="_blank" rel="noopener">http://people.redhat.com/ccaulfie/docs/Votequorum_Intro.pdf</a><br><a href="https://www.ibm.com/developerworks/community/blogs/mhhaque/entry/configure_two_node_highly_available_cluster_using_kvm_fencing_on_rhel7?lang=en" target="_blank" rel="noopener">https://www.ibm.com/developerworks/community/blogs/mhhaque/entry/configure_two_node_highly_available_cluster_using_kvm_fencing_on_rhel7?lang=en</a><br><a href="https://www.suse.com/documentation/sle_ha/book_sleha/data/sec_ha_config_basics_global.html?view=print" target="_blank" rel="noopener">https://www.suse.com/documentation/sle_ha/book_sleha/data/sec_ha_config_basics_global.html?view=print</a></p>
+<h3 id="Physical-node-OS-1"><a href="#Physical-node-OS-1" class="headerlink" title="Physical node OS"></a>Physical node OS</h3><ul>
+<li>CentOS Linux release 7.3<br><img src="/img/test-arch.png" alt=""></li>
+</ul>
+<h2 id="Create-linux-HA-3-x-physical-server-1"><a href="#Create-linux-HA-3-x-physical-server-1" class="headerlink" title="Create linux HA ,3 x physical server"></a>Create linux HA ,3 x physical server</h2><p>127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4<br>::1         localhost localhost.localdomain localhost6 localhost6.localdomain6<br>192.xx.xx.130 node01<br>192.xx.xx.131 node02<br>192.xx.xx.132 node03</p>
+<h3 id="Share-strorages-1"><a href="#Share-strorages-1" class="headerlink" title="Share strorages"></a>Share strorages</h3><p>NFS/Lustre</p>
+<h3 id="Setup-HA-cluster"><a href="#Setup-HA-cluster" class="headerlink" title="Setup HA cluster"></a>Setup HA cluster</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum -y install pacemaker corosync fence-agents-all fence-agents-virsh \</span></span><br><span class="line">  fence-virt pacemaker-remote pcs fence-virtd resource-agents \</span><br><span class="line">  fence-virtd-libvirt fence-virtd-multicast</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-nodes-glusterfs-config"><a href="#3-nodes-glusterfs-config" class="headerlink" title="3 nodes glusterfs config"></a>3 nodes glusterfs config</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ zpool create tank -O canmount=on -o ashift=9 -o cachefile=none -O xattr=sa -O compression=lz4 -O acltype=posixacl raidz2 /dev/sd&#123;c..h&#125;</span><br><span class="line">$ zpool add tank cache /dev/sda4 /dev/sdb4</span><br><span class="line">$ zpool add tank <span class="built_in">log</span> mirror /dev/sda3 /dev/sdb3</span><br><span class="line">$ gluster volume create ec-test disperse-data 2 redundancy 1  transport tcp node1:/tank/glusterfs node2:/tank/glusterfs node3:/tank/glusterfs force</span><br></pre></td></tr></table></figure>
+
+<h4 id="Setup-physical-server-1"><a href="#Setup-physical-server-1" class="headerlink" title="Setup physical server"></a>Setup physical server</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> hacluster | passwd --stdin hacluster</span><br><span class="line">$ systemctl <span class="built_in">enable</span> pcsd.service</span><br><span class="line">$ systemctl <span class="built_in">disable</span> corosync.service pcaemaker.service</span><br><span class="line">$ systemctl stop corosync.service pcaemaker.service</span><br><span class="line">$ systemctl start pcsd.service</span><br><span class="line">$ systemctl is-active pcsd.service</span><br><span class="line">$ pcs cluster auth node01 node02 node03 <span class="comment">##input hacluster password for auth</span></span><br><span class="line">$ pcs cluster setup --name ha-cluster node01,172.29.xx.xx node02,172.92.xx.xx node03,172.29.xx.xx --transport udpu --rrpmode passive --token 17000 --addr0 172.29.xx.0 --addr1 192.168.101.0 </span><br><span class="line">$ pcs cluster setup --start --name ha-cluster node01 node02 node03</span><br><span class="line"><span class="comment">## pcs property set no-quorum-policy=stop #don't need to stop</span></span><br></pre></td></tr></table></figure>
+
+<p>4.1.2 Option no-quorum-policy</p>
+<p>This global option defines what to do when a cluster partition does not have quorum (no majority of nodes is part of the partition).</p>
+<p>Allowed values are:</p>
+<p>ignore<br>The quorum state does not influence the cluster behavior; resource management is continued.</p>
+<p>This setting is useful for the following scenarios:</p>
+<p>Two-node clusters: Since a single node failure would always result in a loss of majority, usually you want the cluster to carry on regardless. Resource integrity is ensured using fencing, which also prevents split brain scenarios.</p>
+<p>Resource-driven clusters: For local clusters with redundant communication channels, a split brain scenario only has a certain probability. Thus, a loss of communication with a node most likely indicates that the node has crashed, and that the surviving nodes should recover and start serving the resources again.</p>
+<p>If no-quorum-policy is set to ignore, a 4-node cluster can sustain concurrent failure of three nodes before service is lost. With the other settings, it would lose quorum after concurrent failure of two nodes.</p>
+<p>freeze<br>If quorum is lost, the cluster partition freezes. Resource management is continued: running resources are not stopped (but possibly restarted in response to monitor events), but no further resources are started within the affected partition.</p>
+<p>This setting is recommended for clusters where certain resources depend on communication with other nodes (for example, OCFS2 mounts). In this case, the default setting no-quorum-policy=stop is not useful, as it would lead to the following scenario: Stopping those resources would not be possible while the peer nodes are unreachable. Instead, an attempt to stop them would eventually time out and cause a stop failure, triggering escalated recovery and fencing.</p>
+<p>stop (default value)<br>If quorum is lost, all resources in the affected cluster partition are stopped in an orderly fashion.</p>
+<p>suicide<br>If quorum is lost, all nodes in the affected cluster partition are fenced.</p>
+<h4 id="Setting-etc-corosync-corosync-conf-for-every-node-1"><a href="#Setting-etc-corosync-corosync-conf-for-every-node-1" class="headerlink" title="Setting /etc/corosync/corosync.conf for every node"></a>Setting /etc/corosync/corosync.conf for every node</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">totem &#123;</span><br><span class="line">    version: 2</span><br><span class="line">    secauth: off</span><br><span class="line">    cluster_name: homer-test</span><br><span class="line">    transport: udpu</span><br><span class="line">    rrp_mode: passive</span><br><span class="line">    token: 17000</span><br><span class="line"></span><br><span class="line">    interface &#123;</span><br><span class="line">        ringnumber: 0</span><br><span class="line">        bindnetaddr: 192.168.xx.0</span><br><span class="line">        mcastaddr: 239.255.1.1</span><br><span class="line">        mcastport: 5405</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    interface &#123;</span><br><span class="line">        ringnumber: 1</span><br><span class="line">        bindnetaddr: 172.29.xx.0</span><br><span class="line">        mcastaddr: 239.255.2.1</span><br><span class="line">        mcastport: 5405</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nodelist &#123;</span><br><span class="line">    node &#123;</span><br><span class="line">        ring0_addr: bgi-sz1-homer-test73</span><br><span class="line">        ring1_addr: 172.29.xx.xx</span><br><span class="line">        nodeid: 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    node &#123;</span><br><span class="line">        ring0_addr: bgi-sz1-homer-test74</span><br><span class="line">        ring1_addr: 172.29.xx.xx</span><br><span class="line">        nodeid: 2</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    node &#123;</span><br><span class="line">        ring0_addr: bgi-sz1-homer-test76</span><br><span class="line">        ring1_addr: 172.29.xx.xx</span><br><span class="line">        nodeid: 3</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">quorum &#123;</span><br><span class="line">    provider: corosync_votequorum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">logging &#123;</span><br><span class="line">    to_logfile: yes</span><br><span class="line">    logfile: /var/<span class="built_in">log</span>/cluster/corosync.log</span><br><span class="line">    to_syslog: yes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Start-cluster"><a href="#Start-cluster" class="headerlink" title="Start cluster"></a>Start cluster</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ pcs cluster start --all</span><br><span class="line">$ corosync-cfgtool -s</span><br><span class="line">Printing ring status.</span><br><span class="line">Local node ID 1</span><br><span class="line">RING ID 0</span><br><span class="line">	id	= 192.168.xx.130</span><br><span class="line">	status	= ring 0 active with no faults</span><br><span class="line">RING ID 1</span><br><span class="line">	id	= 172.29.xx.73</span><br><span class="line">	status	= ring 1 active with no faults</span><br></pre></td></tr></table></figure>
+
+<h4 id="Create-stonith-for-physical-server-1"><a href="#Create-stonith-for-physical-server-1" class="headerlink" title="Create stonith for physical server"></a>Create stonith for physical server</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pcs stonith create node01-fencing fence_ipmilan pcmk_host_list="nod01" \</span></span><br><span class="line">ipaddr=<span class="string">"node1_ipmi_ipaddr"</span> login=ADMIN passwd=ADMIN lanplus=<span class="literal">true</span> power_wait=4 \</span><br><span class="line">op monitor interval=60s</span><br><span class="line"><span class="comment"># pcs stonith create node02-fencing fence_ipmilan pcmk_host_list="node02" \</span></span><br><span class="line"> ipaddr=<span class="string">"node2_ipmi_ipaddr"</span> login=ADMIN passwd=ADMIN lanplus=<span class="literal">true</span> power_wait=4 \</span><br><span class="line">op monitor interval=60s</span><br><span class="line"><span class="comment"># pcs stonith create node03-fencing fence_ipmilan pcmk_host_list="node03" \</span></span><br><span class="line">ipaddr=<span class="string">"node3_ipmi_ipaddr"</span> login=ADMIN passwd=ADMIN lanplus=<span class="literal">true</span> power_wait=4 op \</span><br><span class="line">monitor interval=60s</span><br><span class="line"></span><br><span class="line"><span class="comment"># pcs property set stonith-enabled=true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># pcs status</span></span><br><span class="line">Cluster name: ha-cluster</span><br><span class="line">...</span><br><span class="line">Online: [ node02 node03 node01 ]</span><br><span class="line"></span><br><span class="line">Full list of resources:</span><br><span class="line"></span><br><span class="line"> node01-fencing	(stonith:fence_ipmilan):	Started node02</span><br><span class="line"> node03-fencing	(stonith:fence_ipmilan):	Started node01</span><br><span class="line"> node02-fencing	(stonith:fence_ipmilan):	Started node03</span><br><span class="line"></span><br><span class="line">PCSD Status:</span><br><span class="line">  node03: Online</span><br><span class="line">  node01: Online</span><br><span class="line">  node02: Online</span><br><span class="line"></span><br><span class="line">Daemon Status:</span><br><span class="line">  corosync: active/disabled</span><br><span class="line">  pacemaker: active/disabled</span><br><span class="line">  pcsd: active/enabled</span><br></pre></td></tr></table></figure>
+
+<h4 id="Get-quorum-info-1"><a href="#Get-quorum-info-1" class="headerlink" title="Get quorum info"></a>Get quorum info</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ corosync-quorumtool</span><br><span class="line">Quorum information</span><br><span class="line">------------------</span><br><span class="line">Date:             Mon Mar 13 22:08:01 2017</span><br><span class="line">Quorum provider:  corosync_votequorum</span><br><span class="line">Nodes:            3</span><br><span class="line">Node ID:          0x00000001</span><br><span class="line">Ring ID:          1/568</span><br><span class="line">Quorate:          Yes</span><br><span class="line"></span><br><span class="line">Votequorum information</span><br><span class="line">----------------------</span><br><span class="line">Expected votes:   3</span><br><span class="line">Highest expected: 3</span><br><span class="line">Total votes:      3</span><br><span class="line">Quorum:           2  </span><br><span class="line">Flags:            Quorate </span><br><span class="line"></span><br><span class="line">Membership information</span><br><span class="line">----------------------</span><br><span class="line">    Nodeid      Votes Name</span><br><span class="line">0x00000001          1 192.168.xx.130 (<span class="built_in">local</span>)</span><br><span class="line">0x00000002          1 192.168.xx.131</span><br><span class="line">0x00000003          1 192.168.xx.132</span><br><span class="line"></span><br><span class="line">$ </span><br><span class="line"></span><br><span class="line">$  corosync-cmapctl|grep members</span><br><span class="line">runtime.totem.pg.mrp.srp.members.1.config_version (u64) = 0</span><br><span class="line">runtime.totem.pg.mrp.srp.members.1.ip (str) = r(0) ip(192.168.xx.130) r(1) ip(172.29.xx.73) </span><br><span class="line">runtime.totem.pg.mrp.srp.members.1.join_count (u32) = 1</span><br><span class="line">runtime.totem.pg.mrp.srp.members.1.status (str) = joined</span><br><span class="line">runtime.totem.pg.mrp.srp.members.2.config_version (u64) = 0</span><br><span class="line">runtime.totem.pg.mrp.srp.members.2.ip (str) = r(0) ip(192.168.xx.131) r(1) ip(172.29.xx.74) </span><br><span class="line">runtime.totem.pg.mrp.srp.members.2.join_count (u32) = 1</span><br><span class="line">runtime.totem.pg.mrp.srp.members.2.status (str) = joined</span><br><span class="line">runtime.totem.pg.mrp.srp.members.3.config_version (u64) = 0</span><br><span class="line">runtime.totem.pg.mrp.srp.members.3.ip (str) = r(0) ip(192.168.xx.132) r(1) ip(172.29.xx.76) </span><br><span class="line">runtime.totem.pg.mrp.srp.members.3.join_count (u32) = 1</span><br><span class="line">runtime.totem.pg.mrp.srp.members.3.status (str) = joined</span><br></pre></td></tr></table></figure>
+<h4 id="backup-and-restore-configuration"><a href="#backup-and-restore-configuration" class="headerlink" title="backup and restore configuration"></a>backup and restore configuration</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pcs cluster cib &gt; xx.xml</span><br><span class="line">$ pcs cluster cib-push xx.xml</span><br><span class="line"></span><br><span class="line">$ pcs config</span><br></pre></td></tr></table></figure>
+
+<h4 id="Create-resources"><a href="#Create-resources" class="headerlink" title="Create resources"></a>Create resources</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ pcs resource create VirtualIP1 ocf:heartbeat:IPaddr2 ip=10.0.0.77 cidr_netmask=8 nic=br0 op monitor interval=60s</span><br><span class="line">$ pcs constraint location VirtualIP prefers bgi-sz1-homer-test73=0</span><br><span class="line"></span><br><span class="line">$ pcs resource create ansible-kvm VirtualDomain hypervisor=<span class="string">"qemu:///system"</span> config=<span class="string">"/export/glusterfs/vms/kvm/xml/ansible-kvm.xml"</span> migration_transport=ssh op start timeout=<span class="string">"60s"</span> op stop timeout=<span class="string">"60s"</span> op monitor  timeout=<span class="string">"30"</span> interval=<span class="string">"20"</span>  meta allow-migrate=<span class="string">"true"</span> op migrate_from interval=<span class="string">"0"</span> timeout=<span class="string">"120s"</span> op migrate_to interval=<span class="string">"0"</span> timeout=<span class="string">"120"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if you want add to group, add --group xxx</span></span><br><span class="line">$ pcs resource create ansible-kvm VirtualDomain hypervisor=<span class="string">"qemu:///system"</span> config=<span class="string">"/export/glusterfs/vms/kvm/xml/ansible-kvm.xml"</span> migration_transport=ssh op start timeout=<span class="string">"60s"</span> op stop timeout=<span class="string">"60s"</span> op monitor  timeout=<span class="string">"30"</span> interval=<span class="string">"20"</span>  meta allow-migrate=<span class="string">"true"</span> op migrate_from interval=<span class="string">"0"</span> timeout=<span class="string">"120s"</span> op migrate_to interval=<span class="string">"0"</span> timeout=<span class="string">"120"</span> --group GROUP-A</span><br><span class="line"></span><br><span class="line"><span class="comment"># http</span></span><br><span class="line"><span class="comment"># pcs resource create webres apache configfile="/etc/httpd/conf/httpd.conf" statusurl="http://127.0.0.1/server-status"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Create-the-resource-group"><a href="#Create-the-resource-group" class="headerlink" title="Create the resource group"></a>Create the resource group</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs resource group add GROUP-A resource-1 resource-2 resource-3</span><br></pre></td></tr></table></figure>
+
+<h4 id="monitor"><a href="#monitor" class="headerlink" title="monitor"></a>monitor</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crm_mon</span><br><span class="line">pcs status nodes</span><br></pre></td></tr></table></figure>
+
+<h4 id="Standby-and-maintance"><a href="#Standby-and-maintance" class="headerlink" title="Standby and maintance"></a>Standby and maintance</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster standby</span><br><span class="line">pcs cluster unstandby</span><br><span class="line">pcs cluster stop</span><br><span class="line">pcs cluster stop --all</span><br><span class="line"></span><br><span class="line"><span class="comment">#BAN" the resource group  in which you would like to stop the cluster services</span></span><br><span class="line">pcs resource ban resource-name node-name</span><br><span class="line"></span><br><span class="line"><span class="comment">#maintenance</span></span><br><span class="line">pcs property <span class="built_in">set</span> maintenance-mode=<span class="literal">true</span></span><br><span class="line">pcs property <span class="built_in">set</span> maintenance-mode=flase</span><br></pre></td></tr></table></figure>
+
+<h4 id="Resource-constraint"><a href="#Resource-constraint" class="headerlink" title="Resource constraint"></a>Resource constraint</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ pcs constraint</span><br><span class="line">Location Constraints:</span><br><span class="line">  Resource: VirtualIP</span><br><span class="line">    Enabled on: bgi-sz1-homer-test73 (score:0)</span><br><span class="line">  Resource: VirtualIP2</span><br><span class="line">    Enabled on: bgi-sz1-homer-test74 (score:0)</span><br><span class="line">  Resource: VirtualIP3</span><br><span class="line">    Enabled on: bgi-sz1-homer-test76 (score:0)</span><br><span class="line">Ordering Constraints:</span><br><span class="line">Colocation Constraints:</span><br><span class="line">Ticket Constraints:</span><br><span class="line"></span><br><span class="line">$ pcs constraint location resource-name prefers nodename=50</span><br><span class="line"></span><br><span class="line"><span class="comment"># Using location constraint, you can also avoid specific node to run a particular resource</span></span><br><span class="line">$ pcs constraint location resource-name avoids nodename=50</span><br></pre></td></tr></table></figure>
+
+<h4 id="Resource-order"><a href="#Resource-order" class="headerlink" title="Resource order"></a>Resource order</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create</span></span><br><span class="line">$ pcs constraint order resource1 <span class="keyword">then</span> resource2</span><br><span class="line">$ pcs constraint order resource2 <span class="keyword">then</span> resource3</span><br><span class="line">$ pcs constraint</span><br><span class="line"></span><br><span class="line"><span class="comment"># remove</span></span><br><span class="line">$ pcs constraint order --full</span><br><span class="line">$ pcs constraint order remove resource1 id_output</span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line"></span><br><span class="line">$ pcs constraint order VirtualIP1 <span class="keyword">then</span> manager-kvm</span><br><span class="line">Adding VirtualIP1 manager-kvm (kind: Mandatory) (Options: first-action=start <span class="keyword">then</span>-action=start)</span><br><span class="line">$ pcs constraint</span><br><span class="line">Location Constraints:</span><br><span class="line">  Resource: VirtualIP</span><br><span class="line">    Enabled on: bgi-sz1-homer-test73 (score:0)</span><br><span class="line">  Resource: VirtualIP2</span><br><span class="line">    Enabled on: bgi-sz1-homer-test74 (score:0)</span><br><span class="line">  Resource: VirtualIP3</span><br><span class="line">    Enabled on: bgi-sz1-homer-test76 (score:0)</span><br><span class="line">Ordering Constraints:</span><br><span class="line">  start VirtualIP1 <span class="keyword">then</span> start manager-kvm (kind:Mandatory)</span><br><span class="line">Colocation Constraints:</span><br><span class="line">Ticket Constraints:</span><br><span class="line"></span><br><span class="line">$ pcs constraint order --full</span><br><span class="line">Ordering Constraints:</span><br><span class="line">  start VirtualIP1 <span class="keyword">then</span> start manager-kvm (kind:Mandatory) (id:order-VirtualIP1-manager-kvm-mandatory)</span><br><span class="line"></span><br><span class="line"><span class="comment">#input id</span></span><br><span class="line">$ pcs constraint order remove VirtualIP1 order-VirtualIP1-manager-kvm-mandatory</span><br><span class="line">$ pcs constraint order --full</span><br><span class="line">Ordering Constraints:</span><br></pre></td></tr></table></figure>
+
+<h4 id="Resource-migration"><a href="#Resource-migration" class="headerlink" title="Resource migration"></a>Resource migration</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ pcs resource update resource-name meta migration-threshold=<span class="string">"2"</span></span><br><span class="line">or </span><br><span class="line">$ pcs resource defaults migration-threshold=2</span><br><span class="line"></span><br><span class="line">$ pcs resource update resource-name meta failure-timeout=60s</span><br><span class="line">$ pcs resource show resource-name</span><br><span class="line"><span class="comment"># show fail-count</span></span><br><span class="line">$ pcs resource failcount show</span><br><span class="line">or</span><br><span class="line">$ crm_failcount -r resource-name</span><br><span class="line"></span><br><span class="line"><span class="comment"># reset the fail-counts </span></span><br><span class="line">$ pcs resource failcount reset resource-name node-name</span><br><span class="line">or </span><br><span class="line">$ pcs resource cleanup resource-name</span><br><span class="line">$ pcs resource failcount show  resource-name</span><br></pre></td></tr></table></figure>
+
+<h4 id="Not-move-resource-back"><a href="#Not-move-resource-back" class="headerlink" title="Not move resource back"></a>Not move resource back</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pcs resource defaults resource-stickiness=100</span><br><span class="line">$ pcs resource defaults</span><br></pre></td></tr></table></figure>
+
+<h4 id="Colocation-constraint"><a href="#Colocation-constraint" class="headerlink" title="Colocation constraint"></a>Colocation constraint</h4><p>A colocation constraint determines that the location of one resource depends on the location of another resource</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ pcs constraint colocation add resource1 resource2 INFINITY</span><br><span class="line">$ pcs constraint colocation add resource1 with resource2 INFINITY</span><br><span class="line"><span class="comment">#remove</span></span><br><span class="line">$ pcs constraint --full</span><br><span class="line"></span><br><span class="line">$ pcs constraint colocation remove resource1</span><br></pre></td></tr></table></figure>
+
+<h4 id="Resource-location"><a href="#Resource-location" class="headerlink" title="Resource location"></a>Resource location</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ pcs constraint location resource-name prefers node1</span><br><span class="line">$ pcs constraint location resource-name avoids node1</span><br><span class="line">$ pcs constraint --full</span><br><span class="line">$ pcs constraint location remove location-resource-name</span><br><span class="line">$ pcs constraint location resource-name prefers node1=INFINITY</span><br><span class="line">$ crm_simulate -sL <span class="comment"># get resource score</span></span><br><span class="line"><span class="comment"># Resource pefer node1,node2,node3</span></span><br><span class="line">pcs constraint location resource-name prefers node1=200</span><br><span class="line">pcs constraint location resource-name prefers node2=100</span><br><span class="line">pcs constraint location resource-name prefers node3=0</span><br></pre></td></tr></table></figure>
+
+<h4 id="Update-resource-config"><a href="#Update-resource-config" class="headerlink" title="Update resource config"></a>Update resource config</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pcs resource update ansible-kvm config=/opt/lustresz/DAS_NFS/vms/HA-kvm/homerl/config/ansible-kvm.xml</span><br></pre></td></tr></table></figure>
+
+<h4 id="Manage-resource"><a href="#Manage-resource" class="headerlink" title="Manage resource"></a>Manage resource</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ pcs resource <span class="built_in">disable</span> resource-name    </span><br><span class="line">$ pcs resource <span class="built_in">enable</span> resource-name    </span><br><span class="line">$ pcs resource failcount show resource-name </span><br><span class="line">$ pcs resource failcount reset resource-name</span><br><span class="line">$ pcs resource cleanup resource-name</span><br></pre></td></tr></table></figure>
+
+<h4 id="Clear-error-output"><a href="#Clear-error-output" class="headerlink" title="Clear error output"></a>Clear error output</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcs resource cleanup</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Check-cluster-status"><a href="#Check-cluster-status" class="headerlink" title="Check cluster status"></a>Check cluster status</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ crm_verify -L -V</span><br></pre></td></tr></table></figure>
+
+<h3 id="Destroy-cluster"><a href="#Destroy-cluster" class="headerlink" title="Destroy cluster"></a>Destroy cluster</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pcs cluster destroy --all</span><br><span class="line"></span><br><span class="line">#or </span><br><span class="line">systemctl stop pacemaker corosync</span><br><span class="line">rm -f &#x2F;var&#x2F;lib&#x2F;pacemaker&#x2F;cib&#x2F;*</span><br></pre></td></tr></table></figure>
+<p>Reference<br><a href="http://www.unixarena.com/2016/01/rhel-7-pacemaker-define-the-resource-behaviour.html" target="_blank" rel="noopener">RHEL 7 – Pacemaker</a><br><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/High_Availability_Add-On_Reference/s1-multistateresource-HAAR.html" target="_blank" rel="noopener">High_Availability_Add-On_Reference</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/test/" rel="tag"><i class="fa fa-tag"></i> test</a>
+              <a href="/tags/ha/" rel="tag"><i class="fa fa-tag"></i> ha</a>
+              <a href="/tags/virt/" rel="tag"><i class="fa fa-tag"></i> virt</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/12/04/openzfs-replace/" rel="prev" title="Replace HDD for openzfs">
+      <i class="fa fa-chevron-left"></i> Replace HDD for openzfs
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/04/01/blktrace/" rel="next" title="Blktrace">
+      Blktrace <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pcs"><span class="nav-number">1.</span> <span class="nav-text">pcs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CentOS-7-Initialization"><span class="nav-number">1.1.</span> <span class="nav-text">CentOS 7 Initialization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-fence"><span class="nav-number">1.2.</span> <span class="nav-text">Create fence</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-resource"><span class="nav-number">1.3.</span> <span class="nav-text">Create resource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resource-group"><span class="nav-number">1.4.</span> <span class="nav-text">Resource group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backup-Restore-config"><span class="nav-number">1.5.</span> <span class="nav-text">Backup&#x2F;Restore config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Show-config"><span class="nav-number">1.6.</span> <span class="nav-text">Show config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-default-value"><span class="nav-number">1.7.</span> <span class="nav-text">get default value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Switch-and-delete-resource"><span class="nav-number">1.8.</span> <span class="nav-text">Switch and delete resource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-status"><span class="nav-number">1.9.</span> <span class="nav-text">Get status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Clean-info"><span class="nav-number">1.10.</span> <span class="nav-text">Clean info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">1.11.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pacemaker"><span class="nav-number">2.</span> <span class="nav-text">pacemaker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#clear-all-pacemaker-config"><span class="nav-number">2.1.</span> <span class="nav-text">clear all pacemaker config</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#corosync"><span class="nav-number">3.</span> <span class="nav-text">corosync</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#-1"><span class="nav-number">3.1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-x-CentOS-7-corosync-conf"><span class="nav-number">3.2.</span> <span class="nav-text">3 x CentOS 7 corosync.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-x-CentOS6-corosync-conf"><span class="nav-number">3.3.</span> <span class="nav-text">2 x CentOS6 corosync.conf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-volume-for-test-env"><span class="nav-number">4.</span> <span class="nav-text">Create volume for test env</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#glusterfs-in-ha"><span class="nav-number">5.</span> <span class="nav-text">glusterfs in ha</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#heal-and-split-brain"><span class="nav-number">6.</span> <span class="nav-text">heal and split-brain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Just-for-test-not-in-my-production-environment-it-is-incomplete"><span class="nav-number">7.</span> <span class="nav-text">Just for test , not in my production environment, it is incomplete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Physical-node-OS"><span class="nav-number">8.</span> <span class="nav-text">Physical node OS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtual-machine-OS"><span class="nav-number">9.</span> <span class="nav-text">Virtual machine OS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-linux-HA-3-x-physical-server"><span class="nav-number">10.</span> <span class="nav-text">Create linux HA ,3 x physical server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Share-strorages"><span class="nav-number">11.</span> <span class="nav-text">Share strorages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Installation"><span class="nav-number">12.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-physical-server"><span class="nav-number">13.</span> <span class="nav-text">Setup physical server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setting-etc-corosync-corosync-conf-for-every-node"><span class="nav-number">14.</span> <span class="nav-text">Setting &#x2F;etc&#x2F;corosync&#x2F;corosync.conf for every node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Restart-corosync-service-in-each-node"><span class="nav-number">15.</span> <span class="nav-text">Restart corosync service in each node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-stonith-for-physical-server"><span class="nav-number">16.</span> <span class="nav-text">Create stonith for physical server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-quorum-info"><span class="nav-number">17.</span> <span class="nav-text">Get quorum info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-kvm"><span class="nav-number">18.</span> <span class="nav-text">Install kvm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-HA-resource-for-kvm"><span class="nav-number">19.</span> <span class="nav-text">Create HA resource for kvm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure-the-virtual-machine-for-stonith"><span class="nav-number">20.</span> <span class="nav-text">Configure the virtual machine for stonith</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-stonith-resource-for-vm"><span class="nav-number">21.</span> <span class="nav-text">Create stonith resource for vm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-vm-stonith"><span class="nav-number">22.</span> <span class="nav-text">Test vm stonith</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Physical-node-OS-1"><span class="nav-number">23.</span> <span class="nav-text">Physical node OS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-linux-HA-3-x-physical-server-1"><span class="nav-number"></span> <span class="nav-text">Create linux HA ,3 x physical server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Share-strorages-1"><span class="nav-number">1.</span> <span class="nav-text">Share strorages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-HA-cluster"><span class="nav-number">2.</span> <span class="nav-text">Setup HA cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nodes-glusterfs-config"><span class="nav-number">3.</span> <span class="nav-text">3 nodes glusterfs config</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Setup-physical-server-1"><span class="nav-number">3.1.</span> <span class="nav-text">Setup physical server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Setting-etc-corosync-corosync-conf-for-every-node-1"><span class="nav-number">3.2.</span> <span class="nav-text">Setting &#x2F;etc&#x2F;corosync&#x2F;corosync.conf for every node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Start-cluster"><span class="nav-number">3.3.</span> <span class="nav-text">Start cluster</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-stonith-for-physical-server-1"><span class="nav-number">3.4.</span> <span class="nav-text">Create stonith for physical server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-quorum-info-1"><span class="nav-number">3.5.</span> <span class="nav-text">Get quorum info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#backup-and-restore-configuration"><span class="nav-number">3.6.</span> <span class="nav-text">backup and restore configuration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-resources"><span class="nav-number">3.7.</span> <span class="nav-text">Create resources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-the-resource-group"><span class="nav-number">3.8.</span> <span class="nav-text">Create the resource group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#monitor"><span class="nav-number">3.9.</span> <span class="nav-text">monitor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Standby-and-maintance"><span class="nav-number">3.10.</span> <span class="nav-text">Standby and maintance</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resource-constraint"><span class="nav-number">3.11.</span> <span class="nav-text">Resource constraint</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resource-order"><span class="nav-number">3.12.</span> <span class="nav-text">Resource order</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resource-migration"><span class="nav-number">3.13.</span> <span class="nav-text">Resource migration</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Not-move-resource-back"><span class="nav-number">3.14.</span> <span class="nav-text">Not move resource back</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Colocation-constraint"><span class="nav-number">3.15.</span> <span class="nav-text">Colocation constraint</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resource-location"><span class="nav-number">3.16.</span> <span class="nav-text">Resource location</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Update-resource-config"><span class="nav-number">3.17.</span> <span class="nav-text">Update resource config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Manage-resource"><span class="nav-number">3.18.</span> <span class="nav-text">Manage resource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Clear-error-output"><span class="nav-number">3.19.</span> <span class="nav-text">Clear error output</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Check-cluster-status"><span class="nav-number">3.20.</span> <span class="nav-text">Check cluster status</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Destroy-cluster"><span class="nav-number">4.</span> <span class="nav-text">Destroy cluster</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">703k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">10:39</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2016/03/22/ha/",
+            identifier: "2016/03/22/ha/",
+            title: "High availability test"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
