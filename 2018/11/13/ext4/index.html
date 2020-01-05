@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Oh, shit , data loss, here is lustre ldiskfs backup dataWhen backing up operating system partitions, the partition must be unmounted. 12345678$ dd if&#x3D;&#x2F;dev&#x2F;mapper&#x2F;3600a098000b5ea3e000006065be52460 of&#x3D;3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ext4 info">
+<meta property="og:url" content="http://yoursite.com/2018/11/13/ext4/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="Oh, shit , data loss, here is lustre ldiskfs backup dataWhen backing up operating system partitions, the partition must be unmounted. 12345678$ dd if&#x3D;&#x2F;dev&#x2F;mapper&#x2F;3600a098000b5ea3e000006065be52460 of&#x3D;3">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-13T01:02:56.000Z">
+<meta property="article:modified_time" content="2020-01-05T03:11:37.140Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="ext4">
+<meta property="article:tag" content="fsck">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/11/13/ext4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ext4 info | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/ext4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ext4 info
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-13 09:02:56" itemprop="dateCreated datePublished" datetime="2018-11-13T09:02:56+08:00">2018-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 11:11:37" itemprop="dateModified" datetime="2020-01-05T11:11:37+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/filesystem/" itemprop="url" rel="index">
+                    <span itemprop="name">filesystem</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/13/ext4/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/13/ext4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>10 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Oh, shit , data loss, here is lustre ldiskfs</p>
+<p>backup data<br>When backing up operating system partitions, the partition must be unmounted.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/mapper/3600a098000b5ea3e000006065be52460 of=3600a098000b5ea3e000006065be52460 bs=1M conv=sparse</span><br><span class="line">or you could </span><br><span class="line">$ dump -0uf /backup-files/sda3.dump /dev/sda3</span><br><span class="line">$ dump -0u -f - /dev/sda1 | ssh root@<span class="built_in">test</span>-server dd of=/tmp/sda1.dump</span><br><span class="line"><span class="comment"># recovery </span></span><br><span class="line">$ mount -t ext3 /dev/sda3 /mnt/sda3</span><br><span class="line">$ <span class="built_in">cd</span> /mnt/sda3</span><br><span class="line">restore -rf /backup-files/sda3.dump</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">$ debugfs &#x2F;dev&#x2F;mapper&#x2F;3600a098000b5ea3e000006065be52460</span><br><span class="line">debugfs 1.42.13.wc5 (15-Apr-2016)</span><br><span class="line">&#x2F;dev&#x2F;mapper&#x2F;3600a098000b5ea3e000006065be52460: Can&#39;t read an inode bitmap while reading inode bitmap</span><br><span class="line">debugfs:  stats</span><br><span class="line">stats: Filesystem not open</span><br><span class="line"></span><br><span class="line">$ dumpe2fs &#x2F;dev&#x2F;mapper&#x2F;3600a098000b5ea3e000006065be52460</span><br><span class="line">dumpe2fs 1.42.13.wc5 (15-Apr-2016)</span><br><span class="line">Filesystem volume name:   ldfsqd1-OST0004</span><br><span class="line">Last mounted on:          &#x2F;</span><br><span class="line">Filesystem UUID:          8ffd7826-f9f5-4e92-99ef-75cca46c281a</span><br><span class="line">Filesystem magic number:  0xEF53</span><br><span class="line">Filesystem revision #:    1 (dynamic)</span><br><span class="line">Filesystem features:      has_journal ext_attr dir_index filetype needs_recovery extent 64bit mmp flex_bg sparse_super large_file huge_file uninit_bg dir_nlink quota</span><br><span class="line">Filesystem flags:         signed_directory_hash</span><br><span class="line">Default mount options:    user_xattr acl</span><br><span class="line">Filesystem state:         clean</span><br><span class="line">Errors behavior:          Continue</span><br><span class="line">Filesystem OS type:       Linux</span><br><span class="line">Inode count:              62914560</span><br><span class="line">Block count:              16106127360</span><br><span class="line">Reserved block count:     805306368</span><br><span class="line">Free blocks:              3782402091</span><br><span class="line">Free inodes:              60311208</span><br><span class="line">First block:              0</span><br><span class="line">Block size:               4096</span><br><span class="line">Fragment size:            4096</span><br><span class="line">Group descriptor size:    64</span><br><span class="line">Blocks per group:         32768</span><br><span class="line">Fragments per group:      32768</span><br><span class="line">Inodes per group:         128</span><br><span class="line">Inode blocks per group:   8</span><br><span class="line">Flex block group size:    256</span><br><span class="line">Filesystem created:       Tue Oct 10 13:54:45 2017</span><br><span class="line">Last mount time:          Sat Oct 20 16:15:57 2018</span><br><span class="line">Last write time:          Sat Oct 20 16:15:57 2018</span><br><span class="line">Mount count:              8</span><br><span class="line">Maximum mount count:      -1</span><br><span class="line">Last checked:             Tue Oct 10 13:54:45 2017</span><br><span class="line">Check interval:           0 (&lt;none&gt;)</span><br><span class="line">Lifetime writes:          5132 GB</span><br><span class="line">Reserved blocks uid:      0 (user root)</span><br><span class="line">Reserved blocks gid:      0 (group root)</span><br><span class="line">First inode:              11</span><br><span class="line">Inode size:	          256</span><br><span class="line">Required extra isize:     28</span><br><span class="line">Desired extra isize:      28</span><br><span class="line">Journal inode:            8</span><br><span class="line">Default directory hash:   half_md4</span><br><span class="line">Directory Hash Seed:      7d46aee3-a481-456b-b9ff-6c7ab59a6e1c</span><br><span class="line">Journal backup:           inode blocks</span><br><span class="line">MMP block number:         10246</span><br><span class="line">MMP update interval:      5</span><br><span class="line">User quota inode:         3</span><br><span class="line">Group quota inode:        4</span><br><span class="line">Journal superblock magic number invalid!</span><br><span class="line">......</span><br><span class="line">$ grep  --binary-files&#x3D;text 0000430 3600a09800099437b000008f05be52536</span><br><span class="line">0000430: 9aba e45b 0c00 ffff 53ef 0100 0100 0000  ...[....S.......</span><br><span class="line">The magic number is little-endian 0xef53</span><br><span class="line"></span><br><span class="line">$ dumpe2fs &#x2F;dev&#x2F;mapper&#x2F;3600a098000b5ea3e000006055be52442 | grep superblock -i</span><br><span class="line">dumpe2fs 1.42.13.wc5 (15-Apr-2016)</span><br><span class="line">  Primary superblock at 0, Group descriptors at 1-7680</span><br><span class="line">  Backup superblock at 32768, Group descriptors at 32769-40448</span><br><span class="line">  Backup superblock at 98304, Group descriptors at 98305-105984</span><br><span class="line">  Backup superblock at 163840, Group descriptors at 163841-171520</span><br><span class="line">  Backup superblock at 229376, Group descriptors at 229377-237056</span><br><span class="line">  Backup superblock at 294912, Group descriptors at 294913-302592</span><br><span class="line">  Backup superblock at 819200, Group descriptors at 819201-826880</span><br><span class="line">  Backup superblock at 884736, Group descriptors at 884737-892416</span><br><span class="line">  Backup superblock at 1605632, Group descriptors at 1605633-1613312</span><br><span class="line">  Backup superblock at 2654208, Group descriptors at 2654209-2661888</span><br><span class="line">  Backup superblock at 4096000, Group descriptors at 4096001-4103680</span><br><span class="line">  Backup superblock at 7962624, Group descriptors at 7962625-7970304</span><br><span class="line">  Backup superblock at 11239424, Group descriptors at 11239425-11247104</span><br><span class="line">  Backup superblock at 20480000, Group descriptors at 20480001-20487680</span><br><span class="line">  Backup superblock at 23887872, Group descriptors at 23887873-23895552</span><br><span class="line">  Backup superblock at 71663616, Group descriptors at 71663617-71671296</span><br><span class="line">  Backup superblock at 78675968, Group descriptors at 78675969-78683648</span><br><span class="line">  Backup superblock at 102400000, Group descriptors at 102400001-102407680</span><br><span class="line">  Backup superblock at 214990848, Group descriptors at 214990849-214998528</span><br><span class="line">  Backup superblock at 512000000, Group descriptors at 512000001-512007680</span><br><span class="line">  Backup superblock at 550731776, Group descriptors at 550731777-550739456</span><br><span class="line">  Backup superblock at 644972544, Group descriptors at 644972545-644980224</span><br><span class="line">  Backup superblock at 1934917632, Group descriptors at 1934917633-1934925312</span><br><span class="line">  Backup superblock at 2560000000, Group descriptors at 2560000001-2560007680</span><br><span class="line">  Backup superblock at 3855122432, Group descriptors at 3855122433-3855130112</span><br><span class="line">  Backup superblock at 5804752896, Group descriptors at 5804752897-5804760576</span><br><span class="line">  Backup superblock at 12800000000, Group descriptors at 12800000001-12800007680</span><br></pre></td></tr></table></figure>
+<p>Why some parition all superblock were missing ?</p>
+<h3 id="For-huge-parttion-there-is-no-enough-memory-it-will-cause-slow"><a href="#For-huge-parttion-there-is-no-enough-memory-it-will-cause-slow" class="headerlink" title="For huge parttion, there is no enough memory, it will cause slow"></a>For huge parttion, there is no enough memory, it will cause slow</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;e2fsck.conf</span><br><span class="line">[scratch_files]</span><br><span class="line">directory &#x3D; &#x2F;var&#x2F;cache&#x2F;e2fsck</span><br></pre></td></tr></table></figure>
+
+<h3 id="guess-partion-start"><a href="#guess-partion-start" class="headerlink" title="guess partion start"></a><a href="https://unix.stackexchange.com/questions/103919/how-do-i-find-the-offset-of-an-ext4-filesystem" target="_blank" rel="noopener">guess partion start</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bsz=512 <span class="comment"># or 1024, 2048, 4096 higher = faster</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;2..10000000&#125;; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"---&gt;<span class="variable">$i</span>&lt;---"</span></span><br><span class="line">    mount -o offset=$((<span class="variable">$bsz</span>*<span class="variable">$i</span>)) -t ext4 /dev/whatever /mnt/foo</span><br><span class="line">    <span class="keyword">if</span> [ $? == 0 ]; <span class="keyword">then</span> <span class="comment"># whahoo!</span></span><br><span class="line">        <span class="built_in">echo</span> Eureka</span><br><span class="line">        <span class="built_in">break</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Found-ext-magic-number"><a href="#Found-ext-magic-number" class="headerlink" title="Found ext magic number"></a>Found ext magic number</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">0000400: 0000 c003 0000 00c0 0000 0030 60c4 98a4  ...........0`...</span><br><span class="line">0000410: e243 9703 0000 0000 0200 0000 0200 0000  .C..............</span><br><span class="line">0000420: 0080 0000 0080 0000 8000 0000 9aba e45b  ...............[</span><br><span class="line">0000430: 9aba e45b 0c00 ffff 53ef 0100 0100 0000  ...[....S.......</span><br><span class="line">0000440: 8760 dc59 0000 0000 0000 0000 0100 0000  .`.Y............</span><br><span class="line">0000450: 0000 0000 0b00 0000 0001 0000 2c00 0000  ............,...</span><br><span class="line">0000460: c603 0000 3b01 0000 1c09 a61a 05f9 42cb  ....;.........B.</span><br><span class="line">0000470: a3a9 e929 ee10 20be 6c64 6673 7164 312d  ...).. .ldfsqd1-</span><br><span class="line">0000480: 4f53 5430 3030 3000 2f00 6d70 2f6d 6e74  OST0000./.mp/mnt</span><br><span class="line">0000490: 584e 4435 3733 0000 0000 0000 0000 0000  XND573..........</span><br><span class="line">00004a0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">00004b0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">00004c0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br></pre></td></tr></table></figure>
+
+<h3 id="because-there-is-no-any-parttion-in-this-block-dev"><a href="#because-there-is-no-any-parttion-in-this-block-dev" class="headerlink" title="because there is no any parttion in this block dev"></a>because there is no any parttion in this block dev</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ parted /dev/mapper/3600a098000b5ea3e000006065be52460 p</span><br><span class="line">Model: Linux device-mapper (multipath) (dm)</span><br><span class="line">Disk /dev/mapper/3600a098000b5ea3e000006065be52460: 66.0TB</span><br><span class="line">Sector size (logical/physical): 512B/4096B</span><br><span class="line">Partition Table: loop <span class="comment">#######that means there is no parttion </span></span><br><span class="line">Disk Flags:</span><br><span class="line"></span><br><span class="line">Number  Start  End     Size    File system  Flags</span><br><span class="line"> 1      0.00B  66.0TB  66.0TB  ext4</span><br></pre></td></tr></table></figure>
+
+<h3 id="You-can’t-fsck-by-default"><a href="#You-can’t-fsck-by-default" class="headerlink" title="You can’t fsck by default"></a>You can’t fsck by default</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ e2fsck -n -b 32768 &#x2F;dev&#x2F;mapper&#x2F;3600a098000b5ea3e000006065be52460</span><br><span class="line">e2fsck 1.42.13.wc5 (15-Apr-2016)</span><br><span class="line">MMP interval is 10 seconds and total wait time is 42 seconds. Please wait...</span><br><span class="line">Superblock has an invalid journal (inode 8).</span><br><span class="line">Clear? no</span><br><span class="line"></span><br><span class="line">e2fsck: Illegal inode number while checking ext3 journal for ldfsqd1-OST0004</span><br><span class="line"></span><br><span class="line">ldfsqd1-OST0004: ********** WARNING: Filesystem still has errors **********</span><br><span class="line"></span><br><span class="line">$ e2fsck -n -b 819200 &#x2F;dev&#x2F;mapper&#x2F;3600a098000b5ea3e000006065be52460</span><br><span class="line">e2fsck 1.42.13.wc5 (15-Apr-2016)</span><br><span class="line">MMP interval is 10 seconds and total wait time is 42 seconds. Please wait...</span><br><span class="line">Superblock has an invalid journal (inode 8).</span><br><span class="line">Clear? no</span><br><span class="line"></span><br><span class="line">e2fsck: Illegal inode number while checking ext3 journal for ldfsqd1-OST0004</span><br><span class="line"></span><br><span class="line">ldfsqd1-OST0004: ********** WARNING: Filesystem still has errors **********</span><br></pre></td></tr></table></figure>
+
+<h3 id="Found-some-info-form-superblock"><a href="#Found-some-info-form-superblock" class="headerlink" title="Found some info form superblock"></a>Found some info form superblock</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-n     Causes mke2fs to not actually create a filesystem, but display what it would <span class="keyword">do</span> <span class="keyword">if</span> it were to create  a  filesystem.   </span><br><span class="line">       This can  be used to determine the location of the backup superblocks <span class="keyword">for</span> a particular filesystem, </span><br><span class="line">       so long as the mke2fs parame‐ters that were passed when the filesystem was originally created are used again.  </span><br><span class="line">       (With the -n option added, of course!)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Maybe you could rewrite the superblock</span></span><br><span class="line">mke2fs -S</span><br><span class="line">    -S    Write  superblock and group descriptors only.  This is useful <span class="keyword">if</span> all</span><br><span class="line">          of the superblock and backup superblocks are corrupted, and a  last-</span><br><span class="line">          ditch  recovery method is desired.  It causes mke2fs to reinitialize</span><br><span class="line">          the superblock and group descriptors, <span class="keyword">while</span> not touching  the  inode</span><br><span class="line">          table and the block and inode bitmaps.  The e2fsck program should be</span><br><span class="line">          run immediately after this option is used, and there is no guarantee</span><br><span class="line">          that  any  data  will be salvageable.  It is critical to specify the</span><br><span class="line">          correct filesystem blocksize when using this option, or there is  no</span><br><span class="line">          chance of recovery.</span><br></pre></td></tr></table></figure>
+
+<h3 id="You-have-to-disable-ext-journal-make-it-like-ext2-all-blocks-full-scan"><a href="#You-have-to-disable-ext-journal-make-it-like-ext2-all-blocks-full-scan" class="headerlink" title="You have to disable ext journal, make it like ext2, all blocks full scan"></a>You have to disable ext journal, make it like ext2, all blocks full scan</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ tune2fs -O ^has_journal,needs_rwcovery -f /dev/mapper/3600a098000b5ea3e000006065be52460</span><br><span class="line"><span class="comment">### you can fsck again, but it 's too slow..............maybe 60TB will wait 10 years</span></span><br><span class="line"></span><br><span class="line">$ e2fsck -y /dev/mapper/3600a098000b5ea3e000006065be52460</span><br><span class="line"><span class="comment">### it 's worked</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Looks-like-the-block-dev-has-be-destroy-by-hardware-raid-controller-all-data-has-messed"><a href="#Looks-like-the-block-dev-has-be-destroy-by-hardware-raid-controller-all-data-has-messed" class="headerlink" title="Looks like the block dev has be destroy by hardware raid controller, all data has messed"></a>Looks like the block dev has be destroy by hardware raid controller, all data has messed</h3><p>In 60TiB raw dev, Lustre first 10MB is ext meta data and data map, it will not show any file part<br>But I found the horrible things, reserve space has been overrided as 128KiB, 128KiB is the raid controller segment size.<br>I don ‘t think we can recovery all data. when fsck finish, I ‘m not sure the data is it integrity. maybe some block has corruptted in single file</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">00fffa0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">00fffb0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">00fffc0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">00fffd0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">00fffe0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">00ffff0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">0100000: dcfa 60ef 039f c372 0793 3a8d 4c6a 642d  ..`....r..:.Ljd-</span><br><span class="line">0100010: 50c7 fddf b3f5 fbed f03f 71b5 ccb3 811c  P........?q.....</span><br><span class="line">0100020: 1495 a0c2 ab24 be48 ac46 1109 a19e aadc  .....$.H.F......</span><br><span class="line">0100030: 16d9 0488 2e26 d238 fe48 e492 27c5 dd02  .....&amp;.8.H..<span class="string">'...</span></span><br><span class="line"><span class="string">.....</span></span><br><span class="line"><span class="string">011ffd0: baf1 35e8 54e1 e97c dab5 e762 e74c 83cc  ..5.T..|...b.L..</span></span><br><span class="line"><span class="string">011ffe0: 7d02 7db3 53f2 613d 6ef4 775b a0e2 767f  &#125;.&#125;.S.a=n.w[..v.</span></span><br><span class="line"><span class="string">011fff0: ff8b 65fe 9c39 1018 3b76 586e 3893 2095  ..e..9..;vXn8. .</span></span><br><span class="line"><span class="string">0120000: c000 8023 c001 8023 0008 8023 0000 0100  ...#...#...#....</span></span><br><span class="line"><span class="string">0120010: 0000 0400 0000 0000 0000 0000 0000 3896  ..............8.</span></span><br><span class="line"><span class="string">0120020: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">##### After 128KiB</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">##### Another parttion</span></span><br><span class="line"><span class="string">01bffe0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span></span><br><span class="line"><span class="string">01bfff0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span></span><br><span class="line"><span class="string">01c0000: 9fac ef20 dd9d fd1c 18ed a503 a19e 5f7a  ... .........._z</span></span><br><span class="line"><span class="string">01c0010: ea7d b6c7 850d 7a52 a0a9 61a6 a912 f489  .&#125;....zR..a.....</span></span><br><span class="line"><span class="string">01c0020: da1f 4941 4fe4 f612 1b25 ff91 9b61 928a  ..IAO....%...a..</span></span><br><span class="line"><span class="string">01c0030: 405d 5026 e2a7 a59e d08a d376 8c57 0d1f  @]P&amp;.......v.W..</span></span><br><span class="line"><span class="string">....</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">01fff90: 5080 aaaa 0ef0 3c5c 0020 0d5c 6408 2400  P.....&lt;\. .\d.$.</span></span><br><span class="line"><span class="string">01fffa0: ef15 08e8 7d00 2399 d60f 1b1e 0000 0000  ....&#125;.#.........</span></span><br><span class="line"><span class="string">01fffb0: 966c 6516 0000 0000 ff37 fb12 0000 0000  .le......7......</span></span><br><span class="line"><span class="string">01fffc0: 954a c013 0000 0000 ea47 c570 2708 0000  .J.......G.p'</span>...</span><br><span class="line">01fffd0: 45a6 5fd7 6c03 8ca1 be55 4c44 2a6a 1500  E._.l....ULD*j..</span><br><span class="line">01fffe0: aa06 3ba9 aaba e2a6 fc0f 1b1e 0000 0000  ..;.............</span><br><span class="line">01ffff0: b46c 6516 0000 0000 2838 fb12 0000 0000  .le.....(8......</span><br><span class="line">0200000: 6c65 0975 6e6b 6e6f 776e 0930 0930 0969  le.unknown.0.0.i</span><br><span class="line">0200010: 6e74 726f 6e09 6578 6163 7409 3109 0931  ntron.exact.1..1</span><br><span class="line">0200020: 3709 3130 3030 4745 4e4f 4d45 532c 4142  7.1000GENOMES,AB</span><br><span class="line">0200030: 492c 4146 4659 2c42 4749 2c43 4f4d 504c  I,AFFY,BGI,COMPL</span><br><span class="line">0200040: 4554 455f 4745 4e4f 4d49 4353 2c43 5348  ETE_GENOMICS,CSH</span><br><span class="line">0200050: 4c2d 4841 504d 4150 2c45 4e53 454d 424c  L-HAPMAP,ENSEMBL</span><br><span class="line">0200060: 2c45 5641 2d47 4f4e 4c2c 474d 492c 4855  ,EVA-GONL,GMI,HU</span><br><span class="line">0200070: 4d41 4e47 454e 4f4d 455f 4a43 5649 2c4a  MANGENOME_JCVI,J</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">021ffb0: 454e 4f4d 4553 2c09 3209 2d2c 4154 4141  ENOMES,.2.-,ATAA</span><br><span class="line">021ffc0: 542c 0933 2e30 3030 3030 302c 3530 3035  T,.3.000000,5005</span><br><span class="line">021ffd0: 2e30 3030 3030 302c 0930 2e30 3030 3539  .000000,.0.00059</span><br><span class="line">021ffe0: 392c 302e 3939 3934 3031 2c09 0a37 3032  9,0.999401,..702</span><br><span class="line">021fff0: 0963 6872 3130 0931 3533 3338 3336 3909  .chr10.15338369.</span><br><span class="line">0220000: c000 8043 c001 8043 0008 8043 0000 8000  ...C...C...C....</span><br><span class="line">0220010: 0000 0500 0000 0000 0000 0000 8000 e4f0  ................</span><br><span class="line">0220020: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">0220030: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">0220040: c100 8043 c101 8043 0808 8043 0000 8000  ...C...C...C....</span><br><span class="line">0220050: 0000 0500 0000 0000 0000 0000 8000 9be0  ................</span><br><span class="line">0220060: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">0220070: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">0220080: c200 8043 c201 8043 1008 8043 0000 8000  ...C...C...C....</span><br><span class="line">0220090: 0000 0500 0000 0000 0000 0000 8000 1ad0  ................</span><br><span class="line">02200a0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">02200b0: 0000 0000 0000 0000 0000 0000 0000 0000  ................</span><br><span class="line">02200c0: c300 8043 c301 8043 1808 8043 0000 8000  ...C...C...C....</span><br><span class="line"></span><br><span class="line"><span class="comment">## Why there is file part as 128KiB size override file system reserve space ????</span></span><br><span class="line"><span class="comment">## Here is file system log , looks like no problem</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/ext4/" rel="tag"><i class="fa fa-tag"></i> ext4</a>
+              <a href="/tags/fsck/" rel="tag"><i class="fa fa-tag"></i> fsck</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/12/benchmark/" rel="prev" title="Benchmark">
+      <i class="fa fa-chevron-left"></i> Benchmark
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/11/multipath/" rel="next" title="multipath">
+      multipath <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#For-huge-parttion-there-is-no-enough-memory-it-will-cause-slow"><span class="nav-number">1.</span> <span class="nav-text">For huge parttion, there is no enough memory, it will cause slow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guess-partion-start"><span class="nav-number">2.</span> <span class="nav-text">guess partion start</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Found-ext-magic-number"><span class="nav-number">3.</span> <span class="nav-text">Found ext magic number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#because-there-is-no-any-parttion-in-this-block-dev"><span class="nav-number">4.</span> <span class="nav-text">because there is no any parttion in this block dev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#You-can’t-fsck-by-default"><span class="nav-number">5.</span> <span class="nav-text">You can’t fsck by default</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Found-some-info-form-superblock"><span class="nav-number">6.</span> <span class="nav-text">Found some info form superblock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#You-have-to-disable-ext-journal-make-it-like-ext2-all-blocks-full-scan"><span class="nav-number">7.</span> <span class="nav-text">You have to disable ext journal, make it like ext2, all blocks full scan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Looks-like-the-block-dev-has-be-destroy-by-hardware-raid-controller-all-data-has-messed"><span class="nav-number">8.</span> <span class="nav-text">Looks like the block dev has be destroy by hardware raid controller, all data has messed</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">441k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">6:41</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/11/13/ext4/",
+            identifier: "2018/11/13/ext4/",
+            title: "ext4 info"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

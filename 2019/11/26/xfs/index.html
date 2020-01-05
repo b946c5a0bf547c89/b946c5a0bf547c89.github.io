@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="reference format12$ mkfs.xfs &#x2F;dev&#x2F;device$ mkfs. xfs -d su&#x3D; 64k,sw&#x3D; 4 &#x2F;dev&#x2F;device su &#x3D; value    Specifies a stripe unit or RAID chunk size. The value must be specified in bytes, with an optional k, m,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xfs info">
+<meta property="og:url" content="http://yoursite.com/2019/11/26/xfs/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="reference format12$ mkfs.xfs &#x2F;dev&#x2F;device$ mkfs. xfs -d su&#x3D; 64k,sw&#x3D; 4 &#x2F;dev&#x2F;device su &#x3D; value    Specifies a stripe unit or RAID chunk size. The value must be specified in bytes, with an optional k, m,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-26T08:12:19.000Z">
+<meta property="article:modified_time" content="2020-01-05T03:50:50.051Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="xfs">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/26/xfs/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>xfs info | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/xfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          xfs info
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-26 16:12:19" itemprop="dateCreated datePublished" datetime="2019-11-26T16:12:19+08:00">2019-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 11:50:50" itemprop="dateModified" datetime="2020-01-05T11:50:50+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/filesystem/" itemprop="url" rel="index">
+                    <span itemprop="name">filesystem</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/11/26/xfs/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/26/xfs/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>8.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>8 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://fibrevillage.com/storage" target="_blank" rel="noopener">reference</a></p>
+<h4 id="format"><a href="#format" class="headerlink" title="format"></a>format</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkfs.xfs /dev/device</span><br><span class="line">$ mkfs. xfs -d su= 64k,sw= 4 /dev/device</span><br></pre></td></tr></table></figure>
+<p>su = value<br>    Specifies a stripe unit or RAID chunk size. The value must be specified in bytes, with an optional k, m, or g suffix.<br>sw= value<br>    Specifies the number of data disks in a RAID device, or the number of stripe units in the stripe.</p>
+<a id="more"></a>
+
+<h4 id="Grow"><a href="#Grow" class="headerlink" title="Grow"></a>Grow</h4><p>While XFS file systems can be grown while mounted</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xfs_growfs /mount/point -D size</span><br></pre></td></tr></table></figure>
+
+<h4 id="Suspend-file-system"><a href="#Suspend-file-system" class="headerlink" title="Suspend file system"></a>Suspend file system</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ xfs_freeze -f /mount/point</span><br><span class="line"></span><br><span class="line"><span class="comment">#unfreeze</span></span><br><span class="line">$ xfs_freeze -u /mount/point</span><br></pre></td></tr></table></figure>
+<p>When taking an LVM snapshot, it is not necessary to use xfs_freeze to suspend the file system first.</p>
+<h4 id="Quota"><a href="#Quota" class="headerlink" title="Quota"></a>Quota</h4><p>uquota User quotas<br>gquota Group quotas<br>pquota Project quota</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ mount -o uquota /dev/mapper/LUN13 /lun13</span><br><span class="line">$ xfs_quota  /lun13</span><br><span class="line">$ xfs_quota -x -c <span class="string">'limit isoft=500 ihard=700 trteam'</span> /lun13</span><br><span class="line">$ xfs_quota -x -c <span class="string">' limit -g bsoft=1000 m bhard=1200m test '</span> /lun13</span><br><span class="line"></span><br><span class="line"><span class="comment"># report</span></span><br><span class="line">$ xfs_quota -x -c <span class="string">'report -bih'</span> /lun13</span><br><span class="line"></span><br><span class="line"><span class="comment">#project quota</span></span><br><span class="line">$ xfs_quota -x -c <span class="string">' project -s projectname'</span> project_path</span><br><span class="line">$ xfs_quota -x -c <span class="string">' limit -p bsoft=1000m bhard=1200m projectname'</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Backup-and-restore"><a href="#Backup-and-restore" class="headerlink" title="Backup and restore"></a>Backup and restore</h4><p>To perform a full backup, perform a level 0 dump on the file system.<br>A level 1 dump is the first incremental backup after a full backup. The next incremental backup would be level 2, which only backs up files that have changed since the last level 1 dump; and so on, to a maximum of level 9.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ xfsdump -l level [-L label] -f backup-destination path-to-xfs-filesystem</span><br><span class="line">$ xfsdump -l 0 -f /backup-files/data.xfsdump /data</span><br><span class="line">$ xfsdump -l 0 -L <span class="string">"backup_data"</span> -f /dev/st0 /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># restore</span></span><br><span class="line">$ xfsrestore [-r] [-S session-id] [-L session-label] [-i] -f backup-location restoration-path</span><br><span class="line">$ xfsrestore -f /backup-files/data.xfsdump /mnt/data/</span><br><span class="line">$ xfsrestore -f /dev/st0 -L <span class="string">"backup_data"</span> /mnt/data/</span><br><span class="line"></span><br><span class="line">$ xfsrestore -I <span class="comment"># get the session ID</span></span><br><span class="line">$ xfsrestore -f /dev/st0 -S <span class="string">"45e9af35-efd2-4244-87bc-4762e476cbab"</span> /mnt/data/</span><br><span class="line"></span><br><span class="line">$ xfs_metadump /dev/mapper/vg0-data /home/vg0-data.metadump</span><br><span class="line">$ xfs_mdrestore /home/vg0-data.metadump /home/vg0-data.img</span><br></pre></td></tr></table></figure>
+
+<h4 id="Compare-with-ext4"><a href="#Compare-with-ext4" class="headerlink" title="Compare with ext4"></a>Compare with ext4</h4><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Ext3/4</th>
+<th>XFS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>File System check</td>
+<td>e2fsck</td>
+<td>xfs_repair</td>
+</tr>
+<tr>
+<td>REsizing a File System</td>
+<td>resize2fs</td>
+<td>xfs_growfs</td>
+</tr>
+<tr>
+<td>Save an image of a file system</td>
+<td>e2image</td>
+<td>xfs_metadump and xfs_mdrestore</td>
+</tr>
+<tr>
+<td>Label or tune a File System</td>
+<td>tune2fs</td>
+<td>xfs_admin</td>
+</tr>
+<tr>
+<td>Backup a File System</td>
+<td>dump and restore</td>
+<td>xfsdump xfsrestore</td>
+</tr>
+</tbody></table>
+<h4 id="Defragment"><a href="#Defragment" class="headerlink" title="Defragment"></a>Defragment</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ xfs_db -r  /dev/sdb</span><br><span class="line">$ xfs_db&gt; frag</span><br><span class="line"></span><br><span class="line"><span class="comment"># Defragment</span></span><br><span class="line">$ xfs_fsr -t 3600  -v /lun10</span><br></pre></td></tr></table></figure>
+<h4 id="xfs-admin"><a href="#xfs-admin" class="headerlink" title="xfs_admin"></a>xfs_admin</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ xfs_admin -l /dev/sdb</span><br><span class="line">$ xfs_admin -L <span class="string">"data"</span> /dev/sdb</span><br><span class="line"></span><br><span class="line">$ xfs_admin -u /dev/sdb</span><br><span class="line">$ xfs_admin -U generate-id /dev/sdb</span><br><span class="line">$ xfs_admin -U nil /dev/sdb</span><br><span class="line"></span><br><span class="line">$ xfs_admin -c 0 /dev/sdb</span><br><span class="line"></span><br><span class="line"><span class="comment">#Enable xfs lazy counters</span></span><br><span class="line">$ xfs_admin -c 1 /dev/sdb</span><br></pre></td></tr></table></figure>
+
+<h4 id="Repair"><a href="#Repair" class="headerlink" title="Repair"></a>Repair</h4><p>-n     No modify mode. Specifies that xfs_repair should not modify the filesystem  but  should  only  scan the filesystem and indicate what repairs would have been made</p>
+<p>-L The xfs_repair utility cannot repair an XFS file system with a dirty log. To clear the log, mount and unmount the XFS file system. force log zeroing to clean log<br>-v option gives you xfs_repair verbose outpt, inaddition to the regular repair message +extra verbosity, it has a summary for each repair phase.<br>-d Repair  dangerously.  Allow  xfs_repair to repair an XFS filesystem mounted read only. This is typically done on a root filesystem from single user mode, immediately followed by a reboot.<br>-l option, external log<br>-f Specifies  that  the  filesystem  image  to  be processed is stored in a regular file at device (see the mkfs.xfs -d file option). This might happen if an image copy of a filesystem has been copied or written into an ordinary file.  This option implies that any external log or realtime section is also in an ordinary file.<br>-P option, disable prefetching<br>-t interval Modify reporting interval, specified in seconds. During long runs xfs_repair outputs its progress every 15 minutes. Reporting is only activated when ag_stride is enabled.<br>-m Specifies the approximate maximum amount of memory, in megabytes, to use for xfs_repair.  xfs_repair has its own internal block cache which  will  scale  out  up  to  the lesser of the process’s virtual address limit or about 75% of the system’s physical RAM.  This option overrides these limits. NOTE: These memory limits are only approximate and may use more than the specified limit</p>
+<p>If xfs_repair failed in phase 1, you must restore lost files from backups.<br>If xfs_repair failed in phase 2 or later, you may be able to restore files from the disk by backing up and restoring the files on the file system<br>    * Mount the file system using mount -r (read-only).<br>    * Make a file system backup with xfsdump.<br>    * Use mkfs to a make new file system on the same disk partition or XLV logical volume.<br>    * Restore the files from the backup with xfsrestore.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mount -r /dev/sdb /mnt</span><br><span class="line">$ mount /dev/sdb /mnt -o norecover</span><br></pre></td></tr></table></figure>
+
+
+<p>Without any option, xfs_repair will check and repair errors that it encounters.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ xfs_repair -n &#x2F;dev&#x2F;device</span><br><span class="line">Phase 1 - find and verify superblock...</span><br><span class="line">Phase 2 - using internal log</span><br><span class="line">        - scan filesystem freespace and inode maps...</span><br><span class="line">        - found root inode chunk</span><br><span class="line">Phase 3 - for each AG...</span><br><span class="line">        - scan (but don&#39;t clear) agi unlinked lists...</span><br><span class="line">        - process known inodes and perform inode discovery...</span><br><span class="line">        - agno &#x3D; 0</span><br><span class="line">        - agno &#x3D; 1</span><br><span class="line">        - agno &#x3D; 2</span><br><span class="line">        - agno &#x3D; 3</span><br><span class="line">        - process newly discovered inodes...</span><br><span class="line">Phase 4 - check for duplicate blocks...</span><br><span class="line">        - setting up duplicate extent list...</span><br><span class="line">        - check for inodes claiming duplicate blocks...</span><br><span class="line">        - agno &#x3D; 0</span><br><span class="line">        - agno &#x3D; 1</span><br><span class="line">        - agno &#x3D; 2</span><br><span class="line">        - agno &#x3D; 3</span><br><span class="line">No modify flag set, skipping phase 5</span><br><span class="line">Phase 6 - check inode connectivity...</span><br><span class="line">        - traversing filesystem ...</span><br><span class="line">        - traversal finished ...</span><br><span class="line">        - moving disconnected inodes to lost+found ...</span><br><span class="line">Phase 7 - verify link counts...</span><br><span class="line">No modify flag set, skipping filesystem flush and exiting.</span><br><span class="line"></span><br><span class="line">$ xfs_repair -L &#x2F;dev&#x2F;device</span><br><span class="line">$ xfs_repair -d &#x2F;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>Inode  and inode blockmap (addressing) checks:bad magic number  in inode, bad magic numbers in inode blockmap  blocks,  extents out  of  order,  incorrect  number of records in inode blockmap blocks, blocks claimed that are not in a legal data area of the filesystem, blocks that are claimed by more than one inode.</li>
+<li>Inode  allocation  map  checks:bad  magic number in inode map blocks, inode state as indicated by map (free or in-use) inconsistent with state indicated by the inode, inodes referenced by the filesystem that do not appear in the inode allocation  map, inode  allocation  map referencing blocks that do not appear to contain inodes.</li>
+<li>Size checks:number of blocks  claimed  by  inode  inconsistent with  inode  size, directory size not block aligned, inode size not consistent with inode format.</li>
+<li>Directory checks:bad magic numbers in directory blocks, incorrect  number  of  entries  in  a directory block, bad freespace information in a directory leaf block,  entry  pointing  to  an unallocated  (free) or out of range inode, overlapping entries, missing or incorrect dot and dotdot  entries,  entries  out  of hashvalue  order, incorrect internal directory pointers, directory type not consistent with inode format and size.</li>
+<li>Pathname checks:files or directories not referenced by a pathname starting from the filesystem root, illegal pathname components.</li>
+<li>Link count checks:link counts that do not agree with the  number of directory references to the inode.</li>
+<li>Freemap  checks: blocks  claimed  free by the freemap but also claimed by an inode, blocks unclaimed  by  any  inode  but  not appearing in the freemap.</li>
+<li>Super  Block  checks: total free block and/or free i-node count incorrect, filesystem geometry inconsistent, secondary and primary superblocks contradictory.</li>
+</ol>
+<h4 id="Recover-file"><a href="#Recover-file" class="headerlink" title="Recover file"></a>Recover file</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ ls -ih</span><br><span class="line">70179 -r-xr-xr-x 1 solexa solexa    0 Jan 10  2013 report.htm</span><br><span class="line"></span><br><span class="line">$ xfs_db -r /dev/sdb -c <span class="string">"inode 70179"</span> -c <span class="string">"bmap"</span></span><br><span class="line">data offset 0 startblock 2459337662 (9/43418558) count 1 flag 0a</span><br><span class="line"></span><br><span class="line">$ agblocks=$(xfs_db -r /dev/sdb -c sb -c p | grep ^agblocks | sed <span class="string">'s/.* = //'</span>)</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$agblocks</span></span><br><span class="line">268435455</span><br><span class="line">$ agcount=9</span><br><span class="line">$ b=43418558</span><br><span class="line">$ c=1</span><br><span class="line">$ <span class="built_in">echo</span> $((<span class="variable">$agblocks</span>*<span class="variable">$agcount</span>+<span class="variable">$b</span>)) </span><br><span class="line">2459337653</span><br><span class="line">$ <span class="built_in">echo</span> $((2459337662-9))</span><br><span class="line">2459337653</span><br><span class="line"></span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/sdb bs=4096 skip=$((<span class="variable">$agblocks</span>*<span class="variable">$agcount</span>+<span class="variable">$b</span>)) count=<span class="variable">$c</span> of=/tmp/report.htm</span><br><span class="line">1+0 records <span class="keyword">in</span></span><br><span class="line">1+0 records out</span><br><span class="line">4096 bytes (4.1 kB) copied, 4.6345e-05 s, 88.4 MB/s</span><br><span class="line"></span><br><span class="line">$ cat /tmp/report.htm   <span class="comment"># file come back</span></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=<span class="string">"Content-Type"</span> content=<span class="string">"text/html; charset=gbk"</span>/&gt;</span><br><span class="line">&lt;style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="xfs-estimate"><a href="#xfs-estimate" class="headerlink" title="xfs_estimate"></a>xfs_estimate</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xfs_estimate -v &#x2F;mnt</span><br><span class="line">directory                               bsize   blocks    megabytes    logsize</span><br><span class="line">&#x2F;mnt                                     4096     1138        4.4MB    4096000</span><br><span class="line">$ xfs_estimate -v -b 512 &#x2F;mnt</span><br><span class="line">directory                               bsize   blocks    megabytes    logsize</span><br><span class="line">&#x2F;mnt                                      512     1138        0.6MB     512000</span><br><span class="line">$ xfs_estimate -v -b 4096 &#x2F;mnt</span><br><span class="line">directory                               bsize   blocks    megabytes    logsize</span><br><span class="line">&#x2F;mnt                                     4096     1138        4.4MB    4096000</span><br></pre></td></tr></table></figure>
+
+<h3 id="xfs-info"><a href="#xfs-info" class="headerlink" title="xfs_info"></a>xfs_info</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ xfs_info /mnt</span><br><span class="line">meta-data=/dev/sdb               isize=512    agcount=16, agsize=4799984 blks</span><br><span class="line">         =                       sectsz=512   attr=2, projid32bit=1</span><br><span class="line">         =                       crc=1        finobt=0 spinodes=0</span><br><span class="line">data     =                       bsize=4096   blocks=76799744, imaxpct=25</span><br><span class="line">         =                       sunit=16     swidth=32 blks</span><br><span class="line">naming   =version 2              bsize=4096   ascii-ci=0 ftype=1</span><br><span class="line"><span class="built_in">log</span>      =internal               bsize=4096   blocks=37504, version=2</span><br><span class="line">         =                       sectsz=512   sunit=16 blks, lazy-count=1</span><br><span class="line">realtime =none                   extsz=4096   blocks=0, rtextents=0</span><br></pre></td></tr></table></figure>
+
+<h3 id="xfs-logprint"><a href="#xfs-logprint" class="headerlink" title="xfs_logprint"></a>xfs_logprint</h3><p>-t print out transactional view of an xfs log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">xfs_logprint -t  /dev/sdb</span><br><span class="line">xfs_logprint:</span><br><span class="line">xfs_logprint: /dev/sdb contains a mounted and writable filesystem</span><br><span class="line">    data device: 0x810</span><br><span class="line">    <span class="built_in">log</span> device: 0x810 daddr: 307199104 length: 300032</span><br><span class="line"></span><br><span class="line">    <span class="built_in">log</span> tail: 256 head: 512 state: &lt;DIRTY&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LOG REC AT LSN cycle 1 block 256 (0x1, 0x100)</span><br><span class="line">============================================================================</span><br><span class="line">TRANS: tid:0xb4cdd37c  <span class="built_in">type</span>:SWAPEXT  <span class="comment">#items:2  trans:0xb4cdd37c  q:0x20bcbe0</span></span><br><span class="line">BUF: cnt:2 total:2 a:0x20bd010 len:24 a:0x20bd060 len:384</span><br><span class="line">	BUF:  <span class="comment">#regs:2   start blkno:0x0   len:1   bmap size:1   flags:0x9000</span></span><br><span class="line">	SUPER Block Buffer:</span><br><span class="line"></span><br><span class="line">LOG REC AT LSN cycle 1 block 384 (0x1, 0x180)</span><br><span class="line">============================================================================</span><br><span class="line">TRANS: tid:0xb84fc956  <span class="built_in">type</span>:SWAPEXT  <span class="comment">#items:2  trans:0xb84fc956  q:0x20bcbe0</span></span><br><span class="line">BUF: cnt:2 total:2 a:0x20bd010 len:24 a:0x20cd250 len:384</span><br><span class="line">	BUF:  <span class="comment">#regs:2   start blkno:0x0   len:1   bmap size:1   flags:0x9000</span></span><br><span class="line">	SUPER Block Buffer:</span><br></pre></td></tr></table></figure>
+<p>-i extract and print inode info<br>-q extract and print quota info<br>-e, exit when an error is found in the log<br>-c, Attempt to continue when an error is detected</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xfs_logprint -C xfs.log /dev/sdb</span><br></pre></td></tr></table></figure>
+
+<h4 id="About-barriers"><a href="#About-barriers" class="headerlink" title="About barriers"></a><a href="https://xfs.org/index.php/XFS_FAQ#Write_barrier_support." target="_blank" rel="noopener">About barriers</a></h4><p>Write barrier support is enabled by default in XFS since kernel version 2.6.17. It is disabled by mounting the filesystem with “nobarrier”. Barrier support will flush the write back cache at the appropriate times (such as on XFS log writes). </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/xfs/" rel="tag"><i class="fa fa-tag"></i> xfs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/26/smartctl/" rel="prev" title="smartctl">
+      <i class="fa fa-chevron-left"></i> smartctl
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/29/lfs_command/" rel="next" title="lfs command">
+      lfs command <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#format"><span class="nav-number">1.</span> <span class="nav-text">format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Grow"><span class="nav-number">2.</span> <span class="nav-text">Grow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Suspend-file-system"><span class="nav-number">3.</span> <span class="nav-text">Suspend file system</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Quota"><span class="nav-number">4.</span> <span class="nav-text">Quota</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backup-and-restore"><span class="nav-number">5.</span> <span class="nav-text">Backup and restore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Compare-with-ext4"><span class="nav-number">6.</span> <span class="nav-text">Compare with ext4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Defragment"><span class="nav-number">7.</span> <span class="nav-text">Defragment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xfs-admin"><span class="nav-number">8.</span> <span class="nav-text">xfs_admin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Repair"><span class="nav-number">9.</span> <span class="nav-text">Repair</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recover-file"><span class="nav-number">10.</span> <span class="nav-text">Recover file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs-estimate"><span class="nav-number"></span> <span class="nav-text">xfs_estimate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs-info"><span class="nav-number"></span> <span class="nav-text">xfs_info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs-logprint"><span class="nav-number"></span> <span class="nav-text">xfs_logprint</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#About-barriers"><span class="nav-number">1.</span> <span class="nav-text">About barriers</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">441k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">6:41</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2019/11/26/xfs/",
+            identifier: "2019/11/26/xfs/",
+            title: "xfs info"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

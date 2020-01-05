@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Make sure the ECC work in Linux1234$ dmidecode -t memory  | grep -Ei &#39;error correction type&#39;	Error Correction Type: Single-bit ECC$ dmidecode -t memory  | grep -Ei &#39;error correction type&#39;	Error Correc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux memory">
+<meta property="og:url" content="http://yoursite.com/2018/07/02/mem/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="Make sure the ECC work in Linux1234$ dmidecode -t memory  | grep -Ei &#39;error correction type&#39;	Error Correction Type: Single-bit ECC$ dmidecode -t memory  | grep -Ei &#39;error correction type&#39;	Error Correc">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/img/top-mem1.png">
+<meta property="og:image" content="http://yoursite.com/img/slabtop1.png">
+<meta property="article:published_time" content="2018-07-02T02:49:30.000Z">
+<meta property="article:modified_time" content="2020-01-05T04:23:32.071Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="memory">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/img/top-mem1.png">
+
+<link rel="canonical" href="http://yoursite.com/2018/07/02/mem/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Linux memory | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/02/mem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux memory
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-02 10:49:30" itemprop="dateCreated datePublished" datetime="2018-07-02T10:49:30+08:00">2018-07-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 12:23:32" itemprop="dateModified" datetime="2020-01-05T12:23:32+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Memory/" itemprop="url" rel="index">
+                    <span itemprop="name">Memory</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/07/02/mem/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/02/mem/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>35k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>32 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Make-sure-the-ECC-work-in-Linux"><a href="#Make-sure-the-ECC-work-in-Linux" class="headerlink" title="Make sure the ECC work in Linux"></a>Make sure the ECC work in Linux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ dmidecode -t memory  | grep -Ei <span class="string">'error correction type'</span></span><br><span class="line">	Error Correction Type: Single-bit ECC</span><br><span class="line">$ dmidecode -t memory  | grep -Ei <span class="string">'error correction type'</span></span><br><span class="line">	Error Correction Type: Multi-bit ECC</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="Monitor-ECC-error"><a href="#Monitor-ECC-error" class="headerlink" title="Monitor ECC error"></a>Monitor ECC error</h3><h4 id="From-OS"><a href="#From-OS" class="headerlink" title="From OS"></a>From OS</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Intel x86 scalable</span></span><br><span class="line">skx_edac</span><br><span class="line"></span><br><span class="line"><span class="comment">#Intel x86 E3</span></span><br><span class="line">ie31200-edac</span><br><span class="line">$ edac-util -vs</span><br><span class="line">edac-util: EDAC drivers are loaded. 1 MC detected:</span><br><span class="line">  mc0:IE31200</span><br><span class="line"></span><br><span class="line">$ edac-util -vs</span><br><span class="line">edac-util: EDAC drivers loaded. No memory controllers found</span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">1</span><br><span class="line"></span><br><span class="line">$ edac-util -v</span><br><span class="line">mc0: 0 Uncorrected Errors with no DIMM info</span><br><span class="line">mc0: 0 Corrected Errors with no DIMM info</span><br><span class="line">mc0: csrow0: 0 Uncorrected Errors</span><br><span class="line">mc0: csrow0: mc<span class="comment">#0csrow#0channel#0: 0 Corrected Errors</span></span><br><span class="line">mc0: csrow0: mc<span class="comment">#0csrow#0channel#1: 0 Corrected Errors</span></span><br><span class="line">mc0: csrow1: 0 Uncorrected Errors</span><br><span class="line">mc0: csrow1: mc<span class="comment">#0csrow#1channel#0: 0 Corrected Errors</span></span><br><span class="line">mc0: csrow1: mc<span class="comment">#0csrow#1channel#1: 0 Corrected Errors</span></span><br><span class="line">mc0: csrow2: 0 Uncorrected Errors</span><br><span class="line">mc0: csrow2: mc<span class="comment">#0csrow#2channel#0: 0 Corrected Errors</span></span><br><span class="line">mc0: csrow2: mc<span class="comment">#0csrow#2channel#1: 0 Corrected Errors</span></span><br><span class="line">mc0: csrow3: 0 Uncorrected Errors</span><br><span class="line">mc0: csrow3: mc<span class="comment">#0csrow#3channel#0: 0 Corrected Errors</span></span><br><span class="line">mc0: csrow3: mc<span class="comment">#0csrow#3channel#1: 0 Corrected Errors</span></span><br><span class="line">edac-util: No errors to report.</span><br><span class="line"></span><br><span class="line"><span class="comment">#CentOS 7.7 not support Xeon E2000, the kernel merge the patch at 2019-06, maybe wait CentOS 7.8</span></span><br><span class="line"><span class="comment">#Intel x86 E2000</span></span><br><span class="line">ie31200-edac</span><br><span class="line">$ edac-util -vs</span><br><span class="line">edac-util: EDAC drivers loaded. No memory controllers found</span><br></pre></td></tr></table></figure>
+<h4 id="From-IPMI"><a href="#From-IPMI" class="headerlink" title="From IPMI"></a>From IPMI</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ipmitool sel elist</span><br></pre></td></tr></table></figure>
+
+<h3 id="NIC-page-allocation-failure"><a href="#NIC-page-allocation-failure" class="headerlink" title="NIC page allocation failure"></a><a href="https://access.redhat.com/solutions/641323" target="_blank" rel="noopener">NIC page allocation failure</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line">[Mon Jul  2 10:38:25 2018] swapper/16: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Mon Jul  2 10:38:25 2018] CPU: 16 PID: 0 Comm: swapper/16 Tainted: P           OE  ------------   3.10.0-693.5.2.el7_lustre.x86_64 <span class="comment">#1</span></span><br><span class="line">[Mon Jul  2 10:38:25 2018] Hardware name: Dell Inc. PowerEdge R730/072T6D, BIOS 2.4.3 01/17/2017</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  0000000000104020 7e870b98ec876be5 ffff88103e8039d8 ffffffff816a3e2d</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  ffff88103e803a68 ffffffff81188820 0000000000000246 ffff88103e803a28</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  fffffffffffffffc 0010402000000000 ffff88107ffdb018 7e870b98ec876be5</span><br><span class="line">[Mon Jul  2 10:38:25 2018] Call Trace:</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  &lt;IRQ&gt;  [&lt;ffffffff816a3e2d&gt;] dump_stack+0x19/0x1b</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff81188820&gt;] warn_alloc_failed+0x110/0x180</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff8169fe2a&gt;] __alloc_pages_slowpath+0x6b6/0x724</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff8118cdb5&gt;] __alloc_pages_nodemask+0x405/0x420</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff811d1078&gt;] alloc_pages_current+0x98/0x110</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff8118761e&gt;] __get_free_pages+0xe/0x40</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff811dca2e&gt;] kmalloc_order_trace+0x2e/0xa0</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff811e05c1&gt;] __kmalloc+0x211/0x230</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffffc031abba&gt;] bnx2x_frag_alloc.isra.61+0x2a/0x40 [bnx2x]</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffffc031ba97&gt;] bnx2x_rx_int+0x227/0x17c0 [bnx2x]</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff81573004&gt;] ? consume_skb+0x34/0x80</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff81585dad&gt;] ? __dev_kfree_skb_any+0x3d/0x50</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffffc031eecd&gt;] bnx2x_poll+0x1dd/0x260 [bnx2x]</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff8158799d&gt;] net_rx_action+0x16d/0x380</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff81090b4f&gt;] __do_softirq+0xef/0x280</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff816b6b1c&gt;] call_softirq+0x1c/0x30</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff8102d3c5&gt;] do_softirq+0x65/0xa0</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff81090ed5&gt;] irq_exit+0x105/0x110</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff816b76b6&gt;] do_IRQ+0x56/0xe0</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff816ac2ad&gt;] common_interrupt+0x6d/0x6d</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  &lt;EOI&gt;  [&lt;ffffffff816ab546&gt;] ? native_safe_halt+0x6/0x10</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff816ab3de&gt;] default_idle+0x1e/0xc0</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff81035006&gt;] arch_cpu_idle+0x26/0x30</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff810e7bda&gt;] cpu_startup_entry+0x14a/0x1c0</span><br><span class="line">[Mon Jul  2 10:38:25 2018]  [&lt;ffffffff81051af6&gt;] start_secondary+0x1b6/0x230</span><br><span class="line"></span><br><span class="line"><span class="comment"># in my case </span></span><br><span class="line">[Thu Jul 12 04:23:16 2018]  00000000ad5e4ed1</span><br><span class="line">[Thu Jul 12 04:23:16 2018] Call Trace:</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811e05c1&gt;] __kmalloc+0x211/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  ffff88103e643a20 ffffffff81188820</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  &lt;IRQ&gt;</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  00000000000000c3</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816a3e2d&gt;] dump_stack+0x19/0x1b</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  0000000000000282</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81188820&gt;] warn_alloc_failed+0x110/0x180</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  fffffffffffffffc 0010402000000000</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  ffff8816385ea000 66b8573252d2c8c3</span><br><span class="line">[Thu Jul 12 04:23:16 2018] Call Trace:</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  &lt;IRQ&gt;  [&lt;ffffffff816a3e2d&gt;] dump_stack+0x19/0x1b</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8169fe2a&gt;] __alloc_pages_slowpath+0x6b6/0x724</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81188820&gt;] warn_alloc_failed+0x110/0x180</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811d1078&gt;] alloc_pages_current+0x98/0x110</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f8bba&gt;] bnx2x_frag_alloc.isra.61+0x2a/0x40 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8169fe2a&gt;] __alloc_pages_slowpath+0x6b6/0x724</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8118761e&gt;] __get_free_pages+0xe/0x40</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f9124&gt;] bnx2x_alloc_rx_data.isra.69+0x54/0x1c0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8118cdb5&gt;] __alloc_pages_nodemask+0x405/0x420</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811dca2e&gt;] kmalloc_order_trace+0x2e/0xa0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02fa0b6&gt;] bnx2x_rx_int+0x846/0x17c0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811d1078&gt;] alloc_pages_current+0x98/0x110</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811e05c1&gt;] __kmalloc+0x211/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8118761e&gt;] __get_free_pages+0xe/0x40</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f8bba&gt;] bnx2x_frag_alloc.isra.61+0x2a/0x40 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811dca2e&gt;] kmalloc_order_trace+0x2e/0xa0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f9124&gt;] bnx2x_alloc_rx_data.isra.69+0x54/0x1c0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811e05c1&gt;] ? __kmalloc+0x211/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811e05c1&gt;] __kmalloc+0x211/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f8bba&gt;] bnx2x_frag_alloc.isra.61+0x2a/0x40 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8118cdb5&gt;] __alloc_pages_nodemask+0x405/0x420</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810d1c02&gt;] ? load_balance+0x192/0x9a0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02fa0b6&gt;] bnx2x_rx_int+0x846/0x17c0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f9124&gt;] bnx2x_alloc_rx_data.isra.69+0x54/0x1c0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02fcecd&gt;] bnx2x_poll+0x1dd/0x260 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810d1bd2&gt;] ? load_balance+0x162/0x9a0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02fa0b6&gt;] bnx2x_rx_int+0x846/0x17c0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02fcecd&gt;] bnx2x_poll+0x1dd/0x260 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81573004&gt;] ? consume_skb+0x34/0x80</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8158799d&gt;] net_rx_action+0x16d/0x380</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81585dad&gt;] ? __dev_kfree_skb_any+0x3d/0x50</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81090b4f&gt;] __do_softirq+0xef/0x280</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f95c2&gt;] ? bnx2x_free_tx_pkt+0x1f2/0x2d0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f0062&gt;] ? bnx2x_test_link+0x42/0x270 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02fcecd&gt;] bnx2x_poll+0x1dd/0x260 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8158799d&gt;] net_rx_action+0x16d/0x380</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8158799d&gt;] net_rx_action+0x16d/0x380</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811d1078&gt;] alloc_pages_current+0x98/0x110</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b6b1c&gt;] call_softirq+0x1c/0x30</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81090b4f&gt;] __do_softirq+0xef/0x280</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8118761e&gt;] __get_free_pages+0xe/0x40</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8102d3c5&gt;] do_softirq+0x65/0xa0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b6b1c&gt;] call_softirq+0x1c/0x30</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811dca2e&gt;] kmalloc_order_trace+0x2e/0xa0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81090ed5&gt;] irq_exit+0x105/0x110</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811e05c1&gt;] ? __kmalloc+0x211/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b76b6&gt;] do_IRQ+0x56/0xe0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811e05c1&gt;] __kmalloc+0x211/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816ac2ad&gt;] common_interrupt+0x6d/0x6d</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  &lt;EOI&gt;</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f8bba&gt;] bnx2x_frag_alloc.isra.61+0x2a/0x40 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81527d42&gt;] ? cpuidle_enter_state+0x52/0xc0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81527e88&gt;] cpuidle_idle_call+0xd8/0x210</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81034fee&gt;] arch_cpu_idle+0xe/0x30</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810e7bda&gt;] cpu_startup_entry+0x14a/0x1c0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8102d3c5&gt;] do_softirq+0x65/0xa0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81090b4f&gt;] __do_softirq+0xef/0x280</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02f9124&gt;] bnx2x_alloc_rx_data.isra.69+0x54/0x1c0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81090ed5&gt;] irq_exit+0x105/0x110</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b6b1c&gt;] call_softirq+0x1c/0x30</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02fa0b6&gt;] bnx2x_rx_int+0x846/0x17c0 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b76b6&gt;] do_IRQ+0x56/0xe0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8102d3c5&gt;] do_softirq+0x65/0xa0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810d1c02&gt;] ? load_balance+0x192/0x9a0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816ac2ad&gt;] common_interrupt+0x6d/0x6d</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81090ed5&gt;] irq_exit+0x105/0x110</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  &lt;EOI&gt;</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81527d42&gt;] ? cpuidle_enter_state+0x52/0xc0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b76b6&gt;] do_IRQ+0x56/0xe0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81527e88&gt;] cpuidle_idle_call+0xd8/0x210</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816ac2ad&gt;] common_interrupt+0x6d/0x6d</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  &lt;EOI&gt;  [&lt;ffffffff81527d42&gt;] ? cpuidle_enter_state+0x52/0xc0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81527e88&gt;] cpuidle_idle_call+0xd8/0x210</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81034fee&gt;] arch_cpu_idle+0xe/0x30</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810e7bda&gt;] cpu_startup_entry+0x14a/0x1c0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81051af6&gt;] start_secondary+0x1b6/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81034fee&gt;] arch_cpu_idle+0xe/0x30</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81051af6&gt;] start_secondary+0x1b6/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffffc02fcecd&gt;] bnx2x_poll+0x1dd/0x260 [bnx2x]</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8158799d&gt;] net_rx_action+0x16d/0x380</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81090b4f&gt;] __do_softirq+0xef/0x280</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810e7bda&gt;] cpu_startup_entry+0x14a/0x1c0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81051af6&gt;] start_secondary+0x1b6/0x230</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b6b1c&gt;] call_softirq+0x1c/0x30</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff8102d3c5&gt;] do_softirq+0x65/0xa0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81090ed5&gt;] irq_exit+0x105/0x110</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b76b6&gt;] do_IRQ+0x56/0xe0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816ac2ad&gt;] common_interrupt+0x6d/0x6d</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  &lt;EOI&gt;  [&lt;ffffffff811a3178&gt;] ? fragmentation_index+0x38/0xa0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811a877b&gt;] compaction_suitable+0x5b/0xb0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81199102&gt;] balance_pgdat+0x502/0x5e0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff81199353&gt;] kswapd+0x173/0x440</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810b1920&gt;] ? wake_up_atomic_t+0x30/0x30</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff811991e0&gt;] ? balance_pgdat+0x5e0/0x5e0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810b099f&gt;] kthread+0xcf/0xe0</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810b08d0&gt;] ? insert_kthread_work+0x40/0x40</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff816b4fd8&gt;] ret_from_fork+0x58/0x90</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  [&lt;ffffffff810b08d0&gt;] ? insert_kthread_work+0x40/0x40</span><br><span class="line">[Thu Jul 12 04:23:16 2018] swapper/32: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Thu Jul 12 04:23:16 2018] CPU: 32 PID: 0 Comm: swapper/32 Tainted: P           OE  ------------   3.10.0-693.5.2.el7_lustre.x86_64 <span class="comment">#1</span></span><br><span class="line">[Thu Jul 12 04:23:16 2018] Hardware name: Dell Inc. PowerEdge R730/072T6D, BIOS 2.4.3 01/17/2017</span><br><span class="line">[Thu Jul 12 04:23:16 2018]  0000000000104020 1fc54c56797ed550 ffff88103ea03990 ffffffff816a3e2d</span><br><span class="line">[Thu Jul 12 04:23:16 2018] swapper/12: page allocation failure: order:2, mode:0x104020</span><br><span class="line"></span><br><span class="line"><span class="comment"># you can see a lot of processes could not allocation memory</span></span><br><span class="line">[Fri Aug 16 06:08:22 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:08:22 2019] kswapd0: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] kswapd0: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] swapper/10: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 06:43:21 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:53:18 2019] swapper/22: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 07:58:18 2019] java: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] kswapd0: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] kswapd0: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] kswapd0: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] systemd-journal: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] swapper/16: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] swapper/16: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] swapper/4: page allocation failure: order:2, mode:0x104020</span><br><span class="line">[Fri Aug 16 09:08:22 2019] swapper/4: page allocation failure: order:2, mode:0x104020</span><br></pre></td></tr></table></figure>
+<p>zone_reclaim_mode<br>sysctl -w vm.zone_reclaim_mode=1<br>#This can be set to 1 to attempt reclamation of memory within a NUMA node before reclaiming from other NUMA nodes.</p>
+<p><code>min_free_kbytes</code> (it ‘s worked, the page allocation failure was missing)<br>sysctl -w vm.min_free_kbytes = 540672<br>#Increase the virtual memory kernel tunable vm.min_free_kbytes, which instructs the virtual memory subsystem to try keep a certain amount of memory always free for allocation.</p>
+<p>The network driver is receiving traffic from the network adapter into kernel memory, however when the driver tried to allocate memory, the allocation failed.</p>
+<p>Kernel memory is required to be a contiguous block of a certain size. The kernel memory may be all consumed or fragmented, hence why a contiguous block could not be allocated.</p>
+<p>Tuning of the system’s use of kernel memory is required to ensure the kernel can always service kernel memory allocations when running in interrupt context.</p>
+<p>kswapd high cpu usage in some of not enough memory case<br>reslove the issue temporary</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sar -rB 2 <span class="comment"># check system vm status</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/vm/drop_caches</span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/vm/compact_memory</span><br></pre></td></tr></table></figure>
+
+<p>reduce memory compaction ratio<br>echo 1000 &gt;  /proc/sys/vm/extfrag_threshold # 0~1000 ,1000 means the minimum trigger memory compaction operation, it means kernel memory is required to be a contiguous block of a certain size. The kernel memory may be all consumed or fragmented, hence why a contiguous block could not be allocated.</p>
+<p>Some times there are a lot of free memory in your system. But I ‘m not sure the sk_buffer to malloc memroy range from the linux kernel when the NIC driver tirgger the issue.</p>
+<h4 id="dirty-page"><a href="#dirty-page" class="headerlink" title="dirty page"></a>dirty page</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sysctl -a | grep dirty</span><br><span class="line">vm.dirty_background_bytes = 0</span><br><span class="line">vm.dirty_background_ratio = 10</span><br><span class="line">vm.dirty_bytes = 0</span><br><span class="line">vm.dirty_expire_centisecs = 3000</span><br><span class="line">vm.dirty_ratio = 20</span><br><span class="line">vm.dirty_writeback_centisecs = 500</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="ZRAM"><a href="#ZRAM" class="headerlink" title="ZRAM"></a><a href="http://liujunming.top/2016/07/04/Linux%E5%86%85%E6%A0%B8%E4%B8%ADzram%E6%A8%A1%E5%9D%97%E7%9A%84%E7%90%86%E8%A7%A3/" target="_blank" rel="noopener">ZRAM</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">description <span class="string">"Initializes zram swaping"</span></span><br><span class="line">start on runlevel [2345]</span><br><span class="line">stop on runlevel [!2345]</span><br><span class="line">pre-start script</span><br><span class="line"><span class="comment"># load dependency modules</span></span><br><span class="line">modprobe zram num_devices=2</span><br><span class="line"><span class="comment"># initialize the devices</span></span><br><span class="line"><span class="built_in">echo</span> 1073741824 &gt; /sys/block/zram0/disksize</span><br><span class="line"><span class="built_in">echo</span> 1073741824 &gt; /sys/block/zram1/disksize</span><br><span class="line"><span class="comment"># Creating swap filesystems</span></span><br><span class="line">mkswap /dev/zram0</span><br><span class="line">mkswap /dev/zram1</span><br><span class="line"><span class="comment"># Switch the swaps on</span></span><br><span class="line">swapon -p 5 /dev/zram0</span><br><span class="line">swapon -p 5 /dev/zram1</span><br><span class="line">end script</span><br><span class="line">post-stop script</span><br><span class="line"><span class="comment"># Switching off swap</span></span><br><span class="line">swapoff /dev/zram0</span><br><span class="line">swapoff /dev/zram1</span><br><span class="line">rmmod zram</span><br><span class="line">end script</span><br><span class="line"></span><br><span class="line"><span class="comment">##test zram</span></span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;stdlib.h&gt;  </span></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	//<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, sizeof(int));</span><br><span class="line">	int  *mem;</span><br><span class="line">	int i, size;</span><br><span class="line">	size = 0x70000000;</span><br><span class="line">	mem = (int*)malloc(size*sizeof(int));</span><br><span class="line">	<span class="keyword">for</span>(i = 0; i &lt; size; i++)</span><br><span class="line">		mem[i] = (i%1024);</span><br><span class="line">	getchar();</span><br><span class="line">	free(mem);</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Some-parameter-about-numa"><a href="#Some-parameter-about-numa" class="headerlink" title="Some parameter about numa"></a>Some parameter about numa</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">numactl --interleave=all <span class="comment">#Two/Four socket CPU will share all memory, but you can' t got the best performance except you need more memory</span></span><br><span class="line">vm.zone_reclaim_mode = 0  <span class="comment">#</span></span><br><span class="line"><span class="built_in">echo</span> -15 &gt; /proc/&lt;pid&gt;/oom_adj <span class="comment">#reduce kill ratio	</span></span><br><span class="line">huge page will not be swaped</span><br></pre></td></tr></table></figure>
+
+<h3 id="Soft-lockup-detected-on-a-large-NUMA-system-under-a-heavy-memory-usage"><a href="#Soft-lockup-detected-on-a-large-NUMA-system-under-a-heavy-memory-usage" class="headerlink" title="Soft lockup detected on a large NUMA system under a heavy memory usage"></a><a href="https://access.redhat.com/solutions/1560893" target="_blank" rel="noopener">Soft lockup detected on a large NUMA system under a heavy memory usage</a></h3><p>Systems with numa factor lower than or equal to 30 may hang under the high load.<br>Soft lockup detected under a heavy memory pressure on a large NUMA system.</p>
+<p>For RHEL 7, users must be aware of the following steps that can avoid the soft lockup from occurring. Disable Transparent Huge Page (THP) to avoid such busy memory-compaction, and add “numa_balancing=disable” to the kernel parameter followed by reboot, OR set /proc/sys/vm/zone_reclaim_mode to 1.<br>For RHEL 6,<br>disable Transparent Huge Page (THP) to avoid such busy memory-compaction OR set /proc/sys/vm/zone_reclaim_mode to 1.</p>
+<p>The default value(zero) of /proc/sys/vm/zone_reclaim_mode results in the CPUs running on the memory exhausted nodes to skip over to the next node with available memory to attempt the memory allocation.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">kernel: BUG: soft lockup - CPU<span class="comment">#102 stuck for 22s! [forkoff:235364]</span></span><br><span class="line">kernel: Modules linked <span class="keyword">in</span>: fuse btrfs zlib_deflate raid6_pq xor msdos ext4</span><br><span class="line">mbcache jbd2 binfmt_misc xt_CHECKSUM iptable_mangle ipt_MASQUERADE</span><br><span class="line">nf_nat_masquerade_ipv4 iptable_nat nf_nat_ipv4 nf_nat nf_conntrack_ipv4</span><br><span class="line">nf_defrag_ipv4 xt_conntrack nf_conntrack ipt_REJECT iptable_filter ip_tables</span><br><span class="line">tun bridge stp llc dm_mirror dm_region_hash dm_log dm_mod iTCO_wdt</span><br><span class="line">iTCO_vendor_support vfat fat intel_powerclamp coretemp intel_rapl kvm_intel</span><br><span class="line">kvm crct10dif_pclmul crc32_pclmul crc32c_intel ghash_clmulni_intel aesni_intel</span><br><span class="line">lrw gf128mul glue_helper ablk_helper cryptd pcspkr sb_edac edac_core lpc_ich</span><br><span class="line">i2c_i801 mfd_core shpchp ipmi_si ipmi_msghandler tpm_infineon nls_utf8 isofs</span><br><span class="line">loop uinput xfs libcrc32c sd_mod crc_t10dif crct10dif_common mgag200</span><br><span class="line">syscopyarea sysfillrect sysimgblt drm_kms_helper igb qla2xxx e1000e</span><br><span class="line">kernel: ttm dca ptp scsi_transport_fc drm i2c_algo_bit pps_core scsi_tgt</span><br><span class="line">megaraid_sas i2c_core</span><br><span class="line">kernel: CPU: 102 PID: 235364 Comm: forkoff Not tainted 3.10.0-229.el7.x86_64</span><br><span class="line"><span class="comment">#1                                                                                                                                                                                                                                                                             </span></span><br><span class="line">kernel:</span><br><span class="line">kernel: task: ffff911d25eea220 ti: ffff927835154000 task.ti: ffff927835154000</span><br><span class="line">kernel: RIP: 0010:[&lt;ffffffff811798ef&gt;]  [&lt;ffffffff811798ef&gt;]</span><br><span class="line">isolate_freepages_block+0xaf/0x380</span><br><span class="line">kernel: RSP: 0000:ffff927835157860  EFLAGS: 00000286</span><br><span class="line">kernel: RAX: 00000000ffffffff RBX: 00000014e4b60000 RCX: ffff927835157aa8</span><br><span class="line">kernel: RDX: 0000000053345c00 RSI: 0000000053345a00 RDI: ffff927835157a50</span><br><span class="line">kernel: RBP: ffff9278351578f8 R08: 0000000000000000 R09: ffff8e007ffda000</span><br><span class="line">kernel: R10: 00000014cd168000 R11: 0000000060080000 R12: 0000000000000301</span><br><span class="line">kernel: R13: ffff927835157850 R14: 0000000000000000 R15: 00007f4501f64000</span><br><span class="line">kernel: FS:  00007f4f4d540740(0000) GS:ffff90fa7f9a0000(0000)</span><br><span class="line">knlGS:0000000000000000</span><br><span class="line">kernel: CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033</span><br><span class="line">kernel: CR2: 00007f4690400000 CR3: 000009baa7060000 CR4: 00000000001407e0</span><br><span class="line">kernel: DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000</span><br><span class="line">kernel: DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400</span><br><span class="line">kernel: Stack:</span><br><span class="line">kernel: ffffea2a02311040 0000000060080000 0000000000000094 ffff927835157948</span><br><span class="line">kernel: 0000000053345a00 ffff927835157a50 000000004808ec38 00ff8e0000000000</span><br><span class="line">kernel: ffff927835157a90 ffff927835157aa8 ffff927835157a50 ffff8e007ffad000</span><br><span class="line">kernel: Call Trace:</span><br><span class="line">kernel: [&lt;ffffffff81179d8f&gt;] compaction_alloc+0x1cf/0x240</span><br><span class="line">kernel: [&lt;ffffffff811b15ce&gt;] migrate_pages+0xce/0x610</span><br><span class="line">kernel: [&lt;ffffffff81179bc0&gt;] ? isolate_freepages_block+0x380/0x380</span><br><span class="line">kernel: [&lt;ffffffff8117abb9&gt;] compact_zone+0x299/0x400</span><br><span class="line">kernel: [&lt;ffffffff8117adbc&gt;] compact_zone_order+0x9c/0xf0</span><br><span class="line">kernel: [&lt;ffffffff8117b171&gt;] try_to_compact_pages+0x121/0x1a0</span><br><span class="line">kernel: [&lt;ffffffff815ff336&gt;] __alloc_pages_direct_compact+0xac/0x196</span><br><span class="line">kernel: [&lt;ffffffff81160758&gt;] __alloc_pages_nodemask+0x788/0xb90</span><br><span class="line">kernel: [&lt;ffffffff810b11c0&gt;] ? task_numa_fault+0x8d0/0xbb0</span><br><span class="line">kernel: [&lt;ffffffff811a24aa&gt;] alloc_pages_vma+0x9a/0x140</span><br><span class="line">kernel: [&lt;ffffffff811b674b&gt;] do_huge_pmd_anonymous_page+0x10b/0x410</span><br><span class="line">kernel: [&lt;ffffffff81182334&gt;] handle_mm_fault+0x184/0xd60</span><br><span class="line">kernel: [&lt;ffffffff8160f1e6&gt;] __do_page_fault+0x156/0x520</span><br><span class="line">kernel: [&lt;ffffffff8118a945&gt;] ? change_protection+0x65/0xa0</span><br><span class="line">kernel: [&lt;ffffffff811a0dbb&gt;] ? change_prot_numa+0x1b/0x40</span><br><span class="line">kernel: [&lt;ffffffff810adb86&gt;] ? task_numa_work+0x266/0x300</span><br><span class="line">kernel: [&lt;ffffffff8160f5ca&gt;] do_page_fault+0x1a/0x70</span><br><span class="line">kernel: [&lt;ffffffff81013b0c&gt;] ? do_notify_resume+0x9c/0xb0</span><br><span class="line">kernel: [&lt;ffffffff8160b808&gt;] page_fault+0x28/0x30</span><br><span class="line">kernel: Code: 89 ee 48 89 4d b0 41 89 c5 eb 1d 90 49 83 c7 01 48 83 c3 40 4d</span><br><span class="line">39 <span class="built_in">fc</span> 0f 86 07 01 00 00 41 83 c5 01 4d 85 f6 4c 0f 44 f3 8b 43 18 &lt;83&gt; f8 80</span><br><span class="line">75 dc 48 8b 45 b8 0f b6 55 c0 48 8d 75 c8 4c 8b 45 b0</span><br></pre></td></tr></table></figure>
+
+<h3 id="Transparent-Huge-Page"><a href="#Transparent-Huge-Page" class="headerlink" title="Transparent Huge Page"></a><a href="https://access.redhat.com/solutions/46111" target="_blank" rel="noopener">Transparent Huge Page</a></h3><p>The transparent Huge Page implementation in the Linux kernel includes functionality that provides compaction. Compaction operations are system level processes that are resource intensive</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### Enable or disable</span></span><br><span class="line">$ cat /sys/kernel/mm/transparent_hugepage/enabled</span><br><span class="line">[always] madvise never</span><br><span class="line">$ cat /sys/kernel/mm/transparent_hugepage/defrag</span><br><span class="line">[always] madvise never</span><br><span class="line"></span><br><span class="line">$ grep AnonHugePages /proc/meminfo</span><br><span class="line">AnonHugePages:  19523584 kB</span><br><span class="line"></span><br><span class="line">$ cat /proc/meminfo|grep Huge</span><br><span class="line">AnonHugePages:  1681086464 kB</span><br><span class="line">HugePages_Total:       0</span><br><span class="line">HugePages_Free:        0</span><br><span class="line">HugePages_Rsvd:        0</span><br><span class="line">HugePages_Surp:        0</span><br><span class="line">Hugepagesize:       2048 kB</span><br><span class="line"></span><br><span class="line"><span class="comment">## means 1681086464/2048 = 820843x 2MB huge pages</span></span><br><span class="line"></span><br><span class="line">$ grep -Ei <span class="string">'trans|thp'</span> /proc/vmstat</span><br><span class="line">nr_anon_transparent_hugepages 9533</span><br><span class="line">thp_fault_alloc 24017</span><br><span class="line">thp_fault_fallback 16231</span><br><span class="line">thp_collapse_alloc 1687</span><br><span class="line">thp_collapse_alloc_failed 39449</span><br><span class="line">thp_split 2926</span><br><span class="line">thp_zero_page_alloc 1</span><br><span class="line">thp_zero_page_alloc_failed 0</span><br><span class="line"></span><br><span class="line"><span class="comment">### check the process</span></span><br><span class="line">$ grep -e AnonHugePages  /proc/*/smaps | awk -F <span class="string">'[/ ]+'</span> <span class="string">'$(NF-1)&gt;4 &#123;system("ps -fp  "$3)&#125;'</span></span><br><span class="line">UID        PID  PPID  C STIME TTY          TIME CMD</span><br><span class="line">nobody    5023  5016  3 Jun07 ?        22:28:27 /sbin/lustre_exporter --collector.ost=disabled --collector.mdt=core</span><br><span class="line">UID        PID  PPID  C STIME TTY          TIME CMD</span><br><span class="line">polkitd    743     1  0 Jun07 ?        00:00:19 /usr/lib/polkit-1/polkitd --no-debug</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Single-process-memory"><a href="#Single-process-memory" class="headerlink" title="Single process memory"></a>Single process memory</h3><pre><code>/proc/[pid]/statm
+       Provides information about memory usage, measured in pages.
+       The columns are:
+
+           size       (1) total program size
+                      (same as VmSize in /proc/[pid]/status)
+           resident   (2) resident set size
+                      (same as VmRSS in /proc/[pid]/status)
+           shared     (3) number of resident shared pages (i.e., backed by a file)
+                      (same as RssFile+RssShmem in /proc/[pid]/status)
+           text       (4) text (code)
+           lib        (5) library (unused since Linux 2.6; always 0)
+           data       (6) data + stack
+           dt         (7) dirty pages (unused since Linux 2.6; always 0)</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/3760/statm</span><br><span class="line">400865 96456 37653 27355 0 157019 0</span><br></pre></td></tr></table></figure>
+
+<p>Second field means res (resident)<br>pmap $(pgrep bash)</p>
+<p>There are some of share library in each resident</p>
+<p>If you want get share library memory consumption.<br>/proc/[pid]/smaps (since Linux 2.6.14)<br>              This file shows memory consumption for each of the process’s<br>              mappings.  (The pmap(1) command displays similar information,<br>              in a form that may be easier for parsing.)</p>
+<h4 id="Slab"><a href="#Slab" class="headerlink" title="Slab"></a>Slab</h4><p>In-kernel data structures cache.</p>
+<p>Cache pool for often userd dupulication objects<br>you could found these objects from slabtop</p>
+<p>Get all slabsize<br>awk ‘BEGIN{sum=0;}{sum=sum+$3*$4;}END{print sum/1024/1024}’ /proc/slabinfo MB</p>
+<h4 id="Page-table"><a href="#Page-table" class="headerlink" title="Page table"></a>Page table</h4><p>awk ‘$0~/PageTables/ {print $2}’ /proc/meminfo KB</p>
+<h4 id="Struct-page"><a href="#Struct-page" class="headerlink" title="Struct page"></a>Struct page</h4><p>page frame minimum unit. every page frame has a struct page to point<br><a href="https://stackoverflow.com/questions/34836806/how-to-get-physical-address-from-struct-page-in-linux-kernel" target="_blank" rel="noopener">struct page could mapping page frame to physical address</a><br>all page frame in the LUR list.<br>There are 2.3%(96/4096) usage in linux 2.6.32</p>
+<h3 id="Use-hugetlbfs"><a href="#Use-hugetlbfs" class="headerlink" title="Use hugetlbfs"></a><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/5/html/tuning_and_optimizing_red_hat_enterprise_linux_for_oracle_9i_and_10g_databases/sect-oracle_9i_and_10g_tuning_guide-large_memory_optimization_big_pages_and_huge_pages-configuring_huge_pages_in_red_hat_enterprise_linux_4_or_5" target="_blank" rel="noopener">Use hugetlbfs</a></h3><h4 id="set-hugepage"><a href="#set-hugepage" class="headerlink" title="set hugepage"></a><a href="https://paolozaino.wordpress.com/2016/10/02/how-to-force-any-linux-application-to-use-hugepages-without-modifying-the-source-code/" target="_blank" rel="noopener">set hugepage</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install libhugetlbfs-utils libhugetlbfs</span><br><span class="line"><span class="comment"># To set the 2MB pool minimum to 512 pages:</span></span><br><span class="line">$ hugeadm --pool-pages-min 2MB:512</span><br><span class="line">$ hugeadm --pool-pages-max 2MB:2048</span><br><span class="line">$ hugeadm --pool-list</span><br><span class="line"></span><br><span class="line">$ mkdir -p /mnt/hugetlbfs-64K</span><br><span class="line">$ mount -t hugetlbfs none -opagesize=64k /mnt/hugetlbfs-64K</span><br><span class="line">or </span><br><span class="line">$ mount -t hugetlbfs none /mnt/hugetlbfs -o uid=postfix -o gid=postfix</span><br><span class="line">$ hugeadm --<span class="built_in">set</span>-recommended-shmmax</span><br><span class="line">$ hugeadm --explain</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ LD_PRELOAD=libhugetlbfs.so HUGETLB_MORECORE=yes ./run_your_cmd</span><br><span class="line"><span class="comment">## looks like it 's ok</span></span><br><span class="line">  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND</span><br><span class="line">31723 root      20   0  642.7g  94996   1348 S  1734  0.0 101:41.53 ./ft.E.x</span><br></pre></td></tr></table></figure>
+
+<h4 id="Defragment-kernel-memory"><a href="#Defragment-kernel-memory" class="headerlink" title="Defragment kernel memory"></a>Defragment kernel memory</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">$ mount -t debugfs none  /sys/kernel/debug</span><br><span class="line">$ cat /proc/buddyinfo</span><br><span class="line">                          2^0    2^1    2^2    2^3    2^4    2^5    2^6    2^7    2^8    2^9    2^10 (1024K)</span><br><span class="line">Node 0, zone      DMA      1      0      1      0      2      1      1      0      1      1      3</span><br><span class="line">Node 0, zone    DMA32      3      3      2      2      3      2      4      2      1      0    458</span><br><span class="line">Node 0, zone   Normal 579745  20289    510     94      0      0      0      0      0      0      0</span><br><span class="line">Node 1, zone   Normal 2230945 587911  23339      0      0      0      0      0      0      0      0</span><br><span class="line">Node 2, zone   Normal 2332274 236445  28213   9936    922     23      9      0      0      0      0</span><br><span class="line">Node 3, zone   Normal 654981   7909    163     47     11      1      0      0      0      0      0</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> m &gt; /proc/sysrq-trigger <span class="comment"># same with buddyinfo</span></span><br><span class="line"></span><br><span class="line">$ cat /sys/kernel/debug/extfrag/extfrag_index</span><br><span class="line">Node 0, zone      DMA -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000</span><br><span class="line">Node 0, zone    DMA32 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000</span><br><span class="line">Node 0, zone   Normal -1.000 0.500 0.750 0.875 0.938 0.969 0.985 0.993 0.996 0.998 0.999</span><br><span class="line">Node 1, zone   Normal -1.000 -1.000 0.750 0.875 0.938 0.969 0.985 0.993 0.996 0.998 0.999</span><br><span class="line">Node 2, zone   Normal -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 0.990 0.995</span><br><span class="line">Node 3, zone   Normal -1.000 -1.000 -1.000 0.860 0.930 0.965 0.983 0.992 0.996 0.998 0.999</span><br><span class="line"><span class="comment">#### -1.000 is ok,</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> 1 &gt; /proc/sys/vm/compact_memory</span><br><span class="line"></span><br><span class="line">$ cat /proc/buddyinfo</span><br><span class="line">Node 0, zone      DMA      1      0      1      0      2      1      1      0      1      1      3</span><br><span class="line">Node 0, zone    DMA32      3      3      2      2      3      2      4      2      1      0    458</span><br><span class="line">Node 0, zone   Normal  13927    290      0      0      0      0      0      0      0      0      0</span><br><span class="line">Node 1, zone   Normal 415126 488237 168310  90724  38203   7840    443      9      0      0      0</span><br><span class="line">Node 2, zone   Normal 2068303 341591  58672  25946   4986    920    239     40      1      0      0</span><br><span class="line">Node 3, zone   Normal   9030    668      5     23      7      1      0      0      0      0      0</span><br><span class="line"></span><br><span class="line">$ cat /sys/kernel/debug/extfrag/extfrag_index</span><br><span class="line">Node 0, zone      DMA -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000</span><br><span class="line">Node 0, zone    DMA32 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000</span><br><span class="line">Node 0, zone   Normal -1.000 -1.000 -1.000 -1.000 0.935 0.968 0.984 0.992 0.996 0.998 0.999</span><br><span class="line">Node 1, zone   Normal -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 0.987 0.994 0.997</span><br><span class="line">Node 2, zone   Normal -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 -1.000 0.998 0.999</span><br><span class="line">Node 3, zone   Normal -1.000 -1.000 -1.000 -1.000 0.933 0.967 0.984 0.992 0.996 0.998 0.999</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ cat /proc/sys/vm/extfrag_threshold</span><br><span class="line">500</span><br><span class="line"><span class="comment">## if the value large than extfrag_threshold ,the kswapd will trigger memory compaction, reduce the value to 200 ? </span></span><br><span class="line"><span class="comment">## -1.000 means engough memory, if the value near the 1.000 that means more extfrag_threshold</span></span><br></pre></td></tr></table></figure>
+<p>compact_memory<br>Available only when CONFIG_COMPACTION is set. When 1 is written to the file, all zones are compacted such that free memory is available in contiguous blocks where possible. This can be important for example in the allocation of huge pages although processes will also directly compact memory as required.</p>
+<p>in another node, looks like there are 8 ~ 16K page in centos 7.6 ,3.10.0-957.10.1.el7.x86_64</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> cat /proc/buddyinfo</span><br><span class="line">Node 0, zone      DMA      0      1      1      0      2      1      1      0      1      1      3</span><br><span class="line">Node 0, zone    DMA32     12   6308  12784   5977   1766    440     93     11     19      0      0</span><br><span class="line">Node 0, zone   Normal    190   2376   2586 170387  88814  17747   4114   1895   1211      0      0</span><br><span class="line">Node 1, zone   Normal    186    871    437 165556  81041  12616   2113    978    607      0      0</span><br><span class="line">Node 2, zone   Normal    427   2125   1593 137923  87498  19412   6125    883    552      0      0</span><br><span class="line">Node 3, zone   Normal    280   2686   1041  74979  80569  16675   4315   1792   1145      0      0</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://paolozaino.wordpress.com/2016/10/02/how-to-force-any-linux-application-to-use-hugepages-without-modifying-the-source-code/" target="_blank" rel="noopener">At this point is time to start running your application using libhugetlbfs so that your app will use Hugepages.</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ grep Hugepagesize /proc/meminfo</span><br><span class="line">Hugepagesize:       2048 kB</span><br><span class="line">$ <span class="built_in">echo</span> 512 &gt; /proc/sys/vm/nr_hugepages</span><br><span class="line">This means <span class="keyword">if</span> a 1GB Huge Pages pool should be allocated, <span class="keyword">then</span> 512 Huge Pages need to be allocated</span><br><span class="line">it <span class="string">'s the static huge page</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">echo 1000 &gt; /proc/sys/vm/hugetlb_shm_group</span></span><br><span class="line"><span class="string">##means only members of group testuser(1000) can allocate "huge" Shared memory segment</span></span><br><span class="line"><span class="string">mount -t hugetlbfs -o uid=1000,gid=1000,mode=775,size=10g none /data/hugeshm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#kernel parameter, 4x1G, 1024x2M</span></span><br><span class="line"><span class="string">default_hugepagesz=1G hugepagesz=1G hugepages=4 hugepagesz=2M hugepages=1024</span></span><br><span class="line"><span class="string">mount -t hugetlbfs -o pagesize=1G none /dev/hugepages1G</span></span><br><span class="line"><span class="string">mount -t hugetlbfs -o pagesize=2M none /dev/hugepages2M</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">echo 4 &gt; /sys/devices/system/node/node1/hugepages/hugepages-1048576kB/nr_hugepages</span></span><br><span class="line"><span class="string">echo 1024 &gt; /sys/devices/system/node/node3/hugepages/hugepages-2048kB/nr_hugepages</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">/proc/sys/vm/nr_overcommit_hugepages</span></span><br><span class="line"><span class="string">Defines the maximum number of additional huge pages that can be created and used by the system through overcommitting memory. Writing any non-zero value into this file indicates that the system obtains that number of huge pages from the kernel'</span>s normal page pool <span class="keyword">if</span> the persistent huge page pool is exhausted. As these surplus huge pages become unused, they are <span class="keyword">then</span> freed and returned to the kernel<span class="string">'s normal page pool.</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="memlock"><a href="#memlock" class="headerlink" title="memlock"></a>memlock</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">oracle           soft    memlock         1048576</span><br><span class="line">oracle           hard    memlock         1048576</span><br></pre></td></tr></table></figure>
+<p>The memlock parameter specifies how much memory the oracle user can lock into its address space. Note that Huge Pages are locked in physical memory. The memlock setting is specified in KB and must match the memory size of the number of Huge Pages that Oracle should be able to allocate. So if the Oracle database should be able to use 512 Huge Pages, then memlock must be set to at least 512 * Hugepagesize, which on this system would be 1048576 KB (512<em>1024</em>2). If memlock is too small, then no single Huge Page will be allocated when the Oracle database starts</p>
+<h4 id="free-hugepage"><a href="#free-hugepage" class="headerlink" title="free hugepage"></a>free hugepage</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 0 &gt; /proc/sys/vm/nr_hugepages</span><br></pre></td></tr></table></figure>
+
+<h4 id="manage-tools"><a href="#manage-tools" class="headerlink" title="manage tools"></a>manage tools</h4><p>hugeadm</p>
+<h4 id="reduce-OOM-kill-rate"><a href="#reduce-OOM-kill-rate" class="headerlink" title="reduce OOM kill rate"></a>reduce OOM kill rate</h4><p>echo -15 &gt; /proc/${pid}/oom_adj</p>
+<h4 id="get-pagesize"><a href="#get-pagesize" class="headerlink" title="get pagesize"></a>get pagesize</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getconf PAGESIZE</span><br><span class="line">4096</span><br></pre></td></tr></table></figure>
+
+<h3 id="enable-huge-page-for-performance"><a href="#enable-huge-page-for-performance" class="headerlink" title="enable huge page for performance"></a>enable huge page for performance</h3><ul>
+<li>Hugepages is a feature that allows the Linux kernel to utilize the multiple page size capabilities of<br>modern hardware architectures.<ul>
+<li>A page is the basic unit of virtual memory, with the default page size being 4 KB in the x86 architecture.</li>
+</ul>
+</li>
+<li>Leave sufficient memory for OS use<ul>
+<li>no longer subject to normal memory allocations</li>
+</ul>
+</li>
+<li>Huge Pages are ‘pinned’ to physical RAM and cannot be swapped/paged out.<ul>
+<li>Preference is for 1G hugepages.</li>
+<li>Each hugepage requires a TLB entry. Smaller hugepages =&gt; more TLBs and TLB lookups due to page faults =&gt; higher probability of packet drop blips</li>
+</ul>
+</li>
+</ul>
+<p>hugepagesz<br>[HW,IA-64,PPC,X86-64] The size of the HugeTLB pages.<br>On x86-64 and powerpc, this option can be specified multiple times interleaved with hugepages= to reserve huge pages of different sizes. Valid pages sizes on x86-64 are 2M (when the CPU supports “pse”) and 1G (when the CPU supports the “pdpe1gb” cpuinfo flag).</p>
+<p>hugepages<br>[HW,X86-32,IA-64] HugeTLB pages to allocate at boot.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hugepagesz&#x3D;1G hugepages&#x3D;224</span><br></pre></td></tr></table></figure>
+
+<h3 id="slab-exhaust-all-memory-because-a-lot-of-scan"><a href="#slab-exhaust-all-memory-because-a-lot-of-scan" class="headerlink" title="slab exhaust all memory because a lot of scan"></a>slab exhaust all memory because a lot of scan</h3><p>top<br><img src="/img/top-mem1.png" alt=""></p>
+<p>Why Slab=24021820 kB (24GB)</p>
+<p>slabtop<br><img src="/img/slabtop1.png" alt=""> </p>
+<p>meminfo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">MemTotal:       32832340 kB</span><br><span class="line">MemFree:          829744 kB</span><br><span class="line">Buffers:           85096 kB</span><br><span class="line">Cached:          1895216 kB</span><br><span class="line">SwapCached:       164592 kB</span><br><span class="line">Active:          4572372 kB</span><br><span class="line">Inactive:        2520612 kB</span><br><span class="line">Active(anon):    4131784 kB</span><br><span class="line">Inactive(anon):   983612 kB</span><br><span class="line">Active(file):     440588 kB</span><br><span class="line">Inactive(file):  1537000 kB</span><br><span class="line">Unevictable:       25864 kB</span><br><span class="line">Mlocked:            9512 kB</span><br><span class="line">SwapTotal:       8191996 kB</span><br><span class="line">SwapFree:        5818864 kB</span><br><span class="line">Dirty:               120 kB</span><br><span class="line">Writeback:             0 kB</span><br><span class="line">AnonPages:       4974644 kB</span><br><span class="line">Mapped:            12584 kB</span><br><span class="line">Shmem:                36 kB</span><br><span class="line">Slab:           24021820 kB</span><br><span class="line">SReclaimable:   11202668 kB</span><br><span class="line">SUnreclaim:     12819152 kB</span><br><span class="line">KernelStack:       10624 kB</span><br><span class="line">PageTables:        38088 kB</span><br><span class="line">NFS_Unstable:          0 kB</span><br><span class="line">Bounce:                0 kB</span><br><span class="line">WritebackTmp:          0 kB</span><br><span class="line">CommitLimit:    24608164 kB</span><br><span class="line">Committed_AS:    7777952 kB</span><br><span class="line">VmallocTotal:   34359738367 kB</span><br><span class="line">VmallocUsed:      413916 kB</span><br><span class="line">VmallocChunk:   34359269244 kB</span><br><span class="line">HardwareCorrupted:     0 kB</span><br><span class="line">AnonHugePages:     30720 kB</span><br><span class="line">HugePages_Total:       0</span><br><span class="line">HugePages_Free:        0</span><br><span class="line">HugePages_Rsvd:        0</span><br><span class="line">HugePages_Surp:        0</span><br><span class="line">Hugepagesize:       2048 kB</span><br><span class="line">DirectMap4k:        4096 kB</span><br><span class="line">DirectMap2M:     1957888 k</span><br></pre></td></tr></table></figure>
+
+<h3 id="memmap"><a href="#memmap" class="headerlink" title="memmap"></a><a href="https://docs.pmem.io/getting-started-guide/creating-development-environments/linux-environments/linux-memmap" target="_blank" rel="noopener">memmap</a></h3><p><a href="https://www.kernel.org/doc/Documentation/admin-guide/kernel-parameters.txt" target="_blank" rel="noopener">https://www.kernel.org/doc/Documentation/admin-guide/kernel-parameters.txt</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">memmap=exactmap	[KNL,X86] Enable setting of an exact</span><br><span class="line">			E820 memory map, as specified by the user.</span><br><span class="line">			Such memmap=exactmap lines can be constructed based on</span><br><span class="line">			BIOS output or other requirements. See the memmap=nn@ss</span><br><span class="line">			option description.</span><br><span class="line"></span><br><span class="line">	memmap=nn[KMG]@ss[KMG]</span><br><span class="line">			[KNL] Force usage of a specific region of memory.</span><br><span class="line">			Region of memory to be used is from ss to ss+nn.</span><br><span class="line">			If @ss[KMG] is omitted, it is equivalent to mem=nn[KMG],</span><br><span class="line">			<span class="built_in">which</span> limits max address to nn[KMG].</span><br><span class="line">			Multiple different regions can be specified,</span><br><span class="line">			comma delimited.</span><br><span class="line">			Example:</span><br><span class="line">				memmap=100M@2G,100M<span class="comment">#3G,1G!1024G</span></span><br><span class="line"></span><br><span class="line">	memmap=nn[KMG]<span class="comment">#ss[KMG]</span></span><br><span class="line">			[KNL,ACPI] Mark specific memory as ACPI data.</span><br><span class="line">			Region of memory to be marked is from ss to ss+nn.</span><br><span class="line"></span><br><span class="line">	memmap=nn[KMG]<span class="variable">$ss</span>[KMG]</span><br><span class="line">			[KNL,ACPI] Mark specific memory as reserved.</span><br><span class="line">			Region of memory to be reserved is from ss to ss+nn.</span><br><span class="line">			Example: Exclude memory from 0x18690000-0x1869ffff</span><br><span class="line">			         memmap=64K<span class="variable">$0x18690000</span></span><br><span class="line">			         or</span><br><span class="line">			         memmap=0x10000<span class="variable">$0x18690000</span></span><br><span class="line">			Some bootloaders may need an escape character before <span class="string">'$'</span>,</span><br><span class="line">			like Grub2, otherwise <span class="string">'$'</span> and the following number</span><br><span class="line">			will be eaten.</span><br><span class="line"></span><br><span class="line">	memmap=nn[KMG]!ss[KMG]</span><br><span class="line">			[KNL,X86] Mark specific memory as protected.</span><br><span class="line">			Region of memory to be used, from ss to ss+nn.</span><br><span class="line">			The memory region may be marked as e820 <span class="built_in">type</span> 12 (0xc)</span><br><span class="line">			and is NVDIMM or ADR memory.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ dmesg | grep e820</span><br><span class="line">$ grubby --args&#x3D;&quot;memmap&#x3D;96G:32G&quot; --update-kernel&#x3D;ALL</span><br></pre></td></tr></table></figure>
+<p>mapping /dev/pmemX can be used to create a DAX filesystem</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$ sudo parted &#x2F;dev&#x2F;pmem0</span><br><span class="line">(parted) mkpart</span><br><span class="line">Partition type?  primary&#x2F;extended? p</span><br><span class="line">File system type?  [ext2]? ext4</span><br><span class="line">Start? 2MiB</span><br><span class="line">End? 100GiB</span><br><span class="line">(parted)</span><br><span class="line"></span><br><span class="line">(parted) mkpart</span><br><span class="line">Partition type?  primary&#x2F;extended? p</span><br><span class="line">File system type?  [ext2]? ext4</span><br><span class="line">Start? 100GiB</span><br><span class="line">End? 200GiB</span><br><span class="line"></span><br><span class="line">$  getconf PAGE_SIZE</span><br><span class="line">4096</span><br><span class="line"></span><br><span class="line">$ sudo mkfs.ext4 -b 4096 -E stride&#x3D;512 -F &#x2F;dev&#x2F;pmem0</span><br><span class="line">$ sudo mkdir &#x2F;pmem</span><br><span class="line">$ sudo mount -o dax &#x2F;dev&#x2F;pmem0p1 &#x2F;pmem</span><br><span class="line">$ sudo mount -v | grep &#x2F;pmem</span><br><span class="line">$ fallocate --length 1G &#x2F;pmem&#x2F;data</span><br><span class="line">$ echo 1 &gt; &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;tracing&#x2F;events&#x2F;fs_dax&#x2F;dax_pmd_fault_done&#x2F;enable</span><br><span class="line">$ echo 0 &gt; &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;tracing&#x2F;events&#x2F;fs_dax&#x2F;dax_pmd_fault_done&#x2F;enable</span><br><span class="line"></span><br><span class="line"># Verify the namespace is in fsdax mode</span><br><span class="line">$ ndctl list -u</span><br><span class="line">$ cat &#x2F;proc&#x2F;iomem</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Monitor-ecc-error"><a href="#Monitor-ecc-error" class="headerlink" title="Monitor ecc error"></a>Monitor ecc error</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ dmesg -T |  grep -Ei <span class="string">"Err.*bit ECC"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Monitor multiple bit</span></span><br><span class="line">$ cat /sys/devices/system/edac/mc/mc*/[u,c]e_count | <span class="keyword">while</span> <span class="built_in">read</span> line; <span class="keyword">do</span> [[ ! <span class="variable">$line</span> -eq 0 ]] &amp;&amp; <span class="built_in">echo</span> <span class="string">"Got DRAM ecc error"</span> &amp;&amp; <span class="built_in">exit</span> 2; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Benchmark-by-perf"><a href="#Benchmark-by-perf" class="headerlink" title="Benchmark by perf"></a>Benchmark by perf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">......</span><br><span class="line">NUMA node0 CPU(s):     0,2,4,6,8,10,12,14,16,18</span><br><span class="line">NUMA node1 CPU(s):     1,3,5,7,9,11,13,15,17,19</span><br><span class="line"></span><br><span class="line">$ perf bench numa mem  -p 1 -t 10  -T 12000  -Irq -H 1 -C 1,3,5,7,9,11,13,15,17,19 -M 0,0,0,0,0,0,0,0,0,0</span><br><span class="line"><span class="comment"># Running 'numa/mem' benchmark:</span></span><br><span class="line"></span><br><span class="line"> <span class="comment"># Running main, "perf bench numa numa-mem -p 1 -t 10 -T 12000 -Irq -H 1 -C 1,3,5,7,9,11,13,15,17,19 -M 0,0,0,0,0,0,0,0,0,0"</span></span><br><span class="line">          8.837 secs slowest (max) thread-runtime</span><br><span class="line">          8.000 secs fastest (min) thread-runtime</span><br><span class="line">          8.182 secs average thread-runtime</span><br><span class="line">          4.738 % difference between max/avg runtime</span><br><span class="line">         12.584 GB data processed, per thread</span><br><span class="line">        125.840 GB data processed, total</span><br><span class="line">          0.702 nsecs/byte/thread runtime</span><br><span class="line">          1.424 GB/sec/thread speed</span><br><span class="line">         14.239 GB/sec total speed</span><br><span class="line"></span><br><span class="line">$ perf bench numa mem  -p 1 -t 10  -T 12000  -Irq -H 1 -C 0,2,4,6,8,10,12,14,16,18 -M 0,0,0,0,0,0,0,0,0,0</span><br><span class="line"><span class="comment"># Running 'numa/mem' benchmark:</span></span><br><span class="line"></span><br><span class="line"> <span class="comment"># Running main, "perf bench numa numa-mem -p 1 -t 10 -T 12000 -Irq -H 1 -C 0,2,4,6,8,10,12,14,16,18 -M 0,0,0,0,0,0,0,0,0,0"</span></span><br><span class="line">          5.528 secs slowest (max) thread-runtime</span><br><span class="line">          5.000 secs fastest (min) thread-runtime</span><br><span class="line">          5.084 secs average thread-runtime</span><br><span class="line">          4.776 % difference between max/avg runtime</span><br><span class="line">         12.584 GB data processed, per thread</span><br><span class="line">        125.840 GB data processed, total</span><br><span class="line">          0.439 nsecs/byte/thread runtime</span><br><span class="line">          2.276 GB/sec/thread speed</span><br><span class="line">         22.764 GB/sec total speed</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/memory/" rel="tag"><i class="fa fa-tag"></i> memory</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/27/cpu/" rel="prev" title="cpu tips">
+      <i class="fa fa-chevron-left"></i> cpu tips
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/08/scsi_dev/" rel="next" title="scsi device maintain">
+      scsi device maintain <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Make-sure-the-ECC-work-in-Linux"><span class="nav-number">1.</span> <span class="nav-text">Make sure the ECC work in Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor-ECC-error"><span class="nav-number">2.</span> <span class="nav-text">Monitor ECC error</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#From-OS"><span class="nav-number">2.1.</span> <span class="nav-text">From OS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#From-IPMI"><span class="nav-number">2.2.</span> <span class="nav-text">From IPMI</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NIC-page-allocation-failure"><span class="nav-number">3.</span> <span class="nav-text">NIC page allocation failure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dirty-page"><span class="nav-number">3.1.</span> <span class="nav-text">dirty page</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZRAM"><span class="nav-number">4.</span> <span class="nav-text">ZRAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Some-parameter-about-numa"><span class="nav-number">5.</span> <span class="nav-text">Some parameter about numa</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Soft-lockup-detected-on-a-large-NUMA-system-under-a-heavy-memory-usage"><span class="nav-number">6.</span> <span class="nav-text">Soft lockup detected on a large NUMA system under a heavy memory usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transparent-Huge-Page"><span class="nav-number">7.</span> <span class="nav-text">Transparent Huge Page</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-process-memory"><span class="nav-number">8.</span> <span class="nav-text">Single process memory</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Slab"><span class="nav-number">8.1.</span> <span class="nav-text">Slab</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Page-table"><span class="nav-number">8.2.</span> <span class="nav-text">Page table</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Struct-page"><span class="nav-number">8.3.</span> <span class="nav-text">Struct page</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-hugetlbfs"><span class="nav-number">9.</span> <span class="nav-text">Use hugetlbfs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#set-hugepage"><span class="nav-number">9.1.</span> <span class="nav-text">set hugepage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Defragment-kernel-memory"><span class="nav-number">9.2.</span> <span class="nav-text">Defragment kernel memory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#memlock"><span class="nav-number">9.3.</span> <span class="nav-text">memlock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#free-hugepage"><span class="nav-number">9.4.</span> <span class="nav-text">free hugepage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#manage-tools"><span class="nav-number">9.5.</span> <span class="nav-text">manage tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reduce-OOM-kill-rate"><span class="nav-number">9.6.</span> <span class="nav-text">reduce OOM kill rate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-pagesize"><span class="nav-number">9.7.</span> <span class="nav-text">get pagesize</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enable-huge-page-for-performance"><span class="nav-number">10.</span> <span class="nav-text">enable huge page for performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slab-exhaust-all-memory-because-a-lot-of-scan"><span class="nav-number">11.</span> <span class="nav-text">slab exhaust all memory because a lot of scan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#memmap"><span class="nav-number">12.</span> <span class="nav-text">memmap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Monitor-ecc-error"><span class="nav-number">12.1.</span> <span class="nav-text">Monitor ecc error</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Benchmark-by-perf"><span class="nav-number">13.</span> <span class="nav-text">Benchmark by perf</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">441k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">6:41</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/07/02/mem/",
+            identifier: "2018/07/02/mem/",
+            title: "Linux memory"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
