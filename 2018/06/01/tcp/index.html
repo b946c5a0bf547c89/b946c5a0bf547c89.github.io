@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="MSL (Maximum Segment Lifetime)2MSL server&#x2F;client send the close request in the last ack(time wait status), timewait &#x3D; 2MSL ? after timeout ,send fin ? in this time, the port could not be used. if you">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Network setting">
+<meta property="og:url" content="http://yoursite.com/2018/06/01/tcp/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="MSL (Maximum Segment Lifetime)2MSL server&#x2F;client send the close request in the last ack(time wait status), timewait &#x3D; 2MSL ? after timeout ,send fin ? in this time, the port could not be used. if you">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/img/tcp-state-diagram-v2.svg">
+<meta property="og:image" content="http://yoursite.com/img/duplicate-segment.svg">
+<meta property="og:image" content="http://yoursite.com/img/last-ack.svg">
+<meta property="og:image" content="http://yoursite.com/img/last-ack-reuse.svg">
+<meta property="og:image" content="http://yoursite.com/img/tshark-1.png">
+<meta property="og:image" content="http://yoursite.com/img/tshark-2.png">
+<meta property="article:published_time" content="2018-06-01T02:49:42.000Z">
+<meta property="article:modified_time" content="2020-01-05T11:42:25.839Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="tcp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/img/tcp-state-diagram-v2.svg">
+
+<link rel="canonical" href="http://yoursite.com/2018/06/01/tcp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Network setting | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/tcp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Network setting
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-01 10:49:42" itemprop="dateCreated datePublished" datetime="2018-06-01T10:49:42+08:00">2018-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 19:42:25" itemprop="dateModified" datetime="2020-01-05T19:42:25+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/06/01/tcp/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/01/tcp/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>20k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>18 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="MSL-Maximum-Segment-Lifetime"><a href="#MSL-Maximum-Segment-Lifetime" class="headerlink" title="MSL (Maximum Segment Lifetime)"></a>MSL (Maximum Segment Lifetime)</h4><pre><code>2MSL server/client send the close request in the last ack(time wait status), timewait = 2MSL ? after timeout ,send fin ? in this time, the port could not be used.
+if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port 
+    SO_REUSEPORT (since Linux 3.9)
+    Permits multiple AF_INET or AF_INET6 sockets to be bound to an identical socket address.  This option must be set on each socket (including the first socket) prior to calling bind(2) on the socket.  To prevent port hijacking, all of the processes binding to the same address must have the same effective UID.  This option can be employed with both TCP an UDP sockets.</code></pre><p>tcp segment (报文) + tcp datagram (data)<br>TTL (time to live) in ip head<br>MSL &gt; TTL ?<br>RTT (round-trip time)</p>
+<p>URG: Urget pointer is valid<br>SYN:<br>FIN:<br>ACK:<br>PSH:<br>RST:</p>
+<p>RST+ACK<br>only RST</p>
+<a id="more"></a>
+
+<h4 id="tcp-fin-timeout-and-tcp-max-tw-buckets"><a href="#tcp-fin-timeout-and-tcp-max-tw-buckets" class="headerlink" title="tcp_fin_timeout and tcp_max_tw_buckets"></a><a href="https://access.redhat.com/solutions/41776" target="_blank" rel="noopener">tcp_fin_timeout and tcp_max_tw_buckets</a></h4><p>If you set too large value to tcp_fin_timeout, the system may become out of port, file-descripter and memory. If you set too small value, the system may leak delayed packets.<br>If you set too large value to tcp_max_tw_buckets, the system may become out of port, file-descripter and memory. If you set too small value, the system may not communicate another host.</p>
+<p>TCP(7)</p>
+<pre><code>tcp_fin_timeout (integer; default: 60)
+       This  specifies  how many seconds to wait for a final FIN packet
+       before the socket is forcibly closed.  This is strictly a viola-
+       tion  of  the TCP specification, but required to prevent denial-
+       of-service attacks.  In Linux 2.2, the default value was 180.</code></pre><snip>
+       tcp_max_tw_buckets (integer; default: see below)
+              The  maximum number of sockets in TIME_WAIT state allowed in the
+              system.  This limit exists only to prevent simple denial-of-ser-
+              vice  attacks.   The  default  value  of  NR_FILE*2  is adjusted
+              depending on the memory  in  the  system.   If  this  number  is
+              exceeded, the socket is closed and a warning is printed.
+<snip>
+       TCP_LINGER2
+              The  lifetime  of orphaned FIN_WAIT2 state sockets.  This option
+              can be used to override the system wide  sysctl  tcp_fin_timeout
+              on  this  socket.  This is not to be confused with the socket(7)
+              level option SO_LINGER.  This option should not be used in  code
+              intended to be portable.
+
+<h4 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -n -i eth0 -A -x dst port 443 and greater 100</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux-kernel"><a href="#Linux-kernel" class="headerlink" title="Linux kernel"></a>Linux kernel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">don<span class="string">'t cache ssthresh from previous connection</span></span><br><span class="line"><span class="string">Disable cache metrics so the initial conditions of the closed connections will not be saved to be used in near future connections:</span></span><br><span class="line"><span class="string">net.ipv4.tcp_no_metrics_save = 1</span></span><br><span class="line"><span class="string">'</span>1<span class="string">' means disable caching.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">tcp_slow_start_after_idle = 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">tcp_slow_start_after_idle (Boolean; default: enabled(1); since Linux 2.6.18),If enabled, provide RFC 2861 behavior and time out the congestion window after an idle period. An idle period is defined as the current RTO (retransmission timeout). If disabled, the congestion window will not be timed out after an idle period.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#</span></span><br><span class="line"><span class="string"># Vendors settings live in /usr/lib/sysctl.d/.</span></span><br><span class="line"><span class="string"># To override a whole file, create a new file with the same in</span></span><br><span class="line"><span class="string"># /etc/sysctl.d/ and put new settings there. To override</span></span><br><span class="line"><span class="string"># only specific settings, add a file with a lexically later</span></span><br><span class="line"><span class="string"># name in /etc/sysctl.d/ and put new settings there.</span></span><br><span class="line"><span class="string">#</span></span><br><span class="line"><span class="string"># For more information, see sysctl.conf(5) and sysctl.d(5).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># each socket will use some fd</span></span><br><span class="line"><span class="string">fs.file-max = 1048576 </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># tcp short connection will cause a lot of TIME_WAIT</span></span><br><span class="line"><span class="string">net.ipv4.tcp_max_tw_buckets = 7000</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># disable tcp source trace</span></span><br><span class="line"><span class="string">net.ipv4.conf.default.accept_source_route = 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">net.ipv4.tcp_fin_timeout = 30 </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#TIMEOUT socket re-use</span></span><br><span class="line"><span class="string">net.ipv4.tcp_tw_reuse= 1</span></span><br><span class="line"><span class="string">net.ipv4.tcp_timestamps = 1</span></span><br><span class="line"><span class="string">net.ipv4.tcp_syncookies = 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">net.ipv4.tcp_max_syn_backlog = 8388608</span></span><br><span class="line"><span class="string">net.core.netdev_max_backlog = 8388608</span></span><br><span class="line"><span class="string">net.core.somaxconn = 8388608</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># in our internal LAN, a lots of out of range and tcp retrans</span></span><br><span class="line"><span class="string">net.ipv4.tcp_sack = 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">net.core.netdev_budget=600</span></span><br><span class="line"><span class="string">net.ipv4.tcp_low_latency = 1</span></span><br><span class="line"><span class="string"># socket buffer to 256MB</span></span><br><span class="line"><span class="string">net.core.rmem_max = 268435456</span></span><br><span class="line"><span class="string">net.core.wmem_max = 268435456</span></span><br><span class="line"><span class="string"># allow tcp ipv4 buffer auto-tuning up to 256MB</span></span><br><span class="line"><span class="string"># min,init,maxinum size</span></span><br><span class="line"><span class="string">net.ipv4.tcp_rmem = 65536 134217728 268435456</span></span><br><span class="line"><span class="string">net.ipv4.tcp_wmem = 65536 134217728 268435456</span></span><br><span class="line"><span class="string">net.ipv4.tcp_mem = 65536 134217728 268435456</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">net.ipv4.tcp_adv_win_scale= 2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">net.ipv4.tcp_window_scaling = 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">net.ipv4.tcp_mtu_probing= 1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">net.core.default_qdisc = pfifo_fast</span></span><br><span class="line"><span class="string">net.ipv4.tcp_congestion_control = cubic</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">kernel.numa_balancing=0</span></span><br><span class="line"><span class="string">net.ipv4.tcp_frto=1</span></span><br><span class="line"><span class="string">net.ipv4.tcp_no_metrics_save = 1</span></span><br><span class="line"><span class="string">net.ipv4.tcp_slow_start_after_idle = 0</span></span><br><span class="line"><span class="string">net.ipv4.tcp_mtu_probing = 1</span></span><br><span class="line"><span class="string">#net.ipv4.tcp_syn_retries = 8</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># works best with &gt;= 500 client computers ##</span></span><br><span class="line"><span class="string">net.ipv4.neigh.default.gc_interval = 3600</span></span><br><span class="line"><span class="string">net.ipv4.neigh.default.gc_stale_time = 3600</span></span><br><span class="line"><span class="string">net.ipv4.neigh.default.gc_thresh3 = 8192</span></span><br><span class="line"><span class="string">net.ipv4.neigh.default.gc_thresh2 = 4096</span></span><br><span class="line"><span class="string">net.ipv4.neigh.default.gc_thresh1 = 2048</span></span><br><span class="line"><span class="string"># Keep alive</span></span><br><span class="line"><span class="string">net.ipv4.tcp_keepalive_intvl = 60</span></span><br><span class="line"><span class="string">net.ipv4.tcp_keepalive_probes = 3</span></span><br><span class="line"><span class="string">net.ipv4.tcp_keepalive_time = 7200</span></span><br><span class="line"><span class="string">#net.ipv4.tcp_syn_retries=8</span></span><br><span class="line"><span class="string">##net.ipv4.tcp_keepalive_intvl = 30</span></span><br><span class="line"><span class="string">###net.ipv4.tcp_keepalive_probes = 25</span></span><br><span class="line"><span class="string">###net.ipv4.tcp_keepalive_time = 360</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="tcp-tw-reuse"><a href="#tcp-tw-reuse" class="headerlink" title="tcp_tw_reuse"></a><a href="https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux" target="_blank" rel="noopener">tcp_tw_reuse</a></h4><p>NOTE: net.ipv4.tcp_tw_recycle has been removed from Linux 4.12<br>Linux will randomize timestamp offsets for each connection, making this option completely broken, with or without NAT. It has been completely removed from Linux 4.12.<br>The LAST-ACK state is handled in the exact same way as for net.ipv4.tcp_tw_recycle.</p>
+<p>By enabling net.ipv4.tcp_tw_reuse, Linux will reuse an existing connection in the TIME-WAIT state for a new outgoing connection if the new timestamp is strictly bigger than the most recent timestamp recorded for the previous connection: an outgoing connection in the TIME-WAIT state can be reused after just one second.</p>
+<p>   Allow to reuse TIME-WAIT sockets for new connections when it is safe from protocol viewpoint. Default value is 0. It should not be changed without advice/request of technical experts.<br>   The mere result of this lack of documentation is that we find numerous tuning guides advising to set both these settings to 1 to reduce the number of entries in the TIME-WAIT state. However, as stated by tcp(7) manual page, the net.ipv4.tcp_tw_recycle option is quite problematic for public-facing servers as it won’t handle connections from two different computers behind the same NAT device, which is a problem hard to detect and waiting to bite you:<br>   Enable fast recycling of TIME-WAIT sockets. Enabling this option is not recommended since this causes problems when working with NAT (Network Address Translation).<br><img src="/img/tcp-state-diagram-v2.svg" alt=""></p>
+<p><img src="/img/duplicate-segment.svg" alt=""><br>Due to a shortened TIME-WAIT state, a delayed TCP segment has been accepted in an unrelated connection.</p>
+<p>The other purpose is to ensure the remote end has closed the connection. When the last ACK is lost, the remote end stays in the LAST-ACK state. Without the TIME-WAIT state, a connection could be reopened while the remote end still thinks the previous connection is valid. When it receives a SYN segment (and the sequence number matches), it will answer with a RST as it is not expecting such a segment. The new connection will be aborted with an error<br><img src="/img/last-ack.svg" alt=""><br>If the remote end stays in LAST-ACK state because the last ACK was lost, opening a new connection with the same quadruplet will not work.</p>
+<p>RFC 793 requires the TIME-WAIT state to last twice the time of the MSL. On Linux, this duration is not tunable and is defined in include/net/tcp.h as one minute:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define TCP_TIMEWAIT_LEN (60*HZ) /* how long to wait to destroy TIME-WAIT</span></span><br><span class="line">				  * state, about 60 seconds	*/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ss -tan state time-wait</span><br></pre></td></tr></table></figure>
+
+<p>A hash table of connections, named the “TCP established hash table” (despite containing connections in other states) is used to locate an existing connection, for example when receiving a new segment.</p>
+<p>the TIME-WAIT connection in this table</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ dmesg | grep <span class="string">"TCP established hash table"</span></span><br><span class="line">[    1.041036] TCP established <span class="built_in">hash</span> table entries: 524288 (order: 10, 4194304 bytes)</span><br><span class="line">$ dmesg | grep <span class="string">"TCP bind hash table"</span></span><br><span class="line">[    1.041724] TCP <span class="built_in">bind</span> <span class="built_in">hash</span> table entries: 65536 (order: 8, 1048576 bytes)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slabtop -o | grep -E &#39;(^  OBJS|tw_sock_TCP|tcp_bind_bucket)&#39;</span><br></pre></td></tr></table></figure>
+
+<p>If the FIN segments are received in a timely manner, the local end socket will still be in the TIME-WAIT state and the expected ACK segments will be sent.</p>
+<p>Once a new connection replaces the TIME-WAIT entry, the SYN segment of the new connection is ignored (thanks to the timestamps) and won’t be answered by a RST but only by a retransmission of the FIN segment. The FIN segment will then be answered with a RST (because the local connection is in the SYN-SENT state) which will allow the transition out of the LAST-ACK state. The initial SYN segment will eventually be resent (after one second) because there was no answer and the connection will be established without apparent error, except a slight delay:<br><img src="/img/last-ack-reuse.svg" alt=""></p>
+<h3 id="ethtool"><a href="#ethtool" class="headerlink" title="ethtool"></a><a href="https://voipmagazine.wordpress.com/tag/tcp_no_metrics_save/" target="_blank" rel="noopener">ethtool</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ethtool -s p4p2 speed 1000 duplex full autoneg off</span><br><span class="line">$ grep ETHTOOL_OPTS /etc/sysconfig/network-scripts/ifcfg-p4p1</span><br><span class="line">ETHTOOL_OPTS=speed 1000 duplex full</span><br><span class="line">$ systemctl restart network</span><br><span class="line">$ ifconfig eth0 txqueuelen 3000</span><br></pre></td></tr></table></figure>
+
+<h3 id="SLE-and-SER-in-SACK-RFC2018"><a href="#SLE-and-SER-in-SACK-RFC2018" class="headerlink" title="SLE and SER in SACK(RFC2018)"></a>SLE and SER in SACK(RFC2018)</h3><p>tcpdump will show some packet show “SLE=20480 SER=24576”</p>
+<p>SLE: Sequence Left Edge of already acknowledged data when Selective Acknowledgments are used<br>SRE: Sequence Right Edge of already acknowledged data when Selective Acknowledgments are used</p>
+<p>When server send the package length from 1<del>24576, the client just return ack=$((seq+18736))<br>The client receive 18736 bytes, and recevice the out of order packets from 20480</del>24576 bytes, and just loss from 18737<del>20479 Bytes<br>The server don ‘t need to retrans 20480 to 24576 bytes. if the system not enable sack, it will retrans from 18737</del>24576</p>
+<h3 id="Spurious-retransmission-timeouts"><a href="#Spurious-retransmission-timeouts" class="headerlink" title="Spurious retransmission timeouts"></a>Spurious retransmission timeouts</h3><p>Because packets out of order or another issue trigger the packet RTO, but the packet was not loss, it ‘s misjudging, that means Spurious retransmission timeouts.</p>
+<p>Active F-RTO<br>net.ipv4.tcp_frto=2</p>
+<h3 id="Thin-stream"><a href="#Thin-stream" class="headerlink" title="Thin-stream"></a><a href="https://nnc3.com/mags/LJ_1994-2014/LJ/219/11180.html" target="_blank" rel="noopener">Thin-stream</a></h3><p>For latency env</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># default eq 0</span></span><br><span class="line">sysctl -w net.ipv4.tcp_thin_linear_timeouts=1</span><br><span class="line">sysctl -w net.ipv4.tcp_thin_dupack=1</span><br><span class="line"><span class="built_in">echo</span> 1 &gt;  /proc/sys/net/ipv4/tcp_thin_linear_timeouts</span><br><span class="line"><span class="built_in">echo</span> 1 &gt;  /proc/sys/net/ipv4/tcp_thin_dupack</span><br></pre></td></tr></table></figure>
+
+<h3 id="tcp-retrans"><a href="#tcp-retrans" class="headerlink" title="tcp retrans"></a><a href="http://perthcharles.github.io/2015/09/07/wiki-tcp-retries/" target="_blank" rel="noopener">tcp retrans</a></h3><p>RTO(retransmission timeout)<br>RRT(round-trip time)<br>TCP keep the weight value SRTT(smoothed RRT)</p>
+<p>The latest RRTS = (1-a) * ( last RTTS) + a * (the lastest RRT)<br>In RFC2988, a = 1/8<br>RTTD was the RTT deviation weight value<br>First get RTTD, RTTD value = RRT/2<br>Next the RTTD=(1-B)<em>(the last RTTD) + B(RTTS-the lastest RRT)<br>RFC B=1/4<br>RTO= RTTS + 4</em>RTTD<br>The RFC suggest if the message retrans, this RRT value will be drop<br>When the trigger tcp retrans, the latest RTO * 2 = the last RTO until the maximum</p>
+<p>But RFC != the real implementation</p>
+<p><a href="https://ms2008.github.io/2017/04/14/tcp-timeout/" target="_blank" rel="noopener">tcp_syn_retries 三次握手</a><br>net.ipv4.tcp_syn_retries retrans interval was [1,3,7,15,31]s </p>
+<p>tcp_syn_retries2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if tcp_retries2&#x3D;15，the timeout was 924600ms。</span><br><span class="line"></span><br><span class="line">1. If RTT is tiny that the RTO init value was about 200ms</span><br><span class="line">   The total timeout was 924600ms，looks like retrans 15 times cause over the timeout value and end the tcp stream</span><br><span class="line"></span><br><span class="line">2. If RTT is large,the RTO calculate value was 1000ms</span><br><span class="line">   it doesn&#39; t need retrans 15 times，the timeout value will over 924600ms.</span><br><span class="line">   if the RTT&#x3D;400ms,set tcp_retries2&#x3D;10, only 3 times the tcp stream will end</span><br></pre></td></tr></table></figure>
+
+<h3 id="tcp-retrans-1"><a href="#tcp-retrans-1" class="headerlink" title="tcp retrans"></a>tcp retrans</h3><p>There are 3 server in test env</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">$ numactl --physcpubind=2 iperf3 -c <span class="variable">$serverC</span> -P 1 -M 8960 -S 0x08 -t 36000 -p 5201 -l 512k</span><br><span class="line">Connecting to host 10.53.19.52, port 5201</span><br><span class="line">[  4] <span class="built_in">local</span> <span class="variable">$ServerB</span> port 58064 connected to <span class="variable">$ServerC</span> port 5201</span><br><span class="line">[ ID] Interval           Transfer     Bandwidth       Retr  Cwnd</span><br><span class="line">[  4]   0.00-1.00   sec  1.15 GBytes  9.92 Gbits/sec    0    690 KBytes</span><br><span class="line">...</span><br><span class="line">[  4]  66.00-67.00  sec  1.15 GBytes  9.90 Gbits/sec    0    717 KBytes</span><br><span class="line">... always no retrans, cwnd increase slowly</span><br><span class="line">[  4] 189.00-190.00 sec  1.15 GBytes  9.89 Gbits/sec    0    725 KBytes</span><br><span class="line">...</span><br><span class="line">[  4] 418.00-419.00 sec  1.15 GBytes  9.89 Gbits/sec    0    909 KBytes</span><br><span class="line">...</span><br><span class="line">[  4] 4195.00-4196.00 sec  1.15 GBytes  9.90 Gbits/sec    0    909 KBytes</span><br><span class="line">[  4] 4196.00-4197.00 sec  1.15 GBytes  9.90 Gbits/sec    0    909 KBytes</span><br><span class="line">[  4] 4197.00-4198.00 sec  1.15 GBytes  9.89 Gbits/sec    0    909 KBytes</span><br><span class="line">[  4] 4198.00-4198.51 sec   606 MBytes  9.91 Gbits/sec    0    909 KBytes</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">[ ID] Interval           Transfer     Bandwidth       Retr</span><br><span class="line">[  4]   0.00-4198.51 sec  0.00 (null)s  9.90 Gbits/sec    6             sender</span><br><span class="line">[  4]   0.00-4198.51 sec  0.00 Bytes  0.00 bits/sec                  receiver</span><br><span class="line">iperf3: interrupt - the client has terminated</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ numactl --physcpubind=2 iperf3 -c <span class="variable">$serverA</span> -P 1 -M 8960 -S 0x08 -t 36000 -p 5201 -l 512k</span><br><span class="line"></span><br><span class="line">[  4] 188.00-189.00 sec  1.15 GBytes  9.89 Gbits/sec   10   2.04 MBytes</span><br><span class="line">[  4] 189.00-190.00 sec  1.15 GBytes  9.87 Gbits/sec   14   1.97 MBytes</span><br><span class="line">[  4] 190.00-191.00 sec  1.15 GBytes  9.87 Gbits/sec   38   1.65 MBytes</span><br><span class="line">[  4] 191.00-192.00 sec  1.15 GBytes  9.89 Gbits/sec   18   1.59 MBytes</span><br><span class="line">[  4] 192.00-193.00 sec  1.15 GBytes  9.86 Gbits/sec   12   2.20 MBytes</span><br><span class="line">[  4] 193.00-194.00 sec  1.15 GBytes  9.90 Gbits/sec    8   2.01 MBytes</span><br><span class="line">[  4] 194.00-195.00 sec  1.15 GBytes  9.86 Gbits/sec    9   1.70 MBytes</span><br><span class="line">[  4] 195.00-196.00 sec  1.15 GBytes  9.87 Gbits/sec    8   2.26 MBytes</span><br><span class="line">[  4] 196.00-196.72 sec   851 MBytes  9.88 Gbits/sec    4   1.99 MBytes</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">[ ID] Interval           Transfer     Bandwidth       Retr</span><br><span class="line">[  4]   0.00-196.72 sec   226 GBytes  9.87 Gbits/sec  3776             sender</span><br><span class="line">[  4]   0.00-196.72 sec  0.00 Bytes  0.00 bits/sec                  receiver</span><br><span class="line">iperf3: interrupt - the client has terminated</span><br></pre></td></tr></table></figure>
+
+<h4 id="Make-sure-retrans-type"><a href="#Make-sure-retrans-type" class="headerlink" title="Make sure retrans type"></a>Make sure retrans type</h4><p><a href="https://github.com/brendangregg/perf-tools" target="_blank" rel="noopener">tcpretrans</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">$ netstat -s | grep -i retrans</span><br><span class="line">    36900 segments retransmited</span><br><span class="line">    TCPLostRetransmit: 135</span><br><span class="line">    36854 fast retransmits</span><br><span class="line">    32 forward retransmits</span><br><span class="line">    9 retransmits <span class="keyword">in</span> slow start</span><br><span class="line">    5 SACK retransmits failed</span><br><span class="line">$ netstat -s | grep -i retrans</span><br><span class="line">    36963 segments retransmited</span><br><span class="line">    TCPLostRetransmit: 135</span><br><span class="line">    36917 fast retransmits</span><br><span class="line">    32 forward retransmits</span><br><span class="line">    9 retransmits <span class="keyword">in</span> slow start</span><br><span class="line">    5 SACK retransmits failed</span><br><span class="line"></span><br><span class="line">17:18:03 0      10.53.19.2:40770     R&gt; 10.53.19.1:5201      ESTABLISHED</span><br><span class="line"> =&gt; tcp_retransmit_skb</span><br><span class="line"> =&gt; tcp_fastretrans_alert</span><br><span class="line"> =&gt; tcp_ack</span><br><span class="line"> =&gt; tcp_rcv_established</span><br><span class="line"> =&gt; tcp_v4_do_rcv</span><br><span class="line"> =&gt; tcp_v4_rcv</span><br><span class="line"> =&gt; ip_local_deliver_finish</span><br><span class="line"> =&gt; ip_local_deliver</span><br><span class="line"> =&gt; ip_rcv_finish</span><br><span class="line"> =&gt; ip_rcv</span><br><span class="line"> =&gt; __netif_receive_skb_core</span><br><span class="line"> =&gt; __netif_receive_skb</span><br><span class="line"> =&gt; netif_receive_skb_internal</span><br><span class="line"> =&gt; napi_gro_receive</span><br><span class="line"> =&gt; i40e_clean_rx_irq</span><br><span class="line"> =&gt; i40e_napi_poll</span><br><span class="line"> =&gt; net_rx_action</span><br><span class="line"> =&gt; __do_softirq</span><br><span class="line"> =&gt; call_softirq</span><br><span class="line"> =&gt; do_softirq</span><br><span class="line"> =&gt; irq_exit</span><br><span class="line"> =&gt; do_IRQ</span><br><span class="line"> =&gt; ret_from_intr</span><br><span class="line"> =&gt; cpuidle_enter_state</span><br><span class="line"> =&gt; cpuidle_idle_call</span><br><span class="line"> =&gt; arch_cpu_idle</span><br><span class="line"> =&gt; cpu_startup_entry</span><br><span class="line"> =&gt; start_secondary</span><br><span class="line"> =&gt; start_cpu</span><br><span class="line">17:18:03 11610  10.53.19.2:40770     R&gt; 10.53.19.1:5201      ESTABLISHED</span><br><span class="line"> =&gt; tcp_retransmit_skb</span><br><span class="line"> =&gt; tcp_fastretrans_alert</span><br><span class="line"> =&gt; tcp_ack</span><br><span class="line"> =&gt; tcp_rcv_established</span><br><span class="line"> =&gt; tcp_v4_do_rcv</span><br><span class="line"> =&gt; release_sock</span><br><span class="line"> =&gt; tcp_sendmsg</span><br><span class="line"> =&gt; inet_sendmsg</span><br><span class="line"> =&gt; sock_aio_write</span><br><span class="line"> =&gt; do_sync_write</span><br><span class="line"> =&gt; vfs_write</span><br><span class="line"> =&gt; SyS_write</span><br><span class="line"> =&gt; system_call_fastpath</span><br><span class="line"></span><br><span class="line">$ ps aux | grep 11610</span><br><span class="line">root     11610 11.9  0.0  10084  1524 pts/1    S+   17:15   0:28 iperf3 -c 10.53.19.1 -P 1 -M 8960 -S 0x08 -t 36000 -p 5201 -l 512k</span><br></pre></td></tr></table></figure>
+
+<h4 id="Analysis-wireshark-log"><a href="#Analysis-wireshark-log" class="headerlink" title="Analysis wireshark log"></a>Analysis wireshark log</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ tshark -r first.pcapng <span class="string">"tcp.analysis.retransmission"</span></span><br><span class="line">no output</span><br><span class="line"></span><br><span class="line">$ tshark -r first.pcapng <span class="string">"tcp.analysis.duplicate_ack"</span></span><br><span class="line"></span><br><span class="line">21801 0.710632534   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#1] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794721 TSecr=61820560 SLE=777178578 SRE=777375434</span></span><br><span class="line">21804 0.710733730   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#2] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794721 TSecr=61820560 SLE=777178578 SRE=777500706</span></span><br><span class="line">21811 0.711034519   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#3] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=777867574</span></span><br><span class="line">21814 0.711153496   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#4] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=778010742</span></span><br><span class="line">21816 0.711206308   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#5] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=778082326</span></span><br><span class="line">21818 0.711259113   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#6] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=778144962</span></span><br><span class="line">21820 0.711369837   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#7] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=778279182</span></span><br><span class="line">21823 0.711477980   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#8] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=778413402</span></span><br><span class="line">21826 0.711584396   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#9] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=778547622</span></span><br><span class="line">21829 0.711695472   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#10] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=778681842</span></span><br><span class="line">21831 0.711749935   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#11] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794722 TSecr=61820560 SLE=777178578 SRE=778753426</span></span><br><span class="line">21834 0.711911211   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#12] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794723 TSecr=61820560 SLE=777178578 SRE=778950282</span></span><br><span class="line">21837 0.712018290   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#13] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794723 TSecr=61820560 SLE=777178578 SRE=779084502</span></span><br><span class="line">21839 0.712073239   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#14] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794723 TSecr=61820560 SLE=777178578 SRE=779147138</span></span><br><span class="line">21842 0.712182142   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#15] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794723 TSecr=61820560 SLE=777178578 SRE=779281358</span></span><br><span class="line">21844 0.712229813   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#16] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794723 TSecr=61820560 SLE=777178578 SRE=779317150</span></span><br><span class="line">21846 0.712343529   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#17] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794723 TSecr=61820560 SLE=777178578 SRE=779487162</span></span><br><span class="line">21848 0.712400110   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#18] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794723 TSecr=61820560 SLE=777178578 SRE=779549798</span></span><br><span class="line">21851 0.712507000   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 21799<span class="comment">#19] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=777160682 Win=5263360 Len=0 TSval=2597794723 TSecr=61820560 SLE=777178578 SRE=779684018</span></span><br><span class="line">28272 1.007961111   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#1] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795019 TSecr=61820858 SLE=1144493978 SRE=1144672938</span></span><br><span class="line">28276 1.008232476   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#2] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795019 TSecr=61820858 SLE=1144493978 SRE=1145012962</span></span><br><span class="line">28278 1.008288165   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#3] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795019 TSecr=61820858 SLE=1144493978 SRE=1145075598</span></span><br><span class="line">28284 1.008612213   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#4] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795019 TSecr=61820858 SLE=1144493978 SRE=1145478258</span></span><br><span class="line">28287 1.008719487   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#5] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795019 TSecr=61820858 SLE=1144493978 SRE=1145612478</span></span><br><span class="line">28290 1.008945676   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#6] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1145898814</span></span><br><span class="line">28292 1.008995223   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#7] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1145961450</span></span><br><span class="line">28294 1.009095692   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#8] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1146077774</span></span><br><span class="line">28296 1.009144335   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#9] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1146140410</span></span><br><span class="line">28298 1.009194590   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#10] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1146203046</span></span><br><span class="line">28300 1.009296391   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#11] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1146328318</span></span><br><span class="line">28303 1.009447610   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#12] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1146516226</span></span><br><span class="line">28305 1.009498110   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#13] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1146578862</span></span><br><span class="line">28307 1.009544808   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#14] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1146632550</span></span><br><span class="line">28309 1.009647030   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#15] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795020 TSecr=61820858 SLE=1144493978 SRE=1146757822</span></span><br><span class="line">28312 1.009798430   10.53.19.1 -&gt; 10.53.19.2   TCP 78 [TCP Dup ACK 28269<span class="comment">#16] targus-getdata1 &gt; 40746 [ACK] Seq=1 Ack=1144476082 Win=18720768 Len=0 TSval=2597795021 TSecr=61820858 SLE=1144493978 SRE=1146945730</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/tshark-1.png" alt=""><br><img src="/img/tshark-2.png" alt=""></p>
+<p>TCP has this inherent mechanism of recovery. In tcp stream eq 8 of your trace there was a condition of retransmission generated due to timing but not because of drops. Here is the snippet of your trace.</p>
+<p>Step-1)Server send a packet to client(Let us call it packet-A){Packet.no-150}</p>
+<p>Step-2)Client acknowledged the packet (Let us call it ack-A){Packet.no-192}</p>
+<p>Step-3)Somehow packet-A was retransmitted by Server.The reason might be the delay in receiving ack-A from client and ack timer got out and retransmission timer got kicked in.(Dup of Packet-A){Packet.no-194}</p>
+<p>Step-4)Client generated a duplicate ack for the retransmitted packet.(Dup of ack-A){Packet.no-195}</p>
+<p><a href="https://osqa-ask.wireshark.org/questions/21006/tcp-dup-acktcp-retransmission" target="_blank" rel="noopener">https://osqa-ask.wireshark.org/questions/21006/tcp-dup-acktcp-retransmission</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/tcp/" rel="tag"><i class="fa fa-tag"></i> tcp</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/27/ipmi/" rel="prev" title="ipmitool">
+      <i class="fa fa-chevron-left"></i> ipmitool
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/02/mem/" rel="next" title="Linux memory">
+      Linux memory <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MSL-Maximum-Segment-Lifetime"><span class="nav-number">1.</span> <span class="nav-text">MSL (Maximum Segment Lifetime)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp-fin-timeout-and-tcp-max-tw-buckets"><span class="nav-number">2.</span> <span class="nav-text">tcp_fin_timeout and tcp_max_tw_buckets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcpdump"><span class="nav-number">3.</span> <span class="nav-text">tcpdump</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-kernel"><span class="nav-number"></span> <span class="nav-text">Linux kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tcp-tw-reuse"><span class="nav-number">1.</span> <span class="nav-text">tcp_tw_reuse</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ethtool"><span class="nav-number"></span> <span class="nav-text">ethtool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SLE-and-SER-in-SACK-RFC2018"><span class="nav-number"></span> <span class="nav-text">SLE and SER in SACK(RFC2018)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spurious-retransmission-timeouts"><span class="nav-number"></span> <span class="nav-text">Spurious retransmission timeouts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thin-stream"><span class="nav-number"></span> <span class="nav-text">Thin-stream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-retrans"><span class="nav-number"></span> <span class="nav-text">tcp retrans</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcp-retrans-1"><span class="nav-number"></span> <span class="nav-text">tcp retrans</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Make-sure-retrans-type"><span class="nav-number">1.</span> <span class="nav-text">Make sure retrans type</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Analysis-wireshark-log"><span class="nav-number">2.</span> <span class="nav-text">Analysis wireshark log</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">599k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">9:05</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/06/01/tcp/",
+            identifier: "2018/06/01/tcp/",
+            title: "Network setting"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

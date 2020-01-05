@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Get hardware status from numactl123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051$ lspci -tvv \-[0000:00]-+-00.0  Intel Corporation Xeon E7 v4&#x2F;Xeon E5 v4&#x2F;Xe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Numa tuning">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/numa/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="Get hardware status from numactl123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051$ lspci -tvv \-[0000:00]-+-00.0  Intel Corporation Xeon E7 v4&#x2F;Xeon E5 v4&#x2F;Xe">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-08-06T11:32:04.000Z">
+<meta property="article:modified_time" content="2020-01-05T11:36:14.841Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="cpu">
+<meta property="article:tag" content="mem">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/08/06/numa/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Numa tuning | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/numa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Numa tuning
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-06 19:32:04" itemprop="dateCreated datePublished" datetime="2018-08-06T19:32:04+08:00">2018-08-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 19:36:14" itemprop="dateModified" datetime="2020-01-05T19:36:14+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hardware/" itemprop="url" rel="index">
+                    <span itemprop="name">hardware</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/08/06/numa/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/08/06/numa/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Get-hardware-status-from-numactl"><a href="#Get-hardware-status-from-numactl" class="headerlink" title="Get hardware status from numactl"></a>Get hardware status from numactl</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">$ lspci -tvv</span><br><span class="line"> \-[0000:00]-+-00.0  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D DMI2</span><br><span class="line">             +-01.0-[01-02]----00.0  LSI Logic / Symbios Logic SAS3008 PCI-Express Fusion-MPT SAS-3</span><br><span class="line">             +-02.0-[03-04]--+-00.0  Intel Corporation Ethernet Controller X710 <span class="keyword">for</span> 10GbE SFP+</span><br><span class="line">             |               \-00.1  Intel Corporation Ethernet Controller X710 <span class="keyword">for</span> 10GbE SFP+</span><br><span class="line">             +-02.2-[05-06]--+-00.0  Intel Corporation Ethernet Controller 10-Gigabit X540-AT2</span><br><span class="line">             |               \-00.1  Intel Corporation Ethernet Controller 10-Gigabit X540-AT2</span><br><span class="line">             +-03.0-[07]--</span><br><span class="line">             +-03.2-[08]----00.0  Intel Corporation I210 Gigabit Network Connection</span><br><span class="line">             +-04.0  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 0</span><br><span class="line">             +-04.1  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 1</span><br><span class="line">             +-04.2  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 2</span><br><span class="line">             +-04.3  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 3</span><br><span class="line">             +-04.4  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 4</span><br><span class="line">             +-04.5  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 5</span><br><span class="line">             +-04.6  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 6</span><br><span class="line">             +-04.7  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 7</span><br><span class="line">             +-05.0  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Map/VTd_Misc/System Management</span><br><span class="line">             +-05.1  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D IIO Hot Plug</span><br><span class="line">             +-05.2  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D IIO RAS/Control Status/Global Errors</span><br><span class="line">             +-05.4  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D I/O APIC</span><br><span class="line">             +-11.0  Intel Corporation C610/X99 series chipset SPSR</span><br><span class="line">             +-11.3  Intel Corporation C610/X99 series chipset MS SMBus 2</span><br><span class="line">             +-11.4  Intel Corporation C610/X99 series chipset sSATA Controller [AHCI mode]</span><br><span class="line">             +-14.0  Intel Corporation C610/X99 series chipset USB xHCI Host Controller</span><br><span class="line">             +-16.0  Intel Corporation C610/X99 series chipset MEI Controller <span class="comment">#1</span></span><br><span class="line">             +-16.1  Intel Corporation C610/X99 series chipset MEI Controller <span class="comment">#2</span></span><br><span class="line">             +-1a.0  Intel Corporation C610/X99 series chipset USB Enhanced Host Controller <span class="comment">#2</span></span><br><span class="line">             +-1c.0-[09]--</span><br><span class="line">             +-1c.2-[0a-0b]----00.0-[0b]----00.0  ASPEED Technology, Inc. ASPEED Graphics Family</span><br><span class="line">             +-1d.0  Intel Corporation C610/X99 series chipset USB Enhanced Host Controller <span class="comment">#1</span></span><br><span class="line">             +-1f.0  Intel Corporation C610/X99 series chipset LPC Controller</span><br><span class="line">             +-1f.2  Intel Corporation C610/X99 series chipset 6-Port SATA Controller [AHCI mode]</span><br><span class="line">             +-1f.3  Intel Corporation C610/X99 series chipset SMBus Controller</span><br><span class="line">             \-1f.6  Intel Corporation C610/X99 series chipset Thermal Subsystem</span><br><span class="line"></span><br><span class="line">$ numactl --prefer pci:0000:00:01.0 --show</span><br><span class="line">policy: preferred</span><br><span class="line">preferred node: 0</span><br><span class="line">physcpubind: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19</span><br><span class="line">cpubind: 0 1</span><br><span class="line">nodebind: 0 1</span><br><span class="line">membind: 0 1</span><br><span class="line"></span><br><span class="line">$ numactl --prefer pci:0000:00:02.0-04 --show</span><br><span class="line">policy: preferred</span><br><span class="line">preferred node: 0</span><br><span class="line">physcpubind: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19</span><br><span class="line">cpubind: 0 1</span><br><span class="line">nodebind: 0 1</span><br><span class="line">membind: 0 1</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="show-status"><a href="#show-status" class="headerlink" title="show status"></a>show status</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">$ dmesg -T | grep numa -i</span><br><span class="line">[Mon Aug  6 19:40:25 2018] No NUMA configuration found</span><br><span class="line">[Mon Aug  6 19:41:05 2018] pci_bus 0000:00: on NUMA node 0</span><br><span class="line"></span><br><span class="line">$ numastat</span><br><span class="line">                           node0</span><br><span class="line">numa_hit                 2614819</span><br><span class="line">numa_miss                      0</span><br><span class="line">numa_foreign                   0</span><br><span class="line">interleave_hit           1649936</span><br><span class="line">local_node               2614819</span><br><span class="line">other_node                     0</span><br><span class="line"></span><br><span class="line">If ACPI is disabled, that will also <span class="built_in">disable</span> NUMA; verify that ACPI is not disabled by a grub.conf kernel parameter and remove it <span class="keyword">if</span> found</span><br><span class="line">be careful you have not <span class="built_in">disable</span> ACPI <span class="keyword">in</span> BIOS, <span class="keyword">if</span> you don <span class="string">'t know how to do, please reset the BIOS to default setting.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># reset the BIOS to default</span></span><br><span class="line"><span class="string">$ numastat</span></span><br><span class="line"><span class="string">                           node0           node1           node2           node3</span></span><br><span class="line"><span class="string">numa_hit                 8998488         9332734         8955045         9799005</span></span><br><span class="line"><span class="string">numa_miss                      0               0               0               0</span></span><br><span class="line"><span class="string">numa_foreign                   0               0               0               0</span></span><br><span class="line"><span class="string">interleave_hit            412304          412624          412322          412620</span></span><br><span class="line"><span class="string">local_node               8996406         8912288         8534168         9378404</span></span><br><span class="line"><span class="string">other_node                  2082          420446          420877          420601</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ numactl --hardware</span></span><br><span class="line"><span class="string">available: 4 nodes (0-3)</span></span><br><span class="line"><span class="string">node 0 cpus: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74</span></span><br><span class="line"><span class="string">node 0 size: 786305 MB</span></span><br><span class="line"><span class="string">node 0 free: 768918 MB</span></span><br><span class="line"><span class="string">node 1 cpus: 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89</span></span><br><span class="line"><span class="string">node 1 size: 786432 MB</span></span><br><span class="line"><span class="string">node 1 free: 768579 MB</span></span><br><span class="line"><span class="string">node 2 cpus: 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104</span></span><br><span class="line"><span class="string">node 2 size: 786432 MB</span></span><br><span class="line"><span class="string">node 2 free: 769063 MB</span></span><br><span class="line"><span class="string">node 3 cpus: 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119</span></span><br><span class="line"><span class="string">node 3 size: 786432 MB</span></span><br><span class="line"><span class="string">node 3 free: 766922 MB</span></span><br><span class="line"><span class="string">node distances:</span></span><br><span class="line"><span class="string">node   0   1   2   3</span></span><br><span class="line"><span class="string">  0:  10  21  21  21</span></span><br><span class="line"><span class="string">  1:  21  10  21  21</span></span><br><span class="line"><span class="string">  2:  21  21  10  21</span></span><br><span class="line"><span class="string">  3:  21  21  21  10</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Interleave-mode"><a href="#Interleave-mode" class="headerlink" title="Interleave mode"></a>Interleave mode</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vm.zone_reclaim_mode = 0 <span class="comment">## default,could use remote numa memroy</span></span><br><span class="line">numactl --interleave=all ./your_script</span><br></pre></td></tr></table></figure>
+
+<h4 id="disable-numa-in-grub"><a href="#disable-numa-in-grub" class="headerlink" title="disable numa in grub"></a>disable numa in grub</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rhgb quiet numa=off</span><br></pre></td></tr></table></figure>
+
+<h4 id="Get-your-process-info-about-numa"><a href="#Get-your-process-info-about-numa" class="headerlink" title="Get your process info about numa"></a>Get your process info about numa</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `pidof qemu-kvm`; <span class="keyword">do</span> cat /proc/<span class="variable">$i</span>/status | grep -E <span class="string">'Cpus_allowed_list|Mems_allowed_list'</span>; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/cpu/" rel="tag"><i class="fa fa-tag"></i> cpu</a>
+              <a href="/tags/mem/" rel="tag"><i class="fa fa-tag"></i> mem</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/12/benchmark/" rel="prev" title="Benchmark">
+      <i class="fa fa-chevron-left"></i> Benchmark
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/13/ext4/" rel="next" title="ext4 info">
+      ext4 info <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-hardware-status-from-numactl"><span class="nav-number">1.</span> <span class="nav-text">Get hardware status from numactl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#show-status"><span class="nav-number">2.</span> <span class="nav-text">show status</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Interleave-mode"><span class="nav-number">2.1.</span> <span class="nav-text">Interleave mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#disable-numa-in-grub"><span class="nav-number">2.2.</span> <span class="nav-text">disable numa in grub</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-your-process-info-about-numa"><span class="nav-number">2.3.</span> <span class="nav-text">Get your process info about numa</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">599k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">9:05</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/08/06/numa/",
+            identifier: "2018/08/06/numa/",
+            title: "Numa tuning"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Ftraceftrace kernel docsevents kernel docs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ftrace">
+<meta property="og:url" content="http://yoursite.com/2018/11/22/ftrace/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="Ftraceftrace kernel docsevents kernel docs">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-22T02:00:45.000Z">
+<meta property="article:modified_time" content="2020-01-05T11:51:33.058Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="ftrace">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/11/22/ftrace/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ftrace | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/ftrace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ftrace
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-22 10:00:45" itemprop="dateCreated datePublished" datetime="2018-11-22T10:00:45+08:00">2018-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 19:51:33" itemprop="dateModified" datetime="2020-01-05T19:51:33+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/debug/" itemprop="url" rel="index">
+                    <span itemprop="name">debug</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/22/ftrace/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/22/ftrace/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Ftrace"><a href="#Ftrace" class="headerlink" title="Ftrace"></a><a href="https://zhuanlan.zhihu.com/p/22130013" target="_blank" rel="noopener">Ftrace</a></h3><p><a href="https://www.kernel.org/doc/Documentation/trace/ftrace.txt" target="_blank" rel="noopener">ftrace kernel docs</a><br><a href="https://www.kernel.org/doc/Documentation/trace/events.txt" target="_blank" rel="noopener">events kernel docs</a></p>
+<a id="more"></a>
+<h4 id="Instances"><a href="#Instances" class="headerlink" title="Instances"></a>Instances</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mount -t debugfs none &#x2F;your-mount-point</span><br><span class="line">CentOS default enabled &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;tracing</span><br><span class="line"></span><br><span class="line">function_graph</span><br><span class="line">The function_graph tracer is designed to present results in a more visually appealing format. This tracer also traces the exit of the function, displaying a flow of function calls in the kernel. Note that this tracer has more overhead than the function tracer when enabled, but the same low overhead when disabled.</span><br><span class="line">wakeup</span><br><span class="line">A full CPU tracer that reports the activity happening across all CPUs. Records the time that it takes to wake up the highest priority task in the system, whether that task is a real time task or not. Recording the max time it takes to wake up a non real time task will hide the times it takes to wake up a real time task.</span><br><span class="line">wakeup_rt</span><br><span class="line">A full CPU tracer that reports the activity happening across all CPUs. Records the time that it takes from the current highests priority task to wake up to the time it is scheduled. Only records the time for real time tasks.</span><br><span class="line">preemptirqsoff</span><br><span class="line">Traces the areas that disable pre-emption or interrupts, and records the maximum amount of time for which pre-emption or interrupts were disabled.</span><br><span class="line">preemptoff</span><br><span class="line">Similar to the preemptirqsoff tracer but traces only the maximum interval for which preemption was disabled.</span><br><span class="line">irqsoff</span><br><span class="line">Similar to the preemptirqsoff tracer but traces only the maximum interval for which interrupts were disabled.</span><br><span class="line">nop</span><br><span class="line">The default tracer. It does not provide any tracing facility itself, but as events may interleave into any tracer, the nop tracer is used for specific interest in tracing events.</span><br><span class="line"></span><br><span class="line">instances:</span><br><span class="line">This is a way to make multiple trace buffers where different events can be recorded in different buffers. See &quot;Instances&quot; section below.</span><br><span class="line"></span><br><span class="line">Disable function and function_graph tracing</span><br><span class="line">default is enabled</span><br></pre></td></tr></table></figure>
+<p>cat /sys/kernel/debug/tracing/options/function-trace<br>1</p>
+<p>echo 0 &gt; /sys/kernel/debug/tracing/options/function-trace</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">echo the number of microseconds above which latencies must be</span><br><span class="line">recorded:</span><br></pre></td></tr></table></figure>
+<p>echo 200 &gt; /sys/kernel/debug/tracing/tracing_thresh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>/sys/kernel/debug/tracing is a instance, if you need more instance, you could mkdir /sys/kernel/debug/tracing/instances/foo<br>echo &gt; trace # clean buffer<br>echo $pid &gt; set_ftrace_pid</p>
+<p>cat available_filter_functions<br>echo $(get from cat available_filter_functions) &gt; set_ftrace_filter<br>echo ‘sched<em>‘ &gt; set_ftrace_filter<br>echo ‘*lock</em>‘ &gt; set_ftrace_filter<br>echo ‘spin_<em>‘ &gt; set_ftrace_filter<br>echo ‘*cpu</em>‘ &gt; set_ftrace_filter<br>set_ftrace_notrace (opposite to that of set_ftrace_filter)</p>
+<p>echo 1 &gt; tracing_on #enable trace<br>echo 0 &gt; tracing_on #disable</p>
+<h1 id="tracer-function"><a href="#tracer-function" class="headerlink" title="tracer: function"></a>tracer: function</h1><p>#</p>
+<h1 id="entries-in-buffer-entries-written-975-975-P-40"><a href="#entries-in-buffer-entries-written-975-975-P-40" class="headerlink" title="entries-in-buffer/entries-written: 975/975   #P:40"></a>entries-in-buffer/entries-written: 975/975   #P:40</h1><p>#</p>
+<h1 id="—–-gt-irqs-off"><a href="#—–-gt-irqs-off" class="headerlink" title="_—–=&gt; irqs-off"></a>_—–=&gt; irqs-off</h1><h1 id="—-gt-need-resched"><a href="#—-gt-need-resched" class="headerlink" title="/ _—-=&gt; need-resched"></a>/ _—-=&gt; need-resched</h1><h1 id="—-gt-hardirq-softirq"><a href="#—-gt-hardirq-softirq" class="headerlink" title="| / _—=&gt; hardirq/softirq"></a>| / _—=&gt; hardirq/softirq</h1><h1 id="–-gt-preempt-depth"><a href="#–-gt-preempt-depth" class="headerlink" title="|| / _–=&gt; preempt-depth"></a>|| / _–=&gt; preempt-depth</h1><h1 id="delay"><a href="#delay" class="headerlink" title="||| /     delay"></a>||| /     delay</h1><h1 id="TASK-PID-CPU-TIMESTAMP-FUNCTION"><a href="#TASK-PID-CPU-TIMESTAMP-FUNCTION" class="headerlink" title="TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION"></a>TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION</h1><h1 id=""><a href="#" class="headerlink" title="| |       |   ||||       |         |"></a>| |       |   ||||       |         |</h1><pre><code>z_wr_iss-3045  [014] .... 188761.253438: schedule &lt;-taskq_thread
+z_wr_iss-3045  [014] .... 188761.277938: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [008] .... 188761.278328: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [008] .... 188761.278333: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [008] .... 188761.278368: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [008] .... 188761.279231: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [012] d.h. 188761.279421: scheduler_tick &lt;-update_process_times
+z_wr_iss-3045  [012] .... 188761.279662: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [008] .... 188761.279750: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [004] .... 188761.279785: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [004] .... 188761.279896: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [004] .... 188761.280008: schedule_preempt_disabled &lt;-__mutex_lock_slowpath
+z_wr_iss-3045  [004] .... 188761.280020: schedule_preempt_disabled &lt;-__mutex_lock_slowpath</code></pre><p>$ echo function_graph &gt; current_tracer<br>$ cat trace  | head -20</p>
+<h1 id="tracer-function-graph"><a href="#tracer-function-graph" class="headerlink" title="tracer: function_graph"></a>tracer: function_graph</h1><p>#</p>
+<h1 id="CPU-DURATION-FUNCTION-CALLS"><a href="#CPU-DURATION-FUNCTION-CALLS" class="headerlink" title="CPU  DURATION                  FUNCTION CALLS"></a>CPU  DURATION                  FUNCTION CALLS</h1><h1 id="-1"><a href="#-1" class="headerlink" title="|     |   |                     |   |   |   |"></a>|     |   |                     |   |   |   |</h1><p>   2)   0.114 us    |                            finish_task_switch();<br>   2) + 31.319 us   |                          } /* __schedule <em>/<br>   2) + 32.114 us   |                        } /</em> schedule_preempt_disabled */<br>   2)   0.108 us    |                        _raw_spin_lock();<br>   2)               |                        schedule_preempt_disabled() {<br>   2)               |                          __schedule() {<br>   2)   0.047 us    |                            rcu_note_context_switch();<br>   2)   0.050 us    |                            _raw_spin_lock_irq();<br>   2)               |                            deactivate_task() {<br>   2)               |                              dequeue_task() {<br>   2)   0.098 us    |                                update_rq_clock.part.81();<br>   2)               |                                dequeue_task_fair() {<br>   2)               |                                  dequeue_entity() {<br>   2)               |                                    update_curr() {<br>   2)   0.049 us    |                                      intel_pstate_update_util();<br>   2)   0.050 us    |                                      __calc_delta();</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### Events</span><br></pre></td></tr></table></figure>
+<p>To enable all events, echo ‘<em>:</em>‘ or ‘<em>:’ to the set_event file:<br>$ echo *:</em> &gt; /sys/kernel/debug/tracing/set_event</p>
+<p>To enable event ‘sched_wakeup’:<br>$ echo 1 &gt; /sys/kernel/debug/tracing/events/sched/sched_wakeup/enable</p>
+<p>To disable it:<br>$ echo 0 &gt; /sys/kernel/debug/tracing/events/sched/sched_wakeup/enable</p>
+<p>To enable all events in sched subsystem:<br>$ echo 1 &gt; /sys/kernel/debug/tracing/events/sched/enable</p>
+<p>To enable all events:<br>$ echo 1 &gt; /sys/kernel/debug/tracing/events/enable</p>
+<p>When reading one of these enable files, there are four results:</p>
+<p> 0 - all events this file affects are disabled<br> 1 - all events this file affects are enabled<br> X - there is a mixture of events enabled and disabled<br> ? - this file does not affect any event</p>
+<p>echo 0 &gt; tracing_on<br>echo nop &gt; current_tracer</p>
+<p>cat available_events<br>or<br>cd /sys/kernel/debug/tracing/events</p>
+<p>cat set_ftrace_pid<br>no pid<br>echo &gt; trace<br>echo 99479 &gt; set_ftrace_pid<br>echo 1 &gt; tracing_on<br>echo sched:* &gt; set_event<br>echo ‘irq:<em>‘ &gt;&gt; set_event<br>echo ‘lock:</em>‘ &gt;&gt; set_event</p>
+<h1 id="tracer-nop"><a href="#tracer-nop" class="headerlink" title="tracer: nop"></a>tracer: nop</h1><p>#</p>
+<h1 id="entries-in-buffer-entries-written-4916-4916-P-40"><a href="#entries-in-buffer-entries-written-4916-4916-P-40" class="headerlink" title="entries-in-buffer/entries-written: 4916/4916   #P:40"></a>entries-in-buffer/entries-written: 4916/4916   #P:40</h1><p>#</p>
+<h1 id="—–-gt-irqs-off-1"><a href="#—–-gt-irqs-off-1" class="headerlink" title="_—–=&gt; irqs-off"></a>_—–=&gt; irqs-off</h1><h1 id="—-gt-need-resched-1"><a href="#—-gt-need-resched-1" class="headerlink" title="/ _—-=&gt; need-resched"></a>/ _—-=&gt; need-resched</h1><h1 id="—-gt-hardirq-softirq-1"><a href="#—-gt-hardirq-softirq-1" class="headerlink" title="| / _—=&gt; hardirq/softirq"></a>| / _—=&gt; hardirq/softirq</h1><h1 id="–-gt-preempt-depth-1"><a href="#–-gt-preempt-depth-1" class="headerlink" title="|| / _–=&gt; preempt-depth"></a>|| / _–=&gt; preempt-depth</h1><h1 id="delay-1"><a href="#delay-1" class="headerlink" title="||| /     delay"></a>||| /     delay</h1><h1 id="TASK-PID-CPU-TIMESTAMP-FUNCTION-1"><a href="#TASK-PID-CPU-TIMESTAMP-FUNCTION-1" class="headerlink" title="TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION"></a>TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION</h1><h1 id="-2"><a href="#-2" class="headerlink" title="| |       |   ||||       |         |"></a>| |       |   ||||       |         |</h1><pre><code> &lt;...&gt;-99479 [010] d... 197736.430796: sched_stat_runtime: comm=bash pid=99479 runtime=152273 [ns] vruntime=833140516509 [ns]
+ &lt;...&gt;-99479 [010] dN.. 197736.430798: sched_wakeup: comm=kworker/10:0 pid=94482 prio=120 success=1 target_cpu=010
+ &lt;...&gt;-99479 [010] dN.. 197736.430798: sched_wakeup: comm=bash pid=99479 prio=120 success=1 target_cpu=010
+ &lt;...&gt;-99479 [010] d... 197736.430800: sched_switch: prev_comm=bash prev_pid=99479 prev_prio=120 prev_state=R ==&gt; next_comm=kworker/10:0 next_pid=94482 next_prio=120
+ &lt;...&gt;-94482 [010] d... 197736.430804: sched_wakeup: comm=sshd pid=99477 prio=120 success=1 target_cpu=032
+ &lt;...&gt;-94482 [010] d... 197736.430805: sched_stat_runtime: comm=kworker/10:0 pid=94482 runtime=9300 [ns] vruntime=833128525809 [ns]
+ &lt;...&gt;-94482 [010] d... 197736.430806: sched_switch: prev_comm=kworker/10:0 prev_pid=94482 prev_prio=120 prev_state=S ==&gt; next_comm=bash next_pid=99479 next_prio=120
+&lt;idle&gt;-0     [032] d... 197736.430807: sched_switch: prev_comm=swapper/32 prev_pid=0 prev_prio=120 prev_state=R ==&gt; next_comm=sshd next_pid=99477 next_prio=120
+ &lt;...&gt;-99477 [032] d... 197736.430839: sched_stat_runtime: comm=sshd pid=99477 runtime=36358 [ns] vruntime=9311452689443 [ns]
+ &lt;...&gt;-99477 [032] d... 197736.430848: sched_switch: prev_comm=sshd prev_pid=99477 prev_prio=120 prev_state=S ==&gt; next_comm=swapper/32 next_pid=0 next_prio=120
+ &lt;...&gt;-99479 [010] d... 197736.431094: sched_stat_runtime: comm=bash pid=99479 runtime=288569 [ns] vruntime=833140805078 [ns]
+ &lt;...&gt;-99479 [010] dN.. 197736.431095: sched_wakeup: comm=kworker/10:0 pid=94482 prio=120 success=1 target_cpu=010
+ &lt;...&gt;-99479 [010] dN.. 197736.431095: sched_wakeup: comm=bash pid=99479 prio=120 success=1 target_cpu=010
+ &lt;...&gt;-99479 [010] d... 197736.431096: sched_switch: prev_comm=bash prev_pid=99479 prev_prio=120 prev_state=R ==&gt; next_comm=kworker/10:0 next_pid=94482 next_prio=120</code></pre><p>######## Get sched_switch filter options</p>
+<p>cat /sys/kernel/debug/tracing/events/sched/sched_switch/format<br>name: sched_switch<br>ID: 324<br>format:<br>    field:unsigned short common_type;    offset:0;    size:2;    signed:0;<br>    field:unsigned char common_flags;    offset:2;    size:1;    signed:0;<br>    field:unsigned char common_preempt_count;    offset:3;    size:1;    signed:0;<br>    field:int common_pid;    offset:4;    size:4;    signed:1;</p>
+<pre><code>field:char prev_comm[16];    offset:8;    size:16;    signed:1;
+field:pid_t prev_pid;    offset:24;    size:4;    signed:1;
+field:int prev_prio;    offset:28;    size:4;    signed:1;
+field:long prev_state;    offset:32;    size:8;    signed:1;
+field:char next_comm[16];    offset:40;    size:16;    signed:1;
+field:pid_t next_pid;    offset:56;    size:4;    signed:1;
+field:int next_prio;    offset:60;    size:4;    signed:1;</code></pre><p>print fmt: “prev_comm=%s prev_pid=%d prev_prio=%d prev_state=%s%s ==&gt; next_comm=%s next_pid=%d next_prio=%d”, REC-&gt;prev_comm, REC-&gt;prev_pid, REC-&gt;prev_prio, REC-&gt;prev_state &amp; (1024-1) ? __print_flags(REC-&gt;prev_state &amp; (1024-1), “|”, { 1, “S”} , { 2, “D” }, { 4, “T” }, { 8, “t” }, { 16, “Z” }, { 32, “X” }, { 64, “x” }, { 128, “K” }, { 256, “W” }, { 512, “P” }) : “R”, REC-&gt;prev_state &amp; 1024 ? “+” : “”, REC-&gt;next_comm, REC-&gt;next_pid, REC-&gt;next_prio</p>
+<p>$echo ‘next_comm ~ “cs”‘ &gt; /sys/kernel/debug/tracing/events/sched/sched_switch/filter</p>
+<p>$ cat trace | head -40</p>
+<h1 id="tracer-nop-1"><a href="#tracer-nop-1" class="headerlink" title="tracer: nop"></a>tracer: nop</h1><p>#</p>
+<h1 id="entries-in-buffer-entries-written-1017-1017-P-40"><a href="#entries-in-buffer-entries-written-1017-1017-P-40" class="headerlink" title="entries-in-buffer/entries-written: 1017/1017   #P:40"></a>entries-in-buffer/entries-written: 1017/1017   #P:40</h1><p>#</p>
+<h1 id="—–-gt-irqs-off-2"><a href="#—–-gt-irqs-off-2" class="headerlink" title="_—–=&gt; irqs-off"></a>_—–=&gt; irqs-off</h1><h1 id="—-gt-need-resched-2"><a href="#—-gt-need-resched-2" class="headerlink" title="/ _—-=&gt; need-resched"></a>/ _—-=&gt; need-resched</h1><h1 id="—-gt-hardirq-softirq-2"><a href="#—-gt-hardirq-softirq-2" class="headerlink" title="| / _—=&gt; hardirq/softirq"></a>| / _—=&gt; hardirq/softirq</h1><h1 id="–-gt-preempt-depth-2"><a href="#–-gt-preempt-depth-2" class="headerlink" title="|| / _–=&gt; preempt-depth"></a>|| / _–=&gt; preempt-depth</h1><h1 id="delay-2"><a href="#delay-2" class="headerlink" title="||| /     delay"></a>||| /     delay</h1><h1 id="TASK-PID-CPU-TIMESTAMP-FUNCTION-2"><a href="#TASK-PID-CPU-TIMESTAMP-FUNCTION-2" class="headerlink" title="TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION"></a>TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION</h1><h1 id="-3"><a href="#-3" class="headerlink" title="| |       |   ||||       |         |"></a>| |       |   ||||       |         |</h1><pre><code>    &lt;...&gt;-99479 [004] d... 198076.877184: sched_stat_runtime: comm=bash pid=99479 runtime=192500 [ns] vruntime=910963064502 [ns]
+    &lt;...&gt;-99479 [004] dN.. 198076.877185: sched_wakeup: comm=kworker/4:2 pid=437777 prio=120 success=1 target_cpu=004
+    &lt;...&gt;-99479 [004] dN.. 198076.877186: sched_wakeup: comm=bash pid=99479 prio=120 success=1 target_cpu=004
+    &lt;...&gt;-437777 [004] d... 198076.877192: sched_wakeup: comm=sshd pid=99477 prio=120 success=1 target_cpu=032
+    &lt;...&gt;-437777 [004] d... 198076.877193: sched_stat_runtime: comm=kworker/4:2 pid=437777 runtime=9871 [ns] vruntime=910951074373 [ns]
+    &lt;...&gt;-99477 [032] d... 198076.877225: sched_stat_runtime: comm=sshd pid=99477 runtime=34303 [ns] vruntime=9311457538136 [ns]
+    &lt;...&gt;-99479 [004] d.h. 198076.877272: sched_stat_runtime: comm=bash pid=99479 runtime=78293 [ns] vruntime=910963142795 [ns]
+    &lt;...&gt;-99479 [004] d.H. 198076.877281: sched_wakeup: comm=rcu_sched pid=10 prio=120 success=1 target_cpu=010
+rcu_sched-10    [010] d... 198076.877287: sched_stat_runtime: comm=rcu_sched pid=10 runtime=7465 [ns] vruntime=833154240570 [ns]
+    &lt;...&gt;-99479 [004] d... 198076.877487: sched_stat_runtime: comm=bash pid=99479 runtime=215091 [ns] vruntime=910963357886 [ns]
+    &lt;...&gt;-99479 [004] dN.. 198076.877487: sched_wakeup: comm=kworker/4:2 pid=437777 prio=120 success=1 target_cpu=004
+    &lt;...&gt;-99479 [004] dN.. 198076.877488: sched_wakeup: comm=bash pid=99479 prio=120 success=1 target_cpu=004
+    &lt;...&gt;-437777 [004] d... 198076.877492: sched_wakeup: comm=sshd pid=99477 prio=120 success=1 target_cpu=032
+    &lt;...&gt;-437777 [004] d... 198076.877493: sched_stat_runtime: comm=kworker/4:2 pid=437777 runtime=6786 [ns] vruntime=910951364672 [ns]
+    &lt;...&gt;-99479 [004] d... 198076.877499: sched_stat_runtime: comm=bash pid=99479 runtime=5766 [ns] vruntime=910963363652 [ns]
+    &lt;...&gt;-99477 [032] d... 198076.877526: sched_stat_runtime: comm=sshd pid=99477 runtime=34484 [ns] vruntime=9311457572620 [ns]
+   &lt;idle&gt;-0     [010] dNs. 198076.881270: sched_wakeup: comm=rcu_sched pid=10 prio=120 success=1 target_cpu=010
+rcu_sched-10    [010] d... 198076.881286: sched_stat_runtime: comm=rcu_sched pid=10 runtime=15885 [ns] vruntime=833154256455 [ns]
+   &lt;idle&gt;-0     [016] dNs. 198076.881495: sched_wakeup: comm=kworker/u896:0 pid=163541 prio=120 success=1 target_cpu=016
+    &lt;...&gt;-163541 [016] d... 198076.881501: sched_stat_runtime: comm=kworker/u896:0 pid=163541 runtime=5333 [ns] vruntime=847786361111 [ns]</code></pre><p>$ cd /sys/kernel/debug/tracing/events/signal/signal_generate<br>$ echo “((sig &gt;= 10 &amp;&amp; sig &lt; 15) || sig == 17) &amp;&amp; comm != bash” &gt; filter</p>
+<h1 id="clear-filters"><a href="#clear-filters" class="headerlink" title="clear filters"></a>clear filters</h1><p>$ echo 0 &gt; filter</p>
+<p>$ cd /sys/kernel/debug/tracing/events/sched<br>$ echo prev_pid == 0 &gt; filter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="stacktrace"><a href="#stacktrace" class="headerlink" title="stacktrace"></a>stacktrace</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ echo 1 &gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;stack_tracer_enabled</span><br><span class="line">$ cat stack_max_size</span><br><span class="line">4720</span><br><span class="line">$ cat stack_trace</span><br><span class="line">        Depth    Size   Location    (57 entries)</span><br><span class="line">        -----    ----   --------</span><br><span class="line">  0)     4720     320   alloc_iova_fast+0xd8&#x2F;0x1e0</span><br><span class="line">  1)     4400      48   intel_alloc_iova+0xa5&#x2F;0xd0</span><br><span class="line">  2)     4352      80   __intel_map_single+0x97&#x2F;0x1a0</span><br><span class="line">  3)     4272      16   intel_map_page+0x33&#x2F;0x40</span><br><span class="line">  4)     4256      16   dma_map_page_attrs+0x36&#x2F;0x38 [i40e]</span><br><span class="line">  5)     4240     184   i40e_lan_xmit_frame+0x115b&#x2F;0x13b0 [i40e]</span><br><span class="line">  6)     4056     120   dev_hard_start_xmit+0x246&#x2F;0x3b0</span><br><span class="line">  7)     3936      80   sch_direct_xmit+0x11a&#x2F;0x250</span><br><span class="line">  8)     3856     112   __dev_queue_xmit+0x4a1&#x2F;0x660</span><br><span class="line">  9)     3744      16   dev_queue_xmit+0x10&#x2F;0x20</span><br><span class="line"> 10)     3728      32   bond_dev_queue_xmit+0x32&#x2F;0x80 [bonding]</span><br><span class="line"> 11)     3696      72   bond_start_xmit+0x1be&#x2F;0x420 [bonding]</span><br><span class="line"> 12)     3624     120   dev_hard_start_xmit+0x246&#x2F;0x3b0</span><br><span class="line"> 13)     3504     120   __dev_queue_xmit+0x529&#x2F;0x660</span><br><span class="line"> 14)     3384      16   dev_queue_xmit+0x10&#x2F;0x20</span><br></pre></td></tr></table></figure>
+
+<h3 id="trace-cmd"><a href="#trace-cmd" class="headerlink" title="trace-cmd"></a>trace-cmd</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install trace-cmd</span><br><span class="line">$ trace-cmd ls -l</span><br><span class="line">$ trace-cmd record -p function ls -l</span><br><span class="line">$ trace-cmd record -p function -l &#39;sched*&#39; myapp</span><br><span class="line">$ trace-cmd record -e sched_wakeup ls &#x2F;bin</span><br><span class="line">$ trace-cmd report </span><br><span class="line"></span><br><span class="line">#enable all irq events</span><br><span class="line">$ trace-cmd start -e irq</span><br><span class="line">$ trace-cmd start -p wakeup_rt</span><br><span class="line">$ trace-cmd start -p preemptirqsoff -d</span><br><span class="line">$ trace-cmd start -p nop</span><br></pre></td></tr></table></figure>
+
+<h3 id="disk-iohang"><a href="#disk-iohang" class="headerlink" title="disk iohang"></a><a href="http://www.sysnote.org/2017/03/15/error-disk-cause-iohang/" target="_blank" rel="noopener">disk iohang</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -t debugfs debugfs &#x2F;sys&#x2F;kernel&#x2F;debug</span><br><span class="line"></span><br><span class="line">echo 1 &gt; &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;tracing&#x2F;events&#x2F;scsi&#x2F;scsi_dispatch_cmd_start&#x2F;enable</span><br><span class="line">echo 1 &gt; &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;tracing&#x2F;events&#x2F;scsi&#x2F;scsi_dispatch_cmd_timeout&#x2F;enable</span><br><span class="line"></span><br><span class="line">## filter</span><br><span class="line">grep &quot;host_no&#x3D;7 channel&#x3D;0 id&#x3D;0 lun&#x3D;0&quot; &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;tracing&#x2F;trace</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/ftrace/" rel="tag"><i class="fa fa-tag"></i> ftrace</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/13/ext4/" rel="prev" title="ext4 info">
+      <i class="fa fa-chevron-left"></i> ext4 info
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/23/perf/" rel="next" title="perf">
+      perf <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ftrace"><span class="nav-number">1.</span> <span class="nav-text">Ftrace</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Instances"><span class="nav-number">1.1.</span> <span class="nav-text">Instances</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tracer-function"><span class="nav-number"></span> <span class="nav-text">tracer: function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#entries-in-buffer-entries-written-975-975-P-40"><span class="nav-number"></span> <span class="nav-text">entries-in-buffer&#x2F;entries-written: 975&#x2F;975   #P:40</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—–-gt-irqs-off"><span class="nav-number"></span> <span class="nav-text">_—–&#x3D;&gt; irqs-off</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—-gt-need-resched"><span class="nav-number"></span> <span class="nav-text">&#x2F; _—-&#x3D;&gt; need-resched</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—-gt-hardirq-softirq"><span class="nav-number"></span> <span class="nav-text">| &#x2F; _—&#x3D;&gt; hardirq&#x2F;softirq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#–-gt-preempt-depth"><span class="nav-number"></span> <span class="nav-text">|| &#x2F; _–&#x3D;&gt; preempt-depth</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delay"><span class="nav-number"></span> <span class="nav-text">||| &#x2F;     delay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TASK-PID-CPU-TIMESTAMP-FUNCTION"><span class="nav-number"></span> <span class="nav-text">TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number"></span> <span class="nav-text">| |       |   ||||       |         |</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tracer-function-graph"><span class="nav-number"></span> <span class="nav-text">tracer: function_graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-DURATION-FUNCTION-CALLS"><span class="nav-number"></span> <span class="nav-text">CPU  DURATION                  FUNCTION CALLS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-1"><span class="nav-number"></span> <span class="nav-text">|     |   |                     |   |   |   |</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tracer-nop"><span class="nav-number"></span> <span class="nav-text">tracer: nop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#entries-in-buffer-entries-written-4916-4916-P-40"><span class="nav-number"></span> <span class="nav-text">entries-in-buffer&#x2F;entries-written: 4916&#x2F;4916   #P:40</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—–-gt-irqs-off-1"><span class="nav-number"></span> <span class="nav-text">_—–&#x3D;&gt; irqs-off</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—-gt-need-resched-1"><span class="nav-number"></span> <span class="nav-text">&#x2F; _—-&#x3D;&gt; need-resched</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—-gt-hardirq-softirq-1"><span class="nav-number"></span> <span class="nav-text">| &#x2F; _—&#x3D;&gt; hardirq&#x2F;softirq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#–-gt-preempt-depth-1"><span class="nav-number"></span> <span class="nav-text">|| &#x2F; _–&#x3D;&gt; preempt-depth</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delay-1"><span class="nav-number"></span> <span class="nav-text">||| &#x2F;     delay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TASK-PID-CPU-TIMESTAMP-FUNCTION-1"><span class="nav-number"></span> <span class="nav-text">TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-2"><span class="nav-number"></span> <span class="nav-text">| |       |   ||||       |         |</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tracer-nop-1"><span class="nav-number"></span> <span class="nav-text">tracer: nop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#entries-in-buffer-entries-written-1017-1017-P-40"><span class="nav-number"></span> <span class="nav-text">entries-in-buffer&#x2F;entries-written: 1017&#x2F;1017   #P:40</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—–-gt-irqs-off-2"><span class="nav-number"></span> <span class="nav-text">_—–&#x3D;&gt; irqs-off</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—-gt-need-resched-2"><span class="nav-number"></span> <span class="nav-text">&#x2F; _—-&#x3D;&gt; need-resched</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#—-gt-hardirq-softirq-2"><span class="nav-number"></span> <span class="nav-text">| &#x2F; _—&#x3D;&gt; hardirq&#x2F;softirq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#–-gt-preempt-depth-2"><span class="nav-number"></span> <span class="nav-text">|| &#x2F; _–&#x3D;&gt; preempt-depth</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delay-2"><span class="nav-number"></span> <span class="nav-text">||| &#x2F;     delay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TASK-PID-CPU-TIMESTAMP-FUNCTION-2"><span class="nav-number"></span> <span class="nav-text">TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#-3"><span class="nav-number"></span> <span class="nav-text">| |       |   ||||       |         |</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#clear-filters"><span class="nav-number"></span> <span class="nav-text">clear filters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stacktrace"><span class="nav-number">1.</span> <span class="nav-text">stacktrace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#trace-cmd"><span class="nav-number">2.</span> <span class="nav-text">trace-cmd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disk-iohang"><span class="nav-number">3.</span> <span class="nav-text">disk iohang</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">599k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">9:05</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/11/22/ftrace/",
+            identifier: "2018/11/22/ftrace/",
+            title: "ftrace"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

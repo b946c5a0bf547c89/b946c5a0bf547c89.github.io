@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="bash double-quotes, single-quotes123456789101112A&#x3D;100;ssh name@host &quot;A&#x3D;101;echo \$A&quot;101ssh name@host &quot;A&#x3D;101;echo $A&quot;100#bash expands it to:ssh name@host &quot;A&#x3D;101; echo 100&quot;#use single-quotesssh name@hos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bash tips">
+<meta property="og:url" content="http://yoursite.com/2018/12/11/bash/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="bash double-quotes, single-quotes123456789101112A&#x3D;100;ssh name@host &quot;A&#x3D;101;echo \$A&quot;101ssh name@host &quot;A&#x3D;101;echo $A&quot;100#bash expands it to:ssh name@host &quot;A&#x3D;101; echo 100&quot;#use single-quotesssh name@hos">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-12-11T03:04:49.000Z">
+<meta property="article:modified_time" content="2020-01-05T11:31:36.939Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="bash">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/12/11/bash/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Bash tips | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/11/bash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bash tips
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-12-11 11:04:49" itemprop="dateCreated datePublished" datetime="2018-12-11T11:04:49+08:00">2018-12-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 19:31:36" itemprop="dateModified" datetime="2020-01-05T19:31:36+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bash/" itemprop="url" rel="index">
+                    <span itemprop="name">bash</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/12/11/bash/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/11/bash/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="bash-double-quotes-single-quotes"><a href="#bash-double-quotes-single-quotes" class="headerlink" title="bash double-quotes, single-quotes"></a><a href="https://stackoverflow.com/questions/13826149/how-have-both-local-and-remote-variable-inside-an-ssh-command" target="_blank" rel="noopener">bash double-quotes, single-quotes</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">A=100;</span><br><span class="line">ssh name@host <span class="string">"A=101;echo \$A"</span></span><br><span class="line">101</span><br><span class="line"></span><br><span class="line">ssh name@host <span class="string">"A=101;echo <span class="variable">$A</span>"</span></span><br><span class="line">100</span><br><span class="line"><span class="comment">#bash expands it to:</span></span><br><span class="line">ssh name@host <span class="string">"A=101; echo 100"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#use single-quotes</span></span><br><span class="line">ssh name@host <span class="string">'A=101;echo $A'</span></span><br><span class="line">101</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="bash-replace-expect-script"><a href="#bash-replace-expect-script" class="headerlink" title="bash replace expect script"></a>bash replace expect script</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -e <span class="string">"connect\nshow ld\nexit\n"</span> | ./runCLI.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="expect"><a href="#expect" class="headerlink" title="expect"></a>expect</h3><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect -f</span></span><br><span class="line"><span class="keyword">set</span> timeout <span class="number">60</span></span><br><span class="line">spawn <span class="string">"/opt/CLI_ESD/runCLI.sh"</span></span><br><span class="line">expect <span class="string">"RAIDCmd"</span> &#123; send <span class="string">"connect\r"</span> &#125;</span><br><span class="line">expect <span class="string">"Successful"</span> &#123; send <span class="string">"show ld\r"</span> &#125;</span><br><span class="line">expect <span class="string">"logical volume"</span> &#123; send <span class="string">"exit\r"</span> &#125;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssh-remote-exec-command"><a href="#ssh-remote-exec-command" class="headerlink" title="ssh remote exec command"></a>ssh remote exec command</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#sometimes ssh remote exec command not work</span><br><span class="line">ssh -n name@host  &#39;your command&#39;</span><br><span class="line"></span><br><span class="line">#-t  Force pseudo-terminal allocation.  This can be used to execute arbitrary screen-based programs on a remote machine, which can be very useful, e.g. when implementing menu services.  Multiple -t options force tty allocation, even if ssh has no local tty.</span><br></pre></td></tr></table></figure>
+
+<p>There are a big issue cause I can ‘t parallel exec ssh in bash script, randomly connection closed.<br>I try setting sshd_config</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/ssh/sshd_config | grep max -i</span><br><span class="line">MaxSessions 512</span><br><span class="line">ClientAliveCountMax 512</span><br><span class="line">MaxStartups 500:1:500</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -n -t -o TCPKeepAlive&#x3D;yes -o ServerAliveInterval&#x3D;30 -o GSSAPIAuthentication&#x3D;no -o ControlPersist&#x3D;600 $line &#39;$your command&#39;</span><br></pre></td></tr></table></figure>
+<p>There is no any help</p>
+<p>Fine, I use screen background the command avoid this issue, mpich has the same issue.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">ssh -n -t -o TCPKeepAlive=yes -o GSSAPIAuthentication=no <span class="variable">$line</span> <span class="string">'screen -dmS fio-read "/root/run-fio-read.sh"'</span></span><br><span class="line"><span class="keyword">done</span> &lt; test_hosts</span><br></pre></td></tr></table></figure>
+
+<h4 id="single-command-jump-2-nodes"><a href="#single-command-jump-2-nodes" class="headerlink" title="single command jump 2 nodes"></a>single command jump 2 nodes</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -t user1@<span class="variable">$server1</span> -o GSSAPIAuthentication=no <span class="string">'sudo scp tmp.sh root@$server_ip:'</span></span><br><span class="line">ssh -t user1@<span class="variable">$server1</span> -o GSSAPIAuthentication=no <span class="string">'sudo ssh -n root@$server2_ip sh ./tmp.sh'</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="remove-name-begin-with-“-“"><a href="#remove-name-begin-with-“-“" class="headerlink" title="remove name begin with “-“"></a><a href="https://unix.stackexchange.com/questions/1519/how-do-i-delete-a-file-whose-name-begins-with-hyphen-a-k-a-dash-or-minus" target="_blank" rel="noopener">remove name begin with “-“</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -- --<span class="built_in">help</span></span><br><span class="line">rm ./--<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="IFS"><a href="#IFS" class="headerlink" title="IFS"></a>IFS</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># default value, &lt;space&gt;&lt;tab&gt;&lt;newline&gt;</span></span><br><span class="line">$ IFS=$<span class="string">' \t\n'</span></span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">$ IFS=<span class="string">'input from keyboard space,tab,newline'</span></span><br><span class="line"><span class="comment"># read IFS</span></span><br><span class="line">$ cat -etv &lt;&lt;&lt; <span class="variable">$IFS</span></span><br><span class="line"> ^I$</span><br><span class="line">$</span><br><span class="line"></span><br><span class="line">$ IFS=$(<span class="built_in">echo</span> <span class="string">" \n\t"</span>); <span class="built_in">printf</span> <span class="string">"%s"</span> <span class="string">"<span class="variable">$IFS</span>"</span>|xxd</span><br><span class="line">00000000: 205c 6e5c 74</span><br><span class="line"></span><br><span class="line"><span class="comment"># backup the value</span></span><br><span class="line">OLDIFS=<span class="variable">$IFS</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="test-match"><a href="#test-match" class="headerlink" title="test match"></a>test match</h3><h4 id="is-a-integer"><a href="#is-a-integer" class="headerlink" title="is a integer"></a>is a integer</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a=1</span><br><span class="line">[[ <span class="variable">$a</span> == *[[:digit:]]* ]] &amp;&amp; <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> is an integer"</span></span><br><span class="line">[[ <span class="variable">$1</span> == ?(-)+([0-9]) ]] &amp;&amp; <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> is an integer"</span></span><br><span class="line"><span class="comment">#match yes</span></span><br><span class="line">[[ <span class="string">"<span class="variable">$response</span>"</span> =~ ^([yY][eE][sS]|[yY])+$ ]]</span><br></pre></td></tr></table></figure>
+
+<h3 id="String-Ternary-conditional-operator-three"><a href="#String-Ternary-conditional-operator-three" class="headerlink" title="String, Ternary conditional operator (three)"></a>String, Ternary conditional operator (three)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">VAR1=<span class="string">"BASH"</span></span><br><span class="line">VAR1+=<span class="string">" SCRIPT"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$VAR1</span>"</span></span><br><span class="line">BASH SCRIPT</span><br><span class="line"></span><br><span class="line">n=4</span><br><span class="line">result=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> $(seq 0 $((<span class="variable">$n</span> &gt; 0? <span class="variable">$n</span>-1: 0))); <span class="keyword">do</span> </span><br><span class="line">  result+=<span class="string">"rank-<span class="variable">$i</span>"</span></span><br><span class="line">  result+=<span class="string">" "</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">rank-0 rank-1 rank-2 rank-3</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Arrary"><a href="#Arrary" class="headerlink" title="Arrary"></a>Arrary</h3><h5 id="Associative-array"><a href="#Associative-array" class="headerlink" title="Associative array"></a>Associative array</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">declare -A array</span><br><span class="line">array[foo]&#x3D;bar</span><br><span class="line">array[bar]&#x3D;foo</span><br><span class="line"></span><br><span class="line">for i in &quot;$&#123;!array[@]&#125;&quot;</span><br><span class="line">do</span><br><span class="line">  echo -n &quot;key : $i; &quot;</span><br><span class="line">  echo &quot;value: $&#123;array[$i]&#125;&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://stackoverflow.com/questions/4069188/how-to-pass-an-associative-array-as-argument-to-a-function-in-bash/46085661#46085661" target="_blank" rel="noopener">direct access array in function</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ cat /tmp/tmp</span><br><span class="line">AA 11</span><br><span class="line">BB 22</span><br><span class="line">CC 33</span><br><span class="line">DD 44</span><br><span class="line">ZZ 55</span><br><span class="line">YY 66</span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">declare</span> -A ARR</span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">   key=$(<span class="built_in">echo</span> <span class="variable">$line</span> | awk <span class="string">'&#123;print $1&#125;'</span>)</span><br><span class="line">   value=$(<span class="built_in">echo</span> <span class="variable">$line</span> | awk <span class="string">'&#123;print $2&#125;'</span>)</span><br><span class="line">   ARR[<span class="variable">$key</span>]=<span class="variable">$value</span></span><br><span class="line"><span class="keyword">done</span> &lt; /tmp/tmp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">fun</span></span>() &#123;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;!ARR[@]&#125;</span>"</span>; <span class="keyword">do</span></span><br><span class="line">          <span class="built_in">echo</span> -n <span class="string">"<span class="variable">$i</span>"</span></span><br><span class="line">          <span class="built_in">echo</span> <span class="string">" <span class="variable">$&#123;ARR[$i]&#125;</span>"</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$1</span></span><br><span class="line">&#125;</span><br><span class="line">fun <span class="string">"hahaha"</span></span><br></pre></td></tr></table></figure>
+
+<p>If you want copy array    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">declare</span> -A ARR</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;!ARR[@]&#125;</span>"</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  ARRAY[<span class="string">"<span class="variable">$key</span>"</span>]=<span class="string">"<span class="variable">$&#123;ARR["$key"]&#125;</span>"</span></span><br><span class="line">  <span class="comment"># ARRAY+=( ["$key"]="$&#123;ARR["$key"]&#125;" )</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>bash 4.4 in ubuntu</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">declare</span> -A ARR</span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">   key=$(<span class="built_in">echo</span> <span class="variable">$line</span> | awk <span class="string">'&#123;print $1&#125;'</span>)</span><br><span class="line">   value=$(<span class="built_in">echo</span> <span class="variable">$line</span> | awk <span class="string">'&#123;print $2&#125;'</span>)</span><br><span class="line">   ARR[<span class="variable">$key</span>]=<span class="variable">$value</span></span><br><span class="line"><span class="keyword">done</span> &lt; /tmp/tmp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">print_ARR</span></span>() &#123;</span><br><span class="line">    <span class="built_in">local</span> -n array=<span class="variable">$1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;!array[@]&#125;</span>"</span>; <span class="keyword">do</span></span><br><span class="line">          <span class="built_in">echo</span> -n <span class="string">"<span class="variable">$i</span>"</span></span><br><span class="line">          <span class="built_in">echo</span> <span class="string">" <span class="variable">$&#123;array[$i]&#125;</span>"</span></span><br><span class="line">     <span class="keyword">done</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;!ARR[@]&#125;</span>"</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">   <span class="built_in">echo</span> -n <span class="string">"key: <span class="variable">$i</span> "</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"value: <span class="variable">$&#123;ARR[$i]&#125;</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> ---------<span class="keyword">in</span> func ----------</span><br><span class="line">print_ARR <span class="string">"ARR"</span></span><br></pre></td></tr></table></figure>
+
+<p>or you could </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">   key=$(<span class="built_in">echo</span> <span class="variable">$line</span> | awk <span class="string">'&#123;print $1&#125;'</span>)</span><br><span class="line">   value=$(<span class="built_in">echo</span> <span class="variable">$line</span> | awk <span class="string">'&#123;print $2&#125;'</span>)</span><br><span class="line">   ARR[<span class="variable">$key</span>]=<span class="variable">$value</span></span><br><span class="line"><span class="keyword">done</span> &lt;&lt;&lt; <span class="string">"<span class="variable">$([[ ! -z $var ]] &amp;&amp; awk  '&#123;print $1,$2&#125;' your_file)</span>"</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="array"><a href="#array" class="headerlink" title="array"></a>array</h5><p>split string to array</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ lsscsi_out&#x3D;$(lsscsi | awk &#39;$NF!~&#x2F;-&#x2F; &#123;print $NF&#125;&#39;)</span><br><span class="line">$ read -r -a noroot_dev &lt;&lt;&lt; $lsscsi_out ## you could change IFS for your need, IFS&#x3D;&#39;, &#39; read -r -a array &lt;&lt;&lt; &quot;$string&quot;</span><br><span class="line">$ echo $&#123;#noroot_dev[@]&#125;</span><br><span class="line">6</span><br><span class="line">$ echo $&#123;noroot_dev[@]&#125;</span><br><span class="line">&#x2F;dev&#x2F;sda &#x2F;dev&#x2F;sdf &#x2F;dev&#x2F;sde &#x2F;dev&#x2F;sdd &#x2F;dev&#x2F;sdc &#x2F;dev&#x2F;sdb</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">arr&#x3D;($(echo $m | tr &quot; &quot; &quot;\n&quot;))</span><br><span class="line"></span><br><span class="line">ARRAY&#x3D;()</span><br><span class="line">ARRAY+&#x3D;(&#39;foo&#39;)</span><br><span class="line">ARRAY+&#x3D;(&#39;bar&#39;)</span><br><span class="line">for i in &quot;$&#123;!ARRAY[@]&#125;&quot;; do echo $i; done</span><br><span class="line">for i in &quot;$&#123;ARRAY[@]&#125;&quot;; do echo $i; done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">declare -a names</span><br><span class="line"></span><br><span class="line">names[0]&#x3D;1111</span><br><span class="line">names[1]&#x3D;2222</span><br><span class="line">or</span><br><span class="line">names&#x3D;(&#39;1111&#39; &#39;2222&#39;)</span><br><span class="line">or</span><br><span class="line">names&#x3D;([0]&#x3D;&#39;1111&#39; [1]&#x3D;&#39;2222&#39;)</span><br><span class="line"></span><br><span class="line">$ cat files.txt</span><br><span class="line">1111111</span><br><span class="line">2222222</span><br><span class="line">3333333</span><br><span class="line"></span><br><span class="line"># get array from file</span><br><span class="line">names&#x3D;($(cat files.txt))</span><br><span class="line">$ echo $&#123;names[1]&#125;</span><br><span class="line">2222222</span><br><span class="line">$ echo $&#123;names[2]&#125;</span><br><span class="line">3333333</span><br><span class="line">$ echo $&#123;names[3]&#125;</span><br><span class="line">$ echo $&#123;#names[@]&#125;</span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">$ echo $&#123;names[@]:0:1&#125;</span><br><span class="line">1111111</span><br><span class="line">$ echo $&#123;names[@]:0:2&#125;</span><br><span class="line">1111111 2222222</span><br><span class="line"></span><br><span class="line">echo $&#123;names[@]:1&#125;</span><br><span class="line">2222222 333333</span><br><span class="line"></span><br><span class="line">$ names1&#x3D;([0]&#x3D;&#39;1111&#39; [2]&#x3D;&#39;2222&#39; [4]&#x3D;&#39;3333&#39;)</span><br><span class="line">$ echo $&#123;#adobe[@]&#125;</span><br><span class="line">3</span><br><span class="line"></span><br><span class="line">$ names&#x3D;(&#39;1111&#39; &#39;2222&#39; &#39;3333&#39; &#39;4444&#39; &#39;5555&#39;)</span><br><span class="line">$ names2&#x3D;(&#39;6666&#39; &#39;7777&#39;)</span><br><span class="line">$ names3&#x3D;($&#123;names[@]&#125; $&#123;names2[@]&#125;)</span><br><span class="line">$ echo $&#123;#names3[@]&#125;</span><br><span class="line">7</span><br><span class="line"></span><br><span class="line">### delete array</span><br><span class="line">$ names&#x3D;(&#39;1111&#39; &#39;2222&#39; &#39;3333&#39; &#39;4444&#39;)</span><br><span class="line">$ echo $&#123;names[@]&#x2F;1111&#x2F;0000&#125;</span><br><span class="line">0000 2222 3333 4444</span><br><span class="line"></span><br><span class="line">$ for item in $&#123;names[@]&#125;;do echo $item; done</span><br><span class="line">1111</span><br><span class="line">2222</span><br><span class="line">3333</span><br><span class="line">4444</span><br><span class="line"></span><br><span class="line">$ len&#x3D;$&#123;#names[@]&#125;</span><br><span class="line">$ for ((i&#x3D;0;i&lt;$len;i++));do echo $&#123;names[$i]&#125;;done</span><br><span class="line"></span><br><span class="line">## delete array element</span><br><span class="line">$ noroot_dev&#x3D;($&#123;noroot_dev[@]&#x2F;$j&#x2F;&#125;)</span><br><span class="line"></span><br><span class="line">rclocal&#x3D;&quot;&#x2F;etc&#x2F;rc.d&#x2F;rc.local&quot;</span><br><span class="line">grep -iE &#39;ethtool&#39; $rclocal  || ls &#x2F;sys&#x2F;class&#x2F;net | egrep &#39;(eth|en|p|em|bond|br)&#39; | egrep -v &#39;bonding_masters|vir&#39; | while read nic</span><br><span class="line">do</span><br><span class="line">    nicbuff+&#x3D;($(ethtool -g $nic | grep -A 4 &quot;Pre-set maximums&quot; | grep -vEi &#39;maximums|mini|jumbo&#39; | awk &#39;&#123;print $NF&#125;&#39;))</span><br><span class="line">    echo ethtool -G $nic rx $&#123;nicbuff[0]&#125; tx $&#123;nicbuff[1]&#125; &gt;&gt; $rclocal</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="Avoid-multiple-JBOD-devs-across-in-single-raidz"><a href="#Avoid-multiple-JBOD-devs-across-in-single-raidz" class="headerlink" title="Avoid multiple JBOD devs across in single raidz"></a>Avoid multiple JBOD devs across in single raidz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tempdir=/tmp;</span><br><span class="line">lsscsi -tiv  | sed -z <span class="string">'s/\n  dir:/ /g'</span> | awk -v tempdir=<span class="string">"<span class="variable">$tempdir</span>"</span> -F <span class="string">'[:\\[/ ]+'</span> <span class="string">'$10!~/-/ &amp;&amp; $0~/disk/ &amp;&amp; $7~/sas/ &#123;print "/dev/disk/by-id/scsi-"$11,$2 &gt; tempdir"/"$30"_"$31"_"$32"_"$33"_"$34&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Wait-sub-process-finish"><a href="#Wait-sub-process-finish" class="headerlink" title="Wait sub process finish"></a>Wait sub process finish</h3><p>Here is example to paralle running SMcli to collect MD34xx’s log. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">        SMcli localhost -n <span class="variable">$line</span> -c <span class="string">"save storageArray supportdata file=\"/root/<span class="variable">$&#123;1&#125;</span>/smcli_<span class="variable">$&#123;line&#125;</span>_controller\" force=true;"</span> &amp;</span><br><span class="line">        <span class="built_in">echo</span> $! &gt;&gt; <span class="variable">$dell_pids</span></span><br><span class="line"><span class="keyword">done</span> &lt; <span class="variable">$dell_names</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> Begin to <span class="built_in">wait</span> smcli <span class="variable">$line</span></span><br><span class="line">    <span class="built_in">wait</span> <span class="variable">$line</span></span><br><span class="line"><span class="keyword">done</span> &lt; <span class="variable">$dell_pids</span></span><br></pre></td></tr></table></figure>
+<h3 id="Sed"><a href="#Sed" class="headerlink" title="Sed"></a>Sed</h3><h4 id="print-line-from-16224-to-16482"><a href="#print-line-from-16224-to-16482" class="headerlink" title="print line from 16224 to 16482"></a><a href="https://stackoverflow.com/questions/83329/how-can-i-extract-a-predetermined-range-of-lines-from-a-text-file-on-unix" target="_blank" rel="noopener">print line from 16224 to 16482</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#39;16224,16482p;16483q&#39; filename &gt; newfile</span><br><span class="line">p - Print out the pattern space (to the standard output). This command is usually only used in conjunction with the -n command-line option.</span><br><span class="line"></span><br><span class="line">n - If auto-print is not disabled, print the pattern space, then, regardless, replace the pattern space with the next line of input. If there is no more input then sed exits without processing any more commands.</span><br><span class="line"></span><br><span class="line">q - Exit sed without processing any more commands or input. Note that the current pattern space is printed if auto-print is not disabled with the -n option.</span><br></pre></td></tr></table></figure>
+
+<h3 id="AWK"><a href="#AWK" class="headerlink" title="AWK"></a>AWK</h3><h4 id="single-character-fields"><a href="#single-character-fields" class="headerlink" title="single character fields"></a><a href="https://www.gnu.org/software/gawk/manual/html_node/Single-Character-Fields.html" target="_blank" rel="noopener">single character fields</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> a b | gawk <span class="string">'BEGIN &#123; FS = "" &#125;</span></span><br><span class="line"><span class="string">&gt;                  &#123;</span></span><br><span class="line"><span class="string">&gt;                      for (i = 1; i &lt;= NF; i = i + 1)</span></span><br><span class="line"><span class="string">&gt;                          print "Field", i, "is", $i</span></span><br><span class="line"><span class="string">&gt;                  &#125;'</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><p>If you want use ‘[‘ and ‘]’ become the separator </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F <span class="string">'[][ :]+'</span></span><br></pre></td></tr></table></figure>
+<h4 id="awk-match-bash-variable"><a href="#awk-match-bash-variable" class="headerlink" title="awk match bash variable"></a><a href="https://stackoverflow.com/questions/39384283/how-to-match-a-pattern-given-in-a-variable-in-awk" target="_blank" rel="noopener">awk match bash variable</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -v pat=<span class="string">"<span class="variable">$pattern</span>"</span> -F <span class="string">":"</span> <span class="string">'$0~pat&#123;print $1, $2, $3, $4 &#125;'</span> file</span><br></pre></td></tr></table></figure>
+
+<h4 id="awk-sort-key-and-value"><a href="#awk-sort-key-and-value" class="headerlink" title="awk sort key and value"></a><a href="https://www.gnu.org/software/gawk/manual/html_node/Controlling-Scanning.html" target="_blank" rel="noopener">awk sort key and value</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PROCINFO[<span class="string">"sorted_in"</span>] = <span class="string">"@val_num_desc"</span></span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> a) <span class="built_in">print</span> i, a[i]</span><br></pre></td></tr></table></figure>
+
+<p>awk absolute match $0~/ / /<br>sed absolute match sed -i “/&lt;${i}&gt;/d”</p>
+<h4 id="Got-int-to-variable"><a href="#Got-int-to-variable" class="headerlink" title="Got int to variable"></a>Got int to variable</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[int(<span class="variable">$NF</span>/1000)]++</span><br></pre></td></tr></table></figure>
+
+<h3 id="bash-strings"><a href="#bash-strings" class="headerlink" title="bash strings"></a>bash strings</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># string length</span></span><br><span class="line">[[ <span class="variable">$&#123;#f_check&#125;</span> -le 8 ]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># variable is a number</span></span><br><span class="line">[[ <span class="variable">$VAR</span> = *[[:digit:]]* ]]</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$b</span></span><br><span class="line"><span class="comment">#50_5000cca26b90c3b1</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$c</span></span><br><span class="line">5000cca26b90c3b1</span><br><span class="line"></span><br><span class="line">$ [[ <span class="variable">$b</span> =~ <span class="variable">$c</span> ]] &amp;&amp; <span class="built_in">echo</span> ok</span><br><span class="line">ok</span><br></pre></td></tr></table></figure>
+
+<p>awk statement “next” to immediately continue with processing the next input record.</p>
+<h3 id="Subprocess"><a href="#Subprocess" class="headerlink" title="Subprocess"></a>Subprocess</h3><h4 id="exit-err"><a href="#exit-err" class="headerlink" title="exit err"></a><a href="https://unix.stackexchange.com/questions/48533/exit-shell-script-from-a-subshell" target="_blank" rel="noopener">exit err</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> -E</span><br><span class="line"><span class="built_in">trap</span> <span class="string">'[ "$?" -ne 33 ] || exit 33'</span> ERR</span><br><span class="line">lfs getstripe <span class="variable">$namespace</span> &gt; /dev/null 2&gt;&amp;1 || (<span class="built_in">echo</span> <span class="string">"Not found lustre filesystem"</span> &amp;&amp; <span class="built_in">exit</span> 33)</span><br><span class="line"><span class="built_in">set</span> +E</span><br></pre></td></tr></table></figure>
+
+<h3 id="Termination-Signals-https-www-gnu-org-software-libc-manual-html-node-Termination-Signals-html"><a href="#Termination-Signals-https-www-gnu-org-software-libc-manual-html-node-Termination-Signals-html" class="headerlink" title="[Termination Signals] (https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html)"></a>[Termination Signals] (<a href="https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html" target="_blank" rel="noopener">https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html</a>)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">* 1 SIGHUP The SIGHUP (<span class="string">"hang-up"</span>) signal is used to report that the user<span class="string">'s terminal is disconnected, perhaps because a network or telephone connection was broken.</span></span><br><span class="line"><span class="string">* 2 SIGINT The SIGINT (program interrupt) signal is sent when the user types the INTR character (normally C-c).</span></span><br><span class="line"><span class="string">* 3 The SIGQUIT signal is similar to SIGINT, except that it’s controlled by a different key-the QUIT character, usually C-\-and produces a core dump when it terminates the process, just like a program error signal. You can think of this as a program error condition "detected" by the user</span></span><br><span class="line"><span class="string">* 9 The SIGKILL signal is used to cause immediate program termination. It cannot be handled or ignored, and is therefore always fatal. It is also not possible to block this signal</span></span><br><span class="line"><span class="string">* 15 The SIGTERM signal is a generic signal used to cause program termination. Unlike SIGKILL, this signal can be blocked, handled, and ignored. It is the normal way to politely ask a program to terminate.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### Trap</span></span><br><span class="line"><span class="string">```bash</span></span><br><span class="line"><span class="string">#!/bin/bash</span></span><br><span class="line"><span class="string">mytrap () &#123;</span></span><br><span class="line"><span class="string">  echo hahahahaha</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">trap mytrap SIGHUP SIGINT SIGQUIT SIGTERM ERR EXIT</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">myfunc () &#123;</span></span><br><span class="line"><span class="string"> trap  mytrap RETURN</span></span><br><span class="line"><span class="string"> #trap  mytrap EXIT #no output</span></span><br><span class="line"><span class="string"> echo "I'</span>ve got a bad feeling about this...<span class="string">"</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">myfunc | cat</span></span><br><span class="line"><span class="string">sleep 10</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">###############################</span></span><br><span class="line"><span class="string">Number	SIG	Meaning</span></span><br><span class="line"><span class="string">0	0	On exit from shell</span></span><br><span class="line"><span class="string">1	SIGHUP	Clean tidyup</span></span><br><span class="line"><span class="string">2	SIGINT	Interrupt</span></span><br><span class="line"><span class="string">3	SIGQUIT	Quit</span></span><br><span class="line"><span class="string">6	SIGABRT	Abort</span></span><br><span class="line"><span class="string">9	SIGKILL	Die Now (cannot be trapped)</span></span><br><span class="line"><span class="string">14	SIGALRM	Alarm Clock</span></span><br><span class="line"><span class="string">15	SIGTERM	Terminate</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h3><h4 id="number"><a href="#number" class="headerlink" title="number"></a><a href="https://stackoverflow.com/questions/2556190/random-number-from-a-range-in-a-bash-script" target="_blank" rel="noopener">number</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ shuf -i 2000-65000 -n 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><h4 id="Get-bash-variable"><a href="#Get-bash-variable" class="headerlink" title="Get bash variable"></a>Get bash variable</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sed -i <span class="string">"s/524335808/<span class="variable">$&#123;mem&#125;</span>/"</span></span><br><span class="line">$ sed <span class="string">"/\&lt;<span class="variable">$&#123;a&#125;</span>\&gt;/d"</span> zfs_free_dev <span class="comment"># like grep -w , \&lt;\&gt; force an exact match</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Get-scsi-serial-number-by-bash"><a href="#Get-scsi-serial-number-by-bash" class="headerlink" title="Get scsi serial number by bash"></a>Get scsi serial number by bash</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ strings /sys/block/sda/device/vpd_pg80 | tr -d <span class="string">'\040\011\012\015'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Get-parent-id-info"><a href="#Get-parent-id-info" class="headerlink" title="Get parent id info"></a>Get parent id info</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ pstree -sg 25153</span><br><span class="line">systemd(1)───qemu-kvm(25147)─┬─&#123;qemu-kvm&#125;(25147)</span><br><span class="line">                             ├─&#123;qemu-kvm&#125;(25147)</span><br><span class="line">                             ├─&#123;qemu-kvm&#125;(25147)</span><br><span class="line">                             ├─&#123;qemu-kvm&#125;(25147)</span><br><span class="line">                             ├─&#123;qemu-kvm&#125;(25147)</span><br><span class="line">                             └─&#123;qemu-kvm&#125;(25147)</span><br></pre></td></tr></table></figure>
+
+<h3 id="rsync-copy-to-change-ssh-cipher"><a href="#rsync-copy-to-change-ssh-cipher" class="headerlink" title="rsync copy to change ssh cipher"></a>rsync copy to change ssh cipher</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## -c arcfour could show support cipher</span></span><br><span class="line">$ rsync -aHAXvP -e <span class="string">"ssh -T -c chacha20-poly1305@openssh.com -o Compression=no -x"</span> <span class="built_in">source</span>:/xxxx <span class="variable">$ipaddr</span>:/xxx</span><br></pre></td></tr></table></figure>
+
+<h3 id="Parallel-ssh"><a href="#Parallel-ssh" class="headerlink" title="Parallel ssh"></a>Parallel ssh</h3><ul>
+<li>Don ‘t need install anything (pdsh or cluster shell, ansible)</li>
+<li>Compatibility<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">   ssh -n <span class="variable">$line</span> <span class="string">"your command &gt; your log 2&gt;&amp;1 &amp;"</span></span><br><span class="line"><span class="keyword">done</span> &lt; hosts</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Create-sparse-file"><a href="#Create-sparse-file" class="headerlink" title="Create sparse file"></a>Create sparse file</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ fallocate -l 5G -o 5G bar</span><br><span class="line">$ ls -lhs bar</span><br><span class="line">5.0G -rw-r--r-- 1 root root 10G Aug 23 08:58 bar</span><br><span class="line"></span><br><span class="line">$ truncate -s 512M bar</span><br><span class="line">0 -rw-rw-r-- 1 root root 512M 10月  4 22:07 bar</span><br></pre></td></tr></table></figure>
+
+<h3 id="Num-convert"><a href="#Num-convert" class="headerlink" title="Num convert"></a>Num convert</h3><p>hex -&gt; bin num</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ dc -e &#39;16i2o0x6003p&#39;</span><br><span class="line">110000000000011</span><br><span class="line">110,0000,0000,0011</span><br></pre></td></tr></table></figure>
+
+<p>bin &lt;-&gt; dec</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#bin -&gt; dec</span></span><br><span class="line">$ <span class="built_in">echo</span> $((2<span class="comment">#1010))</span></span><br><span class="line">10</span><br><span class="line"></span><br><span class="line"><span class="comment">#dec -&gt; bin</span></span><br><span class="line"><span class="comment"># 0-255</span></span><br><span class="line">$ bin=(&#123;0..1&#125;&#123;0..1&#125;&#123;0..1&#125;&#123;0..1&#125;&#123;0..1&#125;&#123;0..1&#125;&#123;0..1&#125;&#123;0..1&#125;)</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;a[5]&#125;</span></span><br><span class="line">00000101</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;a[255]&#125;</span></span><br><span class="line">11111111</span><br><span class="line"></span><br><span class="line">$ var=<span class="string">"304"</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">"obase=2; <span class="variable">$var</span>"</span> | bc</span><br><span class="line">100110000</span><br></pre></td></tr></table></figure>
+
+<h4 id="Printf-convert-oct-hex-dec"><a href="#Printf-convert-oct-hex-dec" class="headerlink" title="Printf convert oct,hex,dec"></a>Printf convert oct,hex,dec</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">printf</span> <span class="string">"%d %d %x %o\n"</span> 0x10 010 16 0xf</span><br><span class="line">16 8 10 17</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> $((16<span class="comment">#f))</span></span><br><span class="line">15</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> $((8<span class="comment">#10))</span></span><br><span class="line">8</span><br></pre></td></tr></table></figure>
+
+<h4 id="Integer-ASCII-value-to-character"><a href="#Integer-ASCII-value-to-character" class="headerlink" title="Integer ASCII value to character"></a><a href="https://stackoverflow.com/questions/890262/integer-ascii-value-to-character-in-bash-using-printf" target="_blank" rel="noopener">Integer ASCII value to character</a></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">printf</span> <span class="string">"\x<span class="variable">$(printf %x 65)</span>"</span></span><br><span class="line">A</span><br><span class="line">$ awk <span class="string">'BEGIN&#123;printf "%c", 65&#125;'</span></span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+
+<h3 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h3><p>same with while read line</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ seq 88 97 | xargs -I% grep -H . /proc/irq/%/smp_affinity</span><br></pre></td></tr></table></figure>
+
+<h3 id="taskset"><a href="#taskset" class="headerlink" title="taskset"></a>taskset</h3><h4 id="zfs-and-nfs"><a href="#zfs-and-nfs" class="headerlink" title="zfs and nfs"></a>zfs and nfs</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> i=13</span><br><span class="line">ps -C nfsd | awk <span class="string">'$0!~/PID/ &#123;print $1&#125;'</span> | <span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">        [[ <span class="variable">$i</span> -gt 19 ]] &amp;&amp; <span class="built_in">export</span> i=13</span><br><span class="line">        taskset -p -c <span class="variable">$i</span> <span class="variable">$line</span></span><br><span class="line">        ((i=i+2))</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> core=0</span><br><span class="line">[[ $(grep MHz /proc/cpuinfo -c) -gt 3 ]] &amp;&amp; maxcpu=8 &amp;&amp; <span class="keyword">for</span> i <span class="keyword">in</span> $(pgrep <span class="string">'z_wr_iss$'</span>);</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">        [[ <span class="variable">$core</span> -gt <span class="variable">$maxcpu</span> ]] &amp;&amp; core=0;    taskset -p -c <span class="variable">$core</span> <span class="variable">$i</span>;    ((core++)); ((core++));</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># get moidfy time from </span></span><br><span class="line">$ <span class="built_in">stat</span> -c%Z file</span><br><span class="line"></span><br><span class="line"><span class="comment"># now</span></span><br><span class="line">$ date +%s</span><br></pre></td></tr></table></figure>
+
+<h3 id="xargs-1"><a href="#xargs-1" class="headerlink" title="xargs"></a>xargs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -n <span class="variable">$your_server</span> <span class="string">"lsscsi -gis | awk '\$0~/3500/&#123;print \$6&#125;' | xargs -I&#123;&#125; sdparm -s RCD=0 &#123;&#125; "</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="the-old-script"><a href="#the-old-script" class="headerlink" title="the old script"></a>the old script</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">head -c 10k test1 | tail -c 1k </span><br><span class="line">$ dd <span class="keyword">if</span>=test1 of=test2 bs=1k skip=9 count=1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Read-write-by-Byte-by-dd"><a href="#Read-write-by-Byte-by-dd" class="headerlink" title="Read write by Byte by dd"></a>Read write by Byte by dd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">       ibs=BYTES</span><br><span class="line">              <span class="built_in">read</span> up to BYTES bytes at a time (default: 512)</span><br><span class="line">       obs=BYTES</span><br><span class="line">              write BYTES bytes at a time (default: 512)</span><br><span class="line">       bs=BYTES</span><br><span class="line">              <span class="built_in">read</span> and write up to BYTES bytes at a time (default: 512); overrides ibs and obs</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> bs=1</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/bash/" rel="tag"><i class="fa fa-tag"></i> bash</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/23/perf/" rel="prev" title="perf">
+      <i class="fa fa-chevron-left"></i> perf
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/11/multipath/" rel="next" title="multipath">
+      multipath <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#bash-double-quotes-single-quotes"><span class="nav-number">1.</span> <span class="nav-text">bash double-quotes, single-quotes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash-replace-expect-script"><span class="nav-number">2.</span> <span class="nav-text">bash replace expect script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#expect"><span class="nav-number">3.</span> <span class="nav-text">expect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh-remote-exec-command"><span class="nav-number">4.</span> <span class="nav-text">ssh remote exec command</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#single-command-jump-2-nodes"><span class="nav-number">4.1.</span> <span class="nav-text">single command jump 2 nodes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remove-name-begin-with-“-“"><span class="nav-number">5.</span> <span class="nav-text">remove name begin with “-“</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IFS"><span class="nav-number">6.</span> <span class="nav-text">IFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#test-match"><span class="nav-number">7.</span> <span class="nav-text">test match</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#is-a-integer"><span class="nav-number">7.1.</span> <span class="nav-text">is a integer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String-Ternary-conditional-operator-three"><span class="nav-number">8.</span> <span class="nav-text">String, Ternary conditional operator (three)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Arrary"><span class="nav-number">9.</span> <span class="nav-text">Arrary</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Associative-array"><span class="nav-number">9.0.1.</span> <span class="nav-text">Associative array</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#array"><span class="nav-number">9.0.2.</span> <span class="nav-text">array</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Avoid-multiple-JBOD-devs-across-in-single-raidz"><span class="nav-number">10.</span> <span class="nav-text">Avoid multiple JBOD devs across in single raidz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wait-sub-process-finish"><span class="nav-number">11.</span> <span class="nav-text">Wait sub process finish</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sed"><span class="nav-number">12.</span> <span class="nav-text">Sed</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#print-line-from-16224-to-16482"><span class="nav-number">12.1.</span> <span class="nav-text">print line from 16224 to 16482</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AWK"><span class="nav-number">13.</span> <span class="nav-text">AWK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#single-character-fields"><span class="nav-number">13.1.</span> <span class="nav-text">single character fields</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#filter"><span class="nav-number">13.2.</span> <span class="nav-text">filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk-match-bash-variable"><span class="nav-number">13.3.</span> <span class="nav-text">awk match bash variable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk-sort-key-and-value"><span class="nav-number">13.4.</span> <span class="nav-text">awk sort key and value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Got-int-to-variable"><span class="nav-number">13.5.</span> <span class="nav-text">Got int to variable</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash-strings"><span class="nav-number">14.</span> <span class="nav-text">bash strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subprocess"><span class="nav-number">15.</span> <span class="nav-text">Subprocess</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#exit-err"><span class="nav-number">15.1.</span> <span class="nav-text">exit err</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Termination-Signals-https-www-gnu-org-software-libc-manual-html-node-Termination-Signals-html"><span class="nav-number">16.</span> <span class="nav-text">[Termination Signals] (https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;libc&#x2F;manual&#x2F;html_node&#x2F;Termination-Signals.html)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random"><span class="nav-number">17.</span> <span class="nav-text">Random</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#number"><span class="nav-number">17.1.</span> <span class="nav-text">number</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed"><span class="nav-number">18.</span> <span class="nav-text">sed</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-bash-variable"><span class="nav-number">18.1.</span> <span class="nav-text">Get bash variable</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-scsi-serial-number-by-bash"><span class="nav-number">19.</span> <span class="nav-text">Get scsi serial number by bash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-parent-id-info"><span class="nav-number">20.</span> <span class="nav-text">Get parent id info</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsync-copy-to-change-ssh-cipher"><span class="nav-number">21.</span> <span class="nav-text">rsync copy to change ssh cipher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-ssh"><span class="nav-number">22.</span> <span class="nav-text">Parallel ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-sparse-file"><span class="nav-number">23.</span> <span class="nav-text">Create sparse file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Num-convert"><span class="nav-number">24.</span> <span class="nav-text">Num convert</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Printf-convert-oct-hex-dec"><span class="nav-number">24.1.</span> <span class="nav-text">Printf convert oct,hex,dec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Integer-ASCII-value-to-character"><span class="nav-number">24.2.</span> <span class="nav-text">Integer ASCII value to character</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xargs"><span class="nav-number">25.</span> <span class="nav-text">xargs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#taskset"><span class="nav-number">26.</span> <span class="nav-text">taskset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#zfs-and-nfs"><span class="nav-number">26.1.</span> <span class="nav-text">zfs and nfs</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stat"><span class="nav-number">27.</span> <span class="nav-text">stat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xargs-1"><span class="nav-number">28.</span> <span class="nav-text">xargs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-old-script"><span class="nav-number">29.</span> <span class="nav-text">the old script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Read-write-by-Byte-by-dd"><span class="nav-number">30.</span> <span class="nav-text">Read write by Byte by dd</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">599k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">9:05</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/12/11/bash/",
+            identifier: "2018/12/11/bash/",
+            title: "Bash tips"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

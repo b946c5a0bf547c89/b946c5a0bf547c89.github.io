@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="7selinux123$ setenforce 0$ getenforcePermissive Software Collections ( SCL ) Repository$ yum install centos-release-scl-rh$ yum install devtoolset-8-toolchain $ gfortran –version | head -2GNU Fortran">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/centos/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="7selinux123$ setenforce 0$ getenforcePermissive Software Collections ( SCL ) Repository$ yum install centos-release-scl-rh$ yum install devtoolset-8-toolchain $ gfortran –version | head -2GNU Fortran">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/img/vlc-set1.png">
+<meta property="article:published_time" content="2019-07-18T07:37:02.000Z">
+<meta property="article:modified_time" content="2020-01-05T11:47:54.761Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="centos">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/img/vlc-set1.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/07/18/centos/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>centos | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/centos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          centos
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-07-18 15:37:02" itemprop="dateCreated datePublished" datetime="2019-07-18T15:37:02+08:00">2019-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 19:47:54" itemprop="dateModified" datetime="2020-01-05T19:47:54+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/07/18/centos/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/18/centos/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>25k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>22 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="7"><a href="#7" class="headerlink" title="7"></a>7</h3><h4 id="selinux"><a href="#selinux" class="headerlink" title="selinux"></a>selinux</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ setenforce 0</span><br><span class="line">$ getenforce</span><br><span class="line">Permissive</span><br></pre></td></tr></table></figure>
+<h4 id="Software-Collections-SCL-Repository"><a href="#Software-Collections-SCL-Repository" class="headerlink" title="Software Collections ( SCL ) Repository"></a>Software Collections ( SCL ) Repository</h4><p>$ yum install centos-release-scl-rh<br>$ yum install devtoolset-8-toolchain</p>
+<p>$ gfortran –version | head -2<br>GNU Fortran (GCC) 4.8.5 20150623 (Red Hat 4.8.5-36)<br>Copyright (C) 2015 Free Software Foundation, Inc.</p>
+<p>$ scl enable devtoolset-8 bash</p>
+<p>$  gfortran –version | head -2<br>GNU Fortran (GCC) 8.2.1 20180905 (Red Hat 8.2.1-3)<br>Copyright (C) 2018 Free Software Foundation, Inc.</p>
+<a id="more"></a>
+
+<h3 id="Nofile"><a href="#Nofile" class="headerlink" title="Nofile"></a><a href="https://unix.stackexchange.com/questions/447583/ulimit-vs-file-max" target="_blank" rel="noopener">Nofile</a></h3><p>/proc/sys/fs/file-max<br>ulimit -n</p>
+<p>file-max is the maximum File Descriptors (FD) enforced on a kernel level, which cannot be surpassed by all processes without increasing.<br>The ulimit is enforced on a process level, which can be less than the file-max.</p>
+<p>/proc/sys/fs/file-nr<br>This will return three values denote the number of allocated file handles the number of allocated but unused file handles, and the maximum number of file handles. </p>
+<h3 id="pidstat"><a href="#pidstat" class="headerlink" title="pidstat"></a>pidstat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pidstat -C <span class="string">'linpack|stream'</span> -d 2 -rsuw</span><br></pre></td></tr></table></figure>
+
+<h3 id="nfsstat"><a href="#nfsstat" class="headerlink" title="nfsstat"></a>nfsstat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nfsiostat -d /mount 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="user-space-pipe-size"><a href="#user-space-pipe-size" class="headerlink" title="user space pipe size"></a>user space pipe size</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># F_SETPIPE_SZ F_GETPIPE_SZ</span></span><br><span class="line"><span class="comment"># echo 104857600 &gt; /proc/sys/fs/pipe-max-size</span></span><br><span class="line"><span class="comment"># fs.pipe-max-size=104857600</span></span><br><span class="line"><span class="comment"># ulimit pipe size            (512 bytes, -p) 8 = 4096 bytes, it 's pipe buffer size in the ulimit, not pipe size</span></span><br><span class="line"><span class="comment">## POSIX.1-2001 says that write(2)s of less than PIPE_BUF  bytes  must  be atomic:  the  output  data  is  written  to  the  pipe  as a contiguous sequence.  Writes of more than PIPE_BUF bytes may  be  non-atomic:  the kernel  may  interleave the data with data written by other processes.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># here 2 tools for pipe</span></span><br><span class="line"><span class="comment"># pv - Pipe Viewer - is a terminal-based tool for monitoring the progress of data through a pipeline.</span></span><br><span class="line"><span class="comment"># process1 | pv -pterbTCB 1G | process2</span></span><br><span class="line"></span><br><span class="line">$ pv -cN sources linux-image-unsigned-4.15.0-65-generic-dbgsym_4.15.0-65.74_amd64.ddeb | dd of=/tmp/tmp bs=512 | pv -cN cat</span><br><span class="line"></span><br><span class="line">$ mkfifo -m 777 /tmp/lfs.log</span><br><span class="line">$ lctl debug_daemon start /tmp/lfs.log</span><br></pre></td></tr></table></figure>
+
+<h3 id="rand-file"><a href="#rand-file" class="headerlink" title="rand file"></a>rand file</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rand -out 1G.file 1073741824</span><br></pre></td></tr></table></figure>
+
+<h3 id="samba"><a href="#samba" class="headerlink" title="samba"></a>samba</h3><h4 id="Account"><a href="#Account" class="headerlink" title="Account"></a>Account</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd -r -s /bin/<span class="literal">false</span>  <span class="variable">$USER</span></span><br><span class="line">PASSINPUT=`<span class="built_in">echo</span> <span class="variable">$USER</span>|cut -c1-3`123 </span><br><span class="line">(<span class="built_in">echo</span> <span class="variable">$PASSINPUT</span> ; <span class="built_in">echo</span> <span class="variable">$PASSINPUT</span>)  | smbpasswd -s -a <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+<h4 id="config"><a href="#config" class="headerlink" title="config"></a>config</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">	workgroup = MYGROUP</span><br><span class="line">	server string = Samba Server Version %v</span><br><span class="line">	<span class="built_in">log</span> file = /var/<span class="built_in">log</span>/samba/<span class="built_in">log</span>.%m</span><br><span class="line">	max <span class="built_in">log</span> size = 50</span><br><span class="line">	security = user</span><br><span class="line">	passdb backend = tdbsam</span><br><span class="line">load printers = no</span><br><span class="line">printing = bsd</span><br><span class="line">printcap name = /dev/null</span><br><span class="line"><span class="built_in">disable</span> spoolss = yes</span><br><span class="line"></span><br><span class="line">[SMB_DATA]</span><br><span class="line">path = /samba/data</span><br><span class="line">valid users =  test1,test2,test3,test4</span><br><span class="line">create mask = 0744</span><br><span class="line">force create mode = 0744</span><br><span class="line">security mask = 0744</span><br><span class="line">force security mode = 0744</span><br><span class="line">directory mask = 0755</span><br><span class="line">force directory mode = 0755</span><br><span class="line">directory security mask = 0755</span><br><span class="line">force directory security mode = 0755</span><br><span class="line">writable = yes</span><br><span class="line">fileid:mapping = smb_data</span><br><span class="line">use mmap = no</span><br><span class="line">nt acl support = yes</span><br><span class="line">ea support = yes</span><br></pre></td></tr></table></figure>
+
+<h4 id="Show-status"><a href="#Show-status" class="headerlink" title="Show status"></a>Show status</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ smbclient -L localhost <span class="comment">#show share point</span></span><br><span class="line">$ pdbedit -L <span class="comment"># show users</span></span><br><span class="line">$ mount.cifs //<span class="variable">$domain_addr</span>/SMB_DATA -o username=test1,password=<span class="variable">$your_pass</span> /mnt</span><br><span class="line"></span><br><span class="line">$ ls -l /var/lib/samba/private/</span><br><span class="line">total 936</span><br><span class="line">-rw------- 1 root root 528384 Aug 22 10:36 passdb.tdb</span><br><span class="line">-rw------- 1 root root 430080 Dec 29  2013 secrets.tdb</span><br><span class="line"><span class="comment"># backup data</span></span><br><span class="line">$ pdbedit -e smbpasswd:/root/samba-users.backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># import </span></span><br><span class="line">$ pdbedit -i smbpasswd:/root/samba-users.backup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Please backup all users from /etc/passwd too</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="update-kernel-moduels-in-lib-moduels-uname-r"><a href="#update-kernel-moduels-in-lib-moduels-uname-r" class="headerlink" title="update kernel moduels in /lib/moduels/$(uname -r)"></a>update kernel moduels in /lib/moduels/$(uname -r)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># re-generate modules.alias modules.dep</span></span><br><span class="line">$ depmod -a</span><br></pre></td></tr></table></figure>
+
+<h3 id="syscalls"><a href="#syscalls" class="headerlink" title="syscalls"></a>syscalls</h3><p>Get these names from <a href="https://github.com/torvalds/linux/blob/master/include/linux/syscalls.h" target="_blank" rel="noopener">syscalls.h</a></p>
+<h3 id="filter-syslog"><a href="#filter-syslog" class="headerlink" title="filter syslog"></a><a href="https://access.redhat.com/solutions/1564823" target="_blank" rel="noopener">filter syslog</a></h3><p>Created slice user-0.slice.<br>Starting Session 150 of user root.<br>Started Session 150 of user root.<br>Created slice user-0.slice.<br>Starting Session 151 of user root.<br>Started Session 151 of user root.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'if $programname == "systemd" and ($msg contains "Starting Session" or $msg contains "Started Session" or $msg contains "Created slice" or $msg contains "Starting user-" or $msg contains "Starting User Slice of" or $msg contains "Removed session" or $msg contains "Removed slice User Slice of" or $msg contains "Stopping User Slice of") then stop'</span> &gt;/etc/rsyslog.d/ignore-systemd-session-slice.conf</span><br><span class="line"></span><br><span class="line">$ systemctl restart rsyslog</span><br></pre></td></tr></table></figure>
+
+<h3 id="xfs"><a href="#xfs" class="headerlink" title="xfs"></a>xfs</h3><h4 id="Check-fragmentation"><a href="#Check-fragmentation" class="headerlink" title="Check fragmentation"></a>Check fragmentation</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xfs_db -r -c frag /dev/md127</span><br><span class="line">actual 310296, ideal 306296, fragmentation factor 1.29%</span><br><span class="line">Note, this number is largely meaningless.</span><br><span class="line">Files on this filesystem average 1.01 extents per file</span><br></pre></td></tr></table></figure>
+
+<h3 id="tmp-permission"><a href="#tmp-permission" class="headerlink" title="tmp permission"></a>tmp permission</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 1777 /tmp</span><br></pre></td></tr></table></figure>
+
+<h3 id="taskset"><a href="#taskset" class="headerlink" title="taskset"></a>taskset</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ taskset -p a 205344</span><br><span class="line">pid 205344<span class="string">'s current affinity mask: ffffffffff</span></span><br><span class="line"><span class="string">pid 205344'</span>s new affinity mask: a</span><br><span class="line"></span><br><span class="line">$ taskset -c -p 205344</span><br><span class="line">pid 205344<span class="string">'s current affinity list: 1,3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ echo "obase=2; ibase=16; A" | bc</span></span><br><span class="line"><span class="string">1010 # core 1,3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bind $vnc_server_ip:5910 to localhost:7910</span></span><br><span class="line">$ ssh -L 7910:localhost:5910 username@<span class="variable">$&#123;vnc_server_ip&#125;</span> -o GSSAPIAuthentication=no</span><br><span class="line"></span><br><span class="line"><span class="comment"># to 0.0.0.0:7910</span></span><br><span class="line">$ ssh -L 7910:0.0.0.0:5910 username@<span class="variable">$&#123;vnc_server_ip&#125;</span> -o GSSAPIAuthentication=no</span><br><span class="line"><span class="comment"># same with 0.0.0.0</span></span><br><span class="line">$ ssh -g -L 7910:localhost:5910 username@<span class="variable">$&#123;vnc_server_ip&#125;</span> -o GSSAPIAuthentication=no</span><br><span class="line"><span class="comment"># limit the client ip</span></span><br><span class="line">$ ssh -g -L 7910:<span class="variable">$&#123;ssh_client_ip&#125;</span>:5910 username@<span class="variable">$&#123;vnc_server_ip&#125;</span> -o GSSAPIAuthentication=no</span><br><span class="line"></span><br><span class="line"><span class="comment"># bind $vnc_server_ip:5910 to $vnc_server_ip:7910 by $ssh_client</span></span><br><span class="line"><span class="comment"># modify -L to -R</span></span><br><span class="line">$ ssh -R 7910:localhost:5910 username@<span class="variable">$&#123;vnc_server_ip&#125;</span> -o GSSAPIAuthentication=no</span><br><span class="line"></span><br><span class="line"><span class="comment"># share all ip addr</span></span><br><span class="line"><span class="comment"># modify /etc/ssh/sshd_config 'GatewayPorts clientspecified'</span></span><br><span class="line">$ ssh -R 7910:0.0.0.0:5910 username@<span class="variable">$&#123;vnc_server_ip&#125;</span> -o GSSAPIAuthentication=no</span><br><span class="line"></span><br><span class="line"><span class="comment"># vnc_server_ip2 and ip1 in the same LAN, bind vnc_server_ip2 5910 to ssh client 7910 and forward by vnc_server_ip1</span></span><br><span class="line">$ ssh -L 7910:<span class="variable">$&#123;vnc_server_ip2&#125;</span>:5910 user@<span class="variable">$&#123;vnc_server_ip1&#125;</span></span><br><span class="line">vnc_server_ip1 $ vncview localhost:7910</span><br><span class="line"><span class="comment"># Enable all ip access</span></span><br><span class="line">$ ssh -L 7910:0.0.0.0:5910 user@<span class="variable">$&#123;vnc_server_ip1&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># vnc_server_ip1 access ssh_client_ip2 vnc service</span></span><br><span class="line">$ ssh -R 7910:ssh_client_ip2:5910 user@vnc_server_ip1</span><br><span class="line">vnc_server_ip1 $ vncviewer localhost::7910 </span><br><span class="line"><span class="comment"># Enable all ip access</span></span><br><span class="line">$ ssh -R 7910:0.0.0.0:5910 user@vnc_server_ip1</span><br></pre></td></tr></table></figure>
+
+<h3 id="strace"><a href="#strace" class="headerlink" title="strace"></a>strace</h3><p>-ttt If given thrice, the time printed will include the microseconds and the leading portion will be printed as the number of seconds since the epoch</p>
+<p>-f Trace child processes as they are created by currently traced processes  as  a  result  of  the  fork(2),  vfork(2)  and clone(2)  system  calls. Note that -p PID -f will attach all threads of process PID if it is multi-threaded, not only thread with thread_id = PID</p>
+<p>-T Show the time spent in system calls.  This records the time difference between the beginning and the end of each  system call</p>
+<p>-c Count time, calls, and errors for each system call and report a summary on program exit, suppressing the regular output. This attempts to show system time (CPU time spent running in the kernel) independent of wall clock time.  If -c is used with -f, only aggregate totals for all traced processes are kept.<br>-C Like -c but also print regular output while processes are running.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ strace -ttt -T -e trace=%memory -C -o ~/memory.log -f -p <span class="variable">$pid</span></span><br><span class="line">$ strace -ttt -T -e trace=%desc -C -o ~/desc.log -f -p <span class="variable">$pid</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Calculated-CPU-usage"><a href="#Calculated-CPU-usage" class="headerlink" title="Calculated CPU usage"></a><a href="https://github.com/Leo-G/DevopsWiki/wiki/How-Linux-CPU-Usage-Time-and-Percentage-is-calculated" target="_blank" rel="noopener">Calculated CPU usage</a></h3><p>cpu usage=(idle2-idle1)/(cpu2-cpu1)<em>100 # script example<br>cpu usage=[(user_2 +sys_2+nice_2) - (user_1 + sys_1+nice_1)]/(total_2 - total_1)</em>100</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> cat /proc/<span class="built_in">stat</span></span><br><span class="line">     user nice system idle iowait  irq  softirq steal guest guest_nice</span><br><span class="line">cpu  4705 356  584    3699   23    23     0       0     0          0</span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"> <span class="comment"># by Paul Colby (http://colby.id.au), no rights reserved ;)</span></span><br><span class="line"></span><br><span class="line"> PREV_TOTAL=0</span><br><span class="line"> PREV_IDLE=0</span><br><span class="line"></span><br><span class="line"> <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">   <span class="comment"># Get the total CPU statistics, discarding the 'cpu ' prefix.</span></span><br><span class="line">   CPU=(`sed -n <span class="string">'s/^cpu\s//p'</span> /proc/<span class="built_in">stat</span>`)</span><br><span class="line">   IDLE=<span class="variable">$&#123;CPU[3]&#125;</span> <span class="comment"># Just the idle CPU time.</span></span><br><span class="line"></span><br><span class="line">   <span class="comment"># Calculate the total CPU time.</span></span><br><span class="line">   TOTAL=0</span><br><span class="line">   <span class="keyword">for</span> VALUE <span class="keyword">in</span> <span class="string">"<span class="variable">$&#123;CPU[@]&#125;</span>"</span>; <span class="keyword">do</span></span><br><span class="line">     ((TOTAL=<span class="variable">$TOTAL</span>+<span class="variable">$VALUE</span>))</span><br><span class="line">   <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">   <span class="comment"># Calculate the CPU usage since we last checked.</span></span><br><span class="line">   ((DIFF_IDLE=<span class="variable">$IDLE</span>-<span class="variable">$PREV_IDLE</span>))</span><br><span class="line">   ((DIFF_TOTAL=<span class="variable">$TOTAL</span>-<span class="variable">$PREV_TOTAL</span>))</span><br><span class="line">    </span><br><span class="line">   <span class="comment">## </span></span><br><span class="line">   DIFF_USAGE=$(awk -v diff_idle=<span class="variable">$DIFF_IDLE</span> -v diff_total=<span class="variable">$DIFF_TOTAL</span> <span class="string">'BEGIN&#123;printf "%.2f", (diff_total-diff_idle)/diff_total*100&#125;'</span>)</span><br><span class="line">   <span class="built_in">echo</span> -en <span class="string">"\rCPU: <span class="variable">$DIFF_USAGE</span>%  \b\b"</span></span><br><span class="line"></span><br><span class="line">   <span class="comment"># Remember the total and idle CPU times for the next check.</span></span><br><span class="line">   PREV_TOTAL=<span class="string">"<span class="variable">$TOTAL</span>"</span></span><br><span class="line">   PREV_IDLE=<span class="string">"<span class="variable">$IDLE</span>"</span></span><br><span class="line"></span><br><span class="line">   <span class="comment"># Wait before checking again.</span></span><br><span class="line">   usleep 100000</span><br><span class="line"> <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="tuna"><a href="#tuna" class="headerlink" title="tuna"></a><a href="https://access.redhat.com/solutions/2144921" target="_blank" rel="noopener">tuna</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Disabling automatic IRQ balancing</span></span><br><span class="line">$ systemctl stop irqbalance.service</span><br><span class="line">$ systemctl <span class="built_in">disable</span> irqbalance.service</span><br><span class="line"></span><br><span class="line"><span class="comment">#  the kernel will automatically try to balance the load based on its understanding of the hardware's NUMA layout</span></span><br><span class="line">$  <span class="built_in">echo</span> kernel.numa_balancing=0 &gt;&gt; /etc/sysctl.conf ; sysctl -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># Isolating CPUs from the process scheduler</span></span><br><span class="line">This step involves setting isolcpus on the kernel<span class="string">'s cmdline. This removes cores from the process scheduler that you would like to dedicate to your application, so other userland processes do not migrate to them. Please see this solutions document for more information: https://access.redhat.com/solutions/480473</span></span><br><span class="line"><span class="string">NOTE: kernel threads are not able to be disabled and will always be visible on all cores. In ps -eLf output, these show up in brackets, like [ksoftirqd/0]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ grubby --update-kernel=ALL --add-args='</span>isolcpus=1-3,5-31<span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Show numa node for dev </span></span><br><span class="line"><span class="string">$ numactl -a -N netdev:em1 grep allowed /proc/self/status</span></span><br><span class="line"><span class="string">Cpus_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000055,55555555</span></span><br><span class="line"><span class="string">Cpus_allowed_list:	0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38</span></span><br><span class="line"><span class="string">Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000003</span></span><br><span class="line"><span class="string">Mems_allowed_list:	0-1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## bind to 0,2,4 cores</span></span><br><span class="line"><span class="string">$ numactl -a -N netdev:em1 -C 0,2,4 grep allowed /proc/self/status</span></span><br><span class="line"><span class="string">Cpus_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000015</span></span><br><span class="line"><span class="string">Cpus_allowed_list:	0,2,4</span></span><br><span class="line"><span class="string">Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000003</span></span><br><span class="line"><span class="string">Mems_allowed_list:	0-1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Here has a question, if you recheck the CPU, The CPUs_allowed_list will go to "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38" again</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## write the it to systemd service config file</span></span><br><span class="line"><span class="string">[Service]</span></span><br><span class="line"><span class="string">...other lines...</span></span><br><span class="line"><span class="string">ExecStart=/bin/numactl -aN netdev:em1 -C 6 /path/to/ptpd</span></span><br><span class="line"><span class="string">...other lines...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## about numactl</span></span><br><span class="line"><span class="string">Instead of a number a node can also be:</span></span><br><span class="line"><span class="string">  netdev:DEV the node connected to network device DEV</span></span><br><span class="line"><span class="string">  file:PATH  the node the block device of path is connected to</span></span><br><span class="line"><span class="string">  ip:HOST    the node of the network device host routes through</span></span><br><span class="line"><span class="string">  block:PATH the node of block device path</span></span><br><span class="line"><span class="string">  pci:[seg:]bus:dev[:func] The node of a PCI device</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># Dell H330 IR</span></span><br><span class="line"><span class="string">$ lspci -ttv | grep "MegaRAID SAS-3 3008" -B 1</span></span><br><span class="line"><span class="string"> \-[0000:00]-+-00.0  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D DMI2</span></span><br><span class="line"><span class="string">             +-01.0-[02]----00.0  LSI Logic / Symbios Logic MegaRAID SAS-3 3008 [Fury]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ ls -l /sys/class/block</span></span><br><span class="line"><span class="string">sda -&gt; ../../devices/pci0000:00/0000:00:01.0/0000:02:00.0/host0/target0:0:0/0:0:0:0/block/sda</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">CPU ID</span></span><br><span class="line"><span class="string">Zero-based CPU ID	0	1	2	3	4	5	6	7	8	9	10	11	12</span></span><br><span class="line"><span class="string">Decimal Value	1	2	4	8	16	32	64	128	256	512	1024	2048	4096</span></span><br><span class="line"><span class="string">Hexadecimal Value	1	2	4	8	10	20	40	80	100	200	400	800	1000</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">printf '</span>%x %x\n<span class="string">' 1024 4096</span></span><br><span class="line"><span class="string">400 1000</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ awk -F '</span>[ :]+<span class="string">' '</span><span class="variable">$0</span>!~/CPU/ &amp;&amp; <span class="variable">$0</span>~/em1/&#123;<span class="built_in">print</span> <span class="variable">$2</span>&#125;<span class="string">' /proc/interrupts</span></span><br><span class="line"><span class="string">88</span></span><br><span class="line"><span class="string">90</span></span><br><span class="line"><span class="string">91</span></span><br><span class="line"><span class="string">92</span></span><br><span class="line"><span class="string">93</span></span><br><span class="line"><span class="string">94</span></span><br><span class="line"><span class="string">95</span></span><br><span class="line"><span class="string">96</span></span><br><span class="line"><span class="string">97</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ echo 400 &gt; /proc/irq/88/smp_affinitya</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">$ echo 1000 &gt; /proc/irq/97/smp_affinity</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">$ seq 88 97 | xargs -I% grep -H . /proc/irq/%/smp_affinity</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="NFS-client"><a href="#NFS-client" class="headerlink" title="NFS client"></a>NFS client</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"options sunrpc tcp_slot_table_entries=128"</span> &gt;&gt; /etc/modprobe.d/sunrpc.conf</span><br><span class="line"><span class="comment"># the value default only 2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Monitor"><a href="#Monitor" class="headerlink" title="Monitor"></a>Monitor</h3><h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head</span><br><span class="line">$ ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head</span><br></pre></td></tr></table></figure>
+
+<h3 id="selinux-1"><a href="#selinux-1" class="headerlink" title="selinux"></a>selinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setroubleshoot</span><br></pre></td></tr></table></figure>
+
+<h3 id="handle-overflow-in-jiffies"><a href="#handle-overflow-in-jiffies" class="headerlink" title="handle overflow in jiffies"></a><a href="https://stackoverflow.com/questions/8206762/how-does-linux-handle-overflow-in-jiffies" target="_blank" rel="noopener">handle overflow in jiffies</a></h3><p>1ms = millisecond<br>1us = microsecond !=ms, microsecond = us<br>1ns = billisecond = nanosecond<br>1ps = picosecond</p>
+<p>/usr/src/kernels/$(uname -r)/include/linux/jiffies.h</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">These inlines deal with timer wrapping correctly. You are </span><br><span class="line">strongly encouraged to use them</span><br><span class="line">1. Because people otherwise forget</span><br><span class="line">2. Because <span class="keyword">if</span> the timer wrap changes <span class="keyword">in</span> future you won<span class="string">'t have to</span></span><br><span class="line"><span class="string">   alter your driver code.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">time_after(a,b) returns true if the time a is after time b.</span></span><br></pre></td></tr></table></figure>
+<p>time_before(jiffies, timeout)<br>#define time_before(jiffies, timeout) ((long)(jiffies) - (long)(timeout) &lt; 0)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (time_before(jiffies, timeout)</span><br><span class="line">&#123;</span><br><span class="line">    /* we did not time out, good ... */</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    /* we timed out, error ...*</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,time_before(jiffies,timeout));</span><br></pre></td></tr></table></figure>
+
+
+<p>/usr/src/kernels/3.10.0-862.11.6.el7.x86_64/include/generated/autoconf.h</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define CONFIG_HZ 1000</span></span><br></pre></td></tr></table></figure>
+
+<p>/usr/src/kernels/$(uname -r)/include/asm-generic/param.h<br>1GHz=1000,000,000 Hz<br>1 second/1000000000<br>awk ‘BEGIN{printf “%.9f\n”,1/1000000000}’<br>0.000000001 (1ns/Hz system precision)</p>
+<p>Linux kenrel CONFIG_HZ = 1000</p>
+<p>Tick = 1sec / CONFIG_HZ= 1ms<br>average 1ms with once interrput, 1000 time interrupt in single second</p>
+<p>The timer tick is a timer interrupt that is usually generated HZ times per second<br>jiffies means the unit of time</p>
+<p>the kernel use some macros prevent an overflow, eg: time_before</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#incldue <span class="meta-string">&lt;linux/jiffies.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> i,j,k</span><br><span class="line">j = jiffies;</span><br><span class="line">i = j + HZ;</span><br><span class="line">k = j + HZ*<span class="number">1000</span>;</span><br><span class="line">``</span><br><span class="line"></span><br><span class="line">```c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __ASM_GENERIC_PARAM_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __ASM_GENERIC_PARAM_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;uapi/asm-generic/param.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta"># <span class="meta-keyword">undef</span> HZ</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> HZ		CONFIG_HZ	<span class="comment">/* Internal kernel timer frequency */</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> USER_HZ	100		<span class="comment">/* some user interfaces are */</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> CLOCKS_PER_SEC	(USER_HZ)       <span class="comment">/* in "ticks" like times() */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __ASM_GENERIC_PARAM_H */</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Prevent-the-data-be-deleted"><a href="#Prevent-the-data-be-deleted" class="headerlink" title="Prevent the data be deleted"></a>Prevent the data be deleted</h3><p>If you files system support attr</p>
+<ul>
+<li>: Adds the attribute to the existing attribute of the files.<br>– : Removes the attribute to the existing attribute of the files.<br>= : Keep the existing attributes that the files have.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">$ chattr +i -R demo</span><br><span class="line">$ rm -rf demo/</span><br><span class="line">rm: cannot remove ‘demo/0’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/1’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/2’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/3’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/4’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/5’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/6’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/7’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/8’: Permission denied</span><br><span class="line">rm: cannot remove ‘demo/9’: Permission denied</span><br><span class="line"></span><br><span class="line">$ lsattr demo/</span><br><span class="line">----i----------- demo/0</span><br><span class="line">----i----------- demo/1</span><br><span class="line">----i----------- demo/2</span><br><span class="line">----i----------- demo/3</span><br><span class="line">----i----------- demo/4</span><br><span class="line">----i----------- demo/5</span><br><span class="line">----i----------- demo/6</span><br><span class="line">----i----------- demo/7</span><br><span class="line">----i----------- demo/8</span><br><span class="line">----i----------- demo/9</span><br><span class="line">$ chattr -i -R demo/</span><br><span class="line">$ rm -f demo/*</span><br><span class="line"></span><br><span class="line"><span class="comment">### could be append</span></span><br><span class="line">$ chattr -R +a demo/</span><br><span class="line">$ <span class="built_in">cd</span> demo/</span><br><span class="line">$ ls</span><br><span class="line">0  1  2  3  4  5  6  7  8  9</span><br><span class="line">$ cat 0</span><br><span class="line">0</span><br><span class="line">$ <span class="built_in">echo</span> 0 &gt; 0</span><br><span class="line">-bash: 0: Operation not permitted</span><br><span class="line">$ <span class="built_in">echo</span> 0 &gt;&gt; 0</span><br><span class="line">$ cat 0</span><br><span class="line">0</span><br><span class="line">0</span><br><span class="line">$ lsattr 0</span><br><span class="line">-----a---------- 0</span><br><span class="line">$ rm -f 0</span><br><span class="line">rm: cannot remove ‘0’: Operation not permitted</span><br><span class="line"></span><br><span class="line">$ chattr -R -a demo</span><br><span class="line">$ rm -f demo/*</span><br></pre></td></tr></table></figure>
+
+<h3 id="errno"><a href="#errno" class="headerlink" title="errno"></a>errno</h3><p><a href="https://github.com/torvalds/linux/blob/master/include/uapi/asm-generic/errno.h" target="_blank" rel="noopener">https://github.com/torvalds/linux/blob/master/include/uapi/asm-generic/errno.h</a><br>$ man 3 erron</p>
+<h3 id="tc"><a href="#tc" class="headerlink" title="tc"></a><a href="https://colobu.com/2017/04/21/tc-introduction/" target="_blank" rel="noopener">tc</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## fixed delay</span></span><br><span class="line">$ tc qdisc add dev eth0 root netem delay 100ms</span><br><span class="line"></span><br><span class="line"><span class="comment">## fixed delay range 100ms ± 10ms</span></span><br><span class="line">$ tc qdisc change dev eth0 root netem delay 100ms 10ms</span><br><span class="line"></span><br><span class="line"><span class="comment">## This causes the added delay to be 100ms ± 10ms with the next random element depending 25% on the last one. This isn't true statistical correlation, but an approximation.</span></span><br><span class="line">$ tc qdisc change dev eth0 root netem delay 100ms 10ms 25%</span><br><span class="line"></span><br><span class="line"><span class="comment">## 0.1% package loss</span></span><br><span class="line">$ tc qdisc change dev eth0 root netem loss 0.1%</span><br><span class="line"></span><br><span class="line">$ tc qdisc change dev eth0 root netem loss 0.3% 25%</span><br><span class="line"></span><br><span class="line"><span class="comment">## 1% duplicate package</span></span><br><span class="line">$ tc qdisc change dev eth0 root netem duplicate 1%</span><br><span class="line"></span><br><span class="line"><span class="comment">## 0.1% randomly modify single bit</span></span><br><span class="line">$ tc qdisc change dev eth0 root netem corrupt 0.1%</span><br><span class="line"></span><br><span class="line"><span class="comment">## out of order, 5,10,15,20,25... package send right now, the others delay 10ms, it 's fixed, not random</span></span><br><span class="line">$ tc qdisc change dev eth0 root netem gap 5 delay 10ms</span><br><span class="line"></span><br><span class="line"><span class="comment">## out of order randomly, 25% will be transmit, the others will be delay 10ms, next and previos has the 50% relevance ??</span></span><br><span class="line">$ tc qdisc change dev eth0 root netem delay 10ms reorder 25% 50%</span><br><span class="line"></span><br><span class="line"><span class="comment">## delay time range at 100ms ± 75ms, it could cause the package out of order</span></span><br><span class="line">$ tc qdisc change dev eth0 root netem delay 100ms 75ms</span><br><span class="line"></span><br><span class="line"><span class="comment">## flow control </span></span><br><span class="line">$ tc qdisc add dev eth0 root handle 1:0 netem delay 100ms</span><br><span class="line">$ tc qdisc add dev eth0 parent 1:1 handle 10: tbf rate 256kbit buffer 1600 <span class="built_in">limit</span> 3000</span><br><span class="line">$ tc -s qdisc ls dev eth0</span><br></pre></td></tr></table></figure>
+
+<h3 id="VNC"><a href="#VNC" class="headerlink" title="VNC"></a>VNC</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall -y <span class="string">"GNOME Desktop"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#if there is no another data in this file</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"exec gnome-session"</span> &gt; ~/.xinitrc</span><br><span class="line"></span><br><span class="line">systemctl is-enabled vncserver@.service</span><br><span class="line">systemctl <span class="built_in">enable</span> vncserver@.service</span><br><span class="line"></span><br><span class="line">systemctl get-default</span><br><span class="line">systemctl <span class="built_in">set</span>-default multi-user.target</span><br><span class="line"></span><br><span class="line">cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:4.service</span><br><span class="line">vi /etc/systemd/system/vncserver@:4.service <span class="comment">## replace root user to normal user</span></span><br><span class="line">ExecStart=/usr/sbin/runuser -l root -c <span class="string">"/usr/bin/vncserver %i"</span></span><br><span class="line">PIDFile=/root/.vnc/%H%i.pid</span><br><span class="line"></span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"></span><br><span class="line">ln -s <span class="string">'/etc/systemd/system/vncserver@:4.service'</span> <span class="string">'/etc/systemd/system/multi-user.target.wants/vncserver@:4.service'</span></span><br><span class="line">systemctl <span class="built_in">enable</span> vncserver@:4.service</span><br><span class="line">systemctl start vncserver@:4.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="Vncserer-was-runing-but-there-is-no-desktop-in-centos-7"><a href="#Vncserer-was-runing-but-there-is-no-desktop-in-centos-7" class="headerlink" title="Vncserer was runing, but there is no desktop in centos 7"></a>Vncserer was runing, but there is no desktop in centos 7</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ yum groupinstall Xfce</span><br><span class="line">$ yum install xorg-x11-twm xterm xorg-x11-xinit </span><br><span class="line">$ chmod  755 ~/.vnc/xstartup</span><br><span class="line">$ cat ~/.vnc/xstartup</span><br><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">unset</span> SESSION_MANAGER</span><br><span class="line"><span class="built_in">unset</span> DBUS_SESSION_BUS_ADDRESS</span><br><span class="line"><span class="built_in">exec</span> startxfce4</span><br></pre></td></tr></table></figure>
+
+<h3 id="VLC"><a href="#VLC" class="headerlink" title="VLC"></a>VLC</h3><h4 id="Not-show-media-title"><a href="#Not-show-media-title" class="headerlink" title="Not show media title"></a>Not show media title</h4><p><a href="https://forum.videolan.org/viewtopic.php?t=50202" target="_blank" rel="noopener">Same question</a><br>Tools–&gt;Preferences–&gt;Subtitles / OSD–&gt; Show media title on media start (disable it)<br>Tools–&gt;Preferences–&gt;Subtitles / OSD–&gt; Enable on screen display (disable it)</p>
+<h4 id="Not-resize-interface"><a href="#Not-resize-interface" class="headerlink" title="Not resize interface"></a>Not resize interface</h4><p><img src="/img/vlc-set1.png" alt=""></p>
+<h3 id="grub"><a href="#grub" class="headerlink" title="grub"></a>grub</h3><p>CentOS 7 add kernel parameter</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grubby --remove-args=<span class="string">"argX argY"</span> --args=<span class="string">"argA argB"</span> --update-kernel /boot/kernel</span><br><span class="line">grubby --update-kernel=ALL --args=<span class="string">'scsi_mod.use_blk_mq=y dm_mod.use_blk_mq=y'</span></span><br></pre></td></tr></table></figure>
+
+<p>set default boot</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">grubby --info=ALL</span><br><span class="line">index=0</span><br><span class="line">kernel=/boot/vmlinuz-3.10.0-514.6.1.el7.x86_64</span><br><span class="line">args=<span class="string">"ro crashkernel=auto rd.md.uuid=cc0432b3:6f6f54bf:c2f2b91b:2978ff6a rhgb quiet "</span></span><br><span class="line">root=UUID=5b0e60cf-adf9-42a0-b6e3-0304b919dc33</span><br><span class="line">initrd=/boot/initramfs-3.10.0-514.6.1.el7.x86_64.img</span><br><span class="line">title=CentOS Linux (3.10.0-514.6.1.el7.x86_64) 7 (Core)</span><br><span class="line">index=1</span><br><span class="line">kernel=/boot/vmlinuz-3.10.0-327.el7.x86_64</span><br><span class="line">args=<span class="string">"ro crashkernel=auto rd.md.uuid=cc0432b3:6f6f54bf:c2f2b91b:2978ff6a rhgb quiet "</span></span><br><span class="line">root=UUID=5b0e60cf-adf9-42a0-b6e3-0304b919dc33</span><br><span class="line">initrd=/boot/initramfs-3.10.0-327.el7.x86_64.img</span><br><span class="line">title=CentOS Linux (3.10.0-327.el7.x86_64) 7 (Core)</span><br><span class="line">index=2</span><br><span class="line">kernel=/boot/vmlinuz-0-rescue-f614a3c482eb4b21add5ae750b3871bb</span><br><span class="line">args=<span class="string">"ro crashkernel=auto rd.md.uuid=cc0432b3:6f6f54bf:c2f2b91b:2978ff6a rhgb quiet "</span></span><br><span class="line">root=UUID=5b0e60cf-adf9-42a0-b6e3-0304b919dc33</span><br><span class="line">initrd=/boot/initramfs-0-rescue-f614a3c482eb4b21add5ae750b3871bb.img</span><br><span class="line">title=CentOS Linux (0-rescue-f614a3c482eb4b21add5ae750b3871bb) 7 (Core)</span><br><span class="line">index=3</span><br><span class="line">non linux entry</span><br><span class="line"></span><br><span class="line">grubby --<span class="built_in">set</span>-default /boot/vmlinuz-3.10.0-229.4.2.el7.x86_64</span><br><span class="line">grubby --info /boot/vmlinuz-3.10.0-229.4.2.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<h3 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h3><h4 id="nolock"><a href="#nolock" class="headerlink" title="nolock"></a><a href="https://linux.die.net/man/5/nfs" target="_blank" rel="noopener">nolock</a></h4><p>NLM locking is used for this mount point. When using the nolock option, applications can lock files, but such locks provide exclusion only against other applications running on the same client. Remote applications are not affected by these locks.</p>
+<h4 id="file-lock"><a href="#file-lock" class="headerlink" title="file lock"></a><a href="https://docstore.mik.ua/orelly/networking_2ndEd/nfs/ch11_02.htm" target="_blank" rel="noopener">file lock</a></h4><p>The NFS (Versions 2 and 3) protocol does not support file locking, but the NFS environment supports an ancillary protocol called NLM, which originally stood for “Network Lock Manager.” When an NFS filesystem on an NFS client gets a request to lock a file, instead of an NFS remote procedure call, it generates an NLM remote procedure call.</p>
+<p>The NLM protocol consists of remote procedure calls that pattern fcntl arguments and results. Because blocking locks are supported (a process blocks waiting for a lock that conflicts with another holder), the NLM protocol has the notion of callbacks, from the file server to the NLM client to notify that a lock is available. In this way, the NLM client sometimes acts as an RPC server in order to receive delayed results from lock calls.</p>
+<h3 id="How-could-I-found-which-file-cause-pipe-hang"><a href="#How-could-I-found-which-file-cause-pipe-hang" class="headerlink" title="How could I found which file cause pipe hang"></a>How could I found which file cause pipe hang</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ cat /dev/zero | tee /tank/the_file</span><br><span class="line">$ ps aux | grep 63488</span><br><span class="line">root      63488  5.2  0.0 107972   676 pts/9    S+   04:32   0:19 cat /dev/zero</span><br><span class="line"></span><br><span class="line">$ strace -p 63488</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"</span>..., 65536) = 65536</span><br><span class="line">write(1, <span class="string">"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"</span>..., 65536) = 65536</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"</span>..., 65536) = 65536</span><br><span class="line">write(1, <span class="string">"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"</span>..., 65536</span><br><span class="line">strace: Process 63488 detached</span><br><span class="line"></span><br><span class="line">$ ls -l /proc/63488/fd</span><br><span class="line">total 0</span><br><span class="line">lrwx------ 1 root root 64 Mar 21 04:33 0 -&gt; /dev/pts/9</span><br><span class="line">l-wx------ 1 root root 64 Mar 21 04:33 1 -&gt; pipe:[36710085]</span><br><span class="line">lrwx------ 1 root root 64 Mar 21 04:32 2 -&gt; /dev/pts/9</span><br><span class="line">lr-x------ 1 root root 64 Mar 21 04:33 3 -&gt; /dev/zero</span><br><span class="line">$ lsof | grep 36710085</span><br><span class="line">cat        63488           root    1w     FIFO                0,9         0t0   36710085 pipe</span><br><span class="line">tee        63489           root    0r     FIFO                0,9         0t0   36710085 pipe</span><br><span class="line">$ ls -l /proc/63489/fd</span><br><span class="line">total 0</span><br><span class="line">lr-x------ 1 root root 64 Mar 21 04:33 0 -&gt; pipe:[36710085]</span><br><span class="line">lrwx------ 1 root root 64 Mar 21 04:33 1 -&gt; /dev/pts/9</span><br><span class="line">lrwx------ 1 root root 64 Mar 21 04:32 2 -&gt; /dev/pts/9</span><br><span class="line">l-wx------ 1 root root 64 Mar 21 04:33 3 -&gt; /tank/the_file</span><br></pre></td></tr></table></figure>
+<h4 id="If-pipe-change-to-socket"><a href="#If-pipe-change-to-socket" class="headerlink" title="If pipe change to socket"></a>If pipe change to socket</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ ll /proc/333709/fd</span><br><span class="line">total 0</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 0 -&gt; /dev/null</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 1 -&gt; /dev/null</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 10 -&gt; socket:[326105]</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 11 -&gt; socket:[326106]</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 2 -&gt; /dev/null</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 3 -&gt; socket:[304292]</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 4 -&gt; socket:[304294]</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 5 -&gt; socket:[304295]</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 6 -&gt; socket:[304296]</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 7 -&gt; socket:[304297]</span><br><span class="line">lr-x------ 1 root root 64 Mar 20 03:24 8 -&gt; /run/rpcbind.lock</span><br><span class="line">lrwx------ 1 root root 64 Mar 20 03:24 9 -&gt; socket:[334786]</span><br><span class="line"></span><br><span class="line"><span class="comment">#304294 is inode</span></span><br><span class="line"></span><br><span class="line">$ cat /proc/net/tcp | grep -Ei <span class="string">'local_address|304294'</span></span><br><span class="line">sl  local_address rem_address   st tx_queue rx_queue tr tm-&gt;when retrnsmt   uid  timeout inode</span><br><span class="line">8: 00000000:006F 00000000:0000 0A 00000000:00000000 00:00000000 00000000     0        0 304294 1 ffff9ac0e2f8be00 100 0 0 10 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tcpdump -n -i eth0 -A -x dst port 443 and greater 100</span><br></pre></td></tr></table></figure>
+
+<h3 id="calculate-upload-download-speed-by-ping"><a href="#calculate-upload-download-speed-by-ping" class="headerlink" title="calculate upload/download speed by ping"></a><a href="http://stackoverflow.com/questions/4575537/calculate-upload-download-speed-by-ping" target="_blank" rel="noopener">calculate upload/download speed by ping</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ping -f -c 10000 -s 1472 10.100.100.100</span><br></pre></td></tr></table></figure>
+<p>At the end of the result i get: round-trip min/avg/max/stddev = 0.174/0.219/2.078/0.020 ms<br>so in average it takes 0.219 ms to send 1500 bytes and receive 1500 bytes, that’s 24 kb. 24 kb / 0.219 ms = 110 Mb/s<br>If you want to use that to a server on the internet, you need to lower the packet size to something like 1464 (for MTU 1492), drop the -f option and lower the count so it won’t take too long to finish.</p>
+<p>1500 TX Bytes + 1500 RX Bytes= 3000 Bytes = 3000 * 8 = 24000 bits<br>24000 / 0.219 = 109.589 Mb/s</p>
+<p>It ‘s not represent full throughput. just test single link in your ethernet adapter. not parallel.</p>
+<h3 id="MTU-problem-check"><a href="#MTU-problem-check" class="headerlink" title="MTU problem check"></a>MTU problem check</h3><p>Level 3 network, between 2 nodes pass through gateway<br>Tcpdump show some packets loss, nmap show 10.xx.xx.clent port is “open”.<br>There are some packages return, some will not. Does it MTU problem ? ping could check it.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ traceroute 10.xx.xx.client</span><br><span class="line">traceroute to 10.xx.xx.client (10.xx.xx.client), 30 hops max, 60 byte packets</span><br><span class="line"> 1  10.10.xx.gateway (10.10.xx.gateway)  2.239 ms  1.901 ms  2.080 ms</span><br><span class="line"> 2  10.xx.xx.client (10.xx.xx.client)  0.606 ms  0.584 ms  0.592 ms</span><br><span class="line">$ traceroute 10.xx.xx.client</span><br><span class="line">traceroute to 10.xx.xx.client (10.xx.xx.client), 30 hops max, 60 byte packets</span><br><span class="line"> 1  10.10.xx.gateway (10.10.xx.gateway)  1.881 ms  2.085 ms  2.245 ms</span><br><span class="line"> 2  10.xx.xx.client (10.xx.xx.client)  0.563 ms * *</span><br><span class="line"></span><br><span class="line">$ ping -f -c 20000 -M <span class="keyword">do</span> -s 8972 10.xx.xx.client</span><br><span class="line">PING 10.xx.xx.client (10.xx.xx.client) 8972(9000) bytes of data.</span><br><span class="line">...................................................................^C</span><br><span class="line">--- 10.xx.xx.client ping statistics ---</span><br><span class="line">67 packets transmitted, 0 received, 100% packet loss, time 1076ms</span><br></pre></td></tr></table></figure>
+<p>You can got the issue from tcpdump, all larger than 1500 packets are loss.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">client <span class="comment"># tcpdump -v host 10.53.19.52 and greater 1500</span></span><br><span class="line">tcpdump: listening on bond0, link-type EN10MB (Ethernet), capture size 65535 bytes</span><br><span class="line">11:23:58.134708 IP (tos 0x0, ttl 63, id 27071, offset 0, flags [DF], proto TCP (6), length 8532)</span><br><span class="line">    10.53.19.52.988 &gt; <span class="built_in">test</span>-57-21.exp2: Flags [P.], cksum 0x496d (incorrect -&gt; 0x5fe6), seq 2359537411:2359545891, ack 3804990367, win 53, options [nop,nop,TS val 1203816317 ecr 81802289], length 8480</span><br><span class="line">11:23:58.136045 IP (tos 0x0, ttl 63, id 27077, offset 0, flags [DF], proto TCP (6), length 7292)</span><br><span class="line">    10.53.19.52.988 &gt; <span class="built_in">test</span>-57-21.exp2: Flags [.], cksum 0x4495 (incorrect -&gt; 0xe386), seq 8480:15720, ack 1, win 53, options [nop,nop,TS val 1203816318 ecr 81802294], length 7240</span><br><span class="line">11:23:58.148023 IP (tos 0x0, ttl 63, id 27083, offset 0, flags [DF], proto TCP (6), length 8588)</span><br><span class="line">    10.53.19.52.988 &gt; <span class="built_in">test</span>-57-21.exp2: Flags [P.], cksum 0x49a5 (incorrect -&gt; 0x4006), seq 17016:25552, ack 1, win 53, options [nop,nop,TS val 1203816330 ecr 81802295], length 8536</span><br></pre></td></tr></table></figure>
+<p>If client MTU is 1500, tcpdump(client) will not receive any large packages. they are loss in switch.</p>
+<h3 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h3><h4 id="Exclude-packages"><a href="#Exclude-packages" class="headerlink" title="Exclude packages"></a>Exclude packages</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum update --exclude=kernel*</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">cachedir=/var/cache/yum/<span class="variable">$basearch</span>/<span class="variable">$releasever</span></span><br><span class="line">keepcache=0</span><br><span class="line">debuglevel=2</span><br><span class="line">logfile=/var/<span class="built_in">log</span>/yum.log</span><br><span class="line">exclude=kernel* redhat-release* *.i?86</span><br></pre></td></tr></table></figure>
+<p><a href="https://access.redhat.com/solutions/10185" target="_blank" rel="noopener">reference</a></p>
+<h4 id="Switch-version"><a href="#Switch-version" class="headerlink" title="Switch version"></a>Switch version</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ yum --showduplicates list kernel</span><br><span class="line">Installed Packages</span><br><span class="line">Installed Packages</span><br><span class="line">kernel.x86_64       2.6.32-573.el6       @anaconda-CentOS-201508042137.x86_64/6.7</span><br><span class="line">kernel.x86_64       2.6.32-573.8.1.el6   @update                                 </span><br><span class="line">Available Packages</span><br><span class="line">kernel.x86_64       2.6.32-573.el6       base                                    </span><br><span class="line">kernel.x86_64       2.6.32-573.1.1.el6   update                                  </span><br><span class="line">kernel.x86_64       2.6.32-573.3.1.el6   update                                  </span><br><span class="line">kernel.x86_64       2.6.32-573.7.1.el6   update                                  </span><br><span class="line">kernel.x86_64       2.6.32-573.8.1.el6   update                                  </span><br><span class="line">kernel.x86_64       2.6.32-573.12.1.el6  update                                  </span><br><span class="line">kernel.x86_64       2.6.32-573.18.1.el6  update  </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">#### Yum.conf</span></span><br><span class="line">```apacheconf</span><br><span class="line">keepcache = 1</span><br></pre></td></tr></table></figure>
+
+<h4 id="Download-to-local"><a href="#Download-to-local" class="headerlink" title="Download to local"></a>Download to local</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$</span> <span class="string">yum</span> <span class="string">-y</span> <span class="string">install</span> <span class="string">yum-plugin-downloadonly</span></span><br><span class="line"><span class="string">$</span> <span class="string">yum</span> <span class="string">install</span> <span class="string">--downloadonly</span> <span class="string">--downloaddir=&lt;directory&gt;</span> <span class="string">&lt;package&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://access.redhat.com/solutions/10154" target="_blank" rel="noopener">reference</a></p>
+<h4 id="Resolve-dependency-resolution-errors"><a href="#Resolve-dependency-resolution-errors" class="headerlink" title="Resolve dependency resolution errors"></a>Resolve dependency resolution errors</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum update</span></span><br><span class="line">** Found 5 pre-existing rpmdb problem(s), <span class="string">'yum check'</span> output follows:</span><br><span class="line">MegaCli-8.04.10-1.noarch is a duplicate with MegaCli-8.04.07-1.noarch</span><br><span class="line">kernel-2.6.32-279.5.1.el6_lustre.gb16fe80.x86_64 has missing requires of kernel-firmware &gt;= (<span class="string">'0'</span>, <span class="string">'2.6.32'</span>, <span class="string">'279.5.1.el6_lustre.gb16fe80'</span>)</span><br><span class="line">kernel-firmware-2.6.32-279.5.1.el6.noarch is a duplicate with kernel-firmware-2.6.32-279.el6.noarch</span><br><span class="line">kernel-headers-2.6.32-279.5.1.el6.x86_64 is a duplicate with kernel-headers-2.6.32-279.el6.x86_64</span><br><span class="line">libcom_err-1.42.3.wc3-7.el6.x86_64 is a duplicate with libcom_err-1.41.12-12.el6.i686</span><br><span class="line">......</span><br><span class="line">You could try using --skip-broken to work around the problem</span><br><span class="line">You could try running: rpm -Va --nofiles --nodigest</span><br></pre></td></tr></table></figure>
+
+<h4 id="Uninstall-rpm-packages-from-rpmdb"><a href="#Uninstall-rpm-packages-from-rpmdb" class="headerlink" title="Uninstall rpm packages from rpmdb"></a>Uninstall rpm packages from rpmdb</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -e --justdb --nodeps <span class="string">"bad rpm packages"</span></span><br><span class="line">$ rpm -ivh --force <span class="string">"replace normal rpm packages"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># rebuild rpmdb</span></span><br><span class="line">$ <span class="built_in">cd</span> /var/lib/rpm</span><br><span class="line">$ rm  -f __db*</span><br><span class="line">$ rpm --rebuilddb </span><br><span class="line"></span><br><span class="line">$ yum clean all</span><br><span class="line">$ yum -y update</span><br></pre></td></tr></table></figure>
+
+<h3 id="upgrade-kernel"><a href="#upgrade-kernel" class="headerlink" title="upgrade kernel"></a>upgrade kernel</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://sourceware.org/elfutils/ftp/0.170/elfutils-0.170.tar.bz2</span><br><span class="line">$ tar xjvf elfutils-0.170.tar.bz2</span><br><span class="line">$ <span class="built_in">cd</span> ./elfutils-0.170</span><br><span class="line">$ ./configire; make -j 8; make install</span><br><span class="line">$ <span class="built_in">export</span> C_INCLUDE_PATH=/sources/kernel/elfutils-0.170/libelf:/sources/lib/el7/mpich-3.2.1/include/:<span class="variable">$C_INCLUDE_PATH</span></span><br><span class="line">$ cp -v /boot/config-3.10.0-693.21.1.el7.x86_64 .config</span><br><span class="line">make menuconfig</span><br><span class="line">make rpm-pkg</span><br><span class="line"><span class="comment">### enable what your want</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="BBR"><a href="#BBR" class="headerlink" title="BBR"></a>BBR</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">'net.core.default_qdisc=fq'</span> | sudo tee -a /etc/sysctl.conf</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">'net.ipv4.tcp_congestion_control=bbr'</span> | sudo tee -a /etc/sysctl.conf</span><br><span class="line">sudo sysctl -p</span><br><span class="line"></span><br><span class="line">$ sysctl net.ipv4.tcp_available_congestion_control</span><br><span class="line">net.ipv4.tcp_available_congestion_control = cubic bbr reno</span><br><span class="line"></span><br><span class="line">$ sysctl -n net.ipv4.tcp_congestion_control</span><br><span class="line">bbr</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/centos/" rel="tag"><i class="fa fa-tag"></i> centos</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/24/megaraid/" rel="prev" title="Replace megaraid by strocli">
+      <i class="fa fa-chevron-left"></i> Replace megaraid by strocli
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/09/29/gdb/" rel="next" title="Rookie try to debug">
+      Rookie try to debug <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#7"><span class="nav-number">1.</span> <span class="nav-text">7</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#selinux"><span class="nav-number">1.1.</span> <span class="nav-text">selinux</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Software-Collections-SCL-Repository"><span class="nav-number">1.2.</span> <span class="nav-text">Software Collections ( SCL ) Repository</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nofile"><span class="nav-number">2.</span> <span class="nav-text">Nofile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pidstat"><span class="nav-number">3.</span> <span class="nav-text">pidstat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nfsstat"><span class="nav-number">4.</span> <span class="nav-text">nfsstat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#user-space-pipe-size"><span class="nav-number">5.</span> <span class="nav-text">user space pipe size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rand-file"><span class="nav-number">6.</span> <span class="nav-text">rand file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#samba"><span class="nav-number">7.</span> <span class="nav-text">samba</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Account"><span class="nav-number">7.1.</span> <span class="nav-text">Account</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#config"><span class="nav-number">7.2.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Show-status"><span class="nav-number">7.3.</span> <span class="nav-text">Show status</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update-kernel-moduels-in-lib-moduels-uname-r"><span class="nav-number">8.</span> <span class="nav-text">update kernel moduels in &#x2F;lib&#x2F;moduels&#x2F;$(uname -r)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#syscalls"><span class="nav-number">9.</span> <span class="nav-text">syscalls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#filter-syslog"><span class="nav-number">10.</span> <span class="nav-text">filter syslog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xfs"><span class="nav-number">11.</span> <span class="nav-text">xfs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Check-fragmentation"><span class="nav-number">11.1.</span> <span class="nav-text">Check fragmentation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tmp-permission"><span class="nav-number">12.</span> <span class="nav-text">tmp permission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#taskset"><span class="nav-number">13.</span> <span class="nav-text">taskset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh"><span class="nav-number">14.</span> <span class="nav-text">ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strace"><span class="nav-number">15.</span> <span class="nav-text">strace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculated-CPU-usage"><span class="nav-number">16.</span> <span class="nav-text">Calculated CPU usage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tuna"><span class="nav-number">17.</span> <span class="nav-text">tuna</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS-client"><span class="nav-number">18.</span> <span class="nav-text">NFS client</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitor"><span class="nav-number">19.</span> <span class="nav-text">Monitor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ps"><span class="nav-number">19.1.</span> <span class="nav-text">ps</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#selinux-1"><span class="nav-number">20.</span> <span class="nav-text">selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#handle-overflow-in-jiffies"><span class="nav-number">21.</span> <span class="nav-text">handle overflow in jiffies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prevent-the-data-be-deleted"><span class="nav-number">22.</span> <span class="nav-text">Prevent the data be deleted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#errno"><span class="nav-number">23.</span> <span class="nav-text">errno</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tc"><span class="nav-number">24.</span> <span class="nav-text">tc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VNC"><span class="nav-number">25.</span> <span class="nav-text">VNC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vncserer-was-runing-but-there-is-no-desktop-in-centos-7"><span class="nav-number">26.</span> <span class="nav-text">Vncserer was runing, but there is no desktop in centos 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VLC"><span class="nav-number">27.</span> <span class="nav-text">VLC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Not-show-media-title"><span class="nav-number">27.1.</span> <span class="nav-text">Not show media title</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Not-resize-interface"><span class="nav-number">27.2.</span> <span class="nav-text">Not resize interface</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grub"><span class="nav-number">28.</span> <span class="nav-text">grub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS"><span class="nav-number">29.</span> <span class="nav-text">NFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nolock"><span class="nav-number">29.1.</span> <span class="nav-text">nolock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#file-lock"><span class="nav-number">29.2.</span> <span class="nav-text">file lock</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-could-I-found-which-file-cause-pipe-hang"><span class="nav-number">30.</span> <span class="nav-text">How could I found which file cause pipe hang</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#If-pipe-change-to-socket"><span class="nav-number">30.1.</span> <span class="nav-text">If pipe change to socket</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcpdump"><span class="nav-number">31.</span> <span class="nav-text">tcpdump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#calculate-upload-download-speed-by-ping"><span class="nav-number">32.</span> <span class="nav-text">calculate upload&#x2F;download speed by ping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MTU-problem-check"><span class="nav-number">33.</span> <span class="nav-text">MTU problem check</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yum"><span class="nav-number">34.</span> <span class="nav-text">yum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Exclude-packages"><span class="nav-number">34.1.</span> <span class="nav-text">Exclude packages</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Switch-version"><span class="nav-number">34.2.</span> <span class="nav-text">Switch version</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Download-to-local"><span class="nav-number">34.3.</span> <span class="nav-text">Download to local</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resolve-dependency-resolution-errors"><span class="nav-number">34.4.</span> <span class="nav-text">Resolve dependency resolution errors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Uninstall-rpm-packages-from-rpmdb"><span class="nav-number">34.5.</span> <span class="nav-text">Uninstall rpm packages from rpmdb</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upgrade-kernel"><span class="nav-number">35.</span> <span class="nav-text">upgrade kernel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BBR"><span class="nav-number">35.1.</span> <span class="nav-text">BBR</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">599k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">9:05</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2019/07/18/centos/",
+            identifier: "2019/07/18/centos/",
+            title: "centos"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

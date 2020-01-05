@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="reference Kernel support12345678910111213141516171819202122232425262728293031323334# for perf_events:CONFIG_PERF_EVENTS&#x3D;y# for stack traces:CONFIG_FRAME_POINTER&#x3D;y# kernel symbols:CONFIG_KALLSYMS&#x3D;y# tr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="perf">
+<meta property="og:url" content="http://yoursite.com/2018/11/23/perf/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="reference Kernel support12345678910111213141516171819202122232425262728293031323334# for perf_events:CONFIG_PERF_EVENTS&#x3D;y# for stack traces:CONFIG_FRAME_POINTER&#x3D;y# kernel symbols:CONFIG_KALLSYMS&#x3D;y# tr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/img/perf_flamegraph.png">
+<meta property="article:published_time" content="2018-11-23T06:07:28.000Z">
+<meta property="article:modified_time" content="2020-01-05T11:51:45.071Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="perf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/img/perf_flamegraph.png">
+
+<link rel="canonical" href="http://yoursite.com/2018/11/23/perf/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>perf | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/perf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          perf
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-23 14:07:28" itemprop="dateCreated datePublished" datetime="2018-11-23T14:07:28+08:00">2018-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 19:51:45" itemprop="dateModified" datetime="2020-01-05T19:51:45+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/debug/" itemprop="url" rel="index">
+                    <span itemprop="name">debug</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/23/perf/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/23/perf/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>18k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>17 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.brendangregg.com/perf.html" target="_blank" rel="noopener">reference</a></p>
+<h3 id="Kernel-support"><a href="#Kernel-support" class="headerlink" title="Kernel support"></a>Kernel support</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for perf_events:</span></span><br><span class="line">CONFIG_PERF_EVENTS=y</span><br><span class="line"><span class="comment"># for stack traces:</span></span><br><span class="line">CONFIG_FRAME_POINTER=y</span><br><span class="line"><span class="comment"># kernel symbols:</span></span><br><span class="line">CONFIG_KALLSYMS=y</span><br><span class="line"><span class="comment"># tracepoints:</span></span><br><span class="line">CONFIG_TRACEPOINTS=y</span><br><span class="line"><span class="comment"># kernel function trace:</span></span><br><span class="line">CONFIG_FTRACE=y</span><br><span class="line"><span class="comment"># kernel-level dynamic tracing:</span></span><br><span class="line">CONFIG_KPROBES=y</span><br><span class="line">CONFIG_KPROBE_EVENTS=y</span><br><span class="line"><span class="comment"># user-level dynamic tracing:</span></span><br><span class="line">CONFIG_UPROBES=y</span><br><span class="line">CONFIG_UPROBE_EVENTS=y</span><br><span class="line"><span class="comment"># full kernel debug info:</span></span><br><span class="line">CONFIG_DEBUG_INFO=y</span><br><span class="line"><span class="comment"># kernel lock tracing:</span></span><br><span class="line">CONFIG_LOCKDEP=y</span><br><span class="line"><span class="comment"># kernel lock tracing:</span></span><br><span class="line">CONFIG_LOCK_STAT=y</span><br><span class="line"><span class="comment"># kernel dynamic tracepoint variables:</span></span><br><span class="line">CONFIG_DEBUG_INFO=y</span><br><span class="line"></span><br><span class="line">Kernel-level symbols are <span class="keyword">in</span> the kernel debuginfo package, or when the kernel is compiled with CONFIG_KALLSYMS</span><br><span class="line">The kernel stack traces are incomplete. Now a similar profile with CONFIG_FRAME_POINTER=y, it will cause information incomplete</span><br><span class="line">For kernel analysis, using CONFIG_KPROBES=y and CONFIG_KPROBE_EVENTS=y, to <span class="built_in">enable</span> kernel dynamic tracing. and CONFIG_FRAME_POINTER=y, <span class="keyword">for</span> frame pointer-based kernel stacks</span><br><span class="line">For user-level analysis, CONFIG_UPROBES=y and CONFIG_UPROBE_EVENTS=y, <span class="keyword">for</span> user-level dynamic tracing.</span><br><span class="line">If your kernel has debuginfo (CONFIG_DEBUG_INFO=y), you can fish out kernel variables from <span class="built_in">functions</span>. This is a simple example of examining a size_t (<span class="built_in">integer</span>)</span><br><span class="line"></span><br><span class="line">$ cat /boot/config-`uname -r`</span><br><span class="line">or </span><br><span class="line">$ zcat /proc/config.gz</span><br></pre></td></tr></table></figure>
+<p>Some of linux Desktop version not enable them, I have to re-complie from source code, maybe use Enterprise version is the good choice</p>
+<a id="more"></a>
+<h4 id="perf-source-code"><a href="#perf-source-code" class="headerlink" title="perf source code"></a>perf source code</h4><p><a href="https://cdn.kernel.org/pub/linux/kernel/" target="_blank" rel="noopener">https://cdn.kernel.org/pub/linux/kernel/</a><br>linux-xx.xx.xx/tools/perf/</p>
+<h3 id="perf-top"><a href="#perf-top" class="headerlink" title="perf top"></a>perf top</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ perf list</span><br><span class="line">$ perf top</span><br><span class="line">$ perf top -ag</span><br><span class="line"># input ? for help ,&quot;e&quot; expand single &quot;E&quot; is all, &quot;c&quot; take it back, &quot;C&quot; is all</span><br><span class="line"></span><br><span class="line">events could get from &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;tracing&#x2F;available_events</span><br><span class="line">$ perf top -e branch-misses,cycles,sched:sched_switch</span><br><span class="line">$ perf top -e &#39;&#123;branch-misses,cycles&#125;:u&#39;</span><br><span class="line">$ perf top -e &#39;cycles&#39; -s comm,dso,sym</span><br></pre></td></tr></table></figure>
+<p>if some of events no in perf list, you could get the code from hardware user manual </p>
+<h3 id="perf-stat"><a href="#perf-stat" class="headerlink" title="perf stat"></a>perf stat</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"># CPU counter statistics for the specified PID, until Ctrl-C:</span><br><span class="line">perf stat -p PID</span><br><span class="line"></span><br><span class="line"># CPU counter statistics for the entire system, for 5 seconds:</span><br><span class="line">perf stat -a sleep 5</span><br><span class="line"></span><br><span class="line"># Various basic CPU statistics, system wide, for 10 seconds:</span><br><span class="line">perf stat -e cycles,instructions,cache-references,cache-misses,bus-cycles -a sleep 10</span><br><span class="line"></span><br><span class="line"># Various CPU level 1 data cache statistics for the specified command:</span><br><span class="line">perf stat -e L1-dcache-loads,L1-dcache-load-misses,L1-dcache-stores command</span><br><span class="line"></span><br><span class="line"># Various CPU data TLB statistics for the specified command:</span><br><span class="line">perf stat -e dTLB-loads,dTLB-load-misses,dTLB-prefetch-misses command</span><br><span class="line"></span><br><span class="line"># Various CPU last level cache statistics for the specified command:</span><br><span class="line">perf stat -e LLC-loads,LLC-load-misses,LLC-stores,LLC-prefetches command</span><br><span class="line"></span><br><span class="line"># Using raw PMC counters, eg, counting unhalted core cycles:</span><br><span class="line">perf stat -e r003c -a sleep 5 </span><br><span class="line"></span><br><span class="line"># PMCs: counting cycles and frontend stalls via raw specification:</span><br><span class="line">perf stat -e cycles -e cpu&#x2F;event&#x3D;0x0e,umask&#x3D;0x01,inv,cmask&#x3D;0x01&#x2F; -a sleep 5</span><br><span class="line"></span><br><span class="line"># Count syscalls per-second system-wide:</span><br><span class="line">perf stat -e raw_syscalls:sys_enter -I 1000 -a</span><br><span class="line"></span><br><span class="line"># Count system calls by type for the specified PID, until Ctrl-C:</span><br><span class="line">perf stat -e &#39;syscalls:sys_enter_*&#39; -p PID</span><br><span class="line"></span><br><span class="line">$ perf stat -e &#39;block:*&#39; -a sleep 10</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> Performance counter stats for &#39;system wide&#39;:</span><br><span class="line"></span><br><span class="line">                 0      block:block_touch_buffer</span><br><span class="line">             6,925      block:block_dirty_buffer</span><br><span class="line">                 0      block:block_rq_abort</span><br><span class="line">                 0      block:block_rq_requeue</span><br><span class="line">             1,585      block:block_rq_complete</span><br><span class="line">             1,539      block:block_rq_insert</span><br><span class="line">             1,541      block:block_rq_issue</span><br><span class="line">                 0      block:block_bio_bounce</span><br><span class="line">                 0      block:block_bio_complete</span><br><span class="line">                 0      block:block_bio_backmerge</span><br><span class="line">                 0      block:block_bio_frontmerge</span><br><span class="line">             1,539      block:block_bio_queue</span><br><span class="line">             1,539      block:block_getrq</span><br><span class="line">                 0      block:block_sleeprq</span><br><span class="line">             1,495      block:block_plug</span><br><span class="line">             1,495      block:block_unplug</span><br><span class="line">                 0      block:block_split</span><br><span class="line">             1,497      block:block_bio_remap</span><br><span class="line">                 0      block:block_rq_remap</span><br><span class="line"></span><br><span class="line">      10.016486367 seconds time elapsed</span><br><span class="line"></span><br><span class="line">$ perf stat -e &#39;syscalls:sys_enter_*&#39; -p 101559</span><br><span class="line"></span><br><span class="line">                 0      syscalls:sys_enter_pselect6                                     (99.37%)</span><br><span class="line">                16      syscalls:sys_enter_poll                                       (99.33%)</span><br><span class="line">               100      syscalls:sys_enter_ppoll                                      (99.33%)</span><br><span class="line">                 0      syscalls:sys_enter_getdents                                     (99.33%)</span><br><span class="line">                 0      syscalls:sys_enter_getdents64                                     (99.33%)</span><br><span class="line">                63      syscalls:sys_enter_ioctl                                      (99.33%)</span><br><span class="line">                 0      syscalls:sys_enter_fcntl                                      (99.33%)</span><br><span class="line">                 0      syscalls:sys_enter_mknodat                                     (99.33%)</span><br><span class="line">                 0      syscalls:sys_enter_mknod                                      (99.29%)</span><br><span class="line">                 0      syscalls:sys_enter_mkdirat                                     (99.29%)</span><br><span class="line">                 0      syscalls:sys_enter_mkdir                                      (99.29%)</span><br><span class="line">                 0      syscalls:sys_enter_rmdir                                      (99.29%)</span><br></pre></td></tr></table></figure>
+<p>u - user-space counting<br>k - kernel counting<br>h - hypervisor counting<br>I - non idle counting<br>G - guest counting (in KVM guests)<br>H - host counting (not in KVM guests)<br>p - precise level<br>P - use maximum detected precise level<br>S - read sample value (PERF_SAMPLE_READ)<br>D - pin the event to the PMU<br>W - group is weak and will fallback to non-group if not schedulable</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ perf stat -e instructions:H ls -l</span><br><span class="line"></span><br><span class="line"> Performance counter stats for &#39;ls -l&#39;:</span><br><span class="line"></span><br><span class="line">         7,361,491      instructions:H</span><br><span class="line"></span><br><span class="line">       0.003494865 seconds time elapsed</span><br><span class="line"></span><br><span class="line">$ perf stat ls -l</span><br><span class="line"> Performance counter stats for &#39;ls -l&#39;:</span><br><span class="line"></span><br><span class="line">          3.051715      task-clock (msec)         #    0.892 CPUs utilized</span><br><span class="line">                 1      context-switches          #    0.328 K&#x2F;sec</span><br><span class="line">                 0      cpu-migrations            #    0.000 K&#x2F;sec</span><br><span class="line">               412      page-faults               #    0.135 M&#x2F;sec</span><br><span class="line">         7,312,574      cycles                    #    2.396 GHz</span><br><span class="line">         7,110,578      instructions              #    0.97  insn per cycle</span><br><span class="line">         1,439,981      branches                  #  471.860 M&#x2F;sec</span><br><span class="line">            35,532      branch-misses             #    2.47% of all branches</span><br><span class="line"></span><br><span class="line">       0.003421608 seconds time elapsed</span><br></pre></td></tr></table></figure>
+
+<h3 id="perf-record"><a href="#perf-record" class="headerlink" title="perf record"></a>perf record</h3><p><a href="http://www.brendangregg.com/perf.html" target="_blank" rel="noopener">reference</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ perf record -a -g --call-graph dwarf,8192 -F 888 sleep 60</span><br><span class="line">$ perf record -a -g --call-graph dwarf,8192 -F 888 -o your-perf.data sleep 60</span><br><span class="line"># some timer interrput was 1000ms, some guy suggest change the default frequency</span><br><span class="line"></span><br><span class="line">$ perf record -e context-switches -ag -- sleep 10</span><br><span class="line">$ perf record -e &#39;cycles&#39; -g -- collectl -i3 -scdnt</span><br><span class="line"></span><br><span class="line">-e, --event &lt;event&gt;   event selector. use &#39;perf list&#39; to list available events</span><br><span class="line">-g                    enables call-graph recording</span><br><span class="line"></span><br><span class="line"># Trace all block device issues and completions (has timestamps), until Ctrl-C:</span><br><span class="line">perf record -e block:block_rq_issue -e block:block_rq_complete -a</span><br><span class="line"></span><br><span class="line"># Trace all block completions, of size at least 100 Kbytes, until Ctrl-C:</span><br><span class="line">perf record -e block:block_rq_complete --filter &#39;nr_sector &gt; 200&#39;</span><br><span class="line">perf record -e block:block_rq_complete --filter &#39;nr_sector &gt; 200&#39; -- sleep 10</span><br><span class="line"></span><br><span class="line"># Trace all block completions, synchronous writes only, until Ctrl-C:</span><br><span class="line">perf record -e block:block_rq_complete --filter &#39;rwbs &#x3D;&#x3D; &quot;WS&quot;&#39;</span><br><span class="line"></span><br><span class="line"># Trace all block completions, all types of writes, until Ctrl-C:</span><br><span class="line">perf record -e block:block_rq_complete --filter &#39;rwbs ~ &quot;*W*&quot;&#39;</span><br><span class="line"></span><br><span class="line"># Trace all ext4 calls, and write to a non-ext4 location, until Ctrl-C:</span><br><span class="line">perf record -e &#39;ext4:*&#39; -o &#x2F;tmp&#x2F;perf.data -ag</span><br></pre></td></tr></table></figure>
+
+<h3 id="perf-report"><a href="#perf-report" class="headerlink" title="perf report"></a>perf report</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">$ perf report -g --tui</span><br><span class="line"></span><br><span class="line">$ perf report</span><br><span class="line"></span><br><span class="line">Annotate trace_graph_entry                                                                                                                    ◆</span><br><span class="line">Zoom into the Kernel DSO                                                                                                                      ▒</span><br><span class="line">Browse map details                                                                                                                            ▒</span><br><span class="line">Run scripts for samples of symbol [trace_graph_entry]                                                                                         ▒</span><br><span class="line">Run scripts for all samples                                                                                                                   ▒</span><br><span class="line">Switch to another data file in PWD                                                                                                            ▒</span><br><span class="line">Exit</span><br><span class="line"></span><br><span class="line">#Select Annotate trace_graph_entry</span><br><span class="line">  0.77 │       add    -0x7aecaba0(,%rax,8),%rbx</span><br><span class="line">  0.49 │       mov    $0x1,%eax</span><br><span class="line">       │       lock   xadd   %eax,0x18(%rbx)</span><br><span class="line"> 19.76 │       test   %eax,%eax</span><br><span class="line">       │     ↓ jne    1b9</span><br><span class="line">       │       mov    %gs:0x10e78,%rax</span><br><span class="line">  0.84 │       mov    -0x3fbc(%rax),%ecx</span><br><span class="line">       │       mov    %r12,%rdx</span><br><span class="line">       │       mov    %rdi,%rsi</span><br><span class="line">       │       mov    %r8,%rdi</span><br><span class="line">  0.63 │     → callq  __trace_graph_entry</span><br><span class="line">       │       mov    %eax,%edx</span><br><span class="line">  0.70 │ b4:   lock   decl   0x18(%rbx)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ perf record -e sched:* -a # not add -g</span><br><span class="line">$ perf report -n --stdio -s comm,dso,symbol</span><br><span class="line"># Overhead       Samples  Command          Shared Object      Symbol</span><br><span class="line"># ........  ............  ...............  .................  ..................</span><br><span class="line">#</span><br><span class="line">    66.85%         18167  swapper          [kernel.kallsyms]  [k] ttwu_do_wakeup</span><br><span class="line">     8.96%          2434  systemd-journal  [kernel.kallsyms]  [k] ttwu_do_wakeup</span><br><span class="line">     3.84%          1043  vhost-127249     [kernel.kallsyms]  [k] ttwu_do_wakeup</span><br><span class="line">     3.59%           976  vhost-100221     [kernel.kallsyms]  [k] ttwu_do_wakeup</span><br><span class="line">     3.49%           949  vhost-102705     [kernel.kallsyms]  [k] ttwu_do_wakeup</span><br><span class="line">     3.37%           917  vhost-100880     [kernel.kallsyms]  [k] ttwu_do_wakeup</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Report, with stacks in folded format: one line per stack (needs 4.4):</span><br><span class="line">$ perf report --stdio -n -g folded</span><br><span class="line">$ perf report --stdio  ## record add -g</span><br><span class="line"># Children      Self       Samples  Command</span><br><span class="line"># ........  ........  ............  ...............</span><br><span class="line">#</span><br><span class="line">    64.39%    64.39%          1013  swapper</span><br><span class="line">            |</span><br><span class="line">             --64.39%--start_cpu</span><br><span class="line">                       |</span><br><span class="line">                        --64.39%--start_secondary</span><br><span class="line">                                  |</span><br><span class="line">                                   --64.39%--cpu_startup_entry</span><br><span class="line">                                             |</span><br><span class="line">                                              --64.39%--arch_cpu_idle</span><br><span class="line">                                                        cpuidle_idle_call</span><br><span class="line">                                                        |</span><br><span class="line">                                                        |--51.81%--cpuidle_enter_state</span><br><span class="line">                                                        |          |</span><br><span class="line">                                                        |          |--29.16%--poll_idle</span><br><span class="line">                                                        |          |</span><br><span class="line">                                                        |           --22.65%--intel_idle</span><br><span class="line">                                                        |</span><br><span class="line">                                                         --12.58%--ret_from_intr</span><br><span class="line">                                                                   __irqentry_text_start</span><br><span class="line">                                                                   |</span><br><span class="line">                                                                    --12.58%--irq_exit</span><br><span class="line">                                                                              do_softirq</span><br><span class="line">                                                                              call_softirq</span><br><span class="line">                                                                              __do_softirq</span><br><span class="line">                                                                              |</span><br><span class="line">                                                                               --12.58%--net_rx_action</span><br><span class="line">                                                                                         bnx2x_poll</span><br><span class="line">                                                                                         bnx2x_rx_int</span><br><span class="line">                                                                                         napi_gro_receive</span><br><span class="line">                                                                                         netif_receive_skb_internal</span><br><span class="line">                                                                                         __netif_receive_skb</span><br><span class="line">                                                                                         __netif_receive_skb_core</span><br><span class="line">                                                                                         br_handle_frame</span><br><span class="line">                                                                                         br_handle_frame_finish</span><br><span class="line">                                                                                         br_flood</span><br><span class="line">                                                                                         deliver_clone</span><br><span class="line">                                                                                         __br_forward</span><br><span class="line">                                                                                         br_forward_finish</span><br><span class="line">                                                                                         br_dev_queue_push_xmit</span><br><span class="line">                                                                                         dev_queue_xmit</span><br><span class="line">                                                                                         __dev_queue_xmit</span><br><span class="line">                                                                                         __qdisc_run</span><br><span class="line">                                                                                         sch_direct_xmit</span><br><span class="line">                                                                                         dev_hard_start_xmit</span><br><span class="line">                                                                                         tun_net_xmit</span><br><span class="line">                                                                                         __wake_up</span><br><span class="line">                                                                                         __wake_up_common</span><br><span class="line">                                                                                         vhost_poll_wakeup</span><br><span class="line">                                                                                         vhost_work_queue</span><br><span class="line">                                                                                         wake_up_process</span><br><span class="line">                                                                                         try_to_wake_up</span><br><span class="line">                                                                                         ttwu_do_activate.constprop.93</span><br><span class="line">                                                                                         activate_task</span><br><span class="line">                                                                                         ftrace_graph_caller</span><br><span class="line">                                                                                         prepare_ftrace_return</span><br><span class="line"></span><br><span class="line">$ perf record -F 990 -a --call-graph lbr</span><br><span class="line">$ perf script</span><br><span class="line"></span><br><span class="line"># List all perf.data events, with my recommended fields (needs record -a; newer kernels):</span><br><span class="line">$ perf script --header -F comm,pid,tid,cpu,time,event,ip,sym,dso </span><br><span class="line"></span><br><span class="line"># Dump raw contents from perf.data as hex (for debugging):</span><br><span class="line">$ perf script -D</span><br><span class="line"></span><br><span class="line"># Disassemble and annotate instructions with percentages (needs some debuginfo):</span><br><span class="line">$ perf annotate --stdio</span><br></pre></td></tr></table></figure>
+
+<h3 id="perf-diff"><a href="#perf-diff" class="headerlink" title="perf diff"></a>perf diff</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ perf diff perf.data perf.data.old</span><br><span class="line"><span class="comment"># Event 'cycles:ppp'</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Baseline  Delta Abs  Shared Object              Symbol</span></span><br><span class="line"><span class="comment"># ........  .........  .........................  .....................................................</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">    50.00%    -50.00%  [kernel.kallsyms]          [k] prepare_ftrace_return</span><br><span class="line">    25.00%    +44.80%  [kernel.kallsyms]          [k] intel_idle</span><br><span class="line">    25.00%    -25.00%  [kernel.kallsyms]          [k] vcpu_enter_guest</span><br><span class="line">     0.00%    +23.45%  [kernel.kallsyms]          [k] trace_graph_entry</span><br><span class="line">     0.00%     +4.69%  [kernel.kallsyms]          [k] avl_find</span><br><span class="line">     0.00%     +2.05%  [kernel.kallsyms]          [k] poll_idle</span><br><span class="line">     0.00%     +0.00%  [kernel.kallsyms]          [k] ftrace_graph_caller</span><br><span class="line">     0.00%     +0.00%  systemd-journald           [.] 0x000000000000d1e0</span><br><span class="line">     0.00%     +0.00%  [kernel.kallsyms]          [k] __trace_graph_entry</span><br><span class="line">     0.00%     +0.00%  [kernel.kallsyms]          [k] trace_buffer_lock_reserve</span><br><span class="line">     0.00%     +0.00%  [kernel.kallsyms]          [k] ftrace_caller</span><br><span class="line">     0.00%     +0.00%  libsystemd.so.0.6.0        [.] 0x0000000000005b5f</span><br><span class="line">     0.00%     +0.00%  [kernel.kallsyms]          [k] ring_buffer_lock_reserve</span><br><span class="line">     0.00%     -0.00%  [kernel.kallsyms]          [k] console_unlock</span><br><span class="line">     0.00%     -0.00%  [kernel.kallsyms]          [k] native_queued_spin_lock_slowpath</span><br><span class="line">     0.00%     -0.00%  [kernel.kallsyms]          [k] osq_lock</span><br><span class="line">     0.00%     +0.00%  [kernel.kallsyms]          [k] ftrace_graph_is_dead</span><br><span class="line">     0.00%     +0.00%  [kernel.kallsyms]          [k] ftrace_stub</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dwarf"><a href="#Dwarf" class="headerlink" title="Dwarf"></a>Dwarf</h3><p>Since about the 3.9 kernel, perf_events has supported a workaround for missing frame pointers in user-level stacks: libunwind, which uses dwarf. This can be enabled using “–call-graph dwarf” (or “-g dwarf”).</p>
+<h3 id="perf-list"><a href="#perf-list" class="headerlink" title="perf list"></a>perf list</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ perf list subsys block:*</span><br><span class="line">$ perf list | awk -F: &#39;&#x2F;Tracepoint event&#x2F; &#123; lib[$1]++; PROCINFO[&quot;sorted_in&quot;] &#x3D; &quot;@val_num_desc&quot; &#125; END &#123;  for (l in lib) &#123; printf &quot;  %-16.16s %d\n&quot;, l, lib[l] &#125; &#125;&#39; | column</span><br><span class="line">    syscalls       604	    kmem           12	    context_tracki 2</span><br><span class="line">    xfs            391	    net            9	    gpio           2</span><br><span class="line">    nfs4           66	    i2c            8	    migrate        2</span><br><span class="line">    kvm            55	    dma_fence      8	    sock           2</span><br><span class="line">    nfs            44	    iommu          7	    task           2</span><br><span class="line">    xen            35	    libata         6	    raw_syscalls   2</span><br><span class="line">    sunrpc         31	    filelock       6	    pagemap        2</span><br><span class="line">    writeback      25	    scsi           5	    signal         2</span><br><span class="line">    sched          23	    mpx            5	    filemap        2</span><br><span class="line">    irq_vectors    22	    irq            5	    qdisc          1</span><br><span class="line">    xhci-hcd       20	    module         5	    mce            1</span><br><span class="line">    power          20	    rpm            4	    intel_ish      1</span><br><span class="line">    block          19	    mei            4	    hyperv         1</span><br><span class="line">    nfsd           18	    bridge         4	    vsyscall       1</span><br><span class="line">    regmap         15	    workqueue      4	    rcu            1</span><br><span class="line">    random         15	    drm            3	    printk         1</span><br><span class="line">    vmscan         15	    ras            3	    udp            1</span><br><span class="line">    fs_dax         15	    skb            3	    napi           1</span><br><span class="line">    kvmmmu         14	    compaction     3	    ftrace         1</span><br><span class="line">    timer          13	    exceptions     2	    oom            1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Heat-map"><a href="#Heat-map" class="headerlink" title="Heat map"></a>Heat map</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;brendangregg&#x2F;FlameGraph  # or download it from github</span><br><span class="line">$ cd FlameGraph</span><br><span class="line">$ perf record -F 99 -ag -- sleep 60</span><br><span class="line">$ perf script | .&#x2F;stackcollapse-perf.pl &gt; out.perf-folded</span><br><span class="line"></span><br><span class="line">$ cat out.perf-folded | .&#x2F;flamegraph.pl &gt; perf-kernel.svg</span><br><span class="line">or</span><br><span class="line">$ grep -v cpu_idle out.perf-folded | .&#x2F;flamegraph.pl &gt; nonidle.svg</span><br><span class="line">$ grep nfs out.perf-folded | .&#x2F;flamegraph.pl &gt; nfsinternals.svg</span><br><span class="line">or</span><br><span class="line">$ grep -v cpu_idle out.perf-folded | .&#x2F;flamegraph.pl &gt; nonidle.svg</span><br><span class="line">$ egrep &#39;system_call.*sys_(read|write)&#39; out.perf-folded | .&#x2F;flamegraph.pl &gt; rw.svg</span><br></pre></td></tr></table></figure>
+
+<h3 id="perf-sched-latency-will-summarize-scheduler-latencies-by-task-including-average-and-maximum-delay"><a href="#perf-sched-latency-will-summarize-scheduler-latencies-by-task-including-average-and-maximum-delay" class="headerlink" title="perf sched latency will summarize scheduler latencies by task, including average and maximum delay:"></a>perf sched latency will summarize scheduler latencies by task, including average and maximum delay:</h3><p>perf sched latency<br>perf sched timehist<br>perf sched timehist -MVw<br>perf sched map</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>perf stat -a -e task-clock,cycles,instructions,branches,branch-misses -e stalled-cycles-frontend,stalled-cycles-backend -e cache-references,cache-misses -e LLC-loads,LLC-load-misses,LLC-stores,LLC-store-misses -e L1-dcache-loads,L1-dcache-load-misses,L1-dcache-stores,L1-dcache-store-misses -p 29734</p>
+<h3 id="perf-probe"><a href="#perf-probe" class="headerlink" title="perf probe"></a>perf probe</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">$ perf probe -F <span class="comment"># list all probe point</span></span><br><span class="line">$ perf probe -V tcp_sendmsg</span><br><span class="line">Available variables at tcp_sendmsg</span><br><span class="line">        @&lt;tcp_sendmsg+0&gt;</span><br><span class="line">                int     size_goal</span><br><span class="line">                long int        timeo</span><br><span class="line">                size_t  size</span><br><span class="line">                struct kiocb*   iocb</span><br><span class="line">                struct msghdr*  msg</span><br><span class="line">                struct sock*    sk</span><br><span class="line"></span><br><span class="line">$ perf probe --add <span class="string">'tcp_sendmsg size'</span></span><br><span class="line">Added new event:</span><br><span class="line">  probe:tcp_sendmsg    (on tcp_sendmsg with size)</span><br><span class="line"></span><br><span class="line">You can now use it <span class="keyword">in</span> all perf tools, such as: </span><br><span class="line">$ perf record -e probe:tcp_sendmsg -aR sleep 10</span><br><span class="line"></span><br><span class="line">$ perf probe -V tcp_sendmsg</span><br><span class="line">Available variables at tcp_sendmsg</span><br><span class="line">        @&lt;tcp_sendmsg+0&gt;</span><br><span class="line">                int     size_goal</span><br><span class="line">                long int        timeo</span><br><span class="line">                size_t  size</span><br><span class="line">                struct kiocb*   iocb</span><br><span class="line">                struct msghdr*  msg</span><br><span class="line">                struct sock*    sk</span><br><span class="line"><span class="comment"># Show available variables for the kernel tcp_sendmsg() function (needs debuginfo):</span></span><br><span class="line"></span><br><span class="line">$  perf probe -V tcp_sendmsg:81</span><br><span class="line">Available variables at tcp_sendmsg:81</span><br><span class="line">        @&lt;tcp_sendmsg+826&gt;</span><br><span class="line">                bool    sg</span><br><span class="line">                int     copied</span><br><span class="line">                int     flags</span><br><span class="line">                int     iovlen</span><br><span class="line">                int     mss_now</span><br><span class="line">                int     offset</span><br><span class="line">                int     size_goal</span><br><span class="line">                long int        timeo</span><br><span class="line">                size_t  seglen</span><br><span class="line">                struct iovec*   iov</span><br><span class="line">                struct sock*    sk</span><br><span class="line">                unsigned char*  from</span><br><span class="line"></span><br><span class="line">$ perf record -e probe:tcp_sendmsg -a</span><br><span class="line">$ perf probe -d tcp_sendmsg</span><br><span class="line"></span><br><span class="line">$ perf probe <span class="string">'tcp_sendmsg %ax %dx %cx'</span></span><br><span class="line">$ perf record -e probe:tcp_sendmsg -aR sleep 10</span><br><span class="line">$ perf script</span><br><span class="line">            sshd 226370 [022] 15061.139400: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x15</span><br><span class="line">            sshd 226371 [023] 15061.140399: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa0032731fd78 arg3=0x500</span><br><span class="line">            sshd 226371 [012] 15061.190714: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa0032731fd78 arg3=0x16c</span><br><span class="line">            sshd 226371 [012] 15061.258446: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa0032731fd78 arg3=0x2c</span><br><span class="line">            sshd 226371 [012] 15061.260811: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa0032731fd78 arg3=0x34</span><br><span class="line">            sshd 226371 [012] 15061.263167: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa0032731fd78 arg3=0x14c</span><br><span class="line">            sshd 226371 [012] 15061.273640: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa0032731fd78 arg3=0x1c</span><br><span class="line">            sshd 226370 [022] 15061.277845: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x1f4</span><br><span class="line">            sshd 226370 [022] 15061.277885: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x2c</span><br><span class="line">            sshd 226370 [012] 15061.285352: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x24</span><br><span class="line">            sshd 226370 [012] 15061.285882: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x6c</span><br><span class="line">            sshd 226370 [012] 15061.289555: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x5c</span><br><span class="line">            sshd 226370 [012] 15061.464101: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x6c</span><br><span class="line">            sshd 226370 [012] 15061.590038: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x24</span><br><span class="line">            sshd 226370 [012] 15061.678381: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x24</span><br><span class="line">            sshd 226370 [012] 15061.876852: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x24</span><br><span class="line">            sshd 226370 [012] 15061.993911: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x24</span><br><span class="line">            sshd 226370 [014] 15062.199995: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x24</span><br><span class="line">            sshd 226370 [012] 15062.698951: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x24</span><br><span class="line">            sshd 226370 [012] 15062.956902: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x24</span><br><span class="line">            sshd 226370 [014] 15062.960704: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x1024</span><br><span class="line">            sshd 226370 [016] 15062.960805: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x1024</span><br><span class="line">            sshd 226370 [016] 15062.960835: probe:tcp_sendmsg: (ffffffffb6a95040) arg1=0xffffffffb6a95040 arg2=0xffffa003ac74fd78 arg3=0x12c</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Trace code</span></span><br><span class="line">$ perf probe -L tcp_sendmsg</span><br><span class="line"></span><br><span class="line"><span class="comment"># Trace function</span></span><br><span class="line">$ perf probe -x /lib/libc-2.17.so -a malloc</span><br><span class="line">$ perf report</span><br><span class="line">$ perf probe -x /lib/libc-2.17.so -d malloc</span><br></pre></td></tr></table></figure>
+<p><a href="http://www.brendangregg.com/perf.html" target="_blank" rel="noopener">for more example</a></p>
+<h3 id="perf-script"><a href="#perf-script" class="headerlink" title="perf script"></a>perf script</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ perf record -e block:block_bio_complete -e block:block_bio_remap -ag sleep 20</span><br><span class="line">$ perf script</span><br></pre></td></tr></table></figure>
+
+<h3 id="flamegraph"><a href="#flamegraph" class="headerlink" title="flamegraph"></a><a href="https://billtian.github.io/digoal.blog/2016/11/27/01.html" target="_blank" rel="noopener">flamegraph</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ perf record -agv sleep 30</span><br><span class="line">$ mv perf.data FlameGraph/</span><br><span class="line">$ perf script | ./stackcollapse-perf.pl &gt; out.perf-folded</span><br><span class="line">$ cat out.perf-folded | ./flamegraph.pl &gt; perf-kernel.svg</span><br></pre></td></tr></table></figure>
+
+<p>y-axis process stack, each layer is the function, the higher means the more system stack, top is the function, the parent function under the function.<br>x-axis the calls count, the larger width(plateaus) means more overhead</p>
+<p>The single program exhaust all CPU resource<br><img src="/img/perf_flamegraph.png" alt=""></p>
+<h3 id="perf-annotate"><a href="#perf-annotate" class="headerlink" title="perf annotate"></a>perf annotate</h3><p>This command reads the input file and displays an annotated version of the code. If the object file has debug symbols then the source code will be displayed alongside assembly code.<br>If there is no debug info in the object, then annotated assembly is displayed.</p>
+<p>Since about the 3.9 kernel, perf_events has supported a workaround for missing frame pointers in user-level stacks: libunwind, which uses dwarf.<br>This can be enabled using “-g dwarf”.</p>
+<p>-fno-omit-frame-pointer for software<br>CONFIG_FRAME_POINTER=y</p>
+<h3 id="perf-bench"><a href="#perf-bench" class="headerlink" title="perf bench"></a>perf bench</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ perf bench numa all</span><br><span class="line">$ perf bench numa mem  -p 1 -t 10  -T 12000  -Irq -H 1 -C 0,2,4,6,8,10,12,14,16,18 -M 0,0,0,0,0,0,0,0,0,0</span><br><span class="line">$ perf bench numa mem  -p 1 -t 10  -T 12000  -Irq -H 1 -C 0,2,4,6,8,10,12,14,16,18 -M 0,0,0,0,0,0,0,0,0,0 -s 120 <span class="comment"># add number of seconds to run, here is 120s</span></span><br><span class="line"><span class="comment"># 1 x process, 10 x threads ( single numa ), -T means single thread mem overhead MB, -P means process mem overhead MB</span></span><br><span class="line"><span class="comment"># -C bind the first N tasks to these specific cpus (the rest is unbound)</span></span><br><span class="line"><span class="comment"># -M bind the first N tasks to these specific memory nodes (the rest is unbound)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Compare-local-and-remote-numa-node-overhead"><a href="#Compare-local-and-remote-numa-node-overhead" class="headerlink" title="Compare local and remote numa node overhead"></a>Compare local and remote numa node overhead</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">$ lscpu</span><br><span class="line">......</span><br><span class="line">NUMA node0 CPU(s):     0,2,4,6,8,10,12,14,16,18</span><br><span class="line">NUMA node1 CPU(s):     1,3,5,7,9,11,13,15,17,19</span><br><span class="line"></span><br><span class="line">$ perf bench numa mem  -p 1 -t 10  -T 12000  -Irq -H 1 -C 1,3,5,7,9,11,13,15,17,19 -M 0,0,0,0,0,0,0,0,0,0 -s 120 <span class="comment"># running 120s</span></span><br><span class="line">$ perf bench numa mem  -p 1 -t 10  -T 12000  -Irq -H 1 -C 1,3,5,7,9,11,13,15,17,19 -M 0,0,0,0,0,0,0,0,0,0</span><br><span class="line"><span class="comment"># Running 'numa/mem' benchmark:</span></span><br><span class="line"></span><br><span class="line"> <span class="comment"># Running main, "perf bench numa numa-mem -p 1 -t 10 -T 12000 -Irq -H 1 -C 1,3,5,7,9,11,13,15,17,19 -M 0,0,0,0,0,0,0,0,0,0"</span></span><br><span class="line">          8.837 secs slowest (max) thread-runtime</span><br><span class="line">          8.000 secs fastest (min) thread-runtime</span><br><span class="line">          8.182 secs average thread-runtime</span><br><span class="line">          4.738 % difference between max/avg runtime</span><br><span class="line">         12.584 GB data processed, per thread</span><br><span class="line">        125.840 GB data processed, total</span><br><span class="line">          0.702 nsecs/byte/thread runtime</span><br><span class="line">          1.424 GB/sec/thread speed</span><br><span class="line">         14.239 GB/sec total speed</span><br><span class="line"></span><br><span class="line">$ perf bench numa mem  -p 1 -t 10  -T 12000  -Irq -H 1 -C 0,2,4,6,8,10,12,14,16,18 -M 0,0,0,0,0,0,0,0,0,0 -s 120 <span class="comment"># running 120s</span></span><br><span class="line">$ perf bench numa mem  -p 1 -t 10  -T 12000  -Irq -H 1 -C 0,2,4,6,8,10,12,14,16,18 -M 0,0,0,0,0,0,0,0,0,0</span><br><span class="line"><span class="comment"># Running 'numa/mem' benchmark:</span></span><br><span class="line"></span><br><span class="line"> <span class="comment"># Running main, "perf bench numa numa-mem -p 1 -t 10 -T 12000 -Irq -H 1 -C 0,2,4,6,8,10,12,14,16,18 -M 0,0,0,0,0,0,0,0,0,0"</span></span><br><span class="line">          5.528 secs slowest (max) thread-runtime</span><br><span class="line">          5.000 secs fastest (min) thread-runtime</span><br><span class="line">          5.084 secs average thread-runtime</span><br><span class="line">          4.776 % difference between max/avg runtime</span><br><span class="line">         12.584 GB data processed, per thread</span><br><span class="line">        125.840 GB data processed, total</span><br><span class="line">          0.439 nsecs/byte/thread runtime</span><br><span class="line">          2.276 GB/sec/thread speed</span><br><span class="line">         22.764 GB/sec total speed</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/brendangregg/perf-tools" target="_blank" rel="noopener">perf tools</a><br><a href="https://billtian.github.io/digoal.blog/2016/11/27/01.html" target="_blank" rel="noopener">reference</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/perf/" rel="tag"><i class="fa fa-tag"></i> perf</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/22/ftrace/" rel="prev" title="ftrace">
+      <i class="fa fa-chevron-left"></i> ftrace
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/11/bash/" rel="next" title="Bash tips">
+      Bash tips <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel-support"><span class="nav-number">1.</span> <span class="nav-text">Kernel support</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#perf-source-code"><span class="nav-number">1.1.</span> <span class="nav-text">perf source code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-top"><span class="nav-number">2.</span> <span class="nav-text">perf top</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-stat"><span class="nav-number">3.</span> <span class="nav-text">perf stat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-record"><span class="nav-number">4.</span> <span class="nav-text">perf record</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-report"><span class="nav-number">5.</span> <span class="nav-text">perf report</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-diff"><span class="nav-number">6.</span> <span class="nav-text">perf diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dwarf"><span class="nav-number">7.</span> <span class="nav-text">Dwarf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-list"><span class="nav-number">8.</span> <span class="nav-text">perf list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Heat-map"><span class="nav-number">9.</span> <span class="nav-text">Heat map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-sched-latency-will-summarize-scheduler-latencies-by-task-including-average-and-maximum-delay"><span class="nav-number">10.</span> <span class="nav-text">perf sched latency will summarize scheduler latencies by task, including average and maximum delay:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">11.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-probe"><span class="nav-number">12.</span> <span class="nav-text">perf probe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-script"><span class="nav-number">13.</span> <span class="nav-text">perf script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flamegraph"><span class="nav-number">14.</span> <span class="nav-text">flamegraph</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-annotate"><span class="nav-number">15.</span> <span class="nav-text">perf annotate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perf-bench"><span class="nav-number">16.</span> <span class="nav-text">perf bench</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compare-local-and-remote-numa-node-overhead"><span class="nav-number">16.1.</span> <span class="nav-text">Compare local and remote numa node overhead</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">599k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">9:05</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/11/23/perf/",
+            identifier: "2018/11/23/perf/",
+            title: "perf"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
