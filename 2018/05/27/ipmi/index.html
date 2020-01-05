@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="set boot dev12345678910111213141516171819202122Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ] options&#x3D;persistentIpmitool -I lanplus -H x.x.x.x -U USER -P PASSW">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ipmitool">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/ipmi/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="set boot dev12345678910111213141516171819202122Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ] options&#x3D;persistentIpmitool -I lanplus -H x.x.x.x -U USER -P PASSW">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-05-27T07:35:59.000Z">
+<meta property="article:modified_time" content="2020-01-05T02:56:49.713Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="ipmi">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/05/27/ipmi/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ipmitool | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/ipmi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ipmitool
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-27 15:35:59" itemprop="dateCreated datePublished" datetime="2018-05-27T15:35:59+08:00">2018-05-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 10:56:49" itemprop="dateModified" datetime="2020-01-05T10:56:49+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ipmi/" itemprop="url" rel="index">
+                    <span itemprop="name">ipmi</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/05/27/ipmi/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/27/ipmi/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="set-boot-dev"><a href="#set-boot-dev" class="headerlink" title="set boot dev"></a>set boot dev</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ] options=persistent</span><br><span class="line">Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ]</span><br><span class="line">ipmitool chassis bootdev none options=<span class="built_in">help</span></span><br><span class="line">Legal options settings are:</span><br><span class="line">	<span class="built_in">help</span>:	<span class="built_in">print</span> this message</span><br><span class="line">	valid:	Boot flags valid</span><br><span class="line">	persistent:	Changes are persistent <span class="keyword">for</span> all future boots</span><br><span class="line">	efiboot:	Extensible Firmware Interface Boot (EFI)</span><br><span class="line">	clear-cmos:	CMOS clear</span><br><span class="line">	lockkbd:	Lock Keyboard</span><br><span class="line">	screenblank:	Screen Blank</span><br><span class="line">	lockoutreset:	Lock out Resetbuttons</span><br><span class="line">	lockout_power:	Lock out (power off/sleep request) via Power Button</span><br><span class="line">	verbose=default:	Request quiet BIOS display</span><br><span class="line">	verbose=no:	Request quiet BIOS display</span><br><span class="line">	verbose=yes:	Request verbose BIOS display</span><br><span class="line">	force_pet:	Force progress event traps</span><br><span class="line">	upw_bypass:	User password bypass</span><br><span class="line">	lockout_sleep:	Log Out Sleep Button</span><br><span class="line">	cons_redirect=default:	Console redirection occurs per BIOS configuration setting</span><br><span class="line">	cons_redirect=skip:	Suppress (skip) console redirection <span class="keyword">if</span> enabled</span><br><span class="line">	cons_redirect=<span class="built_in">enable</span>:	Suppress (skip) console redirection <span class="keyword">if</span> enabled</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+
+<h4 id="debug-info"><a href="#debug-info" class="headerlink" title="debug info"></a>debug info</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ipmitool lan <span class="built_in">print</span></span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; shell <span class="comment"># get ipmitool shell, type 'help'</span></span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; sel list <span class="comment"># Show system event log</span></span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; sdr <span class="comment"># List sensor data</span></span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; sdr elist</span><br><span class="line">ipmitool event <span class="string">"CPU 1 Temp"</span> <span class="string">"lnc : Lower Non-Critical"</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#filter string</span></span><br><span class="line">ipmitool sdr list </span><br><span class="line">ipmitool sdr <span class="built_in">type</span> list </span><br><span class="line">ipmitool sdr <span class="built_in">type</span> Temperature </span><br><span class="line">ipmitool sdr <span class="built_in">type</span> Fan </span><br><span class="line">ipmitool sdr <span class="built_in">type</span> <span class="string">'Power Supply'</span></span><br><span class="line"></span><br><span class="line">ipmitool sel elist</span><br><span class="line">ipmitool sel time get</span><br></pre></td></tr></table></figure>
+
+<h4 id="system-status"><a href="#system-status" class="headerlink" title="system status"></a>system status</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ipmitool</span> sdr elist full | grep Avg</span><br><span class="line">Avg Power        | 2Eh | ok  | 21.0 | 200 Watts</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ ipmitool sdr <span class="built_in">type</span> <span class="string">'Current'</span></span><br><span class="line">System Level     | 16h | ok  |  7.1 | 268 Watts</span><br><span class="line">Current Latch    | 09h | ns  |  7.1 | Disabled</span><br><span class="line"></span><br><span class="line">$ ipmitool sdr <span class="built_in">type</span> <span class="string">"CPU "</span></span><br><span class="line">Sensor Type <span class="string">"CPU "</span> not found.</span><br><span class="line">Sensor Types:</span><br><span class="line">	Temperature               (0x01)   Voltage                   (0x02)</span><br><span class="line">	Current                   (0x03)   Fan                       (0x04)</span><br><span class="line">	Physical Security         (0x05)   Platform Security         (0x06)</span><br><span class="line">	Processor                 (0x07)   Power Supply              (0x08)</span><br><span class="line">	Power Unit                (0x09)   Cooling Device            (0x0a)</span><br><span class="line">	Other                     (0x0b)   Memory                    (0x0c)</span><br><span class="line">	Drive Slot / Bay          (0x0d)   POST Memory Resize        (0x0e)</span><br><span class="line">	System Firmwares          (0x0f)   Event Logging Disabled    (0x10)</span><br><span class="line">	Watchdog1                 (0x11)   System Event              (0x12)</span><br><span class="line">	Critical Interrupt        (0x13)   Button                    (0x14)</span><br><span class="line">	Module / Board            (0x15)   Microcontroller           (0x16)</span><br><span class="line">	Add-in Card               (0x17)   Chassis                   (0x18)</span><br><span class="line">	Chip Set                  (0x19)   Other FRU                 (0x1a)</span><br><span class="line">	Cable / Interconnect      (0x1b)   Terminator                (0x1c)</span><br><span class="line">	System Boot Initiated     (0x1d)   Boot Error                (0x1e)</span><br><span class="line">	OS Boot                   (0x1f)   OS Critical Stop          (0x20)</span><br><span class="line">	Slot / Connector          (0x21)   System ACPI Power State   (0x22)</span><br><span class="line">	Watchdog2                 (0x23)   Platform Alert            (0x24)</span><br><span class="line">	Entity Presence           (0x25)   Monitor ASIC              (0x26)</span><br><span class="line">	LAN                       (0x27)   Management Subsys Health  (0x28)</span><br><span class="line">	Battery                   (0x29)   Session Audit             (0x2a)</span><br><span class="line">	Version Change            (0x2b)   FRU State                 (0x2c)</span><br><span class="line">$ ipmitool sdr <span class="built_in">type</span> Temperature</span><br><span class="line">CPU Temp         | 01h | ok  |  3.1 | 83 degrees C</span><br><span class="line">PCH Temp         | 0Ah | ok  |  7.1 | 29 degrees C</span><br><span class="line">System Temp      | 0Bh | ok  |  7.2 | 26 degrees C</span><br><span class="line">Peripheral Temp  | 0Ch | ok  |  7.3 | 30 degrees C</span><br><span class="line">ART1             | 2Bh | ok  |  7.4 | 25 degrees C</span><br><span class="line">ART2             | 2Ch | ok  |  7.5 | 29 degrees C</span><br><span class="line">VcpuVRM Temp     | 10h | ns  |  7.16 | No Reading</span><br><span class="line">DIMMA1 Temp      | B0h | ok  | 32.0 | 28 degrees C</span><br><span class="line">DIMMA2 Temp      | B1h | ok  | 32.1 | 28 degrees C</span><br><span class="line">DIMMB1 Temp      | B2h | ok  | 32.2 | 26 degrees C</span><br><span class="line">DIMMB2 Temp      | B3h | ok  | 32.3 | 27 degrees C</span><br></pre></td></tr></table></figure>
+
+<h4 id="User-and-network"><a href="#User-and-network" class="headerlink" title="User and network"></a>User and network</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ipmitool -I lanplus </span><br><span class="line">ipmitool lan <span class="built_in">set</span> 1 ipsrc [ static | dhcp ] </span><br><span class="line">ipmitool lan <span class="built_in">set</span> 1 ipaddr &lt;ip&gt;</span><br><span class="line">ipmitool lan <span class="built_in">set</span> 1 netmask 255.255.255.0</span><br><span class="line">ipmitool -I lanplus -H &lt;ip&gt; -U &lt;user&gt; -P &lt;user&gt; lan <span class="built_in">set</span> 1 defgw ipaddr &lt;ip&gt;</span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; -P &lt;pass&gt; user <span class="built_in">set</span> name 5 admin</span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; -P &lt;pass&gt; user list</span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; -P &lt;pass&gt; user <span class="built_in">set</span> password 5 &lt;pass&gt; </span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; -P &lt;pass&gt; channel setaccess 1 5 link=on ipmi=on callin=on privilege=4</span><br><span class="line">ipmitool -H &lt;ip&gt; -U &lt;user&gt; -P &lt;pass&gt; user <span class="built_in">enable</span> 5</span><br></pre></td></tr></table></figure>
+
+<h4 id="Get-NIC-mac-from-supermicro-server"><a href="#Get-NIC-mac-from-supermicro-server" class="headerlink" title="Get NIC mac from supermicro server"></a>Get NIC mac from supermicro server</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">You can find the MAC address <span class="keyword">for</span> LAN1/eth0 (not the BMC MAC) via the SuperMicro IPMI interface by running the following <span class="built_in">command</span>:</span><br><span class="line">ipmitool -U <span class="variable">$IPMI_USER</span> -P <span class="variable">$IPMI_PASS</span> -H <span class="variable">$IPMI_HOST</span> raw 0x30 0x21 | tail -c 18</span><br><span class="line">The eth0 MAC address will be output <span class="keyword">in</span> this format:</span><br><span class="line">00 25 90 f0 be ef</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">#### reset mc</span></span><br><span class="line">```bash</span><br><span class="line">ipmitool bmc reset cold</span><br></pre></td></tr></table></figure>
+
+<h4 id="get-SOL-console"><a href="#get-SOL-console" class="headerlink" title="get SOL console"></a>get SOL console</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">modprobe lanplus <span class="comment"># If not yet loaded</span></span><br><span class="line">ipmitool -H &lt;IP&gt; -U &lt;user&gt; -I lanplus sol activate</span><br></pre></td></tr></table></figure>
+
+<h4 id="Set-power-policy"><a href="#Set-power-policy" class="headerlink" title="Set power policy"></a>Set power policy</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ipmitool -H $JBOD_BMCIP -U $user -P $your_password chassis policy previous</span><br><span class="line">    always-on   : turn on when power is restored</span><br><span class="line">    previous    : return to previous state when power is restored</span><br><span class="line">    always-off  : stay off after power is restored</span><br></pre></td></tr></table></figure>
+
+<h3 id="IPMI-log-issues"><a href="#IPMI-log-issues" class="headerlink" title="IPMI log issues"></a>IPMI log issues</h3><p>Pass the “ipmitool sel elist”, I found some interesting things</p>
+<p>case1:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5de1 | 02/27/2018 | 00:22:39 | Voltage Vcpu | Lower Non-recoverable going low  | Deasserted | Reading 1.22 &lt; Threshold 0.49 Volts</span><br><span class="line">5de2 | 02/27/2018 | 00:22:39 | Voltage Vcpu | Lower Critical going low  | Deasserted | Reading 1.22 &lt; Threshold 0.49 Volts</span><br></pre></td></tr></table></figure>
+
+
+<p><a href="https://www.intel.co.uk/content/www/uk/en/support/articles/000024276/server-products/intel-data-center-blocks-intel-dcb.html" target="_blank" rel="noopener">case2:</a><br>Here is the issues:<br>In most cases, the event points to the Alternating Current (AC) power (electrical outlet power) spiking under the minimum warning and fault thresholds for over 20 milliseconds while the system powered on. Therefore, check the power source.</p>
+<p>Other steps to consider if necessary:</p>
+<p>Make sure that the firmware is updated to the latest version.<br>Check for foreign objects inside the chassis such as screws that could grind the board. Reset the power supplies.<br>Correctly attach the Intel® Server Board to the chassis base with the spacers/stand-offs. Refer to the board service guide if in doubt and make sure not to tighten the screws too much.<br>Check that the cables connecting the chassis front panel to the Intel® Server Board are plugged in properly to the front panel header.<br>Make sure the drive ribbon cables inside the computer are attached correctly and securely.<br>If you’re using a UPS, see to it that it’s compliant. Access Frequently Asked Questions About UPS Support for more details.</p>
+<p>If, despite these above recommendations, the situation persists, contact Support with the SysInfo event logs for further diagnosis.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Warning event: PS2 Status reports a predictive failure due to under-voltage that has been detected. This state may result <span class="keyword">in</span> power supply failure.</span><br><span class="line">Warning event: PS1 Status reports a predictive failure due to under-voltage that has been detected. This state may result <span class="keyword">in</span> power supply failure.</span><br><span class="line">Warning event: PS2 Status reports the power supply<span class="string">'s input (AC/DC) has been lost.</span></span><br><span class="line"><span class="string">CRITICAL event: Pwr Unit Status reports that the power unit has suffered a failure (power supply failure).</span></span><br></pre></td></tr></table></figure>
+
+<p>Here is the production env<br>At 2019-03-10 the power supply has the jitter in Power Supply, I get this error in a lot of servers at the same time, and they are in the same data center and in diff rack</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1a | 03/10/2019 | 16:04:21 | Power Supply Status | Power Supply AC lost | Deasserted</span><br><span class="line">1b | 03/10/2019 | 16:04:31 | Power Supply PS Redundancy | Fully Redundant | Asserted</span><br></pre></td></tr></table></figure>
+
+<h3 id="IPMI-hex-to-ipaddr"><a href="#IPMI-hex-to-ipaddr" class="headerlink" title="IPMI hex to ipaddr"></a>IPMI hex to ipaddr</h3><p>C0 A8 30 AF<br>16<em>12(c)+0=192<br>16</em>10(a)+8=168<br>16<em>3+0=48<br>16</em>10(a)+16=176</p>
+<p>192.168.48.176</p>
+<p><a href="https://discuss.pivotal.io/hc/en-us/articles/206396927-How-to-work-on-IPMI-and-IPMITOOL" target="_blank" rel="noopener">reference</a><br><a href="https://www.intel.co.uk/content/www/uk/en/support/articles/000024276/server-products/intel-data-center-blocks-intel-dcb.html" target="_blank" rel="noopener">reference2</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/ipmi/" rel="tag"><i class="fa fa-tag"></i> ipmi</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/26/openzfs-issues/" rel="prev" title="openzfs issues">
+      <i class="fa fa-chevron-left"></i> openzfs issues
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/08/scsi_dev/" rel="next" title="scsi device maintain">
+      scsi device maintain <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#set-boot-dev"><span class="nav-number">1.</span> <span class="nav-text">set boot dev</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#debug-info"><span class="nav-number">2.</span> <span class="nav-text">debug info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#system-status"><span class="nav-number">3.</span> <span class="nav-text">system status</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#User-and-network"><span class="nav-number">4.</span> <span class="nav-text">User and network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-NIC-mac-from-supermicro-server"><span class="nav-number">5.</span> <span class="nav-text">Get NIC mac from supermicro server</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-SOL-console"><span class="nav-number">6.</span> <span class="nav-text">get SOL console</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-power-policy"><span class="nav-number">7.</span> <span class="nav-text">Set power policy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPMI-log-issues"><span class="nav-number"></span> <span class="nav-text">IPMI log issues</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPMI-hex-to-ipaddr"><span class="nav-number"></span> <span class="nav-text">IPMI hex to ipaddr</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">320k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">4:51</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2018/05/27/ipmi/",
+            identifier: "2018/05/27/ipmi/",
+            title: "ipmitool"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
