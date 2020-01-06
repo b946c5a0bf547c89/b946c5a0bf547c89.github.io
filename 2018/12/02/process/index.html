@@ -54,7 +54,7 @@
 <meta property="og:description" content="Process statusIt is used for kernel threads which use the TASK_IDLE state when idling, instead of TASK_INTERRUPTIBLE; in previous versions of the kernel, such threads were reported as TASK_UNINTERRUPT">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-12-02T05:28:02.000Z">
-<meta property="article:modified_time" content="2020-01-05T12:57:57.484Z">
+<meta property="article:modified_time" content="2020-01-06T13:18:05.742Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="process">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 20:57:57" itemprop="dateModified" datetime="2020-01-05T20:57:57+08:00">2020-01-05</time>
+                <time title="Modified: 2020-01-06 21:18:05" itemprop="dateModified" datetime="2020-01-06T21:18:05+08:00">2020-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -303,6 +303,8 @@
       
         <h3 id="Process-status"><a href="#Process-status" class="headerlink" title="Process status"></a><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=06eb61844d841d0032a9950ce7f8e783ee49c0d0" target="_blank" rel="noopener">Process status</a></h3><p><a href="https://unix.stackexchange.com/questions/412471/what-does-i-uppercase-i-mean-in-ps-aux" target="_blank" rel="noopener">It is used for kernel threads which use the TASK_IDLE state when idling, instead of TASK_INTERRUPTIBLE; in previous versions of the kernel, such threads were reported as TASK_UNINTERRUPTIBLE which was confusing.</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/fs/proc/array.c b/fs/proc/array.c</span><br><span class="line">index 01196d3a..a120a45 100644</span><br><span class="line">--- a/fs/proc/array.c</span><br><span class="line">+++ b/fs/proc/array.c</span><br><span class="line">@@ -119,18 +119,23 @@ static inline void task_name(struct seq_file *m, struct task_struct *p)</span><br><span class="line">  * simple bit tests.</span><br><span class="line">  */</span><br><span class="line"> static const char * const task_state_array[] = &#123;</span><br><span class="line">-	<span class="string">"R (running)"</span>,		/*   0 */</span><br><span class="line">-	<span class="string">"S (sleeping)"</span>,		/*   1 */</span><br><span class="line">-	<span class="string">"D (disk sleep)"</span>,	/*   2 */</span><br><span class="line">-	<span class="string">"T (stopped)"</span>,		/*   4 */</span><br><span class="line">-	<span class="string">"t (tracing stop)"</span>,	/*   8 */</span><br><span class="line">-	<span class="string">"X (dead)"</span>,		/*  16 */</span><br><span class="line">-	<span class="string">"Z (zombie)"</span>,		/*  32 */</span><br><span class="line">+</span><br><span class="line">+	/* states <span class="keyword">in</span> TASK_REPORT: */</span><br><span class="line">+	<span class="string">"R (running)"</span>,		/* 0x00 */</span><br><span class="line">+	<span class="string">"S (sleeping)"</span>,		/* 0x01 */</span><br><span class="line">+	<span class="string">"D (disk sleep)"</span>,	/* 0x02 */</span><br><span class="line">+	<span class="string">"T (stopped)"</span>,		/* 0x04 */</span><br><span class="line">+	<span class="string">"t (tracing stop)"</span>,	/* 0x08 */</span><br><span class="line">+	<span class="string">"X (dead)"</span>,		/* 0x10 */</span><br><span class="line">+	<span class="string">"Z (zombie)"</span>,		/* 0x20 */</span><br><span class="line">+</span><br><span class="line">+	/* states beyond TASK_REPORT: */</span><br><span class="line">+	<span class="string">"I (idle)"</span>,		/* 0x40 */</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <h3 id="Get-the-process-system-overhead"><a href="#Get-the-process-system-overhead" class="headerlink" title="Get the process system overhead"></a>Get the process system overhead</h3><p>(14) utime  %lu<br>Amount of time that this process has been scheduled in user mode, measured in clock ticks (divide by sysconf(_SC_CLK_TCK)).  This includes guest time, guest_time (time spent running a virtual CPU, see below), so that applications that are not aware of the guest time field do not lose that time from their calculations.</p>
 <p>(15) stime  %lu<br>Amount of time that this process has been scheduled in kernel mode, measured in clock ticks (divide by sysconf(_SC_CLK_TCK)).</p>
@@ -484,13 +486,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">702k</span>
+    <span title="Symbols count total">705k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">10:38</span>
+    <span title="Reading time total">10:41</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
