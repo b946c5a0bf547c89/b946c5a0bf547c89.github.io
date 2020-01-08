@@ -54,7 +54,7 @@
 <meta property="og:description" content="Two guest share a storage deviceQcow2 not support, raw is ok">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-03-09T13:40:11.000Z">
-<meta property="article:modified_time" content="2020-01-05T04:26:17.617Z">
+<meta property="article:modified_time" content="2020-01-06T15:23:25.708Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="kvm">
 <meta property="article:tag" content="virtualization">
@@ -242,7 +242,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 12:26:17" itemprop="dateModified" datetime="2020-01-05T12:26:17+08:00">2020-01-05</time>
+                <time title="Modified: 2020-01-06 23:23:25" itemprop="dateModified" datetime="2020-01-06T23:23:25+08:00">2020-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,7 +283,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.9k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -314,6 +314,11 @@
 <h3 id="Create-convert-base-image"><a href="#Create-convert-base-image" class="headerlink" title="Create convert base image"></a>Create convert base image</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qed vm1.qed 80G</span><br><span class="line">qemu-img convert -f vmdk -O raw centos7.vmdk centos7.img</span><br><span class="line"><span class="comment">#Base images</span></span><br><span class="line">qemu-img create -b centos6-base.qed -f  qed  centos6-tmp.qed</span><br><span class="line">qemu-img rebase  -u -b centos-6.qed ./kvm1.qed</span><br></pre></td></tr></table></figure>
 
 <h3 id="Virt-manager-show-unreadable-code"><a href="#Virt-manager-show-unreadable-code" class="headerlink" title="Virt-manager show unreadable code"></a>Virt-manager show unreadable code</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install dejavu-sans-fonts</span><br><span class="line"><span class="comment"># if you need Chinese</span></span><br><span class="line">yum -y install ghostscript-chinese-zh_CN</span><br></pre></td></tr></table></figure>
+
+<h3 id="NIC-performance"><a href="#NIC-performance" class="headerlink" title="NIC performance"></a>NIC performance</h3><p>If intel_iommu=on or amd_iommu=on works, you can try replacing them with iommu=pt or amd_iommu=pt. The pt option only enables IOMMU for devices used in passthrough and will provide better host performance. However, the option may not be supported on all hardware. Revert to previous option if the pt option doesn’t work for your host.<br>If the passthrough fails because the hardware does not support interrupt remapping, you can consider enabling the allow_unsafe_interrupts option if the virtual machines are trusted. The allow_unsafe_interrupts is not enabled by default because enabling it potentially exposes the host to MSI attacks from virtual machines. To enable the option:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ grubby --update-kernel=ALL --args=<span class="string">'intel_iommu=pt'</span></span><br><span class="line">$ vi /etc/modprobe.d</span><br><span class="line">options vfio_iommu_type1 allow_unsafe_interrupts=1</span><br></pre></td></tr></table></figure>
+
+
 
     </div>
 
@@ -407,7 +412,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Two-guest-share-a-storage-device"><span class="nav-number">1.</span> <span class="nav-text">Two guest share a storage device</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVM-Multipath"><span class="nav-number">2.</span> <span class="nav-text">KVM Multipath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snapshot"><span class="nav-number">3.</span> <span class="nav-text">Snapshot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-convert-base-image"><span class="nav-number">4.</span> <span class="nav-text">Create convert base image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virt-manager-show-unreadable-code"><span class="nav-number">5.</span> <span class="nav-text">Virt-manager show unreadable code</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Two-guest-share-a-storage-device"><span class="nav-number">1.</span> <span class="nav-text">Two guest share a storage device</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVM-Multipath"><span class="nav-number">2.</span> <span class="nav-text">KVM Multipath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snapshot"><span class="nav-number">3.</span> <span class="nav-text">Snapshot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-convert-base-image"><span class="nav-number">4.</span> <span class="nav-text">Create convert base image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virt-manager-show-unreadable-code"><span class="nav-number">5.</span> <span class="nav-text">Virt-manager show unreadable code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NIC-performance"><span class="nav-number">6.</span> <span class="nav-text">NIC performance</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -423,20 +428,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -471,13 +476,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">711k</span>
+    <span title="Symbols count total">731k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">10:46</span>
+    <span title="Reading time total">11:05</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

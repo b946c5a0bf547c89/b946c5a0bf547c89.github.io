@@ -55,7 +55,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/img/cpu-Isolated-334379.png">
 <meta property="article:published_time" content="2018-05-27T07:35:59.000Z">
-<meta property="article:modified_time" content="2020-01-05T14:53:28.487Z">
+<meta property="article:modified_time" content="2020-01-06T15:46:32.077Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="cpu">
 <meta property="article:tag" content="driver">
@@ -244,7 +244,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 22:53:28" itemprop="dateModified" datetime="2020-01-05T22:53:28+08:00">2020-01-05</time>
+                <time title="Modified: 2020-01-06 23:46:32" itemprop="dateModified" datetime="2020-01-06T23:46:32+08:00">2020-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,7 +285,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>8.6k</span>
+              <span>9.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -337,6 +337,7 @@
 
 <h3 id="Turn-off-the-cpu-cores"><a href="#Turn-off-the-cpu-cores" class="headerlink" title="Turn off the cpu cores"></a>Turn off the cpu cores</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 0 &gt; /sys/devices/system/cpu/cpu17/online</span><br></pre></td></tr></table></figure>
 
+<h3 id="set-parameter-for-storage-system"><a href="#set-parameter-for-storage-system" class="headerlink" title="set parameter for storage system"></a>set parameter for storage system</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ find /sys -iname  rq_affinity ! -name <span class="string">'*irq*'</span> | <span class="keyword">while</span> <span class="built_in">read</span> line; <span class="keyword">do</span> <span class="built_in">echo</span> 2 &gt; <span class="variable">$line</span> ; <span class="keyword">done</span></span><br><span class="line">If this option is <span class="string">'1'</span>, the block layer will migrate request completions to the cpu <span class="string">"group"</span> that originally submitted the request. For some workloads this provides a significant reduction <span class="keyword">in</span> CPU cycles due to caching effects.</span><br><span class="line"></span><br><span class="line">For storage configurations that need to maximize distribution of completion processing setting this option to <span class="string">'2'</span> forces the completion to run on the requesting cpu (bypassing the <span class="string">"group"</span> aggregation logic).</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -357,12 +358,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/05/27/ipmi/" rel="prev" title="ipmitool">
-      <i class="fa fa-chevron-left"></i> ipmitool
+    <a href="/2018/05/27/bios/" rel="prev" title="BIOS">
+      <i class="fa fa-chevron-left"></i> BIOS
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/06/01/tcp/" rel="next" title="Network setting">
-      Network setting <i class="fa fa-chevron-right"></i>
+    <a href="/2018/05/27/ipmi/" rel="next" title="ipmitool">
+      ipmitool <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -430,7 +431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#E3-v6-Turbo-not-work-in-CentOS6"><span class="nav-number">1.</span> <span class="nav-text">E3 v6 Turbo not work in CentOS6</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Check-cpu-freq-instead-of-cat-proc-cpuinfo-grep-MHz"><span class="nav-number">1.0.1.</span> <span class="nav-text">Check cpu freq, instead of cat &#x2F;proc&#x2F;cpuinfo | grep MHz</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#check-driver"><span class="nav-number">1.1.</span> <span class="nav-text">check driver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#When-I-run-pigz-to-benmark"><span class="nav-number">1.2.</span> <span class="nav-text">When I run pigz to benmark</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Isolated-CPUs-example"><span class="nav-number">2.</span> <span class="nav-text">Isolated CPUs example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kernel-parameter"><span class="nav-number">3.</span> <span class="nav-text">kernel parameter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tuna"><span class="nav-number">3.1.</span> <span class="nav-text">tuna</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cpu-IPC-Instruction-Per-Clock-cycle"><span class="nav-number">4.</span> <span class="nav-text">cpu IPC (Instruction Per Clock cycle)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Benchmark-CPU"><span class="nav-number">5.</span> <span class="nav-text">Benchmark CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gcc-x86-options"><span class="nav-number">5.1.</span> <span class="nav-text">gcc_x86_options</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-AVX"><span class="nav-number">6.</span> <span class="nav-text">Disable AVX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Found-the-half-cores"><span class="nav-number">7.</span> <span class="nav-text">Found the half cores</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Turn-off-the-cpu-cores"><span class="nav-number">8.</span> <span class="nav-text">Turn off the cpu cores</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#E3-v6-Turbo-not-work-in-CentOS6"><span class="nav-number">1.</span> <span class="nav-text">E3 v6 Turbo not work in CentOS6</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Check-cpu-freq-instead-of-cat-proc-cpuinfo-grep-MHz"><span class="nav-number">1.0.1.</span> <span class="nav-text">Check cpu freq, instead of cat &#x2F;proc&#x2F;cpuinfo | grep MHz</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#check-driver"><span class="nav-number">1.1.</span> <span class="nav-text">check driver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#When-I-run-pigz-to-benmark"><span class="nav-number">1.2.</span> <span class="nav-text">When I run pigz to benmark</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Isolated-CPUs-example"><span class="nav-number">2.</span> <span class="nav-text">Isolated CPUs example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kernel-parameter"><span class="nav-number">3.</span> <span class="nav-text">kernel parameter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tuna"><span class="nav-number">3.1.</span> <span class="nav-text">tuna</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cpu-IPC-Instruction-Per-Clock-cycle"><span class="nav-number">4.</span> <span class="nav-text">cpu IPC (Instruction Per Clock cycle)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Benchmark-CPU"><span class="nav-number">5.</span> <span class="nav-text">Benchmark CPU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gcc-x86-options"><span class="nav-number">5.1.</span> <span class="nav-text">gcc_x86_options</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-AVX"><span class="nav-number">6.</span> <span class="nav-text">Disable AVX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Found-the-half-cores"><span class="nav-number">7.</span> <span class="nav-text">Found the half cores</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Turn-off-the-cpu-cores"><span class="nav-number">8.</span> <span class="nav-text">Turn off the cpu cores</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set-parameter-for-storage-system"><span class="nav-number">9.</span> <span class="nav-text">set parameter for storage system</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -446,20 +447,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -494,13 +495,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">711k</span>
+    <span title="Symbols count total">731k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">10:46</span>
+    <span title="Reading time total">11:05</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

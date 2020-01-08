@@ -317,7 +317,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/benchmark/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/storage_benchmark/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/logo-4-blog.png">
@@ -331,7 +331,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/07/12/benchmark/" class="post-title-link" itemprop="url">Benchmark</a>
+            <a href="/2018/07/12/storage_benchmark/" class="post-title-link" itemprop="url">storage benchmark</a>
         </h1>
 
         <div class="post-meta">
@@ -348,7 +348,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 19:57:37" itemprop="dateModified" datetime="2020-01-05T19:57:37+08:00">2020-01-05</time>
+                <time title="Modified: 2020-01-06 23:08:06" itemprop="dateModified" datetime="2020-01-06T23:08:06+08:00">2020-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -371,8 +371,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2018/07/12/benchmark/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/12/benchmark/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2018/07/12/storage_benchmark/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/12/storage_benchmark/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -382,14 +382,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>6.1k</span>
+              <span>6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>6 mins.</span>
+              <span>5 mins.</span>
             </span>
 
         </div>
@@ -401,10 +401,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Here is my benchmark info</p>
+          <h3 id="Block-benchmark-trap"><a href="#Block-benchmark-trap" class="headerlink" title="Block benchmark trap"></a>Block benchmark trap</h3><p>fio sequential write in the same device block cause the test result too high</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[rw]</span><br><span class="line">rw=write</span><br><span class="line">ioengine=posixaio</span><br><span class="line">iodepth=4</span><br><span class="line">nrfiles=8</span><br><span class="line">bssplit=1M/100</span><br><span class="line">direct=1</span><br><span class="line">filename=/dev/sdb1</span><br><span class="line">numjobs=4</span><br><span class="line">size=2000G</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/07/12/benchmark/#more" rel="contents">
+              <a class="btn" href="/2018/07/12/storage_benchmark/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -883,7 +884,7 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/cpu/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/network_benchmark/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/logo-4-blog.png">
@@ -897,7 +898,7 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/05/27/cpu/" class="post-title-link" itemprop="url">cpu</a>
+            <a href="/2018/06/01/network_benchmark/" class="post-title-link" itemprop="url">nic benchmark</a>
         </h1>
 
         <div class="post-meta">
@@ -907,14 +908,14 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2018-05-27 15:35:59" itemprop="dateCreated datePublished" datetime="2018-05-27T15:35:59+08:00">2018-05-27</time>
+              <time title="Created: 2018-06-01 10:49:42" itemprop="dateCreated datePublished" datetime="2018-06-01T10:49:42+08:00">2018-06-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 22:53:28" itemprop="dateModified" datetime="2020-01-05T22:53:28+08:00">2020-01-05</time>
+                <time title="Modified: 2020-01-08 17:26:28" itemprop="dateModified" datetime="2020-01-08T17:26:28+08:00">2020-01-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -922,8 +923,8 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hardware/" itemprop="url" rel="index">
-                    <span itemprop="name">hardware</span>
+                  <a href="/categories/benchmark/" itemprop="url" rel="index">
+                    <span itemprop="name">benchmark</span>
                   </a>
                 </span>
             </span>
@@ -937,8 +938,8 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2018/05/27/cpu/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/27/cpu/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2018/06/01/network_benchmark/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/01/network_benchmark/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -948,14 +949,14 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>8.6k</span>
+              <span>19k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>8 mins.</span>
+              <span>17 mins.</span>
             </span>
 
         </div>
@@ -967,10 +968,10 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="E3-v6-Turbo-not-work-in-CentOS6"><a href="#E3-v6-Turbo-not-work-in-CentOS6" class="headerlink" title="E3 v6 Turbo not work in CentOS6"></a>E3 v6 Turbo not work in CentOS6</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">$ cpupower frequency-set --governor ondemand/powersave/performance</span><br><span class="line"></span><br><span class="line">CentOS 6</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line"></span><br><span class="line">CentOS 7</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br></pre></td></tr></table></figure>
+          <h3 id="slot-status"><a href="#slot-status" class="headerlink" title="slot status"></a>slot status</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ 05:00.0 Ethernet controller: Intel Corporation Ethernet Controller XXV710 <span class="keyword">for</span> 25GbE SFP28 (rev 02)</span><br><span class="line">$ lspci -s 05:00.0 -vvv | grep -Ei <span class="string">'8G|MSI-X'</span></span><br><span class="line">      Capabilities: [70] MSI-X: Enable+ Count=129 Masked-</span><br><span class="line">              LnkCap: Port <span class="comment">#0, Speed 8GT/s, Width x8, ASPM L1, Latency L0 &lt;2us, L1 &lt;16us</span></span><br><span class="line">              LnkSta: Speed 8GT/s, Width x8, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2018/05/27/cpu/#more" rel="contents">
+              <a class="btn" href="/2018/06/01/network_benchmark/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1082,6 +1083,117 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/05/27/ipmi/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/cpu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/27/cpu/" class="post-title-link" itemprop="url">cpu</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-27 15:35:59" itemprop="dateCreated datePublished" datetime="2018-05-27T15:35:59+08:00">2018-05-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-06 23:46:32" itemprop="dateModified" datetime="2020-01-06T23:46:32+08:00">2020-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hardware/" itemprop="url" rel="index">
+                    <span itemprop="name">hardware</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/05/27/cpu/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/27/cpu/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>9.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>8 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="E3-v6-Turbo-not-work-in-CentOS6"><a href="#E3-v6-Turbo-not-work-in-CentOS6" class="headerlink" title="E3 v6 Turbo not work in CentOS6"></a>E3 v6 Turbo not work in CentOS6</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">$ cpupower frequency-set --governor ondemand/powersave/performance</span><br><span class="line"></span><br><span class="line">CentOS 6</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line"></span><br><span class="line">CentOS 7</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/05/27/cpu/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1222,117 +1334,6 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/12/ansible/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/12/ansible/" class="post-title-link" itemprop="url">Ansible</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-04-12 15:23:03" itemprop="dateCreated datePublished" datetime="2018-04-12T15:23:03+08:00">2018-04-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 12:24:48" itemprop="dateModified" datetime="2020-01-05T12:24:48+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ansible/" itemprop="url" rel="index">
-                    <span itemprop="name">ansible</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/04/12/ansible/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/04/12/ansible/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>6.2k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>6 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Continue-run"><a href="#Continue-run" class="headerlink" title="Continue run"></a>Continue run</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible-playbook playbook.yml --start-at=<span class="string">"install packages"</span></span><br><span class="line">ansible-playbook playbook.yml --step <span class="comment">## every step will ask you</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/04/12/ansible/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1405,20 +1406,20 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1453,13 +1454,13 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">711k</span>
+    <span title="Symbols count total">731k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">10:46</span>
+    <span title="Reading time total">11:05</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

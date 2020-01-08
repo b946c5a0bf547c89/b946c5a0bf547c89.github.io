@@ -46,21 +46,21 @@
   };
 </script>
 
-  <meta name="description" content="Here is my benchmark info">
+  <meta name="description" content="Block benchmark trapfio sequential write in the same device block cause the test result too high 12345678910[rw]rw&#x3D;writeioengine&#x3D;posixaioiodepth&#x3D;4nrfiles&#x3D;8bssplit&#x3D;1M&#x2F;100direct&#x3D;1filename&#x3D;&#x2F;dev&#x2F;sdb1numjo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Benchmark">
-<meta property="og:url" content="http://yoursite.com/2018/07/12/benchmark/index.html">
+<meta property="og:title" content="storage benchmark">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/storage_benchmark/index.html">
 <meta property="og:site_name" content="b946c5a0bf547c89">
-<meta property="og:description" content="Here is my benchmark info">
+<meta property="og:description" content="Block benchmark trapfio sequential write in the same device block cause the test result too high 12345678910[rw]rw&#x3D;writeioengine&#x3D;posixaioiodepth&#x3D;4nrfiles&#x3D;8bssplit&#x3D;1M&#x2F;100direct&#x3D;1filename&#x3D;&#x2F;dev&#x2F;sdb1numjo">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-07-12T02:25:02.000Z">
-<meta property="article:modified_time" content="2020-01-05T11:57:37.794Z">
+<meta property="article:modified_time" content="2020-01-06T15:08:06.084Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="test">
 <meta property="article:tag" content="benchmark">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2018/07/12/benchmark/">
+<link rel="canonical" href="http://yoursite.com/2018/07/12/storage_benchmark/">
 
 
 <script id="page-configurations">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>Benchmark | b946c5a0bf547c89</title>
+  <title>storage benchmark | b946c5a0bf547c89</title>
   
 
 
@@ -212,7 +212,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/benchmark/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/storage_benchmark/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/logo-4-blog.png">
@@ -225,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Benchmark
+          storage benchmark
         </h1>
 
         <div class="post-meta">
@@ -242,7 +242,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 19:57:37" itemprop="dateModified" datetime="2020-01-05T19:57:37+08:00">2020-01-05</time>
+                <time title="Modified: 2020-01-06 23:08:06" itemprop="dateModified" datetime="2020-01-06T23:08:06+08:00">2020-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,8 +272,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2018/07/12/benchmark/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/12/benchmark/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2018/07/12/storage_benchmark/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/12/storage_benchmark/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -283,14 +283,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>6.1k</span>
+              <span>6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>6 mins.</span>
+              <span>5 mins.</span>
             </span>
 
         </div>
@@ -302,11 +302,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Here is my benchmark info</p>
-<a id="more"></a>
-
-<h3 id="Block-benchmark-trap"><a href="#Block-benchmark-trap" class="headerlink" title="Block benchmark trap"></a>Block benchmark trap</h3><p>fio sequential write in the same device block cause the test result too high</p>
+        <h3 id="Block-benchmark-trap"><a href="#Block-benchmark-trap" class="headerlink" title="Block benchmark trap"></a>Block benchmark trap</h3><p>fio sequential write in the same device block cause the test result too high</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[rw]</span><br><span class="line">rw=write</span><br><span class="line">ioengine=posixaio</span><br><span class="line">iodepth=4</span><br><span class="line">nrfiles=8</span><br><span class="line">bssplit=1M/100</span><br><span class="line">direct=1</span><br><span class="line">filename=/dev/sdb1</span><br><span class="line">numjobs=4</span><br><span class="line">size=2000G</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <p>For avoid this issue, and I don ‘t know why I have to wait after 10% test process, the speed will from 4GB/s down to 1.6GB/s<br>If you use fio test raw device, you ‘d better set numjobs=1, single core is enough</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">rw=write</span><br><span class="line">ioengine=posixaio</span><br><span class="line">iodepth=4</span><br><span class="line">nrfiles=8</span><br><span class="line">bssplit=1M/100</span><br><span class="line">direct=1</span><br><span class="line">filename=/dev/sdb1</span><br><span class="line">numjobs=1</span><br><span class="line">size=2000G</span><br><span class="line">zonemode=strided</span><br><span class="line">zonesize=100G</span><br><span class="line"></span><br><span class="line">[job1]</span><br><span class="line">zoneskip=1000G</span><br><span class="line">[job1]</span><br><span class="line">zoneskip=2000G</span><br><span class="line">[job3]</span><br><span class="line">zoneskip=3000G</span><br><span class="line">[job4]</span><br><span class="line">zoneskip=4000G</span><br><span class="line"></span><br><span class="line">job1: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=posixaio, iodepth=4</span><br><span class="line">job1: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=posixaio, iodepth=4</span><br><span class="line">job3: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=posixaio, iodepth=4</span><br><span class="line">job4: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=posixaio, iodepth=4</span><br><span class="line">fio-3.16</span><br><span class="line">Starting 4 processes</span><br><span class="line">Jobs: 4 (f=4): [W(4)][10.2%][w=1648MiB/s][w=1647 IOPS][eta 49m:02s]</span><br><span class="line"></span><br><span class="line"><span class="comment"># dd version to reproduce</span></span><br><span class="line"><span class="keyword">for</span> ((i=0;i&lt;=3200000; i=i+100000)); <span class="keyword">do</span> dd <span class="keyword">if</span>=/dev/zero of=/dev/sdb1 bs=1M seek=<span class="variable">$i</span> oflag=direct &amp; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
@@ -445,20 +444,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -493,13 +492,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">711k</span>
+    <span title="Symbols count total">731k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">10:46</span>
+    <span title="Reading time total">11:05</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
@@ -598,9 +597,9 @@
       DISQUS.reset({
         reload: true,
         config: {page: {
-            url: "http://yoursite.com/2018/07/12/benchmark/",
-            identifier: "2018/07/12/benchmark/",
-            title: "Benchmark"
+            url: "http://yoursite.com/2018/07/12/storage_benchmark/",
+            identifier: "2018/07/12/storage_benchmark/",
+            title: "storage benchmark"
           }
         }
       });

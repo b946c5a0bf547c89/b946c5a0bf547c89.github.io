@@ -54,7 +54,7 @@
 <meta property="og:description" content="Public12345678910111213141516171819options lnet networks&#x3D;tcp(bond0)options ptlrpc ldlm_num_threads&#x3D;16options ptlrpc at_max&#x3D;300options ptlrpc at_min&#x3D;50options ptlrpc ldlm_enqueue_min&#x3D;260# ldlm_enqueue_">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2019-12-29T07:41:16.000Z">
-<meta property="article:modified_time" content="2020-01-04T05:02:27.206Z">
+<meta property="article:modified_time" content="2020-01-08T02:43:58.000Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="lfs">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-04 13:02:27" itemprop="dateModified" datetime="2020-01-04T13:02:27+08:00">2020-01-04</time>
+                <time title="Modified: 2020-01-08 10:43:58" itemprop="dateModified" datetime="2020-01-08T10:43:58+08:00">2020-01-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -341,7 +341,7 @@
 
 <h4 id="re-writeconf"><a href="#re-writeconf" class="headerlink" title="re-writeconf"></a>re-writeconf</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mds$ tunefs.lfs --writeconf /dev/sdx</span><br><span class="line">oss$ tunefs.lfs --writeconf /dev/ost0</span><br></pre></td></tr></table></figure>
 <p>If MGS and MDT in single block device, you can add “-o nosvc” to avoid mount MDT</p>
-<h3 id="User-group-quota"><a href="#User-group-quota" class="headerlink" title="User group quota"></a>User group quota</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mds $ lctl set_param -P <span class="variable">$FNAME</span>.quota.mdt=ug</span><br><span class="line">mds $ cat /proc/fs/lfs/osd-ldiskfs/<span class="variable">$FNAME</span>-MDT0000/quota_slave/info</span><br><span class="line">quota enabled:  <span class="string">"ug"</span></span><br><span class="line">mds $ lctl set_param -P <span class="variable">$FNAME</span>.quota.ost=ug</span><br><span class="line"></span><br><span class="line">client $ lfs setquota –u user1 –b 307200 –B 309200 –i 10000 –I 11000 /mnt/lfs</span><br><span class="line">client $ lfs setquota –g group1 –b 5120000 –B 5150000 –i 100000 –I 101000 /mnt/lfs</span><br><span class="line"></span><br><span class="line">client $ lfs quota –u user1 -v /mnt/lfs</span><br><span class="line">client $ lfs quota -t -p /mnt/lfs</span><br><span class="line">Block grace time: 1w; Inode grace time: 1w</span><br></pre></td></tr></table></figure>
+<h3 id="User-group-quota"><a href="#User-group-quota" class="headerlink" title="User group quota"></a>User group quota</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mds $ lctl conf_param <span class="variable">$FNAME</span>.quota.mdt=ug</span><br><span class="line">mds $ cat /proc/fs/lfs/osd-ldiskfs/<span class="variable">$FNAME</span>-MDT0000/quota_slave/info</span><br><span class="line">quota enabled:  <span class="string">"ug"</span></span><br><span class="line">mds $ lctl conf_param <span class="variable">$FNAME</span>.quota.ost=ug</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### lctl set_param -P must reboot, no -P not work, if you don' t reboot ,you have too use conf_param</span></span><br><span class="line"></span><br><span class="line">client $ lfs setquota –u user1 –b 307200 –B 309200 –i 10000 –I 11000 /mnt/lfs</span><br><span class="line">client $ lfs setquota –g group1 –b 5120000 –B 5150000 –i 100000 –I 101000 /mnt/lfs</span><br><span class="line"></span><br><span class="line">client $ lfs quota –u user1 -v /mnt/lfs</span><br><span class="line">client $ lfs quota -t -p /mnt/lfs</span><br><span class="line">Block grace time: 1w; Inode grace time: 1w</span><br></pre></td></tr></table></figure>
 
 <h3 id="Disable-the-ost"><a href="#Disable-the-ost" class="headerlink" title="Disable the ost"></a>Disable the ost</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mds $ mds lctl dl | grep osc</span><br><span class="line">8 UP osp lfs-OST0000-osc-MDT0000 lfs-MDT0000-mdtlov_UUID 5</span><br><span class="line"></span><br><span class="line">mds $ lctl --device 8 deactivate</span><br><span class="line">mds $ lctl --device 8 activate</span><br></pre></td></tr></table></figure>
 
@@ -373,8 +373,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/11/26/xfs/" rel="prev" title="xfs">
-      <i class="fa fa-chevron-left"></i> xfs
+    <a href="/2019/11/26/smartctl/" rel="prev" title="smartctl">
+      <i class="fa fa-chevron-left"></i> smartctl
     </a></div>
       <div class="post-nav-item">
     <a href="/2020/01/04/hello-world/" rel="next" title="Hello World">
@@ -462,20 +462,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -510,13 +510,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">711k</span>
+    <span title="Symbols count total">731k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">10:46</span>
+    <span title="Reading time total">11:05</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
