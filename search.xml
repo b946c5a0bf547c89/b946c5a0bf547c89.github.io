@@ -2019,7 +2019,62 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
 
 <h3 id="CPU-setting"><a href="#CPU-setting" class="headerlink" title="CPU setting"></a>CPU setting</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cpupower  frequency-set -g performance</span><br><span class="line">cpupower idle-set -d 3</span><br><span class="line">cpupower idle-set -d 2</span><br><span class="line">cpupower idle-set -d 1</span><br><span class="line">cpupower idle-set -d 0</span><br></pre></td></tr></table></figure>
 
-<h3 id="nic-offload"><a href="#nic-offload" class="headerlink" title="nic offload"></a>nic offload</h3><p>|Features                                     |<br>|———————————————|———–<br>|TSO (TCP Segmentation Offload)               | hardware on<br>|GSO (Generic Segmentation Offload,soft TSO)  | software off<br>|GRO (Generic Receive Offload)                | hardware on<br>|UFO (UDP Fragmentation Offload)              | hardware off(fixed)<br>|rx-checksumming                              | hardware on<br>|tx-checksumming                              | hardware on<br>|scatter-gather                               | hardware on<br>|RSS (Receive side scaling)                   | hardware on<br>|RPS (software RSS)                           | software off<br>|RFS (Receive Flow Streering,UDP support ?)   | software on<br>|XPS (Transmit Packet Steering)               | software on<br>|busy-poll: on [fixed]                        | hw and sw, work with sysctl.net.core.busy_poll &gt; 0</p>
+<h3 id="nic-offload"><a href="#nic-offload" class="headerlink" title="nic offload"></a>nic offload</h3><table>
+<thead>
+<tr>
+<th>Features</th>
+<th>status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TSO TCP Segmentation Offload</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>GSO Generic Segmentation Offload,soft TSO</td>
+<td>software off</td>
+</tr>
+<tr>
+<td>GRO Generic Receive Offload</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>UFO UDP Fragmentation Offload</td>
+<td>hardware off fixed</td>
+</tr>
+<tr>
+<td>rx-checksumming</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>tx-checksumming</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>scatter-gather</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>RSS Receive side scaling</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>RPS software RSS</td>
+<td>software off</td>
+</tr>
+<tr>
+<td>RFS Receive Flow Streering,UDP support ?</td>
+<td>software on</td>
+</tr>
+<tr>
+<td>XPS Transmit Packet Steering</td>
+<td>software on</td>
+</tr>
+<tr>
+<td>busy-poll: on fixed</td>
+<td>hw and sw, work with sysctl.net.core.busy_poll &gt; 0</td>
+</tr>
+</tbody></table>
 <p>TSO = LSO (also called large segmentation offload)<br>RFS and XPS has the same function from receive or transmit, avoid cache miss, numa overhead<br>Receive Packet Steering (RPS) is logically a software implementation of RSS<br>Generic segmentation offload (GSO) is logically a software implementation of TSO</p>
 <p>if TSO was on, disable GSO, same with RSS and RPS</p>
 <p>Enabling the RFS requires enabling the ‘ntuple’ flag via the ethtool,RFS requires the kernel to be compiled with the CONFIG_RFS_ACCEL option. This options is available in kernels 2.6.39 and above. Furthermore, RFS requires Device Managed Flow Steering support.</p>

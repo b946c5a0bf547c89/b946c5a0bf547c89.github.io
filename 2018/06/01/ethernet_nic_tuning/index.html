@@ -54,7 +54,7 @@
 <meta property="og:description" content="slot status12345$ 05:00.0 Ethernet controller: Intel Corporation Ethernet Controller XXV710 for 25GbE SFP28 (rev 02)$ lspci -s 05:00.0 -vvv | grep -Ei &#39;8G|MSI-X&#39;      Capabilities: [70] MSI-X: Enable+">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-06-01T02:49:42.000Z">
-<meta property="article:modified_time" content="2020-01-08T15:20:44.906Z">
+<meta property="article:modified_time" content="2020-01-08T15:23:20.822Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="benchmark">
 <meta property="article:tag" content="nic">
@@ -244,7 +244,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-08 23:20:44" itemprop="dateModified" datetime="2020-01-08T23:20:44+08:00">2020-01-08</time>
+                <time title="Modified: 2020-01-08 23:23:20" itemprop="dateModified" datetime="2020-01-08T23:23:20+08:00">2020-01-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -315,7 +315,62 @@
 
 <h3 id="CPU-setting"><a href="#CPU-setting" class="headerlink" title="CPU setting"></a>CPU setting</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cpupower  frequency-set -g performance</span><br><span class="line">cpupower idle-set -d 3</span><br><span class="line">cpupower idle-set -d 2</span><br><span class="line">cpupower idle-set -d 1</span><br><span class="line">cpupower idle-set -d 0</span><br></pre></td></tr></table></figure>
 
-<h3 id="nic-offload"><a href="#nic-offload" class="headerlink" title="nic offload"></a>nic offload</h3><p>|Features                                     |<br>|———————————————|———–<br>|TSO (TCP Segmentation Offload)               | hardware on<br>|GSO (Generic Segmentation Offload,soft TSO)  | software off<br>|GRO (Generic Receive Offload)                | hardware on<br>|UFO (UDP Fragmentation Offload)              | hardware off(fixed)<br>|rx-checksumming                              | hardware on<br>|tx-checksumming                              | hardware on<br>|scatter-gather                               | hardware on<br>|RSS (Receive side scaling)                   | hardware on<br>|RPS (software RSS)                           | software off<br>|RFS (Receive Flow Streering,UDP support ?)   | software on<br>|XPS (Transmit Packet Steering)               | software on<br>|busy-poll: on [fixed]                        | hw and sw, work with sysctl.net.core.busy_poll &gt; 0</p>
+<h3 id="nic-offload"><a href="#nic-offload" class="headerlink" title="nic offload"></a>nic offload</h3><table>
+<thead>
+<tr>
+<th>Features</th>
+<th>status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TSO TCP Segmentation Offload</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>GSO Generic Segmentation Offload,soft TSO</td>
+<td>software off</td>
+</tr>
+<tr>
+<td>GRO Generic Receive Offload</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>UFO UDP Fragmentation Offload</td>
+<td>hardware off fixed</td>
+</tr>
+<tr>
+<td>rx-checksumming</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>tx-checksumming</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>scatter-gather</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>RSS Receive side scaling</td>
+<td>hardware on</td>
+</tr>
+<tr>
+<td>RPS software RSS</td>
+<td>software off</td>
+</tr>
+<tr>
+<td>RFS Receive Flow Streering,UDP support ?</td>
+<td>software on</td>
+</tr>
+<tr>
+<td>XPS Transmit Packet Steering</td>
+<td>software on</td>
+</tr>
+<tr>
+<td>busy-poll: on fixed</td>
+<td>hw and sw, work with sysctl.net.core.busy_poll &gt; 0</td>
+</tr>
+</tbody></table>
 <p>TSO = LSO (also called large segmentation offload)<br>RFS and XPS has the same function from receive or transmit, avoid cache miss, numa overhead<br>Receive Packet Steering (RPS) is logically a software implementation of RSS<br>Generic segmentation offload (GSO) is logically a software implementation of TSO</p>
 <p>if TSO was on, disable GSO, same with RSS and RPS</p>
 <p>Enabling the RFS requires enabling the ‘ntuple’ flag via the ethtool,RFS requires the kernel to be compiled with the CONFIG_RFS_ACCEL option. This options is available in kernels 2.6.39 and above. Furthermore, RFS requires Device Managed Flow Steering support.</p>
