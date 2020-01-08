@@ -54,7 +54,7 @@
 <meta property="og:description" content="Two guest share a storage deviceQcow2 not support, raw is ok">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-03-09T13:40:11.000Z">
-<meta property="article:modified_time" content="2020-01-06T15:23:25.708Z">
+<meta property="article:modified_time" content="2020-01-08T15:30:30.925Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="kvm">
 <meta property="article:tag" content="virtualization">
@@ -242,7 +242,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-06 23:23:25" itemprop="dateModified" datetime="2020-01-06T23:23:25+08:00">2020-01-06</time>
+                <time title="Modified: 2020-01-08 23:30:30" itemprop="dateModified" datetime="2020-01-08T23:30:30+08:00">2020-01-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,7 +283,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.6k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -316,7 +316,7 @@
 <h3 id="Virt-manager-show-unreadable-code"><a href="#Virt-manager-show-unreadable-code" class="headerlink" title="Virt-manager show unreadable code"></a>Virt-manager show unreadable code</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install dejavu-sans-fonts</span><br><span class="line"><span class="comment"># if you need Chinese</span></span><br><span class="line">yum -y install ghostscript-chinese-zh_CN</span><br></pre></td></tr></table></figure>
 
 <h3 id="NIC-performance"><a href="#NIC-performance" class="headerlink" title="NIC performance"></a>NIC performance</h3><p>If intel_iommu=on or amd_iommu=on works, you can try replacing them with iommu=pt or amd_iommu=pt. The pt option only enables IOMMU for devices used in passthrough and will provide better host performance. However, the option may not be supported on all hardware. Revert to previous option if the pt option doesn’t work for your host.<br>If the passthrough fails because the hardware does not support interrupt remapping, you can consider enabling the allow_unsafe_interrupts option if the virtual machines are trusted. The allow_unsafe_interrupts is not enabled by default because enabling it potentially exposes the host to MSI attacks from virtual machines. To enable the option:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ grubby --update-kernel=ALL --args=<span class="string">'intel_iommu=pt'</span></span><br><span class="line">$ vi /etc/modprobe.d</span><br><span class="line">options vfio_iommu_type1 allow_unsafe_interrupts=1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ grubby --update-kernel=ALL --args=<span class="string">'intel_iommu=pt'</span></span><br><span class="line">$ vi /etc/modprobe.d</span><br><span class="line">options vfio_iommu_type1 allow_unsafe_interrupts=1</span><br><span class="line"></span><br><span class="line"><span class="comment"># mellanox driver sr-iov</span></span><br><span class="line">options mlx4_core port_type_array=2,2 num_vfs=2 probe_vf=0 enable_64b_cqe_eqe=0  log_num_mgm_entry_size=-1</span><br></pre></td></tr></table></figure>
 
 
 
@@ -476,13 +476,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">737k</span>
+    <span title="Symbols count total">752k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">11:10</span>
+    <span title="Reading time total">11:23</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
