@@ -3668,28 +3668,30 @@ cache
 <table>
 <thead>
 <tr>
-<th></th>
+<th>SAS3 performance</th>
 <th>bandwidth GBps</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>SAS3 64 x read raw single port</td>
+<td>SAS3 64 x read raw single SAS port</td>
 <td>4</td>
 </tr>
 <tr>
-<td>SAS3 64 x write raw single port</td>
+<td>SAS3 64 x write raw single SAS port</td>
 <td>3.9</td>
 </tr>
 <tr>
-<td>SAS3 64 x rw 1:1 raw single port</td>
+<td>SAS3 64 x rw 1:1 raw single SAS port</td>
 <td>1.9/1.9</td>
 </tr>
 <tr>
-<td>SAS3 64 x rw 1:1 raw dual port</td>
+<td>SAS3 64 x rw 1:1 raw dual SAS port</td>
 <td>3.63/3.62</td>
 </tr>
 </tbody></table>
 <p>single LSI 9300-8e SAS port(4e) with 84 x 3.5inch NLSAS HDD<br>Not enough SSD for test iops </p>
+<a id="more"></a>
+
 <h3 id="Hardware-index"><a href="#Hardware-index" class="headerlink" title="Hardware index"></a>Hardware index</h3><h4 id="JBOD"><a href="#JBOD" class="headerlink" title="JBOD"></a>JBOD</h4><table>
 <thead>
 <tr>
@@ -4183,8 +4185,8 @@ cache
 </ul>
 </li>
 <li>SFF-8644 <ul>
-<li>Does Signle SAS port could over PCIE x4 bandwidth ?<br>not make sure<ul>
-<li>3.938 GB/s (PCIE G3 x4)</li>
+<li>Does signle SAS cable and single port could over PCIE x4 bandwidth ?<ul>
+<li>Yes, 3.9X GB/s, single SAS port only PCIE x4 </li>
 </ul>
 </li>
 </ul>
@@ -4640,9 +4642,6 @@ cache
 </tbody></table>
 <p><a href="https://www.snia.org/sff/specifications2" target="_blank" rel="noopener">SFF TA TWG Specifications</a></p>
 <h3 id="DMI-3-0"><a href="#DMI-3-0" class="headerlink" title="DMI 3.0"></a>DMI 3.0</h3><p><img src="/img/Dt9p6.jpg" alt=""><br>DMI 2.0 2 GB/s<br>DMI 3.0 3.93 GB/s<br>SATA SSD 500MB/s x 4/8 = 2000/4000MB/s<br><a href="http://electronics.stackexchange.com/questions/219440/why-do-cpus-typically-connect-to-only-one-bus/219446" target="_blank" rel="noopener">reference</a></p>
-<a id="more"></a>
-
-<h3 id="SAS-cable"><a href="#SAS-cable" class="headerlink" title="SAS cable"></a>SAS cable</h3><h4 id="SAS3-12Gbps-x-4-lane-performance"><a href="#SAS3-12Gbps-x-4-lane-performance" class="headerlink" title="SAS3 12Gbps x 4 lane performance"></a>SAS3 12Gbps x 4 lane performance</h4><p>not make sure</p>
 <h3 id="NIC"><a href="#NIC" class="headerlink" title="NIC"></a>NIC</h3><h4 id="10GbE"><a href="#10GbE" class="headerlink" title="10GbE"></a><a href="http://www.missioncriticalmagazine.com/ext/resources/MC/Home/Files/PDFs/WP_Blade_Ethernet_Cabling.pdf" target="_blank" rel="noopener">10GbE</a></h4><p><img src="/img/sfp-10bt-1.png" alt=""><br><img src="/img/sfp-10bt-2.png" alt=""></p>
 <h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><h4 id="NVME-Interface-reference"><a href="#NVME-Interface-reference" class="headerlink" title="NVME Interface reference"></a><a href="http://www.nvmexpress.org/wp-content/uploads/NVMe_Infrastructure_final1.pdf" target="_blank" rel="noopener">NVME Interface reference</a></h4><p><a href="http://www.snia.org/sites/default/education/tutorials/2012/fall/solid/AnilVasudeva_NVMe_NextGen_SSD%20Interface-r1-nc1.pdf" target="_blank" rel="noopener">NVME interface</a></p>
 <p><img src="/img/nvme-1.png" alt=""><br><img src="/img/nvme-2.png" alt=""><br><img src="/img/nvme-3.png" alt=""><br><img src="/img/nvme-4.png" alt=""><br><img src="/img/nvme-5.png" alt=""><br><img src="/img/nvme-6.png" alt=""><br><img src="/img/nvme-7.png" alt=""><br><img src="/img/nvme-8.png" alt=""><br><img src="/img/nvme-9.png" alt=""><br><img src="/img/nvme-10.png" alt=""><br><img src="/img/nvme-11.png" alt=""></p>
