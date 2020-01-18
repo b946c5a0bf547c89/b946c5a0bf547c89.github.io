@@ -1953,40 +1953,40 @@ rcu_sched-10    [010] d... 198076.881286: sched_stat_runtime: comm=rcu_sched pid
 <table>
 <thead>
 <tr>
-<th>Phy layer</th>
-<th>Name</th>
-<th>error Correction</th>
+<th align="center">Phy layer</th>
+<th align="center">Name</th>
+<th align="center">error Correction</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>MMF Optics</td>
-<td>25GBASE-SR</td>
-<td>RS-FEC</td>
+<td align="center">MMF Optics</td>
+<td align="center">25GBASE-SR</td>
+<td align="center">RS-FEC</td>
 </tr>
 <tr>
-<td>Direct Attach Copper</td>
-<td>25GBASE-CR</td>
-<td>BASE-R FEC or RS-FEC</td>
+<td align="center">Direct Attach Copper</td>
+<td align="center">25GBASE-CR</td>
+<td align="center">BASE-R FEC or RS-FEC</td>
 </tr>
 <tr>
-<td>Direct Attach Copper</td>
-<td>25GBASE-CR-S</td>
-<td>BASE-R FEC or disabled</td>
+<td align="center">Direct Attach Copper</td>
+<td align="center">25GBASE-CR-S</td>
+<td align="center">BASE-R FEC or disabled</td>
 </tr>
 <tr>
-<td>Electrical Backplane</td>
-<td>25GBASE-KR</td>
-<td>BASE-R FEC or RS-FEC</td>
+<td align="center">Electrical Backplane</td>
+<td align="center">25GBASE-KR</td>
+<td align="center">BASE-R FEC or RS-FEC</td>
 </tr>
 <tr>
-<td>Electrical Backplane</td>
-<td>25GBASE-KR-S</td>
-<td>BASE-R FEC or disabled</td>
+<td align="center">Electrical Backplane</td>
+<td align="center">25GBASE-KR-S</td>
+<td align="center">BASE-R FEC or disabled</td>
 </tr>
 <tr>
-<td>Twisted Pair</td>
-<td>25GBASE-T</td>
-<td>N/A</td>
+<td align="center">Twisted Pair</td>
+<td align="center">25GBASE-T</td>
+<td align="center">N/A</td>
 </tr>
 </tbody></table>
 <p>The IEEE standard specifies two backplane and copper interfaces. These have different goals, hence the different interface. The –S short reach interfaces aim to support high-quality cables without Forward Error Correction (FEC) to minimize latency. Full reach interfaces aimto support the lowest possible cable or backplane cost and the longest possible reach, which do require the use of FEC. FEC options include BASE-R FEC (also referred to as Fire Code) and RS-FEC (also referred to as Reed-Solomon). RS-FEC has been used for a range of applications including data storage satellite transmissions. BASE-R FEC is a newer technology that is particularly well suited for correction of the burst errors<br>typical in a backplane channel resulting from error propagation in the receive equalizer.</p>
