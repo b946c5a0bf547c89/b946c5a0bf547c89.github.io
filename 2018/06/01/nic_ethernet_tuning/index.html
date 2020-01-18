@@ -54,7 +54,7 @@
 <meta property="og:description" content="slot status12345678910111213$ 05:00.0 Ethernet controller: Intel Corporation Ethernet Controller XXV710 for 25GbE SFP28 (rev 02)$ lspci -s 05:00.0 -vvv | grep -Ei &#39;8G|MSI-X&#39;      Capabilities: [70] MS">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-06-01T02:49:42.000Z">
-<meta property="article:modified_time" content="2020-01-18T06:09:07.014Z">
+<meta property="article:modified_time" content="2020-01-18T06:25:07.008Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="benchmark">
 <meta property="article:tag" content="nic">
@@ -244,7 +244,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 14:09:07" itemprop="dateModified" datetime="2020-01-18T14:09:07+08:00">2020-01-18</time>
+                <time title="Modified: 2020-01-18 14:25:07" itemprop="dateModified" datetime="2020-01-18T14:25:07+08:00">2020-01-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -309,7 +309,46 @@
 <a id="more"></a>
 
 <h3 id="THEORETICAL-MAXIMUM-RATE"><a href="#THEORETICAL-MAXIMUM-RATE" class="headerlink" title="THEORETICAL MAXIMUM RATE"></a><a href="https://support-kb.spirent.com/resources/sites/SPIRENT/content/live/FAQS/10000/FAQ10597/en_US/How_to_Test_10G_Ethernet_WhitePaper_RevB.PDF" target="_blank" rel="noopener">THEORETICAL MAXIMUM RATE</a></h3><p>There are two important concepts related to 10GbE performance: frame rate and throughput. The MAC bit rate of 10GbE, defined in the IEEE standard 802.3ae, is 10 billion bits per second. Frame rate is a simple arithmetic calculation based on the bit rate and frame format definitions. Throughput, defined in IETF RFC 1242, is the highest rate at which the system under test can forward the offered load, without loss. Manufacturers can claim line-rate throughput only if their switch forwards all the traffic offered at the 10Gb/s line rate for the entire duration of the test. The bit rate at which 10GbE Media Access Layer (MAC) operates, 10 billion bits per second, is only one of the parameters in defining the transmission rate for this important new technology. The usual description of true network performance is frame rate, which indicates how many Ethernet frames are moving across the network. The maximum frame rate for 10GbE is determined by a formula that divides the 10 billion bits per second by the preamble, frame length, and inter-frame gap fields, expressed in bits. The maximum frame rate is calculated using the minimum values of the following parameters, as described in the IEEE 802.3ae standard:<br>•        Preamble - 8 bytes * 8 = 64 bits<br>•        Frame length - 64 bytes (minimum) * 8 = 512 bits<br>•        Inter-frame gap - 12 bytes (minimum) * 8 = 96 bits<br>Therefore,<br>Maximum Frame Rate =<br>MAC Transmit Bit Rate/<br>(Preamble + Frame Length + Inter-frame Gap)<br>= 10,000,000,000 / (64 + 512 + 96)<br>= 10,000,000,000 / 672<br>= 14,880,952.38 frame per second (fps)</p>
-<h3 id="About-FEC"><a href="#About-FEC" class="headerlink" title="About FEC"></a><a href="https://solarflare.hammer-europe.com/assets/uploads/resources/QLogic%20-%20White%20Paper%20-%2025Gb%20Ethernet.pdf" target="_blank" rel="noopener">About FEC</a></h3><p>IEEE 802.3 Standard Interfaces that Specify 25GbE<br>| Phy layer           |     Name            | error Correction<br>| ——————  | ——————  | ——————–<br>| MMF Optics          |   25GBASE-SR        | RS-FEC<br>|Direct Attach Copper |   25GBASE-CR        | BASE-R FEC or RS-FEC<br>|Direct Attach Copper |   25GBASE-CR-S      | BASE-R FEC or disabled<br>|Electrical Backplane |   25GBASE-KR        | BASE-R FEC or RS-FEC<br>|Electrical Backplane |   25GBASE-KR-S      | BASE-R FEC or disabled<br>|Twisted Pair         |   25GBASE-T         | N/A</p>
+<h3 id="About-FEC"><a href="#About-FEC" class="headerlink" title="About FEC"></a><a href="https://solarflare.hammer-europe.com/assets/uploads/resources/QLogic%20-%20White%20Paper%20-%2025Gb%20Ethernet.pdf" target="_blank" rel="noopener">About FEC</a></h3><p>IEEE 802.3 Standard Interfaces that Specify 25GbE</p>
+<table>
+<thead>
+<tr>
+<th>Phy layer</th>
+<th>Name</th>
+<th>error Correction</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MMF Optics</td>
+<td>25GBASE-SR</td>
+<td>RS-FEC</td>
+</tr>
+<tr>
+<td>Direct Attach Copper</td>
+<td>25GBASE-CR</td>
+<td>BASE-R FEC or RS-FEC</td>
+</tr>
+<tr>
+<td>Direct Attach Copper</td>
+<td>25GBASE-CR-S</td>
+<td>BASE-R FEC or disabled</td>
+</tr>
+<tr>
+<td>Electrical Backplane</td>
+<td>25GBASE-KR</td>
+<td>BASE-R FEC or RS-FEC</td>
+</tr>
+<tr>
+<td>Electrical Backplane</td>
+<td>25GBASE-KR-S</td>
+<td>BASE-R FEC or disabled</td>
+</tr>
+<tr>
+<td>Twisted Pair</td>
+<td>25GBASE-T</td>
+<td>N/A</td>
+</tr>
+</tbody></table>
 <p>The IEEE standard specifies two backplane and copper interfaces. These have different goals, hence the different interface. The –S short reach interfaces aim to support high-quality cables without Forward Error Correction (FEC) to minimize latency. Full reach interfaces aimto support the lowest possible cable or backplane cost and the longest possible reach, which do require the use of FEC. FEC options include BASE-R FEC (also referred to as Fire Code) and RS-FEC (also referred to as Reed-Solomon). RS-FEC has been used for a range of applications including data storage satellite transmissions. BASE-R FEC is a newer technology that is particularly well suited for correction of the burst errors<br>typical in a backplane channel resulting from error propagation in the receive equalizer.</p>
 <p>IEEE 标准指定了两个底板和铜接口。这些接口的目标不同，因此接口存在不同。–S 短距离接口旨在支持无需转发纠错（FEC）的高质<br>量电缆，以最大限度地降低延迟。全距离接口旨在实现尽可能低的电缆或背板成本以及尽可能长的距离，这需要使用FEC。FEC 选项包<br>括 BASE-R FEC（也称为 Fire Code）和 RS-FEC（也称为 Reed-Solomon）。RS-FEC 已用于一系列应用，包括数据存储卫星传播。BASE-R FEC 是一种新型技术，特别适合纠正背板通道中由于接收均衡器的错误传播而导致的突发错误。</p>
 <h3 id="Tune-adm-policy"><a href="#Tune-adm-policy" class="headerlink" title="Tune-adm policy"></a>Tune-adm policy</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># default config files</span><br><span class="line">$ ls &#x2F;usr&#x2F;lib&#x2F;tuned</span><br><span class="line">balanced  desktop  functions  latency-performance  network-latency  network-throughput  powersave  recommend.d  throughput-performance  virtual-guest  virtual-host</span><br><span class="line"></span><br><span class="line">$ tuned-adm list</span><br><span class="line">$ tuned-adm profile network-throughput</span><br><span class="line">$ tuned-adm active</span><br></pre></td></tr></table></figure>
