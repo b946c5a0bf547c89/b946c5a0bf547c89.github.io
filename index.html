@@ -330,7 +330,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-15 12:38:26" itemprop="dateModified" datetime="2020-01-15T12:38:26+08:00">2020-01-15</time>
+                <time title="Modified: 2020-01-29 23:30:10" itemprop="dateModified" datetime="2020-01-29T23:30:10+08:00">2020-01-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -383,7 +383,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">options lnet networks=tcp(bond0)</span><br><span class="line">options ptlrpc ldlm_num_threads=16</span><br><span class="line">options ptlrpc at_max=300</span><br><span class="line">options ptlrpc at_min=50</span><br><span class="line">options ptlrpc ldlm_enqueue_min=260</span><br><span class="line"></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*net_latency, net_latency + quiescent_time) +\\ 2*service_time</span></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*50, 50 + 140) + 2*50 = 50+140 + 100 = 290</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#at_max The largest potential RPC timeout that a client can set is 2*at_max. By lowering at_max from 600 to 400 seconds we reduce the worst case I/O delay from 1200 seconds, or 20 minutes, to 800 seconds or just over 13 minutes.</span></span><br><span class="line"><span class="comment">#at_min The 40 second value factors into our calculation for an appropriate LDLM timeout as discussed in section LDLM Timeouts. Our recommendation for Lustre servers is also 40 seconds</span></span><br><span class="line"><span class="comment">#Adaptive Timeouts: In a Lustre file system servers keep track of the time it takes for RPCs to be completed</span></span><br><span class="line"><span class="comment">#The quiescent_time in this formula is to account for the time it takes all Lustre clients to reestablish connections with all Lustre targets following an HSN quiesce. We've experimentally determined an average time to be approximately 140 seconds, but it is possible that this value may vary based on different factors such as the number of Lustre clients, the number of Lustre targets, the number of Lustre file systems mounted on each client, etc. Thus, given an at_min of 40 seconds</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># readonly mount</span></span><br><span class="line">$ mount.lfs <span class="variable">$zpool</span> /ost0 -o rdonly_dev</span><br></pre></td></tr></table></figure>
+          <h3 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">options lnet networks=tcp(bond0)</span><br><span class="line">options ptlrpc ldlm_num_threads=16</span><br><span class="line">options ptlrpc at_max=300</span><br><span class="line">options ptlrpc at_min=50</span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*net_latency, net_latency + quiescent_time) +\\ 2*service_time</span></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*50, 50 + 140) + 2*50 = 50+140 + 100 = 290</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#at_max The largest potential RPC timeout that a client can set is 2*at_max. By lowering at_max from 600 to 400 seconds we reduce the worst case I/O delay from 1200 seconds, or 20 minutes, to 800 seconds or just over 13 minutes.</span></span><br><span class="line"><span class="comment">#at_min The 40 second value factors into our calculation for an appropriate LDLM timeout as discussed in section LDLM Timeouts. Our recommendation for Lustre servers is also 40 seconds</span></span><br><span class="line"><span class="comment">#Adaptive Timeouts: In a Lustre file system servers keep track of the time it takes for RPCs to be completed</span></span><br><span class="line"><span class="comment">#The quiescent_time in this formula is to account for the time it takes all Lustre clients to reestablish connections with all Lustre targets following an HSN quiesce. We've experimentally determined an average time to be approximately 140 seconds, but it is possible that this value may vary based on different factors such as the number of Lustre clients, the number of Lustre targets, the number of Lustre file systems mounted on each client, etc. Thus, given an at_min of 40 seconds</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># readonly mount</span></span><br><span class="line">$ mount.lfs <span class="variable">$zpool</span> /ost0 -o rdonly_dev</span><br></pre></td></tr></table></figure>
 <p><a href="http://wiki.lfs.org/Lustre_Resiliency:_Understanding_Lustre_Message_Loss_and_Tuning_for_Resiliency#Tuning_Lustre_for_Resiliency" target="_blank" rel="noopener">Understanding Lustre Message Loss and Tuning for Resiliency</a></p>
           <!--noindex-->
             <div class="post-button">
@@ -993,7 +993,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 12:57:27" itemprop="dateModified" datetime="2020-01-18T12:57:27+08:00">2020-01-18</time>
+                <time title="Modified: 2020-01-21 16:18:19" itemprop="dateModified" datetime="2020-01-21T16:18:19+08:00">2020-01-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1417,13 +1417,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">799k</span>
+    <span title="Symbols count total">809k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">12:06</span>
+    <span title="Reading time total">12:15</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

@@ -54,7 +54,7 @@
 <meta property="og:description" content="bash double-quotes, single-quotes123456789101112A&#x3D;100;ssh name@host &quot;A&#x3D;101;echo \$A&quot;101ssh name@host &quot;A&#x3D;101;echo $A&quot;100#bash expands it to:ssh name@host &quot;A&#x3D;101; echo 100&quot;#use single-quotesssh name@hos">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-12-11T03:04:49.000Z">
-<meta property="article:modified_time" content="2020-01-15T06:27:05.000Z">
+<meta property="article:modified_time" content="2020-01-23T08:37:31.000Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="bash">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-15 14:27:05" itemprop="dateModified" datetime="2020-01-15T14:27:05+08:00">2020-01-15</time>
+                <time title="Modified: 2020-01-23 16:37:31" itemprop="dateModified" datetime="2020-01-23T16:37:31+08:00">2020-01-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,7 +282,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>13k</span>
+              <span>14k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -329,6 +329,8 @@
 <h3 id="test-match"><a href="#test-match" class="headerlink" title="test match"></a>test match</h3><h4 id="is-a-integer"><a href="#is-a-integer" class="headerlink" title="is a integer"></a>is a integer</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a=1</span><br><span class="line">[[ <span class="variable">$a</span> == *[[:digit:]]* ]] &amp;&amp; <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> is an integer"</span></span><br><span class="line">[[ <span class="variable">$1</span> == ?(-)+([0-9]) ]] &amp;&amp; <span class="built_in">echo</span> <span class="string">"<span class="variable">$a</span> is an integer"</span></span><br><span class="line"><span class="comment">#match yes</span></span><br><span class="line">[[ <span class="string">"<span class="variable">$response</span>"</span> =~ ^([yY][eE][sS]|[yY])+$ ]]</span><br></pre></td></tr></table></figure>
 
 <h3 id="String-Ternary-conditional-operator-three"><a href="#String-Ternary-conditional-operator-three" class="headerlink" title="String, Ternary conditional operator (three)"></a>String, Ternary conditional operator (three)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">VAR1=<span class="string">"BASH"</span></span><br><span class="line">VAR1+=<span class="string">" SCRIPT"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"<span class="variable">$VAR1</span>"</span></span><br><span class="line">BASH SCRIPT</span><br><span class="line"></span><br><span class="line">n=4</span><br><span class="line">result=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> $(seq 0 $((<span class="variable">$n</span> &gt; 0? <span class="variable">$n</span>-1: 0))); <span class="keyword">do</span> </span><br><span class="line">  result+=<span class="string">"rank-<span class="variable">$i</span>"</span></span><br><span class="line">  result+=<span class="string">" "</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">rank-0 rank-1 rank-2 rank-3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time_interval=$((<span class="variable">$1</span> &gt; 36000? 36000: 3600))</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="Arrary"><a href="#Arrary" class="headerlink" title="Arrary"></a>Arrary</h3><h5 id="Associative-array"><a href="#Associative-array" class="headerlink" title="Associative array"></a>Associative array</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">declare -A array</span><br><span class="line">array[foo]&#x3D;bar</span><br><span class="line">array[bar]&#x3D;foo</span><br><span class="line"></span><br><span class="line">for i in &quot;$&#123;!array[@]&#125;&quot;</span><br><span class="line">do</span><br><span class="line">  echo -n &quot;key : $i; &quot;</span><br><span class="line">  echo &quot;value: $&#123;array[$i]&#125;&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
@@ -580,13 +582,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">799k</span>
+    <span title="Symbols count total">809k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">12:06</span>
+    <span title="Reading time total">12:15</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
