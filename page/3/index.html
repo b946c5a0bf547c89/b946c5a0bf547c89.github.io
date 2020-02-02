@@ -429,121 +429,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/nic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/07/12/nic/" class="post-title-link" itemprop="url">linux nic</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-07-12 02:29:15" itemprop="dateCreated datePublished" datetime="2018-07-12T02:29:15+08:00">2018-07-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 22:56:29" itemprop="dateModified" datetime="2020-01-05T22:56:29+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hardware/" itemprop="url" rel="index">
-                    <span itemprop="name">hardware</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/07/12/nic/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/12/nic/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>25k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>22 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="First-question"><a href="#First-question" class="headerlink" title="First question"></a>First question</h3><p>Does the ring buffer in ethernet NIC or it ‘s just server memory ?<br>Yes, NIC has the microprocess and system memory, but it’s not ring buffer in linux</p>
-<p>High end ethernet cards(eg: Mellanox) will almost certainly have their own memory and microprocessors to offload work from the rest of the computer.<br>BTW: eg: if tcp stack offload by NIC and bypass kernel that means the ring buffer in NIC.</p>
-<p>Low end ethernet cards may not have their own onboard memory or microprocessors, and will use the host system’s resources to handle network traffic.<br>BTW: I think if you NIC adapter could not offload anything, that means all packages will process by linux, some low end ethernet cards could bypass kernel too, could use direct memory access for some of IO</p>
-<p>Infiniband cards on the other hand will tend to have their own onboard processors but no onboard memory, and will use direct memory access for all IO.</p>
-<p><a href="https://stackoverflow.com/questions/17154759/how-much-memory-does-a-common-nic-have" target="_blank" rel="noopener">reference</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/07/12/nic/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/scsi_dev/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -799,7 +684,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-01 00:41:39" itemprop="dateModified" datetime="2020-02-01T00:41:39+08:00">2020-02-01</time>
+                <time title="Modified: 2020-02-02 21:18:03" itemprop="dateModified" datetime="2020-02-02T21:18:03+08:00">2020-02-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -833,14 +718,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>66k</span>
+              <span>83k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1:01</span>
+              <span>1:16</span>
             </span>
 
         </div>
@@ -856,117 +741,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/06/01/nic_ethernet_tuning/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/ipmi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/27/ipmi/" class="post-title-link" itemprop="url">ipmitool</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-05-27 15:35:59" itemprop="dateCreated datePublished" datetime="2018-05-27T15:35:59+08:00">2018-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 10:56:49" itemprop="dateModified" datetime="2020-01-05T10:56:49+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ipmi/" itemprop="url" rel="index">
-                    <span itemprop="name">ipmi</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/05/27/ipmi/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/27/ipmi/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>6.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>6 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="set-boot-dev"><a href="#set-boot-dev" class="headerlink" title="set boot dev"></a>set boot dev</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ] options=persistent</span><br><span class="line">Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ]</span><br><span class="line">ipmitool chassis bootdev none options=<span class="built_in">help</span></span><br><span class="line">Legal options settings are:</span><br><span class="line">	<span class="built_in">help</span>:	<span class="built_in">print</span> this message</span><br><span class="line">	valid:	Boot flags valid</span><br><span class="line">	persistent:	Changes are persistent <span class="keyword">for</span> all future boots</span><br><span class="line">	efiboot:	Extensible Firmware Interface Boot (EFI)</span><br><span class="line">	clear-cmos:	CMOS clear</span><br><span class="line">	lockkbd:	Lock Keyboard</span><br><span class="line">	screenblank:	Screen Blank</span><br><span class="line">	lockoutreset:	Lock out Resetbuttons</span><br><span class="line">	lockout_power:	Lock out (power off/sleep request) via Power Button</span><br><span class="line">	verbose=default:	Request quiet BIOS display</span><br><span class="line">	verbose=no:	Request quiet BIOS display</span><br><span class="line">	verbose=yes:	Request verbose BIOS display</span><br><span class="line">	force_pet:	Force progress event traps</span><br><span class="line">	upw_bypass:	User password bypass</span><br><span class="line">	lockout_sleep:	Log Out Sleep Button</span><br><span class="line">	cons_redirect=default:	Console redirection occurs per BIOS configuration setting</span><br><span class="line">	cons_redirect=skip:	Suppress (skip) console redirection <span class="keyword">if</span> enabled</span><br><span class="line">	cons_redirect=<span class="built_in">enable</span>:	Suppress (skip) console redirection <span class="keyword">if</span> enabled</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/27/ipmi/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1078,6 +852,117 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/05/27/cpu/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/ipmi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/27/ipmi/" class="post-title-link" itemprop="url">ipmitool</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-27 15:35:59" itemprop="dateCreated datePublished" datetime="2018-05-27T15:35:59+08:00">2018-05-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 10:56:49" itemprop="dateModified" datetime="2020-01-05T10:56:49+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ipmi/" itemprop="url" rel="index">
+                    <span itemprop="name">ipmi</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/05/27/ipmi/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/27/ipmi/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="set-boot-dev"><a href="#set-boot-dev" class="headerlink" title="set boot dev"></a>set boot dev</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ] options=persistent</span><br><span class="line">Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ]</span><br><span class="line">ipmitool chassis bootdev none options=<span class="built_in">help</span></span><br><span class="line">Legal options settings are:</span><br><span class="line">	<span class="built_in">help</span>:	<span class="built_in">print</span> this message</span><br><span class="line">	valid:	Boot flags valid</span><br><span class="line">	persistent:	Changes are persistent <span class="keyword">for</span> all future boots</span><br><span class="line">	efiboot:	Extensible Firmware Interface Boot (EFI)</span><br><span class="line">	clear-cmos:	CMOS clear</span><br><span class="line">	lockkbd:	Lock Keyboard</span><br><span class="line">	screenblank:	Screen Blank</span><br><span class="line">	lockoutreset:	Lock out Resetbuttons</span><br><span class="line">	lockout_power:	Lock out (power off/sleep request) via Power Button</span><br><span class="line">	verbose=default:	Request quiet BIOS display</span><br><span class="line">	verbose=no:	Request quiet BIOS display</span><br><span class="line">	verbose=yes:	Request verbose BIOS display</span><br><span class="line">	force_pet:	Force progress event traps</span><br><span class="line">	upw_bypass:	User password bypass</span><br><span class="line">	lockout_sleep:	Log Out Sleep Button</span><br><span class="line">	cons_redirect=default:	Console redirection occurs per BIOS configuration setting</span><br><span class="line">	cons_redirect=skip:	Suppress (skip) console redirection <span class="keyword">if</span> enabled</span><br><span class="line">	cons_redirect=<span class="built_in">enable</span>:	Suppress (skip) console redirection <span class="keyword">if</span> enabled</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/05/27/ipmi/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1329,6 +1214,117 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/21/linux_errno/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/11/21/linux_errno/" class="post-title-link" itemprop="url">linux_errno</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-11-21 14:03:54" itemprop="dateCreated datePublished" datetime="2017-11-21T14:03:54+08:00">2017-11-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 20:56:49" itemprop="dateModified" datetime="2020-01-05T20:56:49+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/debug/" itemprop="url" rel="index">
+                    <span itemprop="name">debug</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/11/21/linux_errno/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/21/linux_errno/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>5.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Get it from<br>/usr/include/asm-generic/errno.h</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/11/21/linux_errno/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1401,7 +1397,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1449,13 +1445,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">809k</span>
+    <span title="Symbols count total">803k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">12:15</span>
+    <span title="Reading time total">12:10</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
