@@ -330,7 +330,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-29 23:30:10" itemprop="dateModified" datetime="2020-01-29T23:30:10+08:00">2020-01-29</time>
+                <time title="Modified: 2020-02-17 12:26:27" itemprop="dateModified" datetime="2020-02-17T12:26:27+08:00">2020-02-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -383,11 +383,124 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">options lnet networks=tcp(bond0)</span><br><span class="line">options ptlrpc ldlm_num_threads=16</span><br><span class="line">options ptlrpc at_max=300</span><br><span class="line">options ptlrpc at_min=50</span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*net_latency, net_latency + quiescent_time) +\\ 2*service_time</span></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*50, 50 + 140) + 2*50 = 50+140 + 100 = 290</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#at_max The largest potential RPC timeout that a client can set is 2*at_max. By lowering at_max from 600 to 400 seconds we reduce the worst case I/O delay from 1200 seconds, or 20 minutes, to 800 seconds or just over 13 minutes.</span></span><br><span class="line"><span class="comment">#at_min The 40 second value factors into our calculation for an appropriate LDLM timeout as discussed in section LDLM Timeouts. Our recommendation for Lustre servers is also 40 seconds</span></span><br><span class="line"><span class="comment">#Adaptive Timeouts: In a Lustre file system servers keep track of the time it takes for RPCs to be completed</span></span><br><span class="line"><span class="comment">#The quiescent_time in this formula is to account for the time it takes all Lustre clients to reestablish connections with all Lustre targets following an HSN quiesce. We've experimentally determined an average time to be approximately 140 seconds, but it is possible that this value may vary based on different factors such as the number of Lustre clients, the number of Lustre targets, the number of Lustre file systems mounted on each client, etc. Thus, given an at_min of 40 seconds</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># readonly mount</span></span><br><span class="line">$ mount.lfs <span class="variable">$zpool</span> /ost0 -o rdonly_dev</span><br></pre></td></tr></table></figure>
+          <h3 id="format"><a href="#format" class="headerlink" title="format"></a>format</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mdt</span></span><br><span class="line">FSNAME=lustre</span><br><span class="line">MDS1NID=0.0.0.0@tcp</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> mkfs.lustre --reformat --mgs --backfstype=zfs --fsname=<span class="variable">$&#123;FSNAME&#125;</span> --servicenode=<span class="variable">$&#123;MDS1NID&#125;</span> mdt_0/mgt_0</span><br><span class="line"><span class="built_in">echo</span> mkfs.lustre --reformat --mdt --backfstype=zfs --mgsnode=<span class="variable">$&#123;MDS1NID&#125;</span> --fsname=<span class="variable">$&#123;FSNAME&#125;</span> --servicenode=<span class="variable">$&#123;MDS1NID&#125;</span> --index=0 mdt_0/mdt_0</span><br><span class="line"></span><br><span class="line"><span class="comment"># ost</span></span><br><span class="line">FSNAME=lustre</span><br><span class="line">MDS1NID=1.1.1.1@tcp</span><br><span class="line">MDS2NID=2.2.2.2@tcp</span><br><span class="line">OSS1NID=3.3.3.3@tcp </span><br><span class="line">OSS2NID=4.4.4.4@tcp </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;0..6&#125;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> mkfs.lustre --reformat --backfstype=zfs --ost  --index=<span class="variable">$i</span>  --fsname=<span class="variable">$&#123;FSNAME&#125;</span> --servicenode=<span class="variable">$&#123;OSS1NID&#125;</span> --servicenode=<span class="variable">$&#123;OSS2NID&#125;</span> --mgsnode=<span class="variable">$&#123;MDS1NID&#125;</span>  ost_<span class="variable">$i</span>/ost_<span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">options lnet networks=tcp(bond0)</span><br><span class="line">options ptlrpc ldlm_num_threads=16</span><br><span class="line">options ptlrpc at_max=300</span><br><span class="line">options ptlrpc at_min=50</span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*net_latency, net_latency + quiescent_time) +\\ 2*service_time</span></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*50, 50 + 140) + 2*50 = 50+140 + 100 = 290</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#at_max The largest potential RPC timeout that a client can set is 2*at_max. By lowering at_max from 600 to 400 seconds we reduce the worst case I/O delay from 1200 seconds, or 20 minutes, to 800 seconds or just over 13 minutes.</span></span><br><span class="line"><span class="comment">#at_min The 40 second value factors into our calculation for an appropriate LDLM timeout as discussed in section LDLM Timeouts. Our recommendation for Lustre servers is also 40 seconds</span></span><br><span class="line"><span class="comment">#Adaptive Timeouts: In a Lustre file system servers keep track of the time it takes for RPCs to be completed</span></span><br><span class="line"><span class="comment">#The quiescent_time in this formula is to account for the time it takes all Lustre clients to reestablish connections with all Lustre targets following an HSN quiesce. We've experimentally determined an average time to be approximately 140 seconds, but it is possible that this value may vary based on different factors such as the number of Lustre clients, the number of Lustre targets, the number of Lustre file systems mounted on each client, etc. Thus, given an at_min of 40 seconds</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># readonly mount</span></span><br><span class="line">$ mount.lfs <span class="variable">$zpool</span> /ost0 -o rdonly_dev</span><br></pre></td></tr></table></figure>
 <p><a href="http://wiki.lfs.org/Lustre_Resiliency:_Understanding_Lustre_Message_Loss_and_Tuning_for_Resiliency#Tuning_Lustre_for_Resiliency" target="_blank" rel="noopener">Understanding Lustre Message Loss and Tuning for Resiliency</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/12/29/lfs_command/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/smartctl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/26/smartctl/" class="post-title-link" itemprop="url">smartctl</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-26 16:12:19" itemprop="dateCreated datePublished" datetime="2019-11-26T16:12:19+08:00">2019-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 12:08:28" itemprop="dateModified" datetime="2020-01-05T12:08:28+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/scsi/" itemprop="url" rel="index">
+                    <span itemprop="name">scsi</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/11/26/smartctl/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/26/smartctl/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="smart-test"><a href="#smart-test" class="headerlink" title="smart test"></a>smart test</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ smartctl -t long /dev/sdx</span><br><span class="line">$ smartctl -t short /dev/sdx</span><br><span class="line"></span><br><span class="line"><span class="comment">#self test result</span></span><br><span class="line">$ smartctl --capabilities /dev/sdxx</span><br><span class="line">$ smartctl --<span class="built_in">log</span>=selftest /dev/sdxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># During selected tests the specified range of LBAs is checked. The LBAs to be scanned are specified in the following formats:</span></span><br><span class="line">$ smartctl -t select,0-10 -t select,5-15 -t select,10-20 /dev/sdxx</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/26/smartctl/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -501,117 +614,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/11/26/xfs/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/smartctl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/26/smartctl/" class="post-title-link" itemprop="url">smartctl</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-26 16:12:19" itemprop="dateCreated datePublished" datetime="2019-11-26T16:12:19+08:00">2019-11-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 12:08:28" itemprop="dateModified" datetime="2020-01-05T12:08:28+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/scsi/" itemprop="url" rel="index">
-                    <span itemprop="name">scsi</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2019/11/26/smartctl/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/26/smartctl/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="smart-test"><a href="#smart-test" class="headerlink" title="smart test"></a>smart test</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ smartctl -t long /dev/sdx</span><br><span class="line">$ smartctl -t short /dev/sdx</span><br><span class="line"></span><br><span class="line"><span class="comment">#self test result</span></span><br><span class="line">$ smartctl --capabilities /dev/sdxx</span><br><span class="line">$ smartctl --<span class="built_in">log</span>=selftest /dev/sdxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># During selected tests the specified range of LBAs is checked. The LBAs to be scanned are specified in the following formats:</span></span><br><span class="line">$ smartctl -t select,0-10 -t select,5-15 -t select,10-20 /dev/sdxx</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/26/smartctl/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -993,7 +995,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-02 19:45:35" itemprop="dateModified" datetime="2020-02-02T19:45:35+08:00">2020-02-02</time>
+                <time title="Modified: 2020-02-28 13:57:47" itemprop="dateModified" datetime="2020-02-28T13:57:47+08:00">2020-02-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1034,7 +1036,7 @@
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>24 mins.</span>
+              <span>25 mins.</span>
             </span>
 
         </div>
@@ -1046,7 +1048,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="7"><a href="#7" class="headerlink" title="7"></a>7</h3><h4 id="selinux"><a href="#selinux" class="headerlink" title="selinux"></a>selinux</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ setenforce 0</span><br><span class="line">$ getenforce</span><br><span class="line">Permissive</span><br></pre></td></tr></table></figure>
+          <h3 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h3><h4 id="selinux"><a href="#selinux" class="headerlink" title="selinux"></a>selinux</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ setenforce 0</span><br><span class="line">$ getenforce</span><br><span class="line">Permissive</span><br></pre></td></tr></table></figure>
 <h4 id="Software-Collections-SCL-Repository"><a href="#Software-Collections-SCL-Repository" class="headerlink" title="Software Collections ( SCL ) Repository"></a>Software Collections ( SCL ) Repository</h4><p>$ yum install centos-release-scl-rh<br>$ yum install devtoolset-8-toolchain</p>
 <h1 id="centos-8"><a href="#centos-8" class="headerlink" title="centos 8"></a>centos 8</h1><p>$ dnf install gcc-toolset-9</p>
 <p>$ gfortran –version | head -2<br>GNU Fortran (GCC) 4.8.5 20150623 (Red Hat 4.8.5-36)<br>Copyright (C) 2015 Free Software Foundation, Inc.</p>
@@ -1109,7 +1111,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-16 10:46:04" itemprop="dateModified" datetime="2020-01-16T10:46:04+08:00">2020-01-16</time>
+                <time title="Modified: 2020-02-24 14:05:09" itemprop="dateModified" datetime="2020-02-24T14:05:09+08:00">2020-02-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1143,14 +1145,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>26k</span>
+              <span>27k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>24 mins.</span>
+              <span>25 mins.</span>
             </span>
 
         </div>
@@ -1418,13 +1420,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">803k</span>
+    <span title="Symbols count total">820k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">12:10</span>
+    <span title="Reading time total">12:25</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

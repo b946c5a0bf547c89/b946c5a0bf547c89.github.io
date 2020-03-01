@@ -60,7 +60,7 @@
 <meta property="og:image" content="http://yoursite.com/img/tshark-1.png">
 <meta property="og:image" content="http://yoursite.com/img/tshark-2.png">
 <meta property="article:published_time" content="2017-01-08T15:26:29.000Z">
-<meta property="article:modified_time" content="2020-01-08T15:26:51.111Z">
+<meta property="article:modified_time" content="2020-02-25T04:59:44.000Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="tcp">
 <meta name="twitter:card" content="summary">
@@ -248,7 +248,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-08 23:26:51" itemprop="dateModified" datetime="2020-01-08T23:26:51+08:00">2020-01-08</time>
+                <time title="Modified: 2020-02-25 12:59:44" itemprop="dateModified" datetime="2020-02-25T12:59:44+08:00">2020-02-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -311,9 +311,11 @@
         <h4 id="MSL-Maximum-Segment-Lifetime"><a href="#MSL-Maximum-Segment-Lifetime" class="headerlink" title="MSL (Maximum Segment Lifetime)"></a>MSL (Maximum Segment Lifetime)</h4><pre><code>2MSL server/client send the close request in the last ack(time wait status), timewait = 2MSL ? after timeout ,send fin ? in this time, the port could not be used.
 if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port 
     SO_REUSEPORT (since Linux 3.9)
-    Permits multiple AF_INET or AF_INET6 sockets to be bound to an identical socket address.  This option must be set on each socket (including the first socket) prior to calling bind(2) on the socket.  To prevent port hijacking, all of the processes binding to the same address must have the same effective UID.  This option can be employed with both TCP an UDP sockets.</code></pre><p>tcp segment (报文) + tcp datagram (data)<br>TTL (time to live) in ip head<br>MSL &gt; TTL ?<br>RTT (round-trip time)</p>
+    Permits multiple AF_INET or AF_INET6 sockets to be bound to an identical socket address.  This option must be set on each socket (including the first socket) prior to calling bind(2) on the socket.  To prevent port hijacking, all of the processes binding to the same address must have the same effective UID.  This option can be employed with both TCP an UDP sockets.
+    the SO_REUSEPORT socket option support was implemented in a series of patches by Tom Herbert. The new socket option allows multiple sockets on the same host to bind to the same port, and is intended to improve the performance of multithreaded network server applications running on top of multicore systems.</code></pre><p>tcp segment (报文) + tcp datagram (data)<br>TTL (time to live) in ip head<br>MSL &gt; TTL ?<br>RTT (round-trip time)</p>
 <p>URG: Urget pointer is valid<br>SYN:<br>FIN:<br>ACK:<br>PSH:<br>RST:</p>
 <p>RST+ACK<br>only RST</p>
+<p>packets per second (pps)<br>bytes per second (bps)</p>
 <a id="more"></a>
 
 <h4 id="tcp-fin-timeout-and-tcp-max-tw-buckets"><a href="#tcp-fin-timeout-and-tcp-max-tw-buckets" class="headerlink" title="tcp_fin_timeout and tcp_max_tw_buckets"></a><a href="https://access.redhat.com/solutions/41776" target="_blank" rel="noopener">tcp_fin_timeout and tcp_max_tw_buckets</a></h4><p>If you set too large value to tcp_fin_timeout, the system may become out of port, file-descripter and memory. If you set too small value, the system may leak delayed packets.<br>If you set too large value to tcp_max_tw_buckets, the system may become out of port, file-descripter and memory. If you set too small value, the system may not communicate another host.</p>
@@ -547,13 +549,13 @@ if you set SO_REUSEPORT, don &apos;t to wait 2MSL to use the port
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">803k</span>
+    <span title="Symbols count total">820k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">12:10</span>
+    <span title="Reading time total">12:25</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
