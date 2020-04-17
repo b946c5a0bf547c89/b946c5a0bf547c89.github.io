@@ -206,6 +206,731 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/system_tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/24/system_tools/" class="post-title-link" itemprop="url">System tools</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-24 16:29:06" itemprop="dateCreated datePublished" datetime="2020-03-24T16:29:06+08:00">2020-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-27 22:28:27" itemprop="dateModified" datetime="2020-03-27T22:28:27+08:00">2020-03-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/24/system_tools/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/24/system_tools/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="FIO-write"><a href="#FIO-write" class="headerlink" title="FIO write"></a>FIO write</h3><p>if not support fallocate, fio will switch to fadvise64 to write file<br>looks like fadvise64 cause a lot of file system fragment.</p>
+<h3 id="10-billion-or-more-files-in-the-posix-filesystem-directory"><a href="#10-billion-or-more-files-in-the-posix-filesystem-directory" class="headerlink" title="10 billion or more files in the posix filesystem directory"></a>10 billion or more files in the posix filesystem directory</h3><p>ls take a long time, maybe three days or more<br>I moidfy form some C demo files just list some files, the program will exit , not full list</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">$ time ./walk /tank/<span class="built_in">test</span>/dir1 1000 | wc -l</span><br><span class="line">1000</span><br><span class="line"></span><br><span class="line">real    0m0.016s</span><br><span class="line">user    0m0.000s</span><br><span class="line">sys     0m0.016s</span><br><span class="line">$ <span class="built_in">echo</span> 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">$ time ls /tank/<span class="built_in">test</span>/dir1/ | wc -l</span><br><span class="line">858601</span><br><span class="line"></span><br><span class="line">real    0m3.320s</span><br><span class="line">user    0m2.841s</span><br><span class="line">sys     0m0.476s</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;dirent.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *fullpath;</span><br><span class="line"><span class="keyword">int</span> global_count=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">readfile</span><span class="params">(<span class="keyword">char</span> *k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//printf ("print global_count value: %d\n",global_count);</span></span><br><span class="line">    DIR * dp;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">dirent</span> * <span class="title">dirrp</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> *p;</span><br><span class="line">    p = fullpath + <span class="built_in">strlen</span>(fullpath);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="number">-1</span> == lstat(fullpath,&amp;buf))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s[lstat]%s\n"</span>,fullpath,strerror(errno));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(S_ISDIR(buf.st_mode)==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"file: %s \n"</span>,k); <span class="comment">// output file name</span></span><br><span class="line">        global_count--;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="string">'/'</span> != *(p<span class="number">-1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">	*p++ = <span class="string">'/'</span>;</span><br><span class="line">	*p = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"dir %s:\n"</span>,fullpath); <span class="comment">//output dir name</span></span><br><span class="line">    global_count--;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> == (dp=opendir(fullpath)))</span><br><span class="line">    &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s[opendir]%s\n"</span>,fullpath,strerror(errno));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">NULL</span> != (dirrp=readdir(dp)))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>((global_count &lt;= <span class="number">1</span> ))</span><br><span class="line">           <span class="keyword">goto</span> goout;</span><br><span class="line">	<span class="keyword">if</span>((<span class="built_in">strcmp</span>(dirrp-&gt;d_name,<span class="string">"."</span>)==<span class="number">0</span>) || (<span class="built_in">strcmp</span>(dirrp-&gt;d_name,<span class="string">".."</span>)==<span class="number">0</span>))</span><br><span class="line">	    <span class="keyword">continue</span>;</span><br><span class="line">	<span class="built_in">strcpy</span>(p,dirrp-&gt;d_name);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span> == readfile(p))</span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    p[<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>( <span class="number">-1</span> == closedir(dp))</span><br><span class="line">    &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s[closedir]%s\n"</span>,fullpath,strerror(errno));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">goout:</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Usage:%s &lt;Dir name&gt; &lt;List number&gt;\n"</span>,argv[<span class="number">0</span>]+<span class="number">2</span>);</span><br><span class="line">	<span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fullpath = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*PATH_MAX);</span><br><span class="line">    <span class="built_in">memset</span>(fullpath,<span class="number">0</span>,PATH_MAX);</span><br><span class="line">    global_count=atoi(argv[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">strcpy</span>(fullpath,argv[<span class="number">1</span>]);</span><br><span class="line">    readfile(fullpath);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="C-convert-string-to-number"><a href="#C-convert-string-to-number" class="headerlink" title="C convert string to number"></a>C convert string to number</h5><p>int atoi(const char *nptr);<br>global_count=atoi(argv[2]);</p>
+<h5 id="memset"><a href="#memset" class="headerlink" title="memset"></a><a href="https://www.geeksforgeeks.org/memset-c-example/" target="_blank" rel="noopener">memset</a></h5><p>void *memset(void *ptr, int x, size_t n);<br>// ptr ==&gt; Starting address of memory to be filled<br>// x   ==&gt; Value to be filled<br>// n   ==&gt; Number of bytes to be filled starting<br>//         from ptr to be filled</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C program to demonstrate working of memset() </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt; </span></span></span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) </span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%d "</span>, arr[i]); </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>; </span><br><span class="line">    <span class="keyword">int</span> arr[n]; </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Fill whole array with 0. </span></span><br><span class="line">    <span class="built_in">memset</span>(arr, <span class="number">0</span>, n*<span class="keyword">sizeof</span>(arr[<span class="number">0</span>])); </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Array after memset()\n"</span>); </span><br><span class="line">    printArray(arr, n); </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt; </span></span></span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">50</span>] = <span class="string">"GeeksForGeeks is for programming geeks."</span>; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\nBefore memset(): %s\n"</span>, str); </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Fill 8 characters starting from str[13] with '.' </span></span><br><span class="line">    <span class="built_in">memset</span>(str + <span class="number">13</span>, <span class="string">'.'</span>, <span class="number">8</span>*<span class="keyword">sizeof</span>(<span class="keyword">char</span>)); </span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"After memset():  %s"</span>, str); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="Some-struct"><a href="#Some-struct" class="headerlink" title="Some struct"></a>Some struct</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /usr/include/dirent.h</span></span><br><span class="line"></span><br><span class="line">/* This is the data <span class="built_in">type</span> of directory stream objects.</span><br><span class="line">   The actual structure is opaque to users.  */</span><br><span class="line">typedef struct __dirstream DIR;</span><br><span class="line"></span><br><span class="line">struct __dirstream   </span><br><span class="line">   &#123;   </span><br><span class="line">    void *__fd;    </span><br><span class="line">    char *__data;    </span><br><span class="line">    int __entry_data;    </span><br><span class="line">    char *__ptr;    </span><br><span class="line">    int __entry_ptr;    </span><br><span class="line">    size_t __allocation;    </span><br><span class="line">    size_t __size;    </span><br><span class="line">    __libc_lock_define (, __lock)    </span><br><span class="line">   &#125;; </span><br><span class="line"></span><br><span class="line">struct dirent   </span><br><span class="line">&#123;   </span><br><span class="line"> long d_ino; /* inode number */</span><br><span class="line"> off_t d_off; /* offset to this dirent */</span><br><span class="line"> unsigned short d_reclen; /* length of this d_name */</span><br><span class="line"> unsigned char d_type; /* the <span class="built_in">type</span> of d_name */</span><br><span class="line">long d_ino; / char d_name [NAME_MAX+1]; /* file name (null-terminated) */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># /usr/include/asm/stat.h</span></span><br><span class="line"><span class="comment">#define STAT64_HAS_BROKEN_ST_INO        1</span></span><br><span class="line"></span><br><span class="line">/* This matches struct stat64 <span class="keyword">in</span> glibc2.1, hence the absolutely</span><br><span class="line"> * insane amounts of padding around dev_t<span class="string">'s.</span></span><br><span class="line"><span class="string"> */</span></span><br><span class="line"><span class="string">struct stat64 &#123;</span></span><br><span class="line"><span class="string">        unsigned long long      st_dev;</span></span><br><span class="line"><span class="string">        unsigned char   __pad0[4];</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   __st_ino;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned int    st_mode;</span></span><br><span class="line"><span class="string">        unsigned int    st_nlink;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   st_uid;</span></span><br><span class="line"><span class="string">        unsigned long   st_gid;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long long      st_rdev;</span></span><br><span class="line"><span class="string">        unsigned char   __pad3[4];</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        long long       st_size;</span></span><br><span class="line"><span class="string">        unsigned long   st_blksize;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        /* Number 512-byte blocks allocated. */</span></span><br><span class="line"><span class="string">        unsigned long long      st_blocks;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   st_atime;</span></span><br><span class="line"><span class="string">        unsigned long   st_atime_nsec;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   st_mtime;</span></span><br><span class="line"><span class="string">        unsigned int    st_mtime_nsec;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   st_ctime;</span></span><br><span class="line"><span class="string">        unsigned long   st_ctime_nsec;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long long      st_ino;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">/* We don'</span>t need to memset the whole thing just to initialize the padding */</span><br><span class="line"><span class="comment">#define INIT_STRUCT_STAT64_PADDING(st) do &#123;             \</span></span><br><span class="line">        memset(&amp;st.__pad0, 0, sizeof(st.__pad0));       \</span><br><span class="line">        memset(&amp;st.__pad3, 0, sizeof(st.__pad3));       \</span><br><span class="line">&#125; <span class="keyword">while</span> (0)</span><br><span class="line"></span><br><span class="line"><span class="comment">#else /* __i386__ */</span></span><br><span class="line"></span><br><span class="line">struct <span class="built_in">stat</span> &#123;</span><br><span class="line">        unsigned long   st_dev;</span><br><span class="line">        unsigned long   st_ino;</span><br><span class="line">        unsigned long   st_nlink;</span><br><span class="line"></span><br><span class="line">        unsigned int    st_mode;</span><br><span class="line">        unsigned int    st_uid;</span><br><span class="line">        unsigned int    st_gid;</span><br><span class="line">        unsigned int    __pad0;</span><br><span class="line">        unsigned long   st_rdev;</span><br><span class="line">        long            st_size;</span><br><span class="line">        long            st_blksize;</span><br><span class="line">        long            st_blocks;      /* Number 512-byte blocks allocated. */</span><br><span class="line"></span><br><span class="line">        unsigned long   st_atime;</span><br><span class="line">        unsigned long   st_atime_nsec;</span><br><span class="line">        unsigned long   st_mtime;</span><br><span class="line">        unsigned long   st_mtime_nsec;</span><br><span class="line">        unsigned long   st_ctime;</span><br><span class="line">        unsigned long   st_ctime_nsec;</span><br><span class="line">        long            __unused[3];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="lstat"><a href="#lstat" class="headerlink" title="lstat"></a><a href="http://codewiki.wikidot.com/c:system-calls:lstat" target="_blank" rel="noopener">lstat</a></h5><p>int lstat(const char *path, struct stat *buf);<br>lstat is a system call that is used to determine information about a file based on its filename.<br>lstat is exactly the same as the stat system call. The only difference between the two is when the filename refers to a link. When this is the case, lstat returns information about the link itself, whereas stat returns information about the actual file.    </p>
+<p>const char *path    The file path of the file that is being inquired. This can be both relative and absolute.<br>struct stat *buf    A structure where data about the file will be stored. A detailed look at all of the fields in this structure can be found in the struct stat page.<br>return value    Returns a negative value on failure.</p>
+<h5 id="File-type"><a href="#File-type" class="headerlink" title="File type"></a>File type</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">/usr/include/linux/stat.h</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFMT  00170000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFSOCK 0140000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFLNK  0120000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFREG  0100000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFBLK  0060000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFDIR  0040000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFCHR  0020000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFIFO  0010000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISUID  0004000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISGID  0002000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISVTX  0001000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISLNK(m)      (((m) &amp; S_IFMT) == S_IFLNK) # is link ?</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISREG(m)      (((m) &amp; S_IFMT) == S_IFREG) # is file ? </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISDIR(m)      (((m) &amp; S_IFMT) == S_IFDIR) # is dir ? # S_ISDIR(buf.st_mode)==1 means is dir,  ==0 means not dir</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISCHR(m)      (((m) &amp; S_IFMT) == S_IFCHR) # is char ?</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISBLK(m)      (((m) &amp; S_IFMT) == S_IFBLK) # is blk ?</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISFIFO(m)     (((m) &amp; S_IFMT) == S_IFIFO) # is fifo ? </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISSOCK(m)     (((m) &amp; S_IFMT) == S_IFSOCK) # is socket ?</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Here is the permission bit</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRWXU 00700</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRUSR 00400</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IWUSR 00200</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IXUSR 00100</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRWXG 00070</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRGRP 00040</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IWGRP 00020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IXGRP 00010</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRWXO 00007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IROTH 00004</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IWOTH 00002</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IXOTH 00001</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> abc;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line">    stat(<span class="string">"/home"</span>, &amp;buf);</span><br><span class="line">    abc = buf.st_mode &amp; S_IFDIR;</span><br><span class="line">    <span class="keyword">if</span>(abc == S_IFDIR) </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"It's a directory.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">or</span> you could </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(S_ISDIR(buf.st_mode)==<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"file: %s \n"</span>,k); <span class="comment">// output file name</span></span><br><span class="line">    global_count--;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/benchmark-tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/17/benchmark-tools/" class="post-title-link" itemprop="url">bencharmk tools</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-17 17:06:14" itemprop="dateCreated datePublished" datetime="2020-03-17T17:06:14+08:00">2020-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-14 17:42:41" itemprop="dateModified" datetime="2020-04-14T17:42:41+08:00">2020-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/benchmark/" itemprop="url" rel="index">
+                    <span itemprop="name">benchmark</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/17/benchmark-tools/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/17/benchmark-tools/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>12 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="stress-ng"><a href="#stress-ng" class="headerlink" title="stress-ng"></a>stress-ng</h3><h4 id="filesystem"><a href="#filesystem" class="headerlink" title="filesystem"></a>filesystem</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bogo ops/s (real time) is the value of system performance</span></span><br><span class="line"></span><br><span class="line">$ stress-ng  --hdd 16 --hdd-opts rd-rnd --hdd-opts wr-rnd --hdd-opts fadv-rnd --hdd-write-size 128k --timeout 60 --<span class="built_in">times</span> --metrics-brief</span><br><span class="line">stress-ng: info:  [67477] dispatching hogs: 16 hdd</span><br><span class="line">stress-ng: info:  [67477] successful run completed <span class="keyword">in</span> 60.17s (1 min, 0.17 secs)</span><br><span class="line">stress-ng: info:  [67477] stressor       bogo ops real time  usr time  sys time   bogo ops/s   bogo ops/s</span><br><span class="line">stress-ng: info:  [67477]                           (secs)    (secs)    (secs)   (real time) (usr+sys time)</span><br><span class="line">stress-ng: info:  [67477] hdd            19033866     60.12    381.16    575.50    316618.18     19896.17</span><br><span class="line">stress-ng: info:  [67477] <span class="keyword">for</span> a 60.17s run time:</span><br><span class="line">stress-ng: info:  [67477]     962.79s available CPU time</span><br><span class="line">stress-ng: info:  [67477]     381.24s user time   ( 39.60%)</span><br><span class="line">stress-ng: info:  [67477]     575.57s system time ( 59.78%)</span><br><span class="line">stress-ng: info:  [67477]     956.81s total time  ( 99.38%)</span><br><span class="line">stress-ng: info:  [67477] load average: 11.29 4.72 1.86</span><br><span class="line"></span><br><span class="line"><span class="comment"># meta</span></span><br><span class="line">$ stress-ng --sequential 16 --class filesystem --timeout 60 --<span class="built_in">times</span> --metrics-brief</span><br><span class="line">stress-ng: info:  [27612] apparmor stressor will be skipped, AppArmor is not available</span><br><span class="line">stress-ng: info:  [27612] dispatching hogs: 16 <span class="built_in">chdir</span>, 16 chmod, 16 chown, 16 copy-file, 16 dentry, 16 dir, 16 dirdeep, 16 dnotify, 16 dup, 16 eventfd, 16 fallocate, 16 fanotify, 16 fcntl, 16 fiemap, 16 filename, 16 flock, 16 fstat, 16 getdent, 16 handle, 16 inotify, 16 io, 16 iomix, 16 ioprio, 16 lease, 16 link, 16 locka, 16 lockf, 16 lockofd, 16 mknod, 16 open, 16 procfs, 16 rename, 16 symlink, 16 sync-file, 16 utime, 16 xattr</span><br><span class="line"></span><br><span class="line"><span class="comment">#syscall test, no real IO</span></span><br><span class="line">$ stress-ng --<span class="built_in">chdir</span> 8 --chmod 8 --chown 8 --fcntl 8 --filename 8 --flock 8 --fstat 8 --getdent 8 --handle 8 --io 8 -- lockf 8 --timeout 60 --<span class="built_in">times</span> --metrics-brief</span><br><span class="line"></span><br><span class="line"><span class="comment"># parallel running</span></span><br><span class="line"><span class="comment"># if you want test IO performance, got the high IO loading from these.</span></span><br><span class="line">$ stress-ng --fallocate 8 --xattr 8 --dir 8 --mknod 8 --symlink 8 --timeout 60 --<span class="built_in">times</span> --metrics-brief</span><br><span class="line"></span><br><span class="line"><span class="comment"># a lot of NFS not support xattr</span></span><br><span class="line">$ stress-ng --fallocate 8 --dir 8 --mknod 8 --symlink 8 --timeout 60 --<span class="built_in">times</span> --metrics-brief</span><br><span class="line"></span><br><span class="line"><span class="comment"># the high IO loading test could got the high IOPS in ext4 with SATA SSD</span></span><br><span class="line">Device:         rrqm/s   wrqm/s     r/s     w/s    rMB/s    wMB/s avgrq-sz avgqu-sz   await r_await w_await  svctm  %util</span><br><span class="line">sdb               0.00 100284.00    0.00 15955.50     0.00   452.52    58.08    97.34    6.05    0.00    6.05   0.06  95.05</span><br></pre></td></tr></table></figure>
+
+<h4 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ stress-ng --cpu <span class="variable">$cores_num</span> --timeout 900</span><br></pre></td></tr></table></figure>
+
+<h4 id="MEM"><a href="#MEM" class="headerlink" title="MEM"></a>MEM</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ stress-ng --vm 4 --timeout 900s</span><br><span class="line">$ stress-ng --vm-bytes $(awk <span class="string">'/MemFree/&#123;printf "%d\n", $2 * 0.9;&#125;'</span> &lt; /proc/meminfo)k --vm-keep -m 1 -t 30s --metrics-brief</span><br><span class="line">$ stress-ng --mincore 5 --mincore-random --malloc 2 --malloc-bytes 10g --mremap 2 --mremap-bytes 10g --memfd 2 --memfd-bytes 10g --vm-bytes 10g -m 2  -t 600s --metrics-brief</span><br></pre></td></tr></table></figure>
+
+<h4 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ stress-ng --mq 0 -t 30s --<span class="built_in">times</span>  --metrics-brief</span><br><span class="line"></span><br><span class="line"><span class="comment"># The matrix stressor is a good way to exercise the CPU floating point operations as well as memory and processor data cache. Of all the tests, this one generally heats x86 CPUs the best.</span></span><br><span class="line">$ stress-ng --matrix 0 -t 1m --<span class="built_in">times</span> --metrics-brief</span><br></pre></td></tr></table></figure>
+
+<h4 id="mix"><a href="#mix" class="headerlink" title="mix"></a>mix</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ stress-ng --cpu 2 --matrix 1 --mq 3</span><br><span class="line">$ stress-ng --all 2</span><br><span class="line"></span><br><span class="line">$ stress-ng --seq 1 -x numa,matrix,hdd</span><br><span class="line"><span class="comment">#        --sequential N</span></span><br><span class="line">sequentially run all the stressors one by one <span class="keyword">for</span> a default of 60 seconds. The number of instances of each of the individual stressors to be started is N.  If N  is  less than  zero, <span class="keyword">then</span> the number of CPUs online is used <span class="keyword">for</span> the number of instances.  If N is zero, <span class="keyword">then</span> the number of CPUs <span class="keyword">in</span> the system is used.  Use the --timeout option to specify the duration to run each stressor.</span><br></pre></td></tr></table></figure>
+
+<h4 id="the-others-test"><a href="#the-others-test" class="headerlink" title="the others test"></a>the others test</h4><p>$ stress-ng –seq 1 -x nuam, –sched fifo  -t 30s –times –metrics-brief<br>$ stress-ng –vm 16 –vm-bytes 90% -t 1h –metrics-brief<br>$ stress-ng –cpu 8 –cpu-ops 800000<br>$ stress-ng –cpu 4 –cpu-method fft –cpu-ops 10000 –metrics-brief<br>$ stress-ng –cpu 0 –cpu-method all -t 1h<br>$ stress-ng –random 64<br>#run 64 stressors that are randomly chosen from all the available stressors.</p>
+<p>$ stress-ng –cpu 64 –cpu-method all –verify -t 10m –metrics-brief<br>#run 64 instances of all the different cpu stressors and verify that the computations are correct for 10 minutes with a bogo operations summary at the end.</p>
+<p>$ stress-ng –sequential 8 –class io -t 5m –times</p>
+<h1 id="run-all-the-stressors-in-the-io-class-one-by-one-for-5-minutes-each-with-8-instances-of-each-stressor-running-concurrently-and-show-overall-time-utilisation-statistics-at-the-end-of-the-run"><a href="#run-all-the-stressors-in-the-io-class-one-by-one-for-5-minutes-each-with-8-instances-of-each-stressor-running-concurrently-and-show-overall-time-utilisation-statistics-at-the-end-of-the-run" class="headerlink" title="run  all  the stressors in the io class one by one for 5 minutes each, with 8 instances of each stressor running concurrently and show overall time utilisation statistics at the end of the run."></a>run  all  the stressors in the io class one by one for 5 minutes each, with 8 instances of each stressor running concurrently and show overall time utilisation statistics at the end of the run.</h1><p>$ stress-ng –all 0 –maximize –aggressive<br>#run all the stressors (1 instance of each per CPU) simultaneously, maximize the settings (memory sizes, file allocations, etc.) and select the  most  demanding/aggressive options.</p>
+<p>$        stress-ng –sequential 4 –class vm –exclude bigheap,brk,stack<br>#run 4 instances of the VM stressors one after each other, excluding the bigheap, brk and stack stressors</p>
+<p>$ stress-ng –taskset 0,2-3 –cpu 3<br>#run 3 instances of the CPU stressor and pin them to CPUs 0, 2 and 3.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### cpu-cache</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">$ stress-ng --sequential 8 --class cpu-cache -t 5m</span><br><span class="line">stress-ng: info:  [13341] apparmor stressor will be skipped, AppArmor is not available</span><br><span class="line">stress-ng: info:  [13341] dispatching hogs: 8 bsearch, 8 cache, 8 heapsort, 8 hsearch, 8 icache, 8 lockbus, 8 lsearch, 8 malloc, 8 matrix, 8 membarrier, 8 memcpy, 8 mergesort, 8 qsort, 8 str, 8 stream, 8 tsearch, 8 vecmath, 8 wcs, 8 zlib</span><br><span class="line"></span><br><span class="line">$ stress-ng --cpu 4 --cache-level 2 --cache-ways 4 -t 30s --metrics-brief</span><br><span class="line">$ stress-ng --cpu 4 --cache-level 3 --cache-ways 4 -t 30s --metrics-brief</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$ stress-ng --all 0 --class cpu-cache -t 5m --metrics-brief</span><br></pre></td></tr></table></figure>
+
+<h5 id="cpu-method"><a href="#cpu-method" class="headerlink" title="cpu-method"></a>cpu-method</h5><p>$ stress-ng –cpu 1 –cpu-method matrixprod -t 1m –metrics-brief<br>$ for m in double longdouble matrixprod nsqrt cfloat clongdouble decimal32 decimal128 explog bitops ln2 int64 int128 ackermann int128decimal128 gray euler fibonacci; do stress-ng –cpu 0 –cpu-method $m -t 10s –metrics-brief; done</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"># float</span><br><span class="line">double           1000 iterations of a mix of double precision floating point operations</span><br><span class="line">longdouble       1000 iterations of a mix of long double precision floating point operations</span><br><span class="line">matrixprod       matrix  product  of  two  128 × 128 matrices of double floats. Testing on 64 bit x86 hardware shows that this is provides a good mix of memory, cache and floating point operations and is probably the best CPU method to use to make a CPU run hot.</span><br><span class="line">nsqrt            compute sqrt() of long doubles using Newton-Raphson</span><br><span class="line">cfloat           1000 iterations of a mix of floating point complex operations</span><br><span class="line">clongdouble      1000 iterations of a mix of long double floating point complex operations</span><br><span class="line">decimal32        1000 iterations of a mix of 32 bit decimal floating point operations (GCC only)</span><br><span class="line">decimal128       1000 iterations of a mix of 128 bit decimal floating point operations (GCC only)</span><br><span class="line">explog           iterate on n &#x3D; exp(log(n) ÷ 1.00002)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#int</span><br><span class="line">int64            1000 iterations of a mix of 64 bit integer operations</span><br><span class="line">int128           1000 iterations of a mix of 128 bit integer operations (GCC only)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">------------------------performance test--------------------------</span><br><span class="line">#logic</span><br><span class="line">jmp              Simple unoptimised compare &gt;, &lt;, &#x3D;&#x3D; and jmp branching</span><br><span class="line">ackermann        Ackermann function: compute A(3, 10), where:</span><br><span class="line">                 A(m, n) &#x3D; n + 1 if m &#x3D; 0;</span><br><span class="line">                 A(m - 1, 1) if m &gt; 0 and n &#x3D; 0;</span><br><span class="line">                 A(m - 1, A(m, n - 1)) if m &gt; 0 and n &gt; 0</span><br><span class="line"># bit</span><br><span class="line">bitops           various bit operations from bithack, namely: reverse bits, parity check, bit count, round to nearest power of 2</span><br><span class="line"># int</span><br><span class="line">gray             calculate binary to gray code and gray code back to binary for integers from 0 to 65535 </span><br><span class="line">fibonacci        compute Fibonacci sequence of 0, 1, 1, 2, 5, 8...</span><br><span class="line"></span><br><span class="line">#float</span><br><span class="line">euler            compute e using n &#x3D; (1 + (1 ÷ n)) ↑ n </span><br><span class="line">ln2              compute ln(2) based on series:</span><br><span class="line">#mix</span><br><span class="line">int128decimal32 1000 iterations of a mix of 128 bit integer and 128 bit decimal floating point operations (GCC only)</span><br><span class="line">#rand hash</span><br><span class="line">djb2a            128 rounds of hash DJB2a (Dan Bernstein hash using the xor variant) on 128 to 1 bytes of random strings</span><br><span class="line">dither           Floyd–Steinberg dithering of a 1024 × 768 random image from 8 bits down to 1 bit of depth.</span><br><span class="line">crc16            compute 1024 rounds of CCITT CRC16 on random data</span><br><span class="line"></span><br><span class="line">-----------------------------------END--------------------------</span><br><span class="line"></span><br><span class="line">#C</span><br><span class="line">callfunc         recursively call 8 argument C function to a depth of 1024 calls and unwind</span><br><span class="line"></span><br><span class="line">#random, hash</span><br><span class="line">jenkin        Jenkin&#39;s integer hash on 128 rounds of 128..1 bytes of random data</span><br><span class="line">hanoi         solve a 21 disc Towers of Hanoi stack using the recursive solution</span><br><span class="line">              hamming          compute Hamming H(8,4) codes on 262144 lots of 4 bit data. This turns 4 bit data into 8 bit Hamming code containing 4 parity bits. For data bits  d1..d4,</span><br><span class="line">                               parity bits are computed as:</span><br><span class="line">                                 p1 &#x3D; d2 + d3 + d4</span><br><span class="line">                                 p2 &#x3D; d1 + d3 + d4</span><br><span class="line">                                 p3 &#x3D; d1 + d2 + d4</span><br><span class="line">                                 p4 &#x3D; d1 + d2 + d3</span><br><span class="line">correlate        perform a 16384 × 1024 correlation of random doubles</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--memthrash-method method</span><br><span class="line">              specify a memthrash stress method. Available memthrash stress methods are described</span><br><span class="line">              as follows:</span><br><span class="line"></span><br><span class="line">              Method           Description</span><br><span class="line">              all              iterate over all the below memthrash methods</span><br><span class="line">              chunk1           memset 1 byte chunks of random data into random locations</span><br><span class="line">              chunk8           memset 8 byte chunks of random data into random locations</span><br><span class="line">              chunk64          memset 64 byte chunks of random data into random locations</span><br><span class="line">              chunk256         memset 256 byte chunks of random data into random locations</span><br><span class="line">              chunkpage        memset page size chunks of random data into random locations</span><br><span class="line">              flip             flip (invert) all bits in ramdom locations</span><br><span class="line">              flush            flush cache line in random locations</span><br><span class="line">              lock             lock randomly choosing locations (Intel x86 CPUs only)</span><br><span class="line">              matrix           treat memory as a 2 × 2 matrix and swap random elements</span><br><span class="line">              memset           memset the memory with random data</span><br><span class="line">              mfence           stores with write serialization (Intel x86 CPUs only)</span><br><span class="line">              prefetch         prefetch data at random memory locations</span><br><span class="line">              random           randomly  run any of the memthrash methods except for &#39;random&#39; and</span><br><span class="line">                               &#39;all&#39;</span><br><span class="line">              spinread         spin loop read the same random location 2^19 times</span><br><span class="line">              spinwrite        spin loop write the same random location 2^19 times</span><br></pre></td></tr></table></figure>
+
+<h5 id="class"><a href="#class" class="headerlink" title="class"></a>class</h5><p>The stress-ng stressors are grouped together in different classes:</p>
+<p>cpu - CPU intensive<br>cpu-cache - stress CPU instruction and/or data caches<br>device - raw device driver stressors<br>io - generic input/output<br>interrupt - high interrupt load generators<br>filesystem - file system activity<br>memory - stack, heap, memory mapping, shared memory stressors<br>network - TCP/IP, UDP and UNIX domain socket stressors<br>os - core kernel stressors<br>pipe - pipe and UNIX socket stressors<br>scheduler - force high levels of context switching<br>security - AppArmor stressor<br>vm - Virtual Memory stressor (paging and memory)</p>
+<p>–matrix-method method<br>       specify a matrix stress method. Available matrix stress methods are described as follows:</p>
+<pre><code>Method           Description
+all              iterate over all the below matrix stress methods
+add              add two N × N matrices
+
+copy             copy one N × N matrix to another
+div              divide an N × N matrix by a scalar
+hadamard         Hadamard product of two N × N matrices
+frobenius        Frobenius product of two N × N matrices
+mean             arithmetic mean of two N × N matrices
+mult             multiply an N × N matrix by a scalar
+prod             product of two N × N matrices
+sub              subtract one N × N matrix from another N × N matrix
+trans            transpose an N × N matrix</code></pre><h4 id="performance-info"><a href="#performance-info" class="headerlink" title="performance info"></a>performance info</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">$ stress-ng --mq 0 -t 30s --<span class="built_in">times</span> --perf</span><br><span class="line">stress-ng: info:  [68895] dispatching hogs: 16 mq</span><br><span class="line">^Cstress-ng: info:  [68895] unsuccessful run completed <span class="keyword">in</span> 15.95s</span><br><span class="line">stress-ng: info:  [68895] mq:</span><br><span class="line">stress-ng: info:  [68895]            667,942,869,088 CPU Cycles                    41.88 B/sec</span><br><span class="line">stress-ng: info:  [68895]            343,598,563,312 Instructions                  21.54 B/sec (0.514 instr. per cycle)</span><br><span class="line">stress-ng: info:  [68895]              4,273,568,592 Cache References               0.27 B/sec</span><br><span class="line">stress-ng: info:  [68895]                108,195,424 Cache Misses                   6.78 M/sec ( 2.53%)</span><br><span class="line">stress-ng: info:  [68895]             62,069,485,136 Branch Instructions            3.89 B/sec</span><br><span class="line">stress-ng: info:  [68895]              1,391,055,360 Branch Misses                 87.21 M/sec ( 2.24%)</span><br><span class="line">stress-ng: info:  [68895]              4,911,414,496 Bus Cycles                     0.31 B/sec</span><br><span class="line">stress-ng: info:  [68895]            510,787,333,888 Total Cycles                  32.02 B/sec</span><br><span class="line">stress-ng: info:  [68895]                      3,184 Page Faults Minor            199.61 /sec</span><br><span class="line">stress-ng: info:  [68895]                          0 Page Faults Major              0.00 /sec</span><br><span class="line">stress-ng: info:  [68895]                  3,924,080 Context Switches               0.25 M/sec</span><br><span class="line">stress-ng: info:  [68895]                    718,208 CPU Migrations                45.03 K/sec</span><br><span class="line">stress-ng: info:  [68895]                          0 Alignment Faults               0.00 /sec</span><br><span class="line">stress-ng: info:  [68895]                      3,088 Page Faults User             193.60 /sec</span><br><span class="line">stress-ng: info:  [68895]                         96 Page Faults Kernel             6.02 /sec</span><br><span class="line">stress-ng: info:  [68895]                 92,731,952 System Call Enter              5.81 M/sec</span><br><span class="line">stress-ng: info:  [68895]                 92,731,952 System Call Exit               5.81 M/sec</span><br><span class="line">stress-ng: info:  [68895]                 54,434,816 Kmalloc                        3.41 M/sec</span><br><span class="line">stress-ng: info:  [68895]                    399,904 Kmalloc Node                  25.07 K/sec</span><br><span class="line">stress-ng: info:  [68895]                231,994,672 Kfree                         14.54 M/sec</span><br><span class="line">stress-ng: info:  [68895]                    139,904 Kmem Cache Alloc               8.77 K/sec</span><br><span class="line">stress-ng: info:  [68895]                     88,848 Kmem Cache Alloc Node          5.57 K/sec</span><br><span class="line">stress-ng: info:  [68895]                    181,568 Kmem Cache Free               11.38 K/sec</span><br><span class="line">stress-ng: info:  [68895]                     59,856 MM Page Alloc                  3.75 K/sec</span><br><span class="line">stress-ng: info:  [68895]                    158,720 MM Page Free                   9.95 K/sec</span><br><span class="line">stress-ng: info:  [68895]                  8,842,656 RCU Utilization                0.55 M/sec</span><br><span class="line">stress-ng: info:  [68895]                    764,352 Sched Migrate Task            47.92 K/sec</span><br><span class="line">stress-ng: info:  [68895]                          0 Sched Move NUMA                0.00 /sec</span><br><span class="line">stress-ng: info:  [68895]                  6,617,648 Sched Wakeup                   0.41 M/sec</span><br><span class="line">stress-ng: info:  [68895]                         16 Signal Generate                1.00 /sec</span><br><span class="line">stress-ng: info:  [68895]                         80 Signal Deliver                 5.02 /sec</span><br><span class="line">stress-ng: info:  [68895]                        672 IRQ Entry                     42.13 /sec</span><br><span class="line">stress-ng: info:  [68895]                        672 IRQ Exit                      42.13 /sec</span><br><span class="line">stress-ng: info:  [68895]                    664,704 Soft IRQ Entry                41.67 K/sec</span><br><span class="line">stress-ng: info:  [68895]                    664,704 Soft IRQ Exit                 41.67 K/sec</span><br><span class="line">stress-ng: info:  [68895]                         16 Writeback Dirty Inode          1.00 /sec</span><br><span class="line">stress-ng: info:  [68895]                          0 Writeback Dirty Page           0.00 /sec</span><br><span class="line">stress-ng: info:  [68895] <span class="keyword">for</span> a 15.95s run time:</span><br><span class="line">stress-ng: info:  [68895]     255.21s available CPU time</span><br><span class="line">stress-ng: info:  [68895]      25.73s user time   ( 10.08%)</span><br><span class="line">stress-ng: info:  [68895]     181.50s system time ( 71.12%)</span><br><span class="line">stress-ng: info:  [68895]     207.23s total time  ( 81.20%)</span><br><span class="line">stress-ng: info:  [68895] load average: 5.35 1.73 1.08</span><br></pre></td></tr></table></figure>
+
+<h4 id="Verify-mode"><a href="#Verify-mode" class="headerlink" title="Verify mode"></a>Verify mode</h4><p>Some stressors have a verification mode. A stress test is run and the results are checked, if the results are incorrect then stress-ng will flag up a warning error message. Suppose we want to run some exhaustive memory checks on a blob of virtually mapped memory via the vm stressor, enable the –verify mode and this will sanity check that the read/write results on the memory:</p>
+<p>$ stress-ng –vm 1 –vm-bytes 2G –verify -v<br>Note that not all stressors have a verify mode, and enabling it will reduce the bogo op stats as there is an extra verification step being invoked.</p>
+<h4 id="Generating-major-page-faults"><a href="#Generating-major-page-faults" class="headerlink" title="Generating major page faults"></a>Generating major page faults</h4><p>You can generate major page faults (by accessing a page is not loaded in memory at the time of the fault) and see the page fault rate using:<br>$ stress-ng –fault 0 –perf -t 1m</p>
+<p>or with newer kernels use the userfaultfd stressor to force even more major faults:<br>$ stress-ng –userfaultfd 0 –perf -t 1m</p>
+<p>Running timers at high frequency can generate a large interrupt load. The timer stressor with an appropriately selected timer frequency can be used to force many hundreds of thousands of interrupts per second, for example, 32 instances at 1MHz:<br>$ stress-ng –timer 32 –timer-freq 1000000</p>
+<h3 id="test-case"><a href="#test-case" class="headerlink" title="test case"></a>test case</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -------all cores CPU case1:------</span><br><span class="line"><span class="keyword">for</span> m <span class="keyword">in</span> jmp bitops fibonacci euler ln2 int128decimal32 djb2a crc16; <span class="keyword">do</span> stress-ng --cpu 0 --cpu-method <span class="variable">$m</span> -t 240s --metrics-brief; <span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> -------4 cores CPU case1:------</span><br><span class="line"><span class="keyword">for</span> m <span class="keyword">in</span> jmp bitops fibonacci euler ln2 int128decimal32 djb2a crc16; <span class="keyword">do</span> stress-ng --cpu 4 --cpu-method <span class="variable">$m</span> -t 240s --metrics-brief; <span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> -------mem test1:---------</span><br><span class="line">stress-ng --malloc 1 --malloc-bytes $(awk <span class="string">'/MemFree/&#123;printf "%d\n", $2 * 0.1;&#125;'</span> /proc/meminfo)k  --vm-keep -m 1 --vm-bytes $(awk <span class="string">'/MemFree/&#123;printf "%d\n", $2 * 0.1;&#125;'</span> /proc/meminfo)k --mremap 2 --mremap-bytes $(awk <span class="string">'/MemFree/&#123;printf "%d\n", $2 * 0.1;&#125;'</span> /proc/meminfo)k --memfd 2 --memfd-bytes $(awk <span class="string">'/MemFree/&#123;printf "%d\n", $2 * 0.1;&#125;'</span> /proc/meminfo)k -t 600s --metrics-brief</span><br><span class="line"><span class="built_in">echo</span> -------mem test2:---------</span><br><span class="line">stress-ng --mincore 0 --mincore-random -t 600s --metrics-brief</span><br><span class="line"><span class="built_in">echo</span> -------mem test3:---------</span><br><span class="line">stress-ng --vm-bytes $(awk <span class="string">'/MemFree/&#123;printf "%d\n", $2 * 0.9;&#125;'</span> /proc/meminfo)k --vm-keep -m 1 -t 600s --metrics-brief</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/nvme/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/17/nvme/" class="post-title-link" itemprop="url">nvme test</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-17 11:27:38" itemprop="dateCreated datePublished" datetime="2020-03-17T11:27:38+08:00">2020-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-31 01:16:01" itemprop="dateModified" datetime="2020-03-31T01:16:01+08:00">2020-03-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/block/" itemprop="url" rel="index">
+                    <span itemprop="name">block</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/17/nvme/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/17/nvme/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>18k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>17 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>NAND P/E Cycles = amount of program / erase cycles NAND can do before wearing out<ul>
+<li>WAF = NAND writes / host writes</li>
+</ul>
+</li>
+<li>TBW or PBW – amount of host writes to SSD before wearing out<ul>
+<li>TBW = drive capacity * cycles / WAF</li>
+</ul>
+</li>
+<li>DWPD (drive writes per day): amount of data you can write to device each day of the warranty (typically 5 years) without wearing out<ul>
+<li>DWPD = TBW/365/5/drive capacity</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Create partition smaller than total user capacity of SSD</li>
+<li>Limit max LBA of drive through vendor specific tools</li>
+<li>Create a namespace smaller than total user capacity</li>
+<li>Limit application use to smaller LBA range</li>
+</ol>
+<p><a href="https://events.static.linuxfound.org/sites/events/files/slides/lemoal-nvme-polling-vault-2017-final_0.pdf" target="_blank" rel="noopener">nvme hybird polling</a><br>I/O models</p>
+<ul>
+<li><p>IRQ vs polling</p>
+<ul>
+<li>NVM is coming ! Is this relevant ?</li>
+<li>Linux implementation</li>
+</ul>
+</li>
+<li><p>Block Layer and NVMe driver</p>
+<ul>
+<li>Evaluation Results</li>
+<li>Classic polling vs Hybrid polling</li>
+<li>Impact of process scheduling</li>
+<li>Comparison with user level drivers</li>
+</ul>
+</li>
+<li><p>Implemented by blk_mq_poll</p>
+<ul>
+<li>block-mq enabled devices only</li>
+<li>Device queue flagged with “poll enabled”<ul>
+<li>Can be controlled through sysfs</li>
+<li>Enabled by default for devices supporting it, e.g. NVMe</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To enable it, you echo 1 to /sys/block/&lt;dev&gt;/queue/io_poll.</span></span><br><span class="line">$ <span class="built_in">echo</span> 1 &gt;  /sys/block/nvme0n1/queue/io_poll</span><br><span class="line">$ cat  /sys/block/nvme0n1/queue/io_poll</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Polling is tried for any block I/O belonging to a high-priority I/O context (IOCB_HIPRI)</li>
+<li>IRQs are NOT disabled<ul>
+<li>ISR is still executed as the device signals completions</li>
+<li>But ISR sees a completion slot already processed</li>
+</ul>
+</li>
+</ul>
+<p>6us average latency with IRQ, 4.5us with polling</p>
+<ul>
+<li>25% lower latency with polling</li>
+<li>166 KIOPS vs 222 KIOPS</li>
+<li><code>But 100% load on the polling CPU</code></li>
+<li>Only 32% CPU load with IRQ model</li>
+</ul>
+<p>Adaptive hybrid polling gives the same average latency of 4.5us as classic polling</p>
+<ul>
+<li>But with only 58% CPU load</li>
+<li>32% with IRQ model</li>
+<li>Fixed time polling allows controlling the CPU vs latency trade-off</li>
+<li>IRQ like average latency and CPU load for high polling delay</li>
+<li>Better use the IRQ model</li>
+<li>Lower CPU loads with a small average latency degradation achieved with intermediate polling delay</li>
+</ul>
+<p><code>If I use NVME, if you have the top CPU, you could enable the polling, if not , irq is the better choice</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat /sys/block/nvme0n1/queue/io_poll_delay</span><br><span class="line">-1</span><br><span class="line"><span class="comment"># -1 class polling (default)</span></span><br><span class="line"><span class="comment"># 0 means adaptive hybird polling</span></span><br><span class="line">$ <span class="built_in">echo</span> 0 &gt; /sys/block/nvme0n1/queue/io_poll_delay</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">|&lt;------------------------Application Perecived I&#x2F;O latency---------------------------------&gt;|</span><br><span class="line">IRQ      syscall  BIO_stack  Device_driver  CS             sleep            CS  BIO_stack </span><br><span class="line">                                                                            | (wake)</span><br><span class="line">                                                               CS ISR -------</span><br><span class="line">                                                               |(IRQ)</span><br><span class="line">		                    command execution-----------   </span><br><span class="line"></span><br><span class="line">Polling  syscall  BIO_stack  Device_driver    Are you done ?    BIO_stack&lt;-------Gain-------&gt;| </span><br><span class="line">                                                 |</span><br><span class="line">                                           command execution</span><br><span class="line"></span><br><span class="line">Hybrid   syscall  BIO_stack  Device_driver  cs sleep cs  done?  BIO_stack&lt;-------Gain-------&gt;| </span><br><span class="line">                                                     |(wake)|</span><br><span class="line">                                      Timer IRQ --&gt; ISR     |</span><br><span class="line">						     command execution</span><br></pre></td></tr></table></figure>
+<h4 id="Software-optimization"><a href="#Software-optimization" class="headerlink" title="Software optimization"></a>Software optimization</h4><ul>
+<li>System call (VFS)<ul>
+<li>Optimizations introduced with kernel 4.10</li>
+</ul>
+</li>
+<li>BIO stack<ul>
+<li>blk-mq already very efficient</li>
+</ul>
+</li>
+<li>Device driver<ul>
+<li>NVMe driver submission and completion paths are very short</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://metebalci.com/blog/a-quick-tour-of-nvm-express-nvme/" target="_blank" rel="noopener">I’m copy the article, just read it</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">$ nvme --smart-log /dev/nvme0</span><br><span class="line">Smart Log <span class="keyword">for</span> NVME device:nvme0 namespace-id:ffffffff</span><br><span class="line">critical_warning                    : 0</span><br><span class="line">temperature                         : 35 C</span><br><span class="line">available_spare                     : 100%</span><br><span class="line">available_spare_threshold           : 0%</span><br><span class="line">percentage_used                     : 0%</span><br><span class="line">data_units_read                     : 320,346,034</span><br><span class="line">data_units_written                  : 441,545,307</span><br><span class="line">host_read_commands                  : 16,537,842,223</span><br><span class="line">host_write_commands                 : 19,148,305,649</span><br><span class="line">controller_busy_time                : 3,505</span><br><span class="line">power_cycles                        : 50</span><br><span class="line">power_on_hours                      : 16,079</span><br><span class="line">unsafe_shutdowns                    : 33</span><br><span class="line">media_errors                        : 0</span><br><span class="line">num_err_log_entries                 : 0</span><br><span class="line">Warning Temperature Time            : 0</span><br><span class="line">Critical Composite Temperature Time : 0</span><br><span class="line">Thermal Management T1 Trans Count   : 0</span><br><span class="line">Thermal Management T2 Trans Count   : 0</span><br><span class="line">Thermal Management T1 Total Time    : 0</span><br><span class="line">Thermal Management T2 Total Time    : 0</span><br><span class="line"></span><br><span class="line">nvme error-log /dev/nvme0</span><br><span class="line">Error Log Entries <span class="keyword">for</span> device:nvme0 entries:64</span><br><span class="line">.................</span><br><span class="line"> Entry[ 0]</span><br><span class="line">.................</span><br><span class="line">error_count  : 0</span><br><span class="line">sqid         : 0</span><br><span class="line">cmdid        : 0</span><br><span class="line">status_field : 0(SUCCESS: The <span class="built_in">command</span> completed successfully)</span><br><span class="line">parm_err_loc : 0</span><br><span class="line">lba          : 0</span><br><span class="line">nsid         : 0</span><br><span class="line">vs           : 0</span><br><span class="line">cs           : 0</span><br><span class="line">.................</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">Entry[63]</span><br><span class="line">.................</span><br><span class="line">error_count  : 0</span><br><span class="line">sqid         : 0</span><br><span class="line">cmdid        : 0</span><br><span class="line">status_field : 0(SUCCESS: The <span class="built_in">command</span> completed successfully)</span><br><span class="line">parm_err_loc : 0</span><br><span class="line">lba          : 0</span><br><span class="line">nsid         : 0</span><br><span class="line">vs           : 0</span><br><span class="line">cs           : 0</span><br><span class="line">.................</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ nvme get-log /dev/nvme0 --<span class="built_in">log</span>-id=2 --<span class="built_in">log</span>-len=512</span><br><span class="line">Device:nvme0 <span class="built_in">log</span>-id:2 namespace-id:0xffffffff</span><br><span class="line">       0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f</span><br><span class="line">0000: 00 33 01 64 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">".3.d............"</span></span><br><span class="line">0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"................"</span></span><br><span class="line">0020: b2 17 18 13 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"................"</span></span><br><span class="line">0030: 5b 72 51 1a 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"[rQ............."</span></span><br><span class="line">0040: 2f 72 bb d9 03 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"/r.............."</span></span><br><span class="line">0050: f1 f4 53 75 04 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"..Su............"</span></span><br><span class="line">0060: b1 0d 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"................"</span></span><br><span class="line">0070: 32 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"2..............."</span></span><br><span class="line">0080: cf 3e 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">".&gt;.............."</span></span><br><span class="line">0090: 21 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"!..............."</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ nvme list</span><br><span class="line">Node             SN                   Model                                    Namespace Usage                      Format           FW Rev</span><br><span class="line">---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------</span><br><span class="line">/dev/nvme0n1     PHKS00000000000000   INTEL SSDPED1K375GA                      1         375.08  GB / 375.08  GB      4 KiB +  0 B   E2010435</span><br><span class="line"></span><br><span class="line">$ nvme list-ns /dev/nvme0n1</span><br><span class="line">NVMe Status:INVALID_NS: The namespace or the format of that namespace is invalid(400b) NSID:0</span><br><span class="line"></span><br><span class="line">$ nvme fw-download /dev/nvme0n1 -f &lt;fw binary&gt;</span><br><span class="line">$ nvme fw-commit /dev/nvme0n1 -s 1 -a 1</span><br><span class="line">$ nvme reset /dev/nvme0 </span><br><span class="line"></span><br><span class="line"><span class="comment">#secure format</span></span><br><span class="line">$ nvme format /dev/nvme0 –s 1</span><br><span class="line">SES = 0 results <span class="keyword">in</span> drive being formatted and trimmed</span><br><span class="line">SES = 1 <span class="keyword">for</span> Block Erase – low level block erase on media (physically erase NAND blocks, or overwrite with 0 on SCM)</span><br><span class="line">SES = 2 <span class="keyword">for</span> Crypto Erase - change media encryption key</span><br><span class="line">-l <span class="keyword">for</span> LBA format, find capabilities <span class="keyword">in</span> NVMe identify controller -t timeout <span class="keyword">for</span> devices that will take a long time</span><br><span class="line">-p <span class="keyword">for</span> protection information with variable sector size</span><br><span class="line"></span><br><span class="line"><span class="comment">## for more info </span></span><br><span class="line">Format NVM, <span class="built_in">command</span> dword 10</span><br><span class="line"></span><br><span class="line">Sanitize (not widely supported yet)</span><br><span class="line">$ nvme sanitize</span><br><span class="line">* Block Erase – low level block erase on media (physically erase NAND blocks)</span><br><span class="line">* Crypto Erase - change media encryption key</span><br><span class="line">* Overwrite – overwrite with data patterns (not good or recommended <span class="keyword">for</span> NAND based SSDs due to endurance)</span><br></pre></td></tr></table></figure>
+
+<h3 id="create-mdraid-for-nvme-ssd"><a href="#create-mdraid-for-nvme-ssd" class="headerlink" title="create mdraid for nvme ssd"></a>create mdraid for nvme ssd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ mdadm -C /dev/md0 /dev/nvme[0-3]n1 –n 4 –e imsm</span><br><span class="line">$ mdadm -C /dev/md0 /dev/nvme[0-3]n1 –n 4 –e imsm</span><br><span class="line"></span><br><span class="line"><span class="comment">## I/O polling mode was introduced with linux 4.4, in polling mode the cpu continuously checks if the I/O command completed</span></span><br><span class="line">$ <span class="built_in">echo</span> 1 &gt; /sys/block/nvme0n1/queue/io_poll</span><br><span class="line">bash: <span class="built_in">echo</span>: write error: Invalid argument</span><br><span class="line"></span><br><span class="line"><span class="comment">## Hybird polling mode was introduced in linux kenrel 4.10, hybrid polling mode improvded QD1 performance closer to that of polling mode performance, but with lower cpu utilizaion</span></span><br><span class="line"><span class="built_in">echo</span> 0 &gt; /sys/block/nvme0n1/queue/io_poll_delay</span><br><span class="line">0=hybrid, 1 = always poll( default )</span><br><span class="line"></span><br><span class="line">block-mq enabled devices only</span><br><span class="line">Device queue flagged with “poll enabled</span><br><span class="line"></span><br><span class="line">CPU frequency    &gt;  3.0GHz</span><br><span class="line">Hyper threading     <span class="built_in">disable</span></span><br><span class="line">EIST(Enhanced intel speed step technology)    disabled</span><br><span class="line">intel Turbo mode    <span class="built_in">disable</span></span><br><span class="line">C-states            <span class="built_in">disable</span></span><br><span class="line">P-states            <span class="built_in">disable</span></span><br><span class="line">CPU Governor(os)    performance mode</span><br><span class="line">IRQ balancing(os)   disabled</span><br><span class="line">SMP Affinity        <span class="built_in">set</span> interrupts to run <span class="keyword">in</span> the proper CPU cores</span><br><span class="line">I/O polling or Hybrid mode    Enabled</span><br></pre></td></tr></table></figure>
+<p>Linux flow of command execution on NVME SSDs<br>User app requestion IO -&gt; kernel processes IO request and sends to device driver -&gt; device driver processes the requests(create SQ entry, rings doorbell register) -&gt; device processes the requests(read sq entry, processes IO, create cq entry, signals MSI-x to host) -&gt; kernel call device driver to handle the completion -&gt; device driver ack, that the entry in CQ has been processed</p>
+<p>IO execution in SPDK<br>User app requestion IO -&gt; SPDK userspace device driver process the requests(create SQ entry, rings doorbell register) -&gt; device processes the requestion(read sq entry, processes IO, create cq entry) -&gt; user application polls SPDK for IO completion -&gt; spdk call user application completion callback when IO is complete</p>
+<p>cat /proc/version /proc/cpuinfo /proc/meminfo /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor<br>lspci -v<br>nvme list</p>
+<p>#disable IRQ balance<br>set SMP affinity<br>systemctl stop irqbalance<br>folders=/proc/irq/*<br>for folder in $folders<br>do<br>  files=”$folder/*”<br>  for file in $files<br>  do<br>     if [[ $file == *”nvme”* ]]<br>     then<br>        echo $file<br>        contents=$(cat $folder/affinity_hint)<br>        echo $contents &gt; $folder/smp_affinity<br>        cat $folder/smp_affinity<br>     fi<br>  done<br>done</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br></pre></td><td class="code"><pre><span class="line">$ nvme id-ctrl -H &#x2F;dev&#x2F;nvme0n1</span><br><span class="line">NVME Identify Controller:</span><br><span class="line">vid       : 0x8086                  # vid is PCI Vendor ID (so Samsung in this case), 0x144d as in the lspci output.</span><br><span class="line">ssvid     : 0x8086                  # ssvid is PCI Subsystem Vendor ID    </span><br><span class="line">sn        : PHK000000000000000</span><br><span class="line">mn        : INTEL SSDPED1K375GA</span><br><span class="line">fr        : E2010435</span><br><span class="line">rab       : 0</span><br><span class="line">ieee      : 5cd2e4</span><br><span class="line">cmic      : 0                       # the Controller Multi-Path I&#x2F;O and Namespace Sharing Capabilities.</span><br><span class="line">  [3:3] : 0	ANA not supported</span><br><span class="line">  [2:2] : 0	PCI</span><br><span class="line">  [1:1] : 0	Single Controller</span><br><span class="line">  [0:0] : 0	Single Port</span><br><span class="line"></span><br><span class="line">mdts      : 5                       # mdts is Maximum Data Transfer Size. </span><br><span class="line">                                    # It is reported as a power of two and in units of minimum memory page size. mdts&#x3D;5 here</span><br><span class="line">                                    # so 2⁵ &#x3D; 32. We will see the minimum memory page size (MPSMIN) as 4K below. So MDTS is 32 * 4K &#x3D; 128K.</span><br><span class="line">cntlid    : 0</span><br><span class="line">ver       : 0</span><br><span class="line">rtd3r     : 0</span><br><span class="line">rtd3e     : 0</span><br><span class="line">oaes      : </span><br><span class="line">  [9:9] : 0	Firmware Activation Notices Not Supported</span><br><span class="line">  [8:8] : 0	Namespace Attribute Changed Event Not Supported</span><br><span class="line"></span><br><span class="line">ctratt    : 0</span><br><span class="line">  [5:5] : 0	Predictable Latency Mode Not Supported</span><br><span class="line">  [4:4] : 0	Endurance Groups Not Supported</span><br><span class="line">  [3:3] : 0	Read Recovery Levels Not Supported</span><br><span class="line">  [2:2] : 0	NVM Sets Not Supported</span><br><span class="line">  [1:1] : 0	Non-Operational Power State Permissive Not Supported</span><br><span class="line">  [0:0] : 0	128-bit Host Identifier Not Supported</span><br><span class="line"></span><br><span class="line">rrls      : 0</span><br><span class="line">oacs      : 0x7                    # Optional Admin Command Support</span><br><span class="line">  [8:8] : 0	Doorbell Buffer Config Not Supported</span><br><span class="line">  [7:7] : 0	Virtualization Management Not Supported</span><br><span class="line">  [6:6] : 0	NVMe-MI Send and Receive Not Supported</span><br><span class="line">  [5:5] : 0	Directives Not Supported</span><br><span class="line">  [4:4] : 0	Device Self-test Not Supported</span><br><span class="line">  [3:3] : 0	NS Management and Attachment Not Supported</span><br><span class="line">  [2:2] : 0x1	FW Commit and Download Supported</span><br><span class="line">  [1:1] : 0x1	Format NVM Supported</span><br><span class="line">  [0:0] : 0x1	Security Send and Receive Supported</span><br><span class="line"></span><br><span class="line">acl       : 3</span><br><span class="line">aerl      : 3</span><br><span class="line">frmw      : 0x2                    # firmware update</span><br><span class="line">  [4:4] : 0	Firmware Activate Without Reset Not Supported</span><br><span class="line">  [3:1] : 0x1	Number of Firmware Slots</span><br><span class="line">  [0:0] : 0	Firmware Slot 1 Read&#x2F;Write</span><br><span class="line"></span><br><span class="line">lpa       : 0x2</span><br><span class="line">  [3:3] : 0	Telemetry host&#x2F;controller initiated log page Not Suporrted</span><br><span class="line">  [2:2] : 0	Extended data for Get Log Page Not Supported</span><br><span class="line">  [1:1] : 0x1	Command Effects Log Page Supported</span><br><span class="line">  [0:0] : 0	SMART&#x2F;Health Log Page per NS Not Supported</span><br><span class="line"></span><br><span class="line">elpe      : 63</span><br><span class="line">npss      : 0</span><br><span class="line">avscc     : 0</span><br><span class="line">  [0:0] : 0	Admin Vendor Specific Commands uses Vendor Specific Format</span><br><span class="line"></span><br><span class="line">apsta     : 0</span><br><span class="line">  [0:0] : 0	Autonomous Power State Transitions Not Supported</span><br><span class="line"></span><br><span class="line">wctemp    : 0</span><br><span class="line">cctemp    : 0</span><br><span class="line">mtfa      : 0</span><br><span class="line">hmpre     : 0</span><br><span class="line">hmmin     : 0</span><br><span class="line">tnvmcap   : 0                      # Total NVM Capacity and it is an optional field. As it is reported as zero, it is not supported.</span><br><span class="line">unvmcap   : 0                      </span><br><span class="line">rpmbs     : 0</span><br><span class="line"> [31:24]: 0	Access Size</span><br><span class="line"> [23:16]: 0	Total Size</span><br><span class="line">  [5:3] : 0	Authentication Method</span><br><span class="line">  [2:0] : 0	Number of RPMB Units</span><br><span class="line"></span><br><span class="line">edstt     : 0</span><br><span class="line">dsto      : 0</span><br><span class="line">fwug      : 0</span><br><span class="line">kas       : 0</span><br><span class="line">hctma     : 0</span><br><span class="line">  [0:0] : 0	Host Controlled Thermal Management Not Supported</span><br><span class="line"></span><br><span class="line">mntmt     : 0</span><br><span class="line">mxtmt     : 0</span><br><span class="line">sanicap   : 0</span><br><span class="line">  [2:2] : 0	Overwrite Sanitize Operation Not Supported</span><br><span class="line">  [1:1] : 0	Block Erase Sanitize Operation Not Supported</span><br><span class="line">  [0:0] : 0	Crypto Erase Sanitize Operation Not Supported</span><br><span class="line"></span><br><span class="line">hmminds   : 0</span><br><span class="line">hmmaxd    : 0</span><br><span class="line">nsetidmax : 0</span><br><span class="line">anatt     : 0</span><br><span class="line">anacap    : 0</span><br><span class="line">  [7:7] : 0	Non-zero group ID Not Supported</span><br><span class="line">  [6:6] : 0	Group ID does not change</span><br><span class="line">  [4:4] : 0	ANA Change state Not Supported</span><br><span class="line">  [3:3] : 0	ANA Persistent Loss state Not Supported</span><br><span class="line">  [2:2] : 0	ANA Inaccessible state Not Supported</span><br><span class="line">  [1:1] : 0	ANA Non-optimized state Not Supported</span><br><span class="line">  [0:0] : 0	ANA Optimized state Not Supported</span><br><span class="line"></span><br><span class="line">anagrpmax : 0</span><br><span class="line">nanagrpid : 0</span><br><span class="line">sqes      : 0x66   # (Maximum and Required) Submission Queue Entry (SQE) Size. </span><br><span class="line">                   # It is expected to be 64 but with proprietary extensions it can be modified. The value is 0x66 here.</span><br><span class="line">  [7:4] : 0x6	Max SQ Entry Size (64)</span><br><span class="line">  [3:0] : 0x6	Min SQ Entry Size (64)</span><br><span class="line"></span><br><span class="line">cqes      : 0x44   # (Maximum and Required) Completion Queue Entry (CQE) Size. Similar to calculation of SQE size, </span><br><span class="line">                   # its value is 0x44 here, so both maximum and required completion queue entry size is 2⁴&#x3D;16 bytes.</span><br><span class="line">  [7:4] : 0x4	Max CQ Entry Size (16)</span><br><span class="line">  [3:0] : 0x4	Min CQ Entry Size (16)</span><br><span class="line"></span><br><span class="line">maxcmd    : 0</span><br><span class="line">nn        : 1      # (Maximum) Number of Namespaces supported by the controller. Although theoretical maximum is high, here it is 1, </span><br><span class="line">                   # so only one namespace is possible.</span><br><span class="line">oncs      : 0x6    # is Optional NVM Command Support</span><br><span class="line">  [7:7] : 0	Virtualization Management Not Supported</span><br><span class="line">  [6:6] : 0	Timestamp Not Supported</span><br><span class="line">  [5:5] : 0	Reservations Not Supported</span><br><span class="line">  [4:4] : 0	Save and Select Not Supported</span><br><span class="line">  [3:3] : 0	Write Zeroes Not Supported</span><br><span class="line">  [2:2] : 0x1	Data Set Management Supported</span><br><span class="line">  [1:1] : 0x1	Write Uncorrectable Supported</span><br><span class="line">  [0:0] : 0	Compare Not Supported</span><br><span class="line"></span><br><span class="line">fuses     : 0   </span><br><span class="line">  [0:0] : 0	Fused Compare and Write Not Supported</span><br><span class="line"></span><br><span class="line">fna       : 0x4</span><br><span class="line">  [2:2] : 0x1	Crypto Erase Supported as part of Secure Erase</span><br><span class="line">  [1:1] : 0	Crypto Erase Applies to Single Namespace(s)</span><br><span class="line">  [0:0] : 0	Format Applies to Single Namespace(s)</span><br><span class="line"></span><br><span class="line">vwc       : 0</span><br><span class="line">  [0:0] : 0	Volatile Write Cache Not Present</span><br><span class="line"></span><br><span class="line">awun      : 0</span><br><span class="line">awupf     : 0</span><br><span class="line">nvscc     : 0</span><br><span class="line">  [0:0] : 0	NVM Vendor Specific Commands uses Vendor Specific Format</span><br><span class="line"></span><br><span class="line">nwpc      : 0</span><br><span class="line">  [2:2] : 0	Permanent Write Protect Not Supported</span><br><span class="line">  [1:1] : 0	Write Protect Until Power Supply Not Supported</span><br><span class="line">  [0:0] : 0	No Write Protect and Write Protect Namespace Not Supported</span><br><span class="line"></span><br><span class="line">acwu      : 0</span><br><span class="line">sgls      : 0</span><br><span class="line"> [1:0]  : 0	Scatter-Gather Lists Not Supported</span><br><span class="line"></span><br><span class="line">mnan      : 0</span><br><span class="line">subnqn    :</span><br><span class="line">ioccsz    : 0</span><br><span class="line">iorcsz    : 0</span><br><span class="line">icdoff    : 0</span><br><span class="line">ctrattr   : 0</span><br><span class="line">  [0:0] : 0	Dynamic Controller Model</span><br><span class="line"></span><br><span class="line">msdbd     : 0</span><br><span class="line">ps    0 : mp:18.00W operational enlat:0 exlat:0 rrt:0 rrl:0</span><br><span class="line">          rwt:0 rwl:0 idle_power:- active_power:-</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">sending Identify List Namespaces</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">$ nvme list-ns &#x2F;dev&#x2F;nvme0 &quot;</span><br><span class="line">[   0]:0x1</span><br><span class="line"></span><br><span class="line"># optane</span><br><span class="line">$ nvme list-ns &#x2F;dev&#x2F;nvme0</span><br><span class="line">NVMe Status:INVALID_NS: The namespace or the format of that namespace is invalid(400b) NSID:0</span><br><span class="line"></span><br><span class="line">$ nvme id-ns &#x2F;dev&#x2F;nvme0 --namespace-id&#x3D;0x1</span><br><span class="line">NVME Identify Namespace 1:</span><br><span class="line">nsze    : 0x5754b9a  # Namespace Size (NSZE). Indicates the number of logical blocks, 0x5754b9a &#x3D; 91573146</span><br><span class="line">                     # lsblk -b show nvme0n1     259:0    0  375083606016  0 disk    91573146*4096&#x3D;375083606016</span><br><span class="line">ncap    : 0x5754b9a  # The maximum number of logical blocks allocated to the namespace. </span><br><span class="line">                     # If there is a thin provisioning (if disk space is allocated on demand), </span><br><span class="line">                     # this value can be less than NSZE. Here, it is not the case so its value is same as NSZE.</span><br><span class="line">nuse    : 0x5754b9aa # nuse, Namespace Utilization (NUSE). The current number of logical blocks allocated to the namespace. </span><br><span class="line">                     # If there is a thin provisioning (if disk space is allocated on demand), this value can be less than NSZE. </span><br><span class="line">                     # Here, it is not the case so its value is same as NSZE.</span><br><span class="line">nsfeat  : 0          #  Namespace Features (NSFEAT)</span><br><span class="line">                     # Bit 3 &#x3D; 0, NGUID and EUI64 values may be reused by the controller after this namespace is deleted.</span><br><span class="line">                     # Bit 2 &#x3D; 0, the controller does not support the Deallocated or Unwritten Logical Block error.</span><br><span class="line">                     # Bit 1 &#x3D; 0, AWUN, AWUPF and ACWU fields should be used instead of NAWUN, NAWUPF, NACWU.</span><br><span class="line">                     # Bit 0 &#x3D; 0, meaning the namespace does not support Thin Provisioning.</span><br><span class="line">nlbaf   : 6          # Number of LBA Formats (NLBAF). Indicates the number of supported LBA data size and metadata size </span><br><span class="line">                     # combinations supported by the namespace. </span><br><span class="line">                     # If It is a zero based value and its value here is 0, so there is only 1 format supported.</span><br><span class="line">flbas   : 0x3        # Formatted LBA Size (FLBAS). Indicates the LBA data size and metadata size combination </span><br><span class="line">                     # Bits 3:0 indicates one of the 16 supported LBA Formats indicated in this data structure. </span><br><span class="line"></span><br><span class="line">                     #LBA Format fields:</span><br><span class="line"></span><br><span class="line">                     #ms, Metadata Size (MS). Since its value is 0, metadata is not supported.</span><br><span class="line">                     #ds, LBA Data Size (LBADS). It is reported in terms of a power of two, so LBA data size is 2⁹ &#x3D; 512 bytes.</span><br><span class="line">                     #rp, Releative Performance (RP). Indicates the relative performance of this format to other formats. </span><br><span class="line">                     # Value of 0 indicates it is the best performance. </span><br><span class="line">                     # It does not make much sense here because we have only one LBA Format supported.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mc      : 0x1</span><br><span class="line">dpc     : 0x11</span><br><span class="line">dps     : 0          # End-to-end Data Protection Type Settings (DPS), T10 PI</span><br><span class="line">                     # Bit 3 if set to ‘1’ indicates that the protection information, </span><br><span class="line">                     # if enabled, is transferred as the first eight bytes of metadata. </span><br><span class="line">                     # Bit 3 if cleared to ‘0’ indicates that the protection information, </span><br><span class="line">                     # if enabled, is transferred as the last eight bytes of metadata.</span><br><span class="line">                     # 000b Protection information is not enabled</span><br><span class="line">                     # 001b Protection information is enabled, Type 1</span><br><span class="line">                     # 010b Protection information is enabled, Type 2</span><br><span class="line">                     # 011b Protection information is enabled, Type 3</span><br><span class="line">                     # 100b – 111b Reserved</span><br><span class="line">nmic    : 0</span><br><span class="line">rescap  : 0</span><br><span class="line">fpi     : 0</span><br><span class="line">dlfeat  : 0</span><br><span class="line">nawun   : 0</span><br><span class="line">nawupf  : 0</span><br><span class="line">nacwu   : 0</span><br><span class="line">nabsn   : 0</span><br><span class="line">nabo    : 0</span><br><span class="line">nabspf  : 0</span><br><span class="line">noiob   : 0</span><br><span class="line">nvmcap  : 0</span><br><span class="line">nsattr	: 0</span><br><span class="line">nvmsetid: 0</span><br><span class="line">anagrpid: 0</span><br><span class="line">endgid  : 0</span><br><span class="line">nguid   : 00000000000000000000000000000000</span><br><span class="line">eui64   : 5cd2e4e419330100</span><br><span class="line">lbaf  0 : ms:0   lbads:9  rp:0x2</span><br><span class="line">lbaf  1 : ms:8   lbads:9  rp:0x2</span><br><span class="line">lbaf  2 : ms:16  lbads:9  rp:0x2</span><br><span class="line">lbaf  3 : ms:0   lbads:12 rp:0 (in use)</span><br><span class="line">lbaf  4 : ms:8   lbads:12 rp:0</span><br><span class="line">lbaf  5 : ms:64  lbads:12 rp:0</span><br><span class="line">lbaf  6 : ms:128 lbads:12 rp:0</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://nvmexpress.org/wp-content/uploads/NVM_Express_Revision_1.3.pdf" target="_blank" rel="noopener">nvme_express_revision</a><br>nvme admin command </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">VMe Admin Commands</span><br><span class="line">Here are the NVMe admin commands with opcodes:</span><br><span class="line">Create and Delete I/O Submission Queue (01h, 00h)</span><br><span class="line">Get Log Page (02h)</span><br><span class="line">Create and Delete I/O Completion Queue (05h, 04h)</span><br><span class="line">Identify (06h)</span><br><span class="line">Abort (08h)</span><br><span class="line">Get and Set Features (0Ah, 09h)</span><br><span class="line">Asynchronous Event Request (0Ch)</span><br><span class="line">Namespace Management (0Dh)</span><br><span class="line">Firmware Commit and Image Download (10h, 11h)</span><br><span class="line">Device Self-test (14h)</span><br><span class="line">Namespace Attachment (15h)</span><br><span class="line">Keep Alive (18h)</span><br><span class="line">Directive Send and Receive (19h, 1Ah)</span><br><span class="line">Virtualization Management (1Ch)</span><br><span class="line">NVMe-MI Send and Receive (1Dh, 1Eh)</span><br><span class="line">Doorbell Buffer Config (7Ch)</span><br><span class="line">Format NVM (80h)</span><br><span class="line">Security Send and Receive (81h, 82h)</span><br><span class="line">Sanitize (84h)</span><br><span class="line"></span><br><span class="line">$ nvme admin-passthru /dev/nvme0 --opcode=0x06 --cdw10=0x0001 --data-len=4096 -r -d -s</span><br><span class="line">opcode       : 06</span><br><span class="line">flags        : 00</span><br><span class="line">rsvd1        : 0000</span><br><span class="line">nsid         : 00000000</span><br><span class="line">cdw2         : 00000000</span><br><span class="line">cdw3         : 00000000</span><br><span class="line">data_len     : 00001000</span><br><span class="line">metadata_len : 00000000</span><br><span class="line">addr         : 563223139000</span><br><span class="line">metadata     : 0</span><br><span class="line">cdw10        : 00000001</span><br><span class="line">cdw11        : 00000000</span><br><span class="line">cdw12        : 00000000</span><br><span class="line">cdw13        : 00000000</span><br><span class="line">cdw14        : 00000000</span><br><span class="line">cdw15        : 00000000</span><br><span class="line">timeout_ms   : 00000000</span><br><span class="line"></span><br><span class="line"><span class="comment"># NVM command</span></span><br><span class="line"><span class="comment"># NVM comands should only be sent if controller is ready (indicated by Controller Status register CSTS.RDY) and after I/O submission and completion queue have been created.</span></span><br><span class="line">Flush (00h)</span><br><span class="line">Write and Read (01h, 02h)</span><br><span class="line">Write Uncorrectable (04h)</span><br><span class="line">Compare (05h)</span><br><span class="line">Write Zeroes (08h)</span><br><span class="line">Dataset Management (09h)</span><br><span class="line">Reservation Register and Report (0Dh, 0Eh)</span><br><span class="line">Reservation Acquire and Release (11h, 15h)</span><br><span class="line"></span><br><span class="line">$ nvme show-regs -H /dev/nvme0</span><br><span class="line"><span class="built_in">cap</span>     : 2004010fff</span><br><span class="line">	Memory Page Size Maximum      (MPSMAX): 4096 bytes</span><br><span class="line">	Memory Page Size Minimum      (MPSMIN): 4096 bytes</span><br><span class="line">	Boot Partition Support           (BPS): No</span><br><span class="line">	Command Sets Supported           (CSS): NVM <span class="built_in">command</span> <span class="built_in">set</span> is supported</span><br><span class="line">	NVM Subsystem Reset Supported  (NSSRS): No</span><br><span class="line">	Doorbell Stride                (DSTRD): 4 bytes</span><br><span class="line">	Timeout                           (TO): 2000 ms</span><br><span class="line">	Arbitration Mechanism Supported  (AMS): Weighted Round Robin with Urgent Priority Class is not supported</span><br><span class="line">	Contiguous Queues Required       (CQR): Yes</span><br><span class="line">	Maximum Queue Entries Supported (MQES): 4096  <span class="comment">### Bytes</span></span><br><span class="line"></span><br><span class="line">version : 10000</span><br><span class="line">	NVMe specification 1.0</span><br><span class="line"></span><br><span class="line">cc      : 460001</span><br><span class="line">	I/O Completion Queue Entry Size (IOCQES): 16 bytes</span><br><span class="line">	I/O Submission Queue Entry Size (IOSQES): 64 bytes</span><br><span class="line">	Shutdown Notification              (SHN): No notification; no effect</span><br><span class="line">	Arbitration Mechanism Selected     (AMS): Round Robin</span><br><span class="line">	Memory Page Size                   (MPS): 4096 bytes</span><br><span class="line">	I/O Command Sets Selected          (CSS): NVM Command Set</span><br><span class="line">	Enable                              (EN): Yes</span><br><span class="line"></span><br><span class="line">csts    : 1</span><br><span class="line">	Processing Paused               (PP): No</span><br><span class="line">	NVM Subsystem Reset Occurred (NSSRO): No</span><br><span class="line">	Shutdown Status               (SHST): Normal operation (no shutdown has been requested)</span><br><span class="line">	Controller Fatal Status        (CFS): False</span><br><span class="line">	Ready                          (RDY): Yes</span><br><span class="line"></span><br><span class="line">nssr    : 0</span><br><span class="line">	NVM Subsystem Reset Control (NSSRC): 0</span><br><span class="line"></span><br><span class="line">intms   : 0</span><br><span class="line">	Interrupt Vector Mask Set (IVMS): 0</span><br><span class="line"></span><br><span class="line">intmc   : 0</span><br><span class="line">	Interrupt Vector Mask Clear (IVMC): 0</span><br><span class="line"></span><br><span class="line">aqa     : 1f001f</span><br><span class="line">	Admin Completion Queue Size (ACQS): 32</span><br><span class="line">	Admin Submission Queue Size (ASQS): 32</span><br><span class="line"></span><br><span class="line">asq     : 10255f9000</span><br><span class="line">	Admin Submission Queue Base (ASQB): 10255f9000</span><br><span class="line"></span><br><span class="line">acq     : 10255f8000</span><br><span class="line">	Admin Completion Queue Base (ACQB): 10255f8000</span><br><span class="line"></span><br><span class="line">cmbloc  : 0</span><br><span class="line">	Controller Memory Buffer feature is not supported</span><br><span class="line"></span><br><span class="line">cmbsz   : 0</span><br><span class="line">	Controller Memory Buffer feature is not supported</span><br><span class="line"></span><br><span class="line">bpinfo  : 0</span><br><span class="line">	Boot Partition feature is not supported</span><br><span class="line"></span><br><span class="line">bprsel  : 0</span><br><span class="line">	Boot Partition feature is not supported</span><br><span class="line"></span><br><span class="line">bpmbl   : 0</span><br><span class="line">	Boot Partition feature is not supported</span><br></pre></td></tr></table></figure>
+
+<h3 id="Read-data-from-the-device"><a href="#Read-data-from-the-device" class="headerlink" title="Read data from the device"></a>Read data from the device</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/nvme0n1 of=lba.0.dd bs=512 count=1</span><br><span class="line">$ nvme <span class="built_in">read</span> /dev/nvme0n1 --start-block=0 --block-count=0 --data-size=512 --data=lba.0.read</span><br><span class="line">$ nvme io-passthru /dev/nvme0 --opcode=0x02 --namespace-id=0x1 --data-len=512 --<span class="built_in">read</span> --cdw10=0 --cdw11=0 --cdw12=0 -b &gt; lba.0.io</span><br><span class="line">nvme: malloc.c:2392: sysmalloc: Assertion `(old_top == initial_top (av) &amp;&amp; old_size == 0) || ((unsigned long) (old_size) &gt;= MINSIZE &amp;&amp; prev_inuse (old_top) &amp;&amp; ((unsigned long) old_end &amp; (pagesize - 1)) == 0)<span class="string">' failed.</span></span><br><span class="line"><span class="string">Aborted (core dumped)</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/16/network_hardware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/16/network_hardware/" class="post-title-link" itemprop="url">network topology</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-16 10:32:49 / Modified: 11:14:08" itemprop="dateCreated datePublished" datetime="2020-03-16T10:32:49+08:00">2020-03-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/16/network_hardware/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/16/network_hardware/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>720</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Deep-buffers-matter"><a href="#Deep-buffers-matter" class="headerlink" title="Deep buffers matter"></a>Deep buffers matter</h3><ul>
+<li>lossless networks</li>
+<li>how to they deal with incast problems ?<ul>
+<li>Answer: tell everyone to stop<ul>
+<li>In theory, allows small buffers</li>
+<li>In practice, this leads to tree saturation</li>
+<li>Causes blocking all the way to all sources<br><img src="/img/deep_buffer_matt-1.png" alt=""><table>
+<thead>
+<tr>
+<th>Customer</th>
+<th align="center">Real Buffer Utilization</th>
+<th align="right">Cool</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HPC</td>
+<td align="center">Storage Clustre -medium</td>
+<td align="right">33MB</td>
+</tr>
+<tr>
+<td>Animation</td>
+<td align="center">Storage filer(NFS)</td>
+<td align="right">6.2MB</td>
+</tr>
+<tr>
+<td>Software vendor</td>
+<td align="center">Engineering Build servers</td>
+<td align="right">14.9MB</td>
+</tr>
+<tr>
+<td>Online shopping</td>
+<td align="center">Hadoop 2K servers -big data</td>
+<td align="right">52.3MB</td>
+</tr>
+<tr>
+<td>Educational</td>
+<td align="center">Virtualization</td>
+<td align="right">52.4MB</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Deep-Buffers-Matter"><a href="#Deep-Buffers-Matter" class="headerlink" title="Deep Buffers Matter!"></a>Deep Buffers Matter!</h4><p>cause packets dropped per teragen<br>Improving uplink contention in mixed speed networks<br>High Density in core/spine (many-to-one, in-cast, fan-in)<br><img src="/img/deep_buffer_matt-2.png" alt=""></p>
+<h4 id="Buffer-utilisation-per-port"><a href="#Buffer-utilisation-per-port" class="headerlink" title="Buffer utilisation per port"></a>Buffer utilisation per port</h4><p>some switch get the lower buffer utilisation<br>it could cause a lot of tcp retransmit</p>
+<p>The question is our issues.<br>How much buffer are you using ? Any visibility ?<br>What cause your retransmits ?<br><img src="/img/deep_buffer_matt-3.png" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/03/gdb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/03/gdb/" class="post-title-link" itemprop="url">GDB tips</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-03 22:17:33" itemprop="dateCreated datePublished" datetime="2020-03-03T22:17:33+08:00">2020-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-27 22:31:29" itemprop="dateModified" datetime="2020-03-27T22:31:29+08:00">2020-03-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/gdb/" itemprop="url" rel="index">
+                    <span itemprop="name">gdb</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/03/gdb/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/03/gdb/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>505</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="print-argv"><a href="#print-argv" class="headerlink" title="print argv"></a><a href="https://wizardforcel.gitbooks.io/100-gdb-tips/set-program-args.html" target="_blank" rel="noopener">print argv</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g3 walk1.c -o walk</span><br><span class="line">$ gdb ./walk <span class="comment"># or you could $ gdb -args ./walk /tmp 10</span></span><br><span class="line">Reading symbols from /root/walk...done.</span><br><span class="line"></span><br><span class="line">(gdb) b main</span><br><span class="line">Breakpoint 1 at 0x400bb8: file walk1.c, line 73.</span><br><span class="line">(gdb) r /tmp 10 <span class="comment">#  or you could (gdb) set args /tmp 10</span></span><br><span class="line">Starting program: /root/./walk /tmp 10</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main (argc=3, argv=0x7fffffffe138) at walk1.c:73</span><br><span class="line">73	    <span class="keyword">if</span>(argc != 3)</span><br><span class="line">(gdb) p argc</span><br><span class="line"><span class="variable">$1</span> = 3</span><br><span class="line">(gdb) p argv</span><br><span class="line"><span class="variable">$2</span> = (char **) 0x7fffffffe138</span><br><span class="line">(gdb) p argv[0]</span><br><span class="line"><span class="variable">$3</span> = 0x7fffffffe414 <span class="string">"/root/./walk"</span></span><br><span class="line">(gdb) p argv[1]</span><br><span class="line"><span class="variable">$4</span> = 0x7fffffffe421 <span class="string">"/tmp"</span></span><br><span class="line">(gdb) p argv[2]</span><br><span class="line"><span class="variable">$5</span> = 0x7fffffffe426 <span class="string">"10"</span></span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/04/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -330,7 +1055,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-17 12:26:27" itemprop="dateModified" datetime="2020-02-17T12:26:27+08:00">2020-02-17</time>
+                <time title="Modified: 2020-03-30 23:01:57" itemprop="dateModified" datetime="2020-03-30T23:01:57+08:00">2020-03-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -364,14 +1089,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>32k</span>
+              <span>33k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>29 mins.</span>
+              <span>30 mins.</span>
             </span>
 
         </div>
@@ -555,7 +1280,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 22:51:37" itemprop="dateModified" datetime="2020-01-05T22:51:37+08:00">2020-01-05</time>
+                <time title="Modified: 2020-04-18 02:05:48" itemprop="dateModified" datetime="2020-04-18T02:05:48+08:00">2020-04-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -589,14 +1314,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>9k</span>
+              <span>17k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>8 mins.</span>
+              <span>16 mins.</span>
             </span>
 
         </div>
@@ -609,7 +1334,7 @@
 
       
           <p><a href="http://fibrevillage.com/storage" target="_blank" rel="noopener">reference</a></p>
-<h4 id="format"><a href="#format" class="headerlink" title="format"></a>format</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Raid 60  24 HDD ，12HDD/per raid6   （12-2）× 2 ， Raid stripe size 64KB</span></span><br><span class="line">$ mkfs.xfs -f -d sunit=64,swidth=$((64*20)) /dev/sdxx1</span><br><span class="line"></span><br><span class="line">$ mkfs.xfs /dev/device</span><br><span class="line">$ mkfs. xfs -d su= 64k,sw= 4 /dev/device</span><br></pre></td></tr></table></figure>
+<h4 id="format"><a href="#format" class="headerlink" title="format"></a>format</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Raid 60  24 HDD ，12HDD/per raid6   （12-2）× 2 ， Raid stripe size 64KB</span></span><br><span class="line">$ mkfs.xfs -f -d sunit=64,swidth=$((64*20)) /dev/sdxx1</span><br><span class="line"><span class="comment">#su: Stripe unit, which is the RAID chunk size, in bytes</span></span><br><span class="line"><span class="comment">#sw: Multiplier of the stripe unit, i.e. number of data disks</span></span><br><span class="line"></span><br><span class="line">$ mkfs.xfs /dev/device</span><br><span class="line">$ mkfs. xfs -d su= 64k,sw= 4 /dev/device</span><br></pre></td></tr></table></figure>
 <p>su = value<br>    Specifies a stripe unit or RAID chunk size. The value must be specified in bytes, with an optional k, m, or g suffix.<br>sw= value<br>    Specifies the number of data disks in a RAID device, or the number of stripe units in the stripe.</p>
           <!--noindex-->
             <div class="post-button">
@@ -737,574 +1462,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/golang/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/10/golang/" class="post-title-link" itemprop="url">golang</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-10 23:38:16" itemprop="dateCreated datePublished" datetime="2019-10-10T23:38:16+08:00">2019-10-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 20:33:04" itemprop="dateModified" datetime="2020-01-05T20:33:04+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2019/10/10/golang/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/10/golang/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.8k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>4 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="runtime-pprof-example"><a href="#runtime-pprof-example" class="headerlink" title="runtime/pprof example"></a>runtime/pprof example</h3>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/10/golang/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/29/gdb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/09/29/gdb/" class="post-title-link" itemprop="url">Rookie try to debug</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-09-29 13:05:03" itemprop="dateCreated datePublished" datetime="2019-09-29T13:05:03+08:00">2019-09-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 19:56:28" itemprop="dateModified" datetime="2020-01-05T19:56:28+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/debug/" itemprop="url" rel="index">
-                    <span itemprop="name">debug</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2019/09/29/gdb/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/29/gdb/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>16k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>14 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="crash"><a href="#crash" class="headerlink" title="crash"></a>crash</h3><h4 id="For-ubuntu"><a href="#For-ubuntu" class="headerlink" title="For ubuntu"></a><a href="https://wiki.ubuntu.com/Debug%20Symbol%20Packages" target="_blank" rel="noopener">For ubuntu</a></h4><p>Donwload the debuginfo file from <a href="http://ddebs.ubuntu.com/pool/main/l/linux/" target="_blank" rel="noopener">http://ddebs.ubuntu.com/pool/main/l/linux/</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install ubuntu-dbgsym-keyring</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ crash &#x2F;usr&#x2F;lib&#x2F;debug&#x2F;boot&#x2F;vmlinux-4.15.0-65-generic </span><br><span class="line"></span><br><span class="line">or you can add source.list</span><br><span class="line">## debuginfo</span><br><span class="line">deb http:&#x2F;&#x2F;ddebs.ubuntu.com&#x2F; bionic main restricted universe multiverse</span><br><span class="line">deb http:&#x2F;&#x2F;ddebs.ubuntu.com&#x2F; bionic-updates main restricted universe multiverse</span><br><span class="line">deb http:&#x2F;&#x2F;ddebs.ubuntu.com&#x2F; bionic-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/09/29/gdb/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/centos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/18/centos/" class="post-title-link" itemprop="url">centos</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-07-18 15:37:02" itemprop="dateCreated datePublished" datetime="2019-07-18T15:37:02+08:00">2019-07-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-28 13:57:47" itemprop="dateModified" datetime="2020-02-28T13:57:47+08:00">2020-02-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/others/" itemprop="url" rel="index">
-                    <span itemprop="name">others</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2019/07/18/centos/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/18/centos/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>27k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>25 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h3><h4 id="selinux"><a href="#selinux" class="headerlink" title="selinux"></a>selinux</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ setenforce 0</span><br><span class="line">$ getenforce</span><br><span class="line">Permissive</span><br></pre></td></tr></table></figure>
-<h4 id="Software-Collections-SCL-Repository"><a href="#Software-Collections-SCL-Repository" class="headerlink" title="Software Collections ( SCL ) Repository"></a>Software Collections ( SCL ) Repository</h4><p>$ yum install centos-release-scl-rh<br>$ yum install devtoolset-8-toolchain</p>
-<h1 id="centos-8"><a href="#centos-8" class="headerlink" title="centos 8"></a>centos 8</h1><p>$ dnf install gcc-toolset-9</p>
-<p>$ gfortran –version | head -2<br>GNU Fortran (GCC) 4.8.5 20150623 (Red Hat 4.8.5-36)<br>Copyright (C) 2015 Free Software Foundation, Inc.</p>
-<p>$ scl enable devtoolset-8 bash</p>
-<p>$  gfortran –version | head -2<br>GNU Fortran (GCC) 8.2.1 20180905 (Red Hat 8.2.1-3)<br>Copyright (C) 2018 Free Software Foundation, Inc.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/07/18/centos/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/24/megaraid/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/24/megaraid/" class="post-title-link" itemprop="url">Replace megaraid by strocli</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-05-24 09:26:24" itemprop="dateCreated datePublished" datetime="2019-05-24T09:26:24+08:00">2019-05-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-24 14:05:09" itemprop="dateModified" datetime="2020-02-24T14:05:09+08:00">2020-02-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/raid/" itemprop="url" rel="index">
-                    <span itemprop="name">raid</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2019/05/24/megaraid/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/24/megaraid/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>27k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>25 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Set-time"><a href="#Set-time" class="headerlink" title="Set time"></a>Set time</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ perccli64 /call show time</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> time=yyyymmdd hh:mm:ss|systemtime</span><br><span class="line">$ timedatectl <span class="built_in">set</span>-timezone Asia/XXXXXX</span><br><span class="line">$ storcli64 /call <span class="built_in">set</span> time=systemtime</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/05/24/megaraid/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/consistency-test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/28/consistency-test/" class="post-title-link" itemprop="url">Test hardware and filesystem data consistency</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-28 17:43:07" itemprop="dateCreated datePublished" datetime="2019-04-28T17:43:07+08:00">2019-04-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 19:59:35" itemprop="dateModified" datetime="2020-01-05T19:59:35+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/benchmark/" itemprop="url" rel="index">
-                    <span itemprop="name">benchmark</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2019/04/28/consistency-test/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/28/consistency-test/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>14k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>13 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Because there are some Enterprise hardware firmware issue cause some function not work/data loss.<br><a href="https://engineering.nordeus.com/power-failure-testing-with-ssds/" target="_blank" rel="noopener">make sure the supercapacitor is work in Enterprise SSD</a><br>In Some case, if the device partition is not aligned, the logic 512 Byte across the two physical block(512B), it will cause atomic transaction failed (enable the dev write buffer,the buffer no battery or supercapacitor)</p>
-<h3 id="About-filesystem-settting"><a href="#About-filesystem-settting" class="headerlink" title="About filesystem settting"></a>About filesystem settting</h3><p>Disable barrier and set data is writeback </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ext4&#x2F;xfs -o barrier&#x3D;0,data&#x3D;writeback</span><br><span class="line">zfs disable sync write</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/28/consistency-test/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1372,20 +1534,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1420,13 +1582,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">820k</span>
+    <span title="Symbols count total">925k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">12:25</span>
+    <span title="Reading time total">14:01</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

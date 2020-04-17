@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="NAND P&#x2F;E Cycles &#x3D; amount of program &#x2F; erase cycles NAND can do before wearing out WAF &#x3D; NAND writes &#x2F; host writes   TBW or PBW – amount of host writes to SSD before wearing out TBW &#x3D; drive capacity *">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nvme test">
+<meta property="og:url" content="http://yoursite.com/2020/03/17/nvme/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="NAND P&#x2F;E Cycles &#x3D; amount of program &#x2F; erase cycles NAND can do before wearing out WAF &#x3D; NAND writes &#x2F; host writes   TBW or PBW – amount of host writes to SSD before wearing out TBW &#x3D; drive capacity *">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-17T03:27:38.000Z">
+<meta property="article:modified_time" content="2020-03-30T17:16:01.000Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="nfs">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/17/nvme/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>nvme test | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/17/nvme/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          nvme test
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-17 11:27:38" itemprop="dateCreated datePublished" datetime="2020-03-17T11:27:38+08:00">2020-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-31 01:16:01" itemprop="dateModified" datetime="2020-03-31T01:16:01+08:00">2020-03-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/block/" itemprop="url" rel="index">
+                    <span itemprop="name">block</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/17/nvme/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/17/nvme/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>18k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>17 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li>NAND P/E Cycles = amount of program / erase cycles NAND can do before wearing out<ul>
+<li>WAF = NAND writes / host writes</li>
+</ul>
+</li>
+<li>TBW or PBW – amount of host writes to SSD before wearing out<ul>
+<li>TBW = drive capacity * cycles / WAF</li>
+</ul>
+</li>
+<li>DWPD (drive writes per day): amount of data you can write to device each day of the warranty (typically 5 years) without wearing out<ul>
+<li>DWPD = TBW/365/5/drive capacity</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>Create partition smaller than total user capacity of SSD</li>
+<li>Limit max LBA of drive through vendor specific tools</li>
+<li>Create a namespace smaller than total user capacity</li>
+<li>Limit application use to smaller LBA range</li>
+</ol>
+<p><a href="https://events.static.linuxfound.org/sites/events/files/slides/lemoal-nvme-polling-vault-2017-final_0.pdf" target="_blank" rel="noopener">nvme hybird polling</a><br>I/O models</p>
+<ul>
+<li><p>IRQ vs polling</p>
+<ul>
+<li>NVM is coming ! Is this relevant ?</li>
+<li>Linux implementation</li>
+</ul>
+</li>
+<li><p>Block Layer and NVMe driver</p>
+<ul>
+<li>Evaluation Results</li>
+<li>Classic polling vs Hybrid polling</li>
+<li>Impact of process scheduling</li>
+<li>Comparison with user level drivers</li>
+</ul>
+</li>
+<li><p>Implemented by blk_mq_poll</p>
+<ul>
+<li>block-mq enabled devices only</li>
+<li>Device queue flagged with “poll enabled”<ul>
+<li>Can be controlled through sysfs</li>
+<li>Enabled by default for devices supporting it, e.g. NVMe</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To enable it, you echo 1 to /sys/block/&lt;dev&gt;/queue/io_poll.</span></span><br><span class="line">$ <span class="built_in">echo</span> 1 &gt;  /sys/block/nvme0n1/queue/io_poll</span><br><span class="line">$ cat  /sys/block/nvme0n1/queue/io_poll</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Polling is tried for any block I/O belonging to a high-priority I/O context (IOCB_HIPRI)</li>
+<li>IRQs are NOT disabled<ul>
+<li>ISR is still executed as the device signals completions</li>
+<li>But ISR sees a completion slot already processed</li>
+</ul>
+</li>
+</ul>
+<p>6us average latency with IRQ, 4.5us with polling</p>
+<ul>
+<li>25% lower latency with polling</li>
+<li>166 KIOPS vs 222 KIOPS</li>
+<li><code>But 100% load on the polling CPU</code></li>
+<li>Only 32% CPU load with IRQ model</li>
+</ul>
+<p>Adaptive hybrid polling gives the same average latency of 4.5us as classic polling</p>
+<ul>
+<li>But with only 58% CPU load</li>
+<li>32% with IRQ model</li>
+<li>Fixed time polling allows controlling the CPU vs latency trade-off</li>
+<li>IRQ like average latency and CPU load for high polling delay</li>
+<li>Better use the IRQ model</li>
+<li>Lower CPU loads with a small average latency degradation achieved with intermediate polling delay</li>
+</ul>
+<p><code>If I use NVME, if you have the top CPU, you could enable the polling, if not , irq is the better choice</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cat /sys/block/nvme0n1/queue/io_poll_delay</span><br><span class="line">-1</span><br><span class="line"><span class="comment"># -1 class polling (default)</span></span><br><span class="line"><span class="comment"># 0 means adaptive hybird polling</span></span><br><span class="line">$ <span class="built_in">echo</span> 0 &gt; /sys/block/nvme0n1/queue/io_poll_delay</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">|&lt;------------------------Application Perecived I&#x2F;O latency---------------------------------&gt;|</span><br><span class="line">IRQ      syscall  BIO_stack  Device_driver  CS             sleep            CS  BIO_stack </span><br><span class="line">                                                                            | (wake)</span><br><span class="line">                                                               CS ISR -------</span><br><span class="line">                                                               |(IRQ)</span><br><span class="line">		                    command execution-----------   </span><br><span class="line"></span><br><span class="line">Polling  syscall  BIO_stack  Device_driver    Are you done ?    BIO_stack&lt;-------Gain-------&gt;| </span><br><span class="line">                                                 |</span><br><span class="line">                                           command execution</span><br><span class="line"></span><br><span class="line">Hybrid   syscall  BIO_stack  Device_driver  cs sleep cs  done?  BIO_stack&lt;-------Gain-------&gt;| </span><br><span class="line">                                                     |(wake)|</span><br><span class="line">                                      Timer IRQ --&gt; ISR     |</span><br><span class="line">						     command execution</span><br></pre></td></tr></table></figure>
+<h4 id="Software-optimization"><a href="#Software-optimization" class="headerlink" title="Software optimization"></a>Software optimization</h4><ul>
+<li>System call (VFS)<ul>
+<li>Optimizations introduced with kernel 4.10</li>
+</ul>
+</li>
+<li>BIO stack<ul>
+<li>blk-mq already very efficient</li>
+</ul>
+</li>
+<li>Device driver<ul>
+<li>NVMe driver submission and completion paths are very short</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://metebalci.com/blog/a-quick-tour-of-nvm-express-nvme/" target="_blank" rel="noopener">I’m copy the article, just read it</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">$ nvme --smart-log /dev/nvme0</span><br><span class="line">Smart Log <span class="keyword">for</span> NVME device:nvme0 namespace-id:ffffffff</span><br><span class="line">critical_warning                    : 0</span><br><span class="line">temperature                         : 35 C</span><br><span class="line">available_spare                     : 100%</span><br><span class="line">available_spare_threshold           : 0%</span><br><span class="line">percentage_used                     : 0%</span><br><span class="line">data_units_read                     : 320,346,034</span><br><span class="line">data_units_written                  : 441,545,307</span><br><span class="line">host_read_commands                  : 16,537,842,223</span><br><span class="line">host_write_commands                 : 19,148,305,649</span><br><span class="line">controller_busy_time                : 3,505</span><br><span class="line">power_cycles                        : 50</span><br><span class="line">power_on_hours                      : 16,079</span><br><span class="line">unsafe_shutdowns                    : 33</span><br><span class="line">media_errors                        : 0</span><br><span class="line">num_err_log_entries                 : 0</span><br><span class="line">Warning Temperature Time            : 0</span><br><span class="line">Critical Composite Temperature Time : 0</span><br><span class="line">Thermal Management T1 Trans Count   : 0</span><br><span class="line">Thermal Management T2 Trans Count   : 0</span><br><span class="line">Thermal Management T1 Total Time    : 0</span><br><span class="line">Thermal Management T2 Total Time    : 0</span><br><span class="line"></span><br><span class="line">nvme error-log /dev/nvme0</span><br><span class="line">Error Log Entries <span class="keyword">for</span> device:nvme0 entries:64</span><br><span class="line">.................</span><br><span class="line"> Entry[ 0]</span><br><span class="line">.................</span><br><span class="line">error_count  : 0</span><br><span class="line">sqid         : 0</span><br><span class="line">cmdid        : 0</span><br><span class="line">status_field : 0(SUCCESS: The <span class="built_in">command</span> completed successfully)</span><br><span class="line">parm_err_loc : 0</span><br><span class="line">lba          : 0</span><br><span class="line">nsid         : 0</span><br><span class="line">vs           : 0</span><br><span class="line">cs           : 0</span><br><span class="line">.................</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">Entry[63]</span><br><span class="line">.................</span><br><span class="line">error_count  : 0</span><br><span class="line">sqid         : 0</span><br><span class="line">cmdid        : 0</span><br><span class="line">status_field : 0(SUCCESS: The <span class="built_in">command</span> completed successfully)</span><br><span class="line">parm_err_loc : 0</span><br><span class="line">lba          : 0</span><br><span class="line">nsid         : 0</span><br><span class="line">vs           : 0</span><br><span class="line">cs           : 0</span><br><span class="line">.................</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ nvme get-log /dev/nvme0 --<span class="built_in">log</span>-id=2 --<span class="built_in">log</span>-len=512</span><br><span class="line">Device:nvme0 <span class="built_in">log</span>-id:2 namespace-id:0xffffffff</span><br><span class="line">       0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f</span><br><span class="line">0000: 00 33 01 64 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">".3.d............"</span></span><br><span class="line">0010: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"................"</span></span><br><span class="line">0020: b2 17 18 13 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"................"</span></span><br><span class="line">0030: 5b 72 51 1a 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"[rQ............."</span></span><br><span class="line">0040: 2f 72 bb d9 03 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"/r.............."</span></span><br><span class="line">0050: f1 f4 53 75 04 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"..Su............"</span></span><br><span class="line">0060: b1 0d 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"................"</span></span><br><span class="line">0070: 32 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"2..............."</span></span><br><span class="line">0080: cf 3e 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">".&gt;.............."</span></span><br><span class="line">0090: 21 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 <span class="string">"!..............."</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ nvme list</span><br><span class="line">Node             SN                   Model                                    Namespace Usage                      Format           FW Rev</span><br><span class="line">---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------</span><br><span class="line">/dev/nvme0n1     PHKS00000000000000   INTEL SSDPED1K375GA                      1         375.08  GB / 375.08  GB      4 KiB +  0 B   E2010435</span><br><span class="line"></span><br><span class="line">$ nvme list-ns /dev/nvme0n1</span><br><span class="line">NVMe Status:INVALID_NS: The namespace or the format of that namespace is invalid(400b) NSID:0</span><br><span class="line"></span><br><span class="line">$ nvme fw-download /dev/nvme0n1 -f &lt;fw binary&gt;</span><br><span class="line">$ nvme fw-commit /dev/nvme0n1 -s 1 -a 1</span><br><span class="line">$ nvme reset /dev/nvme0 </span><br><span class="line"></span><br><span class="line"><span class="comment">#secure format</span></span><br><span class="line">$ nvme format /dev/nvme0 –s 1</span><br><span class="line">SES = 0 results <span class="keyword">in</span> drive being formatted and trimmed</span><br><span class="line">SES = 1 <span class="keyword">for</span> Block Erase – low level block erase on media (physically erase NAND blocks, or overwrite with 0 on SCM)</span><br><span class="line">SES = 2 <span class="keyword">for</span> Crypto Erase - change media encryption key</span><br><span class="line">-l <span class="keyword">for</span> LBA format, find capabilities <span class="keyword">in</span> NVMe identify controller -t timeout <span class="keyword">for</span> devices that will take a long time</span><br><span class="line">-p <span class="keyword">for</span> protection information with variable sector size</span><br><span class="line"></span><br><span class="line"><span class="comment">## for more info </span></span><br><span class="line">Format NVM, <span class="built_in">command</span> dword 10</span><br><span class="line"></span><br><span class="line">Sanitize (not widely supported yet)</span><br><span class="line">$ nvme sanitize</span><br><span class="line">* Block Erase – low level block erase on media (physically erase NAND blocks)</span><br><span class="line">* Crypto Erase - change media encryption key</span><br><span class="line">* Overwrite – overwrite with data patterns (not good or recommended <span class="keyword">for</span> NAND based SSDs due to endurance)</span><br></pre></td></tr></table></figure>
+
+<h3 id="create-mdraid-for-nvme-ssd"><a href="#create-mdraid-for-nvme-ssd" class="headerlink" title="create mdraid for nvme ssd"></a>create mdraid for nvme ssd</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$ mdadm -C /dev/md0 /dev/nvme[0-3]n1 –n 4 –e imsm</span><br><span class="line">$ mdadm -C /dev/md0 /dev/nvme[0-3]n1 –n 4 –e imsm</span><br><span class="line"></span><br><span class="line"><span class="comment">## I/O polling mode was introduced with linux 4.4, in polling mode the cpu continuously checks if the I/O command completed</span></span><br><span class="line">$ <span class="built_in">echo</span> 1 &gt; /sys/block/nvme0n1/queue/io_poll</span><br><span class="line">bash: <span class="built_in">echo</span>: write error: Invalid argument</span><br><span class="line"></span><br><span class="line"><span class="comment">## Hybird polling mode was introduced in linux kenrel 4.10, hybrid polling mode improvded QD1 performance closer to that of polling mode performance, but with lower cpu utilizaion</span></span><br><span class="line"><span class="built_in">echo</span> 0 &gt; /sys/block/nvme0n1/queue/io_poll_delay</span><br><span class="line">0=hybrid, 1 = always poll( default )</span><br><span class="line"></span><br><span class="line">block-mq enabled devices only</span><br><span class="line">Device queue flagged with “poll enabled</span><br><span class="line"></span><br><span class="line">CPU frequency    &gt;  3.0GHz</span><br><span class="line">Hyper threading     <span class="built_in">disable</span></span><br><span class="line">EIST(Enhanced intel speed step technology)    disabled</span><br><span class="line">intel Turbo mode    <span class="built_in">disable</span></span><br><span class="line">C-states            <span class="built_in">disable</span></span><br><span class="line">P-states            <span class="built_in">disable</span></span><br><span class="line">CPU Governor(os)    performance mode</span><br><span class="line">IRQ balancing(os)   disabled</span><br><span class="line">SMP Affinity        <span class="built_in">set</span> interrupts to run <span class="keyword">in</span> the proper CPU cores</span><br><span class="line">I/O polling or Hybrid mode    Enabled</span><br></pre></td></tr></table></figure>
+<p>Linux flow of command execution on NVME SSDs<br>User app requestion IO -&gt; kernel processes IO request and sends to device driver -&gt; device driver processes the requests(create SQ entry, rings doorbell register) -&gt; device processes the requests(read sq entry, processes IO, create cq entry, signals MSI-x to host) -&gt; kernel call device driver to handle the completion -&gt; device driver ack, that the entry in CQ has been processed</p>
+<p>IO execution in SPDK<br>User app requestion IO -&gt; SPDK userspace device driver process the requests(create SQ entry, rings doorbell register) -&gt; device processes the requestion(read sq entry, processes IO, create cq entry) -&gt; user application polls SPDK for IO completion -&gt; spdk call user application completion callback when IO is complete</p>
+<p>cat /proc/version /proc/cpuinfo /proc/meminfo /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor<br>lspci -v<br>nvme list</p>
+<p>#disable IRQ balance<br>set SMP affinity<br>systemctl stop irqbalance<br>folders=/proc/irq/*<br>for folder in $folders<br>do<br>  files=”$folder/*”<br>  for file in $files<br>  do<br>     if [[ $file == *”nvme”* ]]<br>     then<br>        echo $file<br>        contents=$(cat $folder/affinity_hint)<br>        echo $contents &gt; $folder/smp_affinity<br>        cat $folder/smp_affinity<br>     fi<br>  done<br>done</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br></pre></td><td class="code"><pre><span class="line">$ nvme id-ctrl -H &#x2F;dev&#x2F;nvme0n1</span><br><span class="line">NVME Identify Controller:</span><br><span class="line">vid       : 0x8086                  # vid is PCI Vendor ID (so Samsung in this case), 0x144d as in the lspci output.</span><br><span class="line">ssvid     : 0x8086                  # ssvid is PCI Subsystem Vendor ID    </span><br><span class="line">sn        : PHK000000000000000</span><br><span class="line">mn        : INTEL SSDPED1K375GA</span><br><span class="line">fr        : E2010435</span><br><span class="line">rab       : 0</span><br><span class="line">ieee      : 5cd2e4</span><br><span class="line">cmic      : 0                       # the Controller Multi-Path I&#x2F;O and Namespace Sharing Capabilities.</span><br><span class="line">  [3:3] : 0	ANA not supported</span><br><span class="line">  [2:2] : 0	PCI</span><br><span class="line">  [1:1] : 0	Single Controller</span><br><span class="line">  [0:0] : 0	Single Port</span><br><span class="line"></span><br><span class="line">mdts      : 5                       # mdts is Maximum Data Transfer Size. </span><br><span class="line">                                    # It is reported as a power of two and in units of minimum memory page size. mdts&#x3D;5 here</span><br><span class="line">                                    # so 2⁵ &#x3D; 32. We will see the minimum memory page size (MPSMIN) as 4K below. So MDTS is 32 * 4K &#x3D; 128K.</span><br><span class="line">cntlid    : 0</span><br><span class="line">ver       : 0</span><br><span class="line">rtd3r     : 0</span><br><span class="line">rtd3e     : 0</span><br><span class="line">oaes      : </span><br><span class="line">  [9:9] : 0	Firmware Activation Notices Not Supported</span><br><span class="line">  [8:8] : 0	Namespace Attribute Changed Event Not Supported</span><br><span class="line"></span><br><span class="line">ctratt    : 0</span><br><span class="line">  [5:5] : 0	Predictable Latency Mode Not Supported</span><br><span class="line">  [4:4] : 0	Endurance Groups Not Supported</span><br><span class="line">  [3:3] : 0	Read Recovery Levels Not Supported</span><br><span class="line">  [2:2] : 0	NVM Sets Not Supported</span><br><span class="line">  [1:1] : 0	Non-Operational Power State Permissive Not Supported</span><br><span class="line">  [0:0] : 0	128-bit Host Identifier Not Supported</span><br><span class="line"></span><br><span class="line">rrls      : 0</span><br><span class="line">oacs      : 0x7                    # Optional Admin Command Support</span><br><span class="line">  [8:8] : 0	Doorbell Buffer Config Not Supported</span><br><span class="line">  [7:7] : 0	Virtualization Management Not Supported</span><br><span class="line">  [6:6] : 0	NVMe-MI Send and Receive Not Supported</span><br><span class="line">  [5:5] : 0	Directives Not Supported</span><br><span class="line">  [4:4] : 0	Device Self-test Not Supported</span><br><span class="line">  [3:3] : 0	NS Management and Attachment Not Supported</span><br><span class="line">  [2:2] : 0x1	FW Commit and Download Supported</span><br><span class="line">  [1:1] : 0x1	Format NVM Supported</span><br><span class="line">  [0:0] : 0x1	Security Send and Receive Supported</span><br><span class="line"></span><br><span class="line">acl       : 3</span><br><span class="line">aerl      : 3</span><br><span class="line">frmw      : 0x2                    # firmware update</span><br><span class="line">  [4:4] : 0	Firmware Activate Without Reset Not Supported</span><br><span class="line">  [3:1] : 0x1	Number of Firmware Slots</span><br><span class="line">  [0:0] : 0	Firmware Slot 1 Read&#x2F;Write</span><br><span class="line"></span><br><span class="line">lpa       : 0x2</span><br><span class="line">  [3:3] : 0	Telemetry host&#x2F;controller initiated log page Not Suporrted</span><br><span class="line">  [2:2] : 0	Extended data for Get Log Page Not Supported</span><br><span class="line">  [1:1] : 0x1	Command Effects Log Page Supported</span><br><span class="line">  [0:0] : 0	SMART&#x2F;Health Log Page per NS Not Supported</span><br><span class="line"></span><br><span class="line">elpe      : 63</span><br><span class="line">npss      : 0</span><br><span class="line">avscc     : 0</span><br><span class="line">  [0:0] : 0	Admin Vendor Specific Commands uses Vendor Specific Format</span><br><span class="line"></span><br><span class="line">apsta     : 0</span><br><span class="line">  [0:0] : 0	Autonomous Power State Transitions Not Supported</span><br><span class="line"></span><br><span class="line">wctemp    : 0</span><br><span class="line">cctemp    : 0</span><br><span class="line">mtfa      : 0</span><br><span class="line">hmpre     : 0</span><br><span class="line">hmmin     : 0</span><br><span class="line">tnvmcap   : 0                      # Total NVM Capacity and it is an optional field. As it is reported as zero, it is not supported.</span><br><span class="line">unvmcap   : 0                      </span><br><span class="line">rpmbs     : 0</span><br><span class="line"> [31:24]: 0	Access Size</span><br><span class="line"> [23:16]: 0	Total Size</span><br><span class="line">  [5:3] : 0	Authentication Method</span><br><span class="line">  [2:0] : 0	Number of RPMB Units</span><br><span class="line"></span><br><span class="line">edstt     : 0</span><br><span class="line">dsto      : 0</span><br><span class="line">fwug      : 0</span><br><span class="line">kas       : 0</span><br><span class="line">hctma     : 0</span><br><span class="line">  [0:0] : 0	Host Controlled Thermal Management Not Supported</span><br><span class="line"></span><br><span class="line">mntmt     : 0</span><br><span class="line">mxtmt     : 0</span><br><span class="line">sanicap   : 0</span><br><span class="line">  [2:2] : 0	Overwrite Sanitize Operation Not Supported</span><br><span class="line">  [1:1] : 0	Block Erase Sanitize Operation Not Supported</span><br><span class="line">  [0:0] : 0	Crypto Erase Sanitize Operation Not Supported</span><br><span class="line"></span><br><span class="line">hmminds   : 0</span><br><span class="line">hmmaxd    : 0</span><br><span class="line">nsetidmax : 0</span><br><span class="line">anatt     : 0</span><br><span class="line">anacap    : 0</span><br><span class="line">  [7:7] : 0	Non-zero group ID Not Supported</span><br><span class="line">  [6:6] : 0	Group ID does not change</span><br><span class="line">  [4:4] : 0	ANA Change state Not Supported</span><br><span class="line">  [3:3] : 0	ANA Persistent Loss state Not Supported</span><br><span class="line">  [2:2] : 0	ANA Inaccessible state Not Supported</span><br><span class="line">  [1:1] : 0	ANA Non-optimized state Not Supported</span><br><span class="line">  [0:0] : 0	ANA Optimized state Not Supported</span><br><span class="line"></span><br><span class="line">anagrpmax : 0</span><br><span class="line">nanagrpid : 0</span><br><span class="line">sqes      : 0x66   # (Maximum and Required) Submission Queue Entry (SQE) Size. </span><br><span class="line">                   # It is expected to be 64 but with proprietary extensions it can be modified. The value is 0x66 here.</span><br><span class="line">  [7:4] : 0x6	Max SQ Entry Size (64)</span><br><span class="line">  [3:0] : 0x6	Min SQ Entry Size (64)</span><br><span class="line"></span><br><span class="line">cqes      : 0x44   # (Maximum and Required) Completion Queue Entry (CQE) Size. Similar to calculation of SQE size, </span><br><span class="line">                   # its value is 0x44 here, so both maximum and required completion queue entry size is 2⁴&#x3D;16 bytes.</span><br><span class="line">  [7:4] : 0x4	Max CQ Entry Size (16)</span><br><span class="line">  [3:0] : 0x4	Min CQ Entry Size (16)</span><br><span class="line"></span><br><span class="line">maxcmd    : 0</span><br><span class="line">nn        : 1      # (Maximum) Number of Namespaces supported by the controller. Although theoretical maximum is high, here it is 1, </span><br><span class="line">                   # so only one namespace is possible.</span><br><span class="line">oncs      : 0x6    # is Optional NVM Command Support</span><br><span class="line">  [7:7] : 0	Virtualization Management Not Supported</span><br><span class="line">  [6:6] : 0	Timestamp Not Supported</span><br><span class="line">  [5:5] : 0	Reservations Not Supported</span><br><span class="line">  [4:4] : 0	Save and Select Not Supported</span><br><span class="line">  [3:3] : 0	Write Zeroes Not Supported</span><br><span class="line">  [2:2] : 0x1	Data Set Management Supported</span><br><span class="line">  [1:1] : 0x1	Write Uncorrectable Supported</span><br><span class="line">  [0:0] : 0	Compare Not Supported</span><br><span class="line"></span><br><span class="line">fuses     : 0   </span><br><span class="line">  [0:0] : 0	Fused Compare and Write Not Supported</span><br><span class="line"></span><br><span class="line">fna       : 0x4</span><br><span class="line">  [2:2] : 0x1	Crypto Erase Supported as part of Secure Erase</span><br><span class="line">  [1:1] : 0	Crypto Erase Applies to Single Namespace(s)</span><br><span class="line">  [0:0] : 0	Format Applies to Single Namespace(s)</span><br><span class="line"></span><br><span class="line">vwc       : 0</span><br><span class="line">  [0:0] : 0	Volatile Write Cache Not Present</span><br><span class="line"></span><br><span class="line">awun      : 0</span><br><span class="line">awupf     : 0</span><br><span class="line">nvscc     : 0</span><br><span class="line">  [0:0] : 0	NVM Vendor Specific Commands uses Vendor Specific Format</span><br><span class="line"></span><br><span class="line">nwpc      : 0</span><br><span class="line">  [2:2] : 0	Permanent Write Protect Not Supported</span><br><span class="line">  [1:1] : 0	Write Protect Until Power Supply Not Supported</span><br><span class="line">  [0:0] : 0	No Write Protect and Write Protect Namespace Not Supported</span><br><span class="line"></span><br><span class="line">acwu      : 0</span><br><span class="line">sgls      : 0</span><br><span class="line"> [1:0]  : 0	Scatter-Gather Lists Not Supported</span><br><span class="line"></span><br><span class="line">mnan      : 0</span><br><span class="line">subnqn    :</span><br><span class="line">ioccsz    : 0</span><br><span class="line">iorcsz    : 0</span><br><span class="line">icdoff    : 0</span><br><span class="line">ctrattr   : 0</span><br><span class="line">  [0:0] : 0	Dynamic Controller Model</span><br><span class="line"></span><br><span class="line">msdbd     : 0</span><br><span class="line">ps    0 : mp:18.00W operational enlat:0 exlat:0 rrt:0 rrl:0</span><br><span class="line">          rwt:0 rwl:0 idle_power:- active_power:-</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">sending Identify List Namespaces</span><br><span class="line">&#96;&#96;&#96;bash</span><br><span class="line">$ nvme list-ns &#x2F;dev&#x2F;nvme0 &quot;</span><br><span class="line">[   0]:0x1</span><br><span class="line"></span><br><span class="line"># optane</span><br><span class="line">$ nvme list-ns &#x2F;dev&#x2F;nvme0</span><br><span class="line">NVMe Status:INVALID_NS: The namespace or the format of that namespace is invalid(400b) NSID:0</span><br><span class="line"></span><br><span class="line">$ nvme id-ns &#x2F;dev&#x2F;nvme0 --namespace-id&#x3D;0x1</span><br><span class="line">NVME Identify Namespace 1:</span><br><span class="line">nsze    : 0x5754b9a  # Namespace Size (NSZE). Indicates the number of logical blocks, 0x5754b9a &#x3D; 91573146</span><br><span class="line">                     # lsblk -b show nvme0n1     259:0    0  375083606016  0 disk    91573146*4096&#x3D;375083606016</span><br><span class="line">ncap    : 0x5754b9a  # The maximum number of logical blocks allocated to the namespace. </span><br><span class="line">                     # If there is a thin provisioning (if disk space is allocated on demand), </span><br><span class="line">                     # this value can be less than NSZE. Here, it is not the case so its value is same as NSZE.</span><br><span class="line">nuse    : 0x5754b9aa # nuse, Namespace Utilization (NUSE). The current number of logical blocks allocated to the namespace. </span><br><span class="line">                     # If there is a thin provisioning (if disk space is allocated on demand), this value can be less than NSZE. </span><br><span class="line">                     # Here, it is not the case so its value is same as NSZE.</span><br><span class="line">nsfeat  : 0          #  Namespace Features (NSFEAT)</span><br><span class="line">                     # Bit 3 &#x3D; 0, NGUID and EUI64 values may be reused by the controller after this namespace is deleted.</span><br><span class="line">                     # Bit 2 &#x3D; 0, the controller does not support the Deallocated or Unwritten Logical Block error.</span><br><span class="line">                     # Bit 1 &#x3D; 0, AWUN, AWUPF and ACWU fields should be used instead of NAWUN, NAWUPF, NACWU.</span><br><span class="line">                     # Bit 0 &#x3D; 0, meaning the namespace does not support Thin Provisioning.</span><br><span class="line">nlbaf   : 6          # Number of LBA Formats (NLBAF). Indicates the number of supported LBA data size and metadata size </span><br><span class="line">                     # combinations supported by the namespace. </span><br><span class="line">                     # If It is a zero based value and its value here is 0, so there is only 1 format supported.</span><br><span class="line">flbas   : 0x3        # Formatted LBA Size (FLBAS). Indicates the LBA data size and metadata size combination </span><br><span class="line">                     # Bits 3:0 indicates one of the 16 supported LBA Formats indicated in this data structure. </span><br><span class="line"></span><br><span class="line">                     #LBA Format fields:</span><br><span class="line"></span><br><span class="line">                     #ms, Metadata Size (MS). Since its value is 0, metadata is not supported.</span><br><span class="line">                     #ds, LBA Data Size (LBADS). It is reported in terms of a power of two, so LBA data size is 2⁹ &#x3D; 512 bytes.</span><br><span class="line">                     #rp, Releative Performance (RP). Indicates the relative performance of this format to other formats. </span><br><span class="line">                     # Value of 0 indicates it is the best performance. </span><br><span class="line">                     # It does not make much sense here because we have only one LBA Format supported.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mc      : 0x1</span><br><span class="line">dpc     : 0x11</span><br><span class="line">dps     : 0          # End-to-end Data Protection Type Settings (DPS), T10 PI</span><br><span class="line">                     # Bit 3 if set to ‘1’ indicates that the protection information, </span><br><span class="line">                     # if enabled, is transferred as the first eight bytes of metadata. </span><br><span class="line">                     # Bit 3 if cleared to ‘0’ indicates that the protection information, </span><br><span class="line">                     # if enabled, is transferred as the last eight bytes of metadata.</span><br><span class="line">                     # 000b Protection information is not enabled</span><br><span class="line">                     # 001b Protection information is enabled, Type 1</span><br><span class="line">                     # 010b Protection information is enabled, Type 2</span><br><span class="line">                     # 011b Protection information is enabled, Type 3</span><br><span class="line">                     # 100b – 111b Reserved</span><br><span class="line">nmic    : 0</span><br><span class="line">rescap  : 0</span><br><span class="line">fpi     : 0</span><br><span class="line">dlfeat  : 0</span><br><span class="line">nawun   : 0</span><br><span class="line">nawupf  : 0</span><br><span class="line">nacwu   : 0</span><br><span class="line">nabsn   : 0</span><br><span class="line">nabo    : 0</span><br><span class="line">nabspf  : 0</span><br><span class="line">noiob   : 0</span><br><span class="line">nvmcap  : 0</span><br><span class="line">nsattr	: 0</span><br><span class="line">nvmsetid: 0</span><br><span class="line">anagrpid: 0</span><br><span class="line">endgid  : 0</span><br><span class="line">nguid   : 00000000000000000000000000000000</span><br><span class="line">eui64   : 5cd2e4e419330100</span><br><span class="line">lbaf  0 : ms:0   lbads:9  rp:0x2</span><br><span class="line">lbaf  1 : ms:8   lbads:9  rp:0x2</span><br><span class="line">lbaf  2 : ms:16  lbads:9  rp:0x2</span><br><span class="line">lbaf  3 : ms:0   lbads:12 rp:0 (in use)</span><br><span class="line">lbaf  4 : ms:8   lbads:12 rp:0</span><br><span class="line">lbaf  5 : ms:64  lbads:12 rp:0</span><br><span class="line">lbaf  6 : ms:128 lbads:12 rp:0</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://nvmexpress.org/wp-content/uploads/NVM_Express_Revision_1.3.pdf" target="_blank" rel="noopener">nvme_express_revision</a><br>nvme admin command </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">VMe Admin Commands</span><br><span class="line">Here are the NVMe admin commands with opcodes:</span><br><span class="line">Create and Delete I/O Submission Queue (01h, 00h)</span><br><span class="line">Get Log Page (02h)</span><br><span class="line">Create and Delete I/O Completion Queue (05h, 04h)</span><br><span class="line">Identify (06h)</span><br><span class="line">Abort (08h)</span><br><span class="line">Get and Set Features (0Ah, 09h)</span><br><span class="line">Asynchronous Event Request (0Ch)</span><br><span class="line">Namespace Management (0Dh)</span><br><span class="line">Firmware Commit and Image Download (10h, 11h)</span><br><span class="line">Device Self-test (14h)</span><br><span class="line">Namespace Attachment (15h)</span><br><span class="line">Keep Alive (18h)</span><br><span class="line">Directive Send and Receive (19h, 1Ah)</span><br><span class="line">Virtualization Management (1Ch)</span><br><span class="line">NVMe-MI Send and Receive (1Dh, 1Eh)</span><br><span class="line">Doorbell Buffer Config (7Ch)</span><br><span class="line">Format NVM (80h)</span><br><span class="line">Security Send and Receive (81h, 82h)</span><br><span class="line">Sanitize (84h)</span><br><span class="line"></span><br><span class="line">$ nvme admin-passthru /dev/nvme0 --opcode=0x06 --cdw10=0x0001 --data-len=4096 -r -d -s</span><br><span class="line">opcode       : 06</span><br><span class="line">flags        : 00</span><br><span class="line">rsvd1        : 0000</span><br><span class="line">nsid         : 00000000</span><br><span class="line">cdw2         : 00000000</span><br><span class="line">cdw3         : 00000000</span><br><span class="line">data_len     : 00001000</span><br><span class="line">metadata_len : 00000000</span><br><span class="line">addr         : 563223139000</span><br><span class="line">metadata     : 0</span><br><span class="line">cdw10        : 00000001</span><br><span class="line">cdw11        : 00000000</span><br><span class="line">cdw12        : 00000000</span><br><span class="line">cdw13        : 00000000</span><br><span class="line">cdw14        : 00000000</span><br><span class="line">cdw15        : 00000000</span><br><span class="line">timeout_ms   : 00000000</span><br><span class="line"></span><br><span class="line"><span class="comment"># NVM command</span></span><br><span class="line"><span class="comment"># NVM comands should only be sent if controller is ready (indicated by Controller Status register CSTS.RDY) and after I/O submission and completion queue have been created.</span></span><br><span class="line">Flush (00h)</span><br><span class="line">Write and Read (01h, 02h)</span><br><span class="line">Write Uncorrectable (04h)</span><br><span class="line">Compare (05h)</span><br><span class="line">Write Zeroes (08h)</span><br><span class="line">Dataset Management (09h)</span><br><span class="line">Reservation Register and Report (0Dh, 0Eh)</span><br><span class="line">Reservation Acquire and Release (11h, 15h)</span><br><span class="line"></span><br><span class="line">$ nvme show-regs -H /dev/nvme0</span><br><span class="line"><span class="built_in">cap</span>     : 2004010fff</span><br><span class="line">	Memory Page Size Maximum      (MPSMAX): 4096 bytes</span><br><span class="line">	Memory Page Size Minimum      (MPSMIN): 4096 bytes</span><br><span class="line">	Boot Partition Support           (BPS): No</span><br><span class="line">	Command Sets Supported           (CSS): NVM <span class="built_in">command</span> <span class="built_in">set</span> is supported</span><br><span class="line">	NVM Subsystem Reset Supported  (NSSRS): No</span><br><span class="line">	Doorbell Stride                (DSTRD): 4 bytes</span><br><span class="line">	Timeout                           (TO): 2000 ms</span><br><span class="line">	Arbitration Mechanism Supported  (AMS): Weighted Round Robin with Urgent Priority Class is not supported</span><br><span class="line">	Contiguous Queues Required       (CQR): Yes</span><br><span class="line">	Maximum Queue Entries Supported (MQES): 4096  <span class="comment">### Bytes</span></span><br><span class="line"></span><br><span class="line">version : 10000</span><br><span class="line">	NVMe specification 1.0</span><br><span class="line"></span><br><span class="line">cc      : 460001</span><br><span class="line">	I/O Completion Queue Entry Size (IOCQES): 16 bytes</span><br><span class="line">	I/O Submission Queue Entry Size (IOSQES): 64 bytes</span><br><span class="line">	Shutdown Notification              (SHN): No notification; no effect</span><br><span class="line">	Arbitration Mechanism Selected     (AMS): Round Robin</span><br><span class="line">	Memory Page Size                   (MPS): 4096 bytes</span><br><span class="line">	I/O Command Sets Selected          (CSS): NVM Command Set</span><br><span class="line">	Enable                              (EN): Yes</span><br><span class="line"></span><br><span class="line">csts    : 1</span><br><span class="line">	Processing Paused               (PP): No</span><br><span class="line">	NVM Subsystem Reset Occurred (NSSRO): No</span><br><span class="line">	Shutdown Status               (SHST): Normal operation (no shutdown has been requested)</span><br><span class="line">	Controller Fatal Status        (CFS): False</span><br><span class="line">	Ready                          (RDY): Yes</span><br><span class="line"></span><br><span class="line">nssr    : 0</span><br><span class="line">	NVM Subsystem Reset Control (NSSRC): 0</span><br><span class="line"></span><br><span class="line">intms   : 0</span><br><span class="line">	Interrupt Vector Mask Set (IVMS): 0</span><br><span class="line"></span><br><span class="line">intmc   : 0</span><br><span class="line">	Interrupt Vector Mask Clear (IVMC): 0</span><br><span class="line"></span><br><span class="line">aqa     : 1f001f</span><br><span class="line">	Admin Completion Queue Size (ACQS): 32</span><br><span class="line">	Admin Submission Queue Size (ASQS): 32</span><br><span class="line"></span><br><span class="line">asq     : 10255f9000</span><br><span class="line">	Admin Submission Queue Base (ASQB): 10255f9000</span><br><span class="line"></span><br><span class="line">acq     : 10255f8000</span><br><span class="line">	Admin Completion Queue Base (ACQB): 10255f8000</span><br><span class="line"></span><br><span class="line">cmbloc  : 0</span><br><span class="line">	Controller Memory Buffer feature is not supported</span><br><span class="line"></span><br><span class="line">cmbsz   : 0</span><br><span class="line">	Controller Memory Buffer feature is not supported</span><br><span class="line"></span><br><span class="line">bpinfo  : 0</span><br><span class="line">	Boot Partition feature is not supported</span><br><span class="line"></span><br><span class="line">bprsel  : 0</span><br><span class="line">	Boot Partition feature is not supported</span><br><span class="line"></span><br><span class="line">bpmbl   : 0</span><br><span class="line">	Boot Partition feature is not supported</span><br></pre></td></tr></table></figure>
+
+<h3 id="Read-data-from-the-device"><a href="#Read-data-from-the-device" class="headerlink" title="Read data from the device"></a>Read data from the device</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/nvme0n1 of=lba.0.dd bs=512 count=1</span><br><span class="line">$ nvme <span class="built_in">read</span> /dev/nvme0n1 --start-block=0 --block-count=0 --data-size=512 --data=lba.0.read</span><br><span class="line">$ nvme io-passthru /dev/nvme0 --opcode=0x02 --namespace-id=0x1 --data-len=512 --<span class="built_in">read</span> --cdw10=0 --cdw11=0 --cdw12=0 -b &gt; lba.0.io</span><br><span class="line">nvme: malloc.c:2392: sysmalloc: Assertion `(old_top == initial_top (av) &amp;&amp; old_size == 0) || ((unsigned long) (old_size) &gt;= MINSIZE &amp;&amp; prev_inuse (old_top) &amp;&amp; ((unsigned long) old_end &amp; (pagesize - 1)) == 0)<span class="string">' failed.</span></span><br><span class="line"><span class="string">Aborted (core dumped)</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/nfs/" rel="tag"><i class="fa fa-tag"></i> nfs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/16/network_hardware/" rel="prev" title="network topology">
+      <i class="fa fa-chevron-left"></i> network topology
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/17/benchmark-tools/" rel="next" title="bencharmk tools">
+      bencharmk tools <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Software-optimization"><span class="nav-number">1.</span> <span class="nav-text">Software optimization</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create-mdraid-for-nvme-ssd"><span class="nav-number"></span> <span class="nav-text">create mdraid for nvme ssd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Read-data-from-the-device"><span class="nav-number"></span> <span class="nav-text">Read data from the device</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">925k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">14:01</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2020/03/17/nvme/",
+            identifier: "2020/03/17/nvme/",
+            title: "nvme test"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

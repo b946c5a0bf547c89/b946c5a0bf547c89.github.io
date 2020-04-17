@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="FIO writeif not support fallocate, fio will switch to fadvise64 to write filelooks like fadvise64 cause a lot of file system fragment. 10 billion or more files in the posix filesystem directoryls take">
+<meta property="og:type" content="article">
+<meta property="og:title" content="System tools">
+<meta property="og:url" content="http://yoursite.com/2020/03/24/system_tools/index.html">
+<meta property="og:site_name" content="b946c5a0bf547c89">
+<meta property="og:description" content="FIO writeif not support fallocate, fio will switch to fadvise64 to write filelooks like fadvise64 cause a lot of file system fragment. 10 billion or more files in the posix filesystem directoryls take">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-24T08:29:06.000Z">
+<meta property="article:modified_time" content="2020-03-27T14:28:27.000Z">
+<meta property="article:author" content="Ginger">
+<meta property="article:tag" content="system">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/24/system_tools/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>System tools | b946c5a0bf547c89</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">b946c5a0bf547c89</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My Silent Hill</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/system_tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          System tools
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-24 16:29:06" itemprop="dateCreated datePublished" datetime="2020-03-24T16:29:06+08:00">2020-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-27 22:28:27" itemprop="dateModified" datetime="2020-03-27T22:28:27+08:00">2020-03-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/24/system_tools/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/24/system_tools/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="FIO-write"><a href="#FIO-write" class="headerlink" title="FIO write"></a>FIO write</h3><p>if not support fallocate, fio will switch to fadvise64 to write file<br>looks like fadvise64 cause a lot of file system fragment.</p>
+<h3 id="10-billion-or-more-files-in-the-posix-filesystem-directory"><a href="#10-billion-or-more-files-in-the-posix-filesystem-directory" class="headerlink" title="10 billion or more files in the posix filesystem directory"></a>10 billion or more files in the posix filesystem directory</h3><p>ls take a long time, maybe three days or more<br>I moidfy form some C demo files just list some files, the program will exit , not full list</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">$ time ./walk /tank/<span class="built_in">test</span>/dir1 1000 | wc -l</span><br><span class="line">1000</span><br><span class="line"></span><br><span class="line">real    0m0.016s</span><br><span class="line">user    0m0.000s</span><br><span class="line">sys     0m0.016s</span><br><span class="line">$ <span class="built_in">echo</span> 3 &gt; /proc/sys/vm/drop_caches</span><br><span class="line">$ time ls /tank/<span class="built_in">test</span>/dir1/ | wc -l</span><br><span class="line">858601</span><br><span class="line"></span><br><span class="line">real    0m3.320s</span><br><span class="line">user    0m2.841s</span><br><span class="line">sys     0m0.476s</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;dirent.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *fullpath;</span><br><span class="line"><span class="keyword">int</span> global_count=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">readfile</span><span class="params">(<span class="keyword">char</span> *k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//printf ("print global_count value: %d\n",global_count);</span></span><br><span class="line">    DIR * dp;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">dirent</span> * <span class="title">dirrp</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> *p;</span><br><span class="line">    p = fullpath + <span class="built_in">strlen</span>(fullpath);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="number">-1</span> == lstat(fullpath,&amp;buf))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s[lstat]%s\n"</span>,fullpath,strerror(errno));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(S_ISDIR(buf.st_mode)==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"file: %s \n"</span>,k); <span class="comment">// output file name</span></span><br><span class="line">        global_count--;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="string">'/'</span> != *(p<span class="number">-1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">	*p++ = <span class="string">'/'</span>;</span><br><span class="line">	*p = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"dir %s:\n"</span>,fullpath); <span class="comment">//output dir name</span></span><br><span class="line">    global_count--;</span><br><span class="line">    <span class="keyword">if</span>(<span class="literal">NULL</span> == (dp=opendir(fullpath)))</span><br><span class="line">    &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s[opendir]%s\n"</span>,fullpath,strerror(errno));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">NULL</span> != (dirrp=readdir(dp)))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>((global_count &lt;= <span class="number">1</span> ))</span><br><span class="line">           <span class="keyword">goto</span> goout;</span><br><span class="line">	<span class="keyword">if</span>((<span class="built_in">strcmp</span>(dirrp-&gt;d_name,<span class="string">"."</span>)==<span class="number">0</span>) || (<span class="built_in">strcmp</span>(dirrp-&gt;d_name,<span class="string">".."</span>)==<span class="number">0</span>))</span><br><span class="line">	    <span class="keyword">continue</span>;</span><br><span class="line">	<span class="built_in">strcpy</span>(p,dirrp-&gt;d_name);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(<span class="number">0</span> == readfile(p))</span><br><span class="line">	    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    p[<span class="number">-1</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>( <span class="number">-1</span> == closedir(dp))</span><br><span class="line">    &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s[closedir]%s\n"</span>,fullpath,strerror(errno));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">goout:</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Usage:%s &lt;Dir name&gt; &lt;List number&gt;\n"</span>,argv[<span class="number">0</span>]+<span class="number">2</span>);</span><br><span class="line">	<span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fullpath = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*PATH_MAX);</span><br><span class="line">    <span class="built_in">memset</span>(fullpath,<span class="number">0</span>,PATH_MAX);</span><br><span class="line">    global_count=atoi(argv[<span class="number">2</span>]);</span><br><span class="line">    <span class="built_in">strcpy</span>(fullpath,argv[<span class="number">1</span>]);</span><br><span class="line">    readfile(fullpath);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="C-convert-string-to-number"><a href="#C-convert-string-to-number" class="headerlink" title="C convert string to number"></a>C convert string to number</h5><p>int atoi(const char *nptr);<br>global_count=atoi(argv[2]);</p>
+<h5 id="memset"><a href="#memset" class="headerlink" title="memset"></a><a href="https://www.geeksforgeeks.org/memset-c-example/" target="_blank" rel="noopener">memset</a></h5><p>void *memset(void *ptr, int x, size_t n);<br>// ptr ==&gt; Starting address of memory to be filled<br>// x   ==&gt; Value to be filled<br>// n   ==&gt; Number of bytes to be filled starting<br>//         from ptr to be filled</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C program to demonstrate working of memset() </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt; </span></span></span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) </span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%d "</span>, arr[i]); </span><br><span class="line">&#125; </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">10</span>; </span><br><span class="line">    <span class="keyword">int</span> arr[n]; </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Fill whole array with 0. </span></span><br><span class="line">    <span class="built_in">memset</span>(arr, <span class="number">0</span>, n*<span class="keyword">sizeof</span>(arr[<span class="number">0</span>])); </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Array after memset()\n"</span>); </span><br><span class="line">    printArray(arr, n); </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt; </span></span></span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">50</span>] = <span class="string">"GeeksForGeeks is for programming geeks."</span>; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\nBefore memset(): %s\n"</span>, str); </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// Fill 8 characters starting from str[13] with '.' </span></span><br><span class="line">    <span class="built_in">memset</span>(str + <span class="number">13</span>, <span class="string">'.'</span>, <span class="number">8</span>*<span class="keyword">sizeof</span>(<span class="keyword">char</span>)); </span><br><span class="line">  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"After memset():  %s"</span>, str); </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="Some-struct"><a href="#Some-struct" class="headerlink" title="Some struct"></a>Some struct</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /usr/include/dirent.h</span></span><br><span class="line"></span><br><span class="line">/* This is the data <span class="built_in">type</span> of directory stream objects.</span><br><span class="line">   The actual structure is opaque to users.  */</span><br><span class="line">typedef struct __dirstream DIR;</span><br><span class="line"></span><br><span class="line">struct __dirstream   </span><br><span class="line">   &#123;   </span><br><span class="line">    void *__fd;    </span><br><span class="line">    char *__data;    </span><br><span class="line">    int __entry_data;    </span><br><span class="line">    char *__ptr;    </span><br><span class="line">    int __entry_ptr;    </span><br><span class="line">    size_t __allocation;    </span><br><span class="line">    size_t __size;    </span><br><span class="line">    __libc_lock_define (, __lock)    </span><br><span class="line">   &#125;; </span><br><span class="line"></span><br><span class="line">struct dirent   </span><br><span class="line">&#123;   </span><br><span class="line"> long d_ino; /* inode number */</span><br><span class="line"> off_t d_off; /* offset to this dirent */</span><br><span class="line"> unsigned short d_reclen; /* length of this d_name */</span><br><span class="line"> unsigned char d_type; /* the <span class="built_in">type</span> of d_name */</span><br><span class="line">long d_ino; / char d_name [NAME_MAX+1]; /* file name (null-terminated) */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># /usr/include/asm/stat.h</span></span><br><span class="line"><span class="comment">#define STAT64_HAS_BROKEN_ST_INO        1</span></span><br><span class="line"></span><br><span class="line">/* This matches struct stat64 <span class="keyword">in</span> glibc2.1, hence the absolutely</span><br><span class="line"> * insane amounts of padding around dev_t<span class="string">'s.</span></span><br><span class="line"><span class="string"> */</span></span><br><span class="line"><span class="string">struct stat64 &#123;</span></span><br><span class="line"><span class="string">        unsigned long long      st_dev;</span></span><br><span class="line"><span class="string">        unsigned char   __pad0[4];</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   __st_ino;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned int    st_mode;</span></span><br><span class="line"><span class="string">        unsigned int    st_nlink;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   st_uid;</span></span><br><span class="line"><span class="string">        unsigned long   st_gid;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long long      st_rdev;</span></span><br><span class="line"><span class="string">        unsigned char   __pad3[4];</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        long long       st_size;</span></span><br><span class="line"><span class="string">        unsigned long   st_blksize;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        /* Number 512-byte blocks allocated. */</span></span><br><span class="line"><span class="string">        unsigned long long      st_blocks;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   st_atime;</span></span><br><span class="line"><span class="string">        unsigned long   st_atime_nsec;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   st_mtime;</span></span><br><span class="line"><span class="string">        unsigned int    st_mtime_nsec;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long   st_ctime;</span></span><br><span class="line"><span class="string">        unsigned long   st_ctime_nsec;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        unsigned long long      st_ino;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">/* We don'</span>t need to memset the whole thing just to initialize the padding */</span><br><span class="line"><span class="comment">#define INIT_STRUCT_STAT64_PADDING(st) do &#123;             \</span></span><br><span class="line">        memset(&amp;st.__pad0, 0, sizeof(st.__pad0));       \</span><br><span class="line">        memset(&amp;st.__pad3, 0, sizeof(st.__pad3));       \</span><br><span class="line">&#125; <span class="keyword">while</span> (0)</span><br><span class="line"></span><br><span class="line"><span class="comment">#else /* __i386__ */</span></span><br><span class="line"></span><br><span class="line">struct <span class="built_in">stat</span> &#123;</span><br><span class="line">        unsigned long   st_dev;</span><br><span class="line">        unsigned long   st_ino;</span><br><span class="line">        unsigned long   st_nlink;</span><br><span class="line"></span><br><span class="line">        unsigned int    st_mode;</span><br><span class="line">        unsigned int    st_uid;</span><br><span class="line">        unsigned int    st_gid;</span><br><span class="line">        unsigned int    __pad0;</span><br><span class="line">        unsigned long   st_rdev;</span><br><span class="line">        long            st_size;</span><br><span class="line">        long            st_blksize;</span><br><span class="line">        long            st_blocks;      /* Number 512-byte blocks allocated. */</span><br><span class="line"></span><br><span class="line">        unsigned long   st_atime;</span><br><span class="line">        unsigned long   st_atime_nsec;</span><br><span class="line">        unsigned long   st_mtime;</span><br><span class="line">        unsigned long   st_mtime_nsec;</span><br><span class="line">        unsigned long   st_ctime;</span><br><span class="line">        unsigned long   st_ctime_nsec;</span><br><span class="line">        long            __unused[3];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="lstat"><a href="#lstat" class="headerlink" title="lstat"></a><a href="http://codewiki.wikidot.com/c:system-calls:lstat" target="_blank" rel="noopener">lstat</a></h5><p>int lstat(const char *path, struct stat *buf);<br>lstat is a system call that is used to determine information about a file based on its filename.<br>lstat is exactly the same as the stat system call. The only difference between the two is when the filename refers to a link. When this is the case, lstat returns information about the link itself, whereas stat returns information about the actual file.    </p>
+<p>const char *path    The file path of the file that is being inquired. This can be both relative and absolute.<br>struct stat *buf    A structure where data about the file will be stored. A detailed look at all of the fields in this structure can be found in the struct stat page.<br>return value    Returns a negative value on failure.</p>
+<h5 id="File-type"><a href="#File-type" class="headerlink" title="File type"></a>File type</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">/usr/include/linux/stat.h</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFMT  00170000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFSOCK 0140000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFLNK  0120000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFREG  0100000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFBLK  0060000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFDIR  0040000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFCHR  0020000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IFIFO  0010000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISUID  0004000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISGID  0002000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISVTX  0001000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISLNK(m)      (((m) &amp; S_IFMT) == S_IFLNK) # is link ?</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISREG(m)      (((m) &amp; S_IFMT) == S_IFREG) # is file ? </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISDIR(m)      (((m) &amp; S_IFMT) == S_IFDIR) # is dir ? # S_ISDIR(buf.st_mode)==1 means is dir,  ==0 means not dir</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISCHR(m)      (((m) &amp; S_IFMT) == S_IFCHR) # is char ?</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISBLK(m)      (((m) &amp; S_IFMT) == S_IFBLK) # is blk ?</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISFIFO(m)     (((m) &amp; S_IFMT) == S_IFIFO) # is fifo ? </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_ISSOCK(m)     (((m) &amp; S_IFMT) == S_IFSOCK) # is socket ?</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Here is the permission bit</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRWXU 00700</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRUSR 00400</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IWUSR 00200</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IXUSR 00100</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRWXG 00070</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRGRP 00040</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IWGRP 00020</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IXGRP 00010</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IRWXO 00007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IROTH 00004</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IWOTH 00002</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> S_IXOTH 00001</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> abc;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">stat</span> <span class="title">buf</span>;</span></span><br><span class="line">    stat(<span class="string">"/home"</span>, &amp;buf);</span><br><span class="line">    abc = buf.st_mode &amp; S_IFDIR;</span><br><span class="line">    <span class="keyword">if</span>(abc == S_IFDIR) </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"It's a directory.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">or</span> you could </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(S_ISDIR(buf.st_mode)==<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"file: %s \n"</span>,k); <span class="comment">// output file name</span></span><br><span class="line">    global_count--;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/system/" rel="tag"><i class="fa fa-tag"></i> system</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/17/benchmark-tools/" rel="prev" title="bencharmk tools">
+      <i class="fa fa-chevron-left"></i> bencharmk tools
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#FIO-write"><span class="nav-number">1.</span> <span class="nav-text">FIO write</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-billion-or-more-files-in-the-posix-filesystem-directory"><span class="nav-number">2.</span> <span class="nav-text">10 billion or more files in the posix filesystem directory</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#C-convert-string-to-number"><span class="nav-number">2.0.1.</span> <span class="nav-text">C convert string to number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#memset"><span class="nav-number">2.0.2.</span> <span class="nav-text">memset</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Some-struct"><span class="nav-number">2.0.3.</span> <span class="nav-text">Some struct</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#lstat"><span class="nav-number">2.0.4.</span> <span class="nav-text">lstat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#File-type"><span class="nav-number">2.0.5.</span> <span class="nav-text">File type</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ginger"
+      src="/img/logo-4-blog.png">
+  <p class="site-author-name" itemprop="name">Ginger</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ginger</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">925k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">14:01</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://b946c5a0bf547c89.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://yoursite.com/2020/03/24/system_tools/",
+            identifier: "2020/03/24/system_tools/",
+            title: "System tools"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://b946c5a0bf547c89.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

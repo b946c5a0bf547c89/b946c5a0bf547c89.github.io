@@ -206,6 +206,686 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/perf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/23/perf/" class="post-title-link" itemprop="url">perf</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-23 14:07:28" itemprop="dateCreated datePublished" datetime="2018-11-23T14:07:28+08:00">2018-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-30 22:19:30" itemprop="dateModified" datetime="2020-03-30T22:19:30+08:00">2020-03-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/debug/" itemprop="url" rel="index">
+                    <span itemprop="name">debug</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/23/perf/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/23/perf/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>19k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>17 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.brendangregg.com/perf.html" target="_blank" rel="noopener">reference</a></p>
+<h3 id="Kernel-support"><a href="#Kernel-support" class="headerlink" title="Kernel support"></a>Kernel support</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># for perf_events:</span></span><br><span class="line">CONFIG_PERF_EVENTS=y</span><br><span class="line"><span class="comment"># for stack traces:</span></span><br><span class="line">CONFIG_FRAME_POINTER=y</span><br><span class="line"><span class="comment"># kernel symbols:</span></span><br><span class="line">CONFIG_KALLSYMS=y</span><br><span class="line"><span class="comment"># tracepoints:</span></span><br><span class="line">CONFIG_TRACEPOINTS=y</span><br><span class="line"><span class="comment"># kernel function trace:</span></span><br><span class="line">CONFIG_FTRACE=y</span><br><span class="line"><span class="comment"># kernel-level dynamic tracing:</span></span><br><span class="line">CONFIG_KPROBES=y</span><br><span class="line">CONFIG_KPROBE_EVENTS=y</span><br><span class="line"><span class="comment"># user-level dynamic tracing:</span></span><br><span class="line">CONFIG_UPROBES=y</span><br><span class="line">CONFIG_UPROBE_EVENTS=y</span><br><span class="line"><span class="comment"># full kernel debug info:</span></span><br><span class="line">CONFIG_DEBUG_INFO=y</span><br><span class="line"><span class="comment"># kernel lock tracing:</span></span><br><span class="line">CONFIG_LOCKDEP=y</span><br><span class="line"><span class="comment"># kernel lock tracing:</span></span><br><span class="line">CONFIG_LOCK_STAT=y</span><br><span class="line"><span class="comment"># kernel dynamic tracepoint variables:</span></span><br><span class="line">CONFIG_DEBUG_INFO=y</span><br><span class="line"></span><br><span class="line">Kernel-level symbols are <span class="keyword">in</span> the kernel debuginfo package, or when the kernel is compiled with CONFIG_KALLSYMS</span><br><span class="line">The kernel stack traces are incomplete. Now a similar profile with CONFIG_FRAME_POINTER=y, it will cause information incomplete</span><br><span class="line">For kernel analysis, using CONFIG_KPROBES=y and CONFIG_KPROBE_EVENTS=y, to <span class="built_in">enable</span> kernel dynamic tracing. and CONFIG_FRAME_POINTER=y, <span class="keyword">for</span> frame pointer-based kernel stacks</span><br><span class="line">For user-level analysis, CONFIG_UPROBES=y and CONFIG_UPROBE_EVENTS=y, <span class="keyword">for</span> user-level dynamic tracing.</span><br><span class="line">If your kernel has debuginfo (CONFIG_DEBUG_INFO=y), you can fish out kernel variables from <span class="built_in">functions</span>. This is a simple example of examining a size_t (<span class="built_in">integer</span>)</span><br><span class="line"></span><br><span class="line">$ cat /boot/config-`uname -r`</span><br><span class="line">or </span><br><span class="line">$ zcat /proc/config.gz</span><br></pre></td></tr></table></figure>
+<p>Some of linux Desktop version not enable them, I have to re-complie from source code, maybe use Enterprise version is the good choice</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/23/perf/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/22/ftrace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/22/ftrace/" class="post-title-link" itemprop="url">ftrace</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-22 10:00:45" itemprop="dateCreated datePublished" datetime="2018-11-22T10:00:45+08:00">2018-11-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 19:51:33" itemprop="dateModified" datetime="2020-01-05T19:51:33+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/debug/" itemprop="url" rel="index">
+                    <span itemprop="name">debug</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/22/ftrace/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/22/ftrace/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Ftrace"><a href="#Ftrace" class="headerlink" title="Ftrace"></a><a href="https://zhuanlan.zhihu.com/p/22130013" target="_blank" rel="noopener">Ftrace</a></h3><p><a href="https://www.kernel.org/doc/Documentation/trace/ftrace.txt" target="_blank" rel="noopener">ftrace kernel docs</a><br><a href="https://www.kernel.org/doc/Documentation/trace/events.txt" target="_blank" rel="noopener">events kernel docs</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/22/ftrace/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/nfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/13/nfs/" class="post-title-link" itemprop="url">nfs info</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-13 09:02:56" itemprop="dateCreated datePublished" datetime="2018-11-13T09:02:56+08:00">2018-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-30 22:24:32" itemprop="dateModified" datetime="2020-03-30T22:24:32+08:00">2020-03-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/filesystem/" itemprop="url" rel="index">
+                    <span itemprop="name">filesystem</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/13/nfs/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/13/nfs/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>18k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>17 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="NFS-timeout"><a href="#NFS-timeout" class="headerlink" title="NFS timeout"></a>NFS timeout</h3><p>timo=600 (60s)<br>retrs=2: only work with soft<br>hard: retry forever and not return error</p>
+<h3 id="test-a-short-nfs-interrupt-from-network"><a href="#test-a-short-nfs-interrupt-from-network" class="headerlink" title="test a short nfs interrupt from network"></a>test a short nfs interrupt from network</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nfs client $ mount <span class="variable">$nfs_server</span>:/mountpoint /<span class="variable">$nfs_mount</span> -o timeo=60,retrans=2,soft</span><br><span class="line">nfs client $ dd <span class="keyword">if</span>=/dev/zero of=/<span class="variable">$nfs_mount</span>/write_file bs=1M </span><br><span class="line">nfs server $ iptables -A INPUT -s <span class="variable">$nfs_client_ip</span> -j DROP</span><br></pre></td></tr></table></figure>
+
+<p>nfs client</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">nfs client $ ss -i </span><br><span class="line">tcp    ESTAB      0      1569744 nfs_client:732                  nfs_server:nfs</span><br><span class="line">	 cubic wscale:7,7 rto:201 rtt:0.827/0.127 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1140 ssthresh:749 bytes_acked:3422225317 bytes_received:3575596188 segs_out:2375575 segs_in:90001 send 15968.3Mbps pacing_rate 31931.7Mbps unacked:1040 retrans:0/3 rcv_rtt:6.875 rcv_space:9177516</span><br><span class="line"></span><br><span class="line"><span class="comment">###### --------- firewall block -----------</span></span><br><span class="line"></span><br><span class="line">tcp    ESTAB      0      408    nfs_client:732                  nfs_server:nfs</span><br><span class="line">	 cubic wscale:7,7 rto:406 backoff:1 rtt:2.332/1.92 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:812 bytes_acked:3628610397 bytes_received:3684699536 segs_out:2517451 segs_in:93659 send 5.0Mbps lastsnd:315 lastrcv:528 lastack:534 pacing_rate 11534.3Mbps unacked:1 retrans:1/5 lost:1 rcv_rtt:16 rcv_space:9177516</span><br><span class="line"></span><br><span class="line">backoff: 1,3,3,4,4,4,5,5,5,5,5,5,5, ....</span><br><span class="line">1 x 1</span><br><span class="line">2 x 3</span><br><span class="line">3 x 4</span><br><span class="line">7 x 5</span><br><span class="line">when backoff:8, I clear the firewall rule</span><br><span class="line">I don <span class="string">'t know why there is no any ss info in 2 seconds. could not the ip addra</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">These value has changed</span></span><br><span class="line"><span class="string">rtt:&lt;rtt&gt;/&lt;rttvar&gt;</span></span><br><span class="line"><span class="string">rtt is the average round trip time, rttvar is the mean deviation of rtt, their units are millisecond</span></span><br><span class="line"><span class="string">backoff:&lt;icsk_backoff&gt;</span></span><br><span class="line"><span class="string">used for exponential backoff re-transmission, the actual re-transmission timeout value is icsk_rto &lt;&lt; icsk_backoff</span></span><br><span class="line"><span class="string">rto:&lt;icsk_rto&gt;</span></span><br><span class="line"><span class="string">tcp re-transmission timeout value, the unit is millisecond</span></span><br><span class="line"><span class="string">cwnd:&lt;cwnd&gt;</span></span><br><span class="line"><span class="string">congestion window size</span></span><br><span class="line"><span class="string">ssthresh:&lt;ssthresh&gt;</span></span><br><span class="line"><span class="string">tcp congestion window slow start threshold</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">like this:</span></span><br><span class="line"><span class="string">33</span></span><br><span class="line"><span class="string">tcp    ESTAB      0      4154312 nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:12992 backoff:6 rtt:2.332/1.92 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:812 bytes_acked:3628610397 bytes_received:3684699536 segs_out:2517461 segs_in:93664 send 5.0Mbps lastsnd:10832 lastrcv:23667 lastack:23673 pacing_rate 11534.3Mbps unacked:1 retrans:1/10 lost:1 rcv_rtt:16 rcv_space:9177516</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### here from ESTAB to FIN-WAIT-1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">34</span></span><br><span class="line"><span class="string">tcp    FIN-WAIT-1 0      4154313 nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:12992 backoff:6 rtt:2.332/1.92 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:812 bytes_acked:3628610397 bytes_received:3684699536 segs_out:2517461 segs_in:93664 send 5.0Mbps lastsnd:11837 lastrcv:24672 lastack:24678 pacing_rate 11534.3Mbps unacked:1 retrans:1/10 lost:1 rcv_rtt:16 rcv_space:9177516</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">110</span></span><br><span class="line"><span class="string">tcp    FIN-WAIT-1 0      4154313 nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:51968 backoff:8 rtt:2.332/1.92 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:812 bytes_acked:3628610397 bytes_received:3684699536 segs_out:2517465 segs_in:93666 send 5.0Mbps lastsnd:49203 lastrcv:101094 lastack:101100 pacing_rate 11534.3Mbps unacked:1 retrans:1/12 lost:1 rcv_rtt:16 rcv_space:9177516</span></span><br><span class="line"><span class="string">111</span></span><br><span class="line"><span class="string">tcp    FIN-WAIT-1 0      4154313 nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:51968 backoff:8 rtt:2.332/1.92 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:812 bytes_acked:3628610397 bytes_received:3684699536 segs_out:2517465 segs_in:93666 send 5.0Mbps lastsnd:50208 lastrcv:102099 lastack:102105 pacing_rate 11534.3Mbps unacked:1 retrans:1/12 lost:1 rcv_rtt:16 rcv_space:9177516</span></span><br><span class="line"><span class="string">112</span></span><br><span class="line"><span class="string">tcp    FIN-WAIT-1 0      4154313 nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:51968 backoff:8 rtt:2.332/1.92 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:812 bytes_acked:3628610397 bytes_received:3684699536 segs_out:2517465 segs_in:93666 send 5.0Mbps lastsnd:51214 lastrcv:103105 lastack:103111 pacing_rate 11534.3Mbps unacked:1 retrans:1/12 lost:1 rcv_rtt:16 rcv_space:9177516</span></span><br><span class="line"><span class="string">113</span></span><br><span class="line"><span class="string">## TCP socket closed, reconnect</span></span><br><span class="line"><span class="string">114</span></span><br><span class="line"><span class="string">115</span></span><br><span class="line"><span class="string">116</span></span><br><span class="line"><span class="string">tcp    ESTAB      0      0      nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:201 rtt:0.174/0.091 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:447 ssthresh:74 bytes_acked:54006797 bytes_received:12623248 segs_out:37874 segs_in:1288 send 29758.9Mbps lastsnd:66 lastrcv:66 lastack:66 rcv_rtt:1 rcv_space:1624864</span></span><br><span class="line"><span class="string">117</span></span><br><span class="line"><span class="string">tcp    ESTAB      0      0      nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:201 rtt:0.174/0.091 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:447 ssthresh:74 bytes_acked:54006797 bytes_received:12623248 segs_out:37874 segs_in:1288 send 29758.9Mbps lastsnd:1071 lastrcv:1071 lastack:1071 rcv_rtt:1 rcv_space:1624864</span></span><br><span class="line"><span class="string">118</span></span><br><span class="line"><span class="string">tcp    ESTAB      0      0      nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:201 rtt:0.174/0.091 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:447 ssthresh:74 bytes_acked:54006797 bytes_received:12623248 segs_out:37874 segs_in:1288 send 29758.9Mbps lastsnd:2077 lastrcv:2077 lastack:2077 rcv_rtt:1 rcv_space:1624864</span></span><br><span class="line"><span class="string">119</span></span><br><span class="line"><span class="string">tcp    ESTAB      0      0      nfs_client:732                  nfs_server:nfs</span></span><br><span class="line"><span class="string">         cubic wscale:7,7 rto:201 rtt:0.174/0.091 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:447 ssthresh:74 bytes_acked:54006797 bytes_received:12623248 segs_out:37874 segs_in:1288 send 29758.9Mbps lastsnd:3083 lastrcv:3083 lastack:3083 rcv_rtt:1 rcv_space:1624864</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## nfs info, add 10 rpc calls timeout in dmesg </span></span><br><span class="line"><span class="string">16</span></span><br><span class="line"><span class="string">Client rpc stats:</span></span><br><span class="line"><span class="string">calls      retrans    authrefrsh</span></span><br><span class="line"><span class="string">7170       0          7171</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">17</span></span><br><span class="line"><span class="string">Client rpc stats:</span></span><br><span class="line"><span class="string">calls      retrans    authrefrsh</span></span><br><span class="line"><span class="string">7180       0          7181</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:30 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string">[Sat Mar  7 22:14:31 2020] nfs: server nfs_server not responding, timed out</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">7180 x18</span></span><br><span class="line"><span class="string">7190 x18</span></span><br><span class="line"><span class="string">7191 x30</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">nfs client $ dd if=/dev/zero of=/$nfs_mount/write_file bs=1M</span></span><br><span class="line"><span class="string">dd: error writing ‘t’: Input/output error</span></span><br><span class="line"><span class="string">3513+0 records in</span></span><br><span class="line"><span class="string">3512+0 records out</span></span><br><span class="line"><span class="string">3682598912 bytes (3.7 GB) copied, 120.265 s, 30.6 MB/s</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="test-case2-just-ss-log"><a href="#test-case2-just-ss-log" class="headerlink" title="test case2 ,just ss log"></a>test case2 ,just ss log</h3><p>In the 10 second, the nfs server block the client<br>the client not modify sysctl.conf, before reboot, all parameters have been commentted.<br>default value was net.ipv4.tcp_syn_retries = 6 #in the default set, the TCP_RTO_MAX was 64s, if HZ equal 1s, the TCP_RTO_MAX equal 120s, that means you could not improve it to 128s</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tcp_syn_retries - INTEGER</span><br><span class="line">	Number of times initial SYNs for an active TCP connection attempt</span><br><span class="line">	will be retransmitted. Should not be higher than 127. Default value</span><br><span class="line">	is 6, which corresponds to 63seconds till the last retransmission</span><br><span class="line">	with the current initial RTO of 1second. With this the final timeout</span><br><span class="line">	for an active TCP connection attempt will happen after 127 seconds.</span><br><span class="line"></span><br><span class="line">#define TCP_RTO_MAX ((unsigned)(120*HZ))</span><br><span class="line">#define TCP_RTO_MIN ((unsigned)(HZ&#x2F;5))</span><br></pre></td></tr></table></figure>
+
+<p>singel cp command has been copy the file in the nfs mount point</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br></pre></td><td class="code"><pre><span class="line">tcp    ESTAB      0      204    nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic wscale:7,7 rto:202 rtt:1.164/0.065 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1882 ssthresh:1641 bytes_acked:6002294501 bytes_received:6019345332 segs_out:4166222 segs_in:152076 send 18729.5Mbps lastsnd:11 lastrcv:11 lastack:11 unacked:1 rcv_rtt:2 rcv_space:6157740</span><br><span class="line">9</span><br><span class="line">tcp    ESTAB      0      3675872 nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic wscale:7,7 rto:202 rtt:1.295/0.078 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1959 ssthresh:1641 bytes_acked:6273315925 bytes_received:6199765744 segs_out:4356084 segs_in:157556 send 17523.6Mbps lastsnd:157 lastrcv:162 lastack:167 unacked:1962 rcv_rtt:59.25 rcv_space:6157740</span><br><span class="line">10</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#### nfs server block the client</span></span><br><span class="line"></span><br><span class="line">tcp    ESTAB      0      3675872 nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic wscale:7,7 rto:808 backoff:2 rtt:1.295/0.078 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:1371 bytes_acked:6273315925 bytes_received:6199765744 segs_out:4356088 segs_in:157558 send 8.9Mbps lastsnd:554 lastrcv:1166 lastack:1171 unacked:1962 retrans:1/2 lost:1962 rcv_rtt:59.25 rcv_space:6157740</span><br><span class="line">11</span><br><span class="line">tcp    ESTAB      0      3675872 nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic wscale:7,7 rto:1616 backoff:3 rtt:1.295/0.078 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:1371 bytes_acked:6273315925 bytes_received:6199765744 segs_out:4356090 segs_in:157559 send 8.9Mbps lastsnd:750 lastrcv:2171 lastack:2176 unacked:1962 retrans:1/3 lost:1962 rcv_rtt:59.25 rcv_space:6157740</span><br><span class="line">12</span><br><span class="line">tcp    ESTAB      0      3675872 nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic wscale:7,7 rto:3232 backoff:4 rtt:1.295/0.078 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:1371 bytes_acked:6273315925 bytes_received:6199765744 segs_out:4356092 segs_in:157560 send 8.9Mbps lastsnd:134 lastrcv:3175 lastack:3180 unacked:1962 retrans:1/4 lost:1962 rcv_rtt:59.25 rcv_space:6157740</span><br><span class="line">13</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### from 15 to 16, the ESTAB convert to FIN_WAIT-1</span></span><br><span class="line"></span><br><span class="line">tcp    ESTAB      0      3675872 nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic wscale:7,7 rto:3232 backoff:4 rtt:1.295/0.078 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:1371 bytes_acked:6273315925 bytes_received:6199765744 segs_out:4356092 segs_in:157560 send 8.9Mbps lastsnd:2142 lastrcv:5183 lastack:5188 unacked:1962 retrans:1/4 lost:1962 rcv_rtt:59.25 rcv_space:6157740</span><br><span class="line">15</span><br><span class="line">tcp    FIN-WAIT-1 0      3675873 nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic wscale:7,7 rto:3232 backoff:4 rtt:1.295/0.078 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:1371 bytes_acked:6273315925 bytes_received:6199765744 segs_out:4356092 segs_in:157560 send 8.9Mbps lastsnd:3145 lastrcv:6186 lastack:6191 unacked:1962 retrans:1/4 lost:1962 rcv_rtt:59.25 rcv_space:6157740</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### From 216 to 217, the FIN-WAIT-1 convert to SYN-SENT, total 201 FIN-WAIT-1</span></span><br><span class="line"></span><br><span class="line">tcp    FIN-WAIT-1 0      3675873 nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic wscale:7,7 rto:103424 backoff:9 rtt:1.295/0.078 ato:40 mss:1448 rcvmss:1448 advmss:1448 cwnd:1 ssthresh:1371 bytes_acked:6273315925 bytes_received:6199765744 segs_out:4356102 segs_in:157565 send 8.9Mbps lastsnd:103531 lastrcv:206948 lastack:206953 unacked:1962 retrans:1/9 lost:1962 rcv_rtt:59.25 rcv_space:6157740</span><br><span class="line">216</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:tbrpf                nfs_server:nfs</span><br><span class="line">         cubic rto:1000 mss:524 rcvmss:88 advmss:1460 cwnd:10 segs_out:1 lastsnd:1807447 lastrcv:1807447 lastack:1807447 unacked:1</span><br><span class="line">217</span><br><span class="line"></span><br><span class="line"><span class="comment"># rto will always changed in SYN-SENT</span></span><br><span class="line">rto:1000 1s</span><br><span class="line">rto:2000 2s</span><br><span class="line">rto:4000 4s</span><br><span class="line">rto:8000 8s</span><br><span class="line">rto:16000 16s</span><br><span class="line">rto:32000 32s</span><br><span class="line">rto:64000 64s</span><br><span class="line">total 127s</span><br><span class="line"></span><br><span class="line">just output 3s number, not output any ss -i connection info</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">after 3s ,try again</span><br><span class="line">rto:1000 1s</span><br><span class="line">rto:2000 2s</span><br><span class="line">rto:4000 4s</span><br><span class="line">rto:8000 8s</span><br><span class="line">rto:16000 16s</span><br><span class="line">rto:32000 32s</span><br><span class="line">rto:64000 64s</span><br><span class="line">total 127s</span><br><span class="line"></span><br><span class="line">after 6s, try again</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">rto:1000 1s</span><br><span class="line">rto:2000 2s</span><br><span class="line">rto:4000 4s</span><br><span class="line">rto:8000 8s</span><br><span class="line">rto:16000 16s</span><br><span class="line">rto:32000 32s</span><br><span class="line">rto:64000 64s</span><br><span class="line">total 127s</span><br><span class="line"></span><br><span class="line">after 12s, try again</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">rto:1000 1s</span><br><span class="line">rto:2000 2s</span><br><span class="line">rto:4000 4s</span><br><span class="line">rto:8000 8s</span><br><span class="line">rto:16000 16s</span><br><span class="line">rto:32000 32s</span><br><span class="line">rto:64000 64s</span><br><span class="line">total 127s</span><br><span class="line"></span><br><span class="line">....</span><br><span class="line"></span><br><span class="line">tcp_syn_retries = 6 just work <span class="keyword">in</span> rto retry timer ,1s,2s,4s,8s,16s,32s,64s, modify it to 3, it work right now.</span><br><span class="line">the tcp SYN-SENT retry interval was 3s,6s,12s,24s ,after 24s , it <span class="string">'s will fix to 45s, each 45s the tcp SYN-SENT probe will be send</span></span><br><span class="line"><span class="string">I try to modify tcp_syn_retries, tcp_keepalive_intvl, tcp_retries1, tcp_retries2, tcp_synack_retries. it '</span>s not worked, always 45~46s, centos 7, 8 has the same result</span><br><span class="line"></span><br><span class="line"><span class="comment">#the same with tcpdump log, the last package time to next begin time about 49~50s, the last package rto was 4000ms, 49-4=45s</span></span><br><span class="line">02:39:28.383410 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2638733895, win 29200, options [mss 1460,sackOK,TS val 83069440 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:39:29.385376 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2638733895, win 29200, options [mss 1460,sackOK,TS val 83070442 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:39:31.391375 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2638733895, win 29200, options [mss 1460,sackOK,TS val 83072448 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:39:38.407391 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2795358566, win 29200, options [mss 1460,sackOK,TS val 83079464 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:39:39.409376 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2795358566, win 29200, options [mss 1460,sackOK,TS val 83080466 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:39:41.415375 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2795358566, win 29200, options [mss 1460,sackOK,TS val 83082472 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:39:51.439390 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2998983553, win 29200, options [mss 1460,sackOK,TS val 83092496 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:39:52.441377 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2998983553, win 29200, options [mss 1460,sackOK,TS val 83093498 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:39:54.447374 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2998983553, win 29200, options [mss 1460,sackOK,TS val 83095504 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:40:10.495403 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3296733769, win 29200, options [mss 1460,sackOK,TS val 83111552 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:40:11.497378 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3296733769, win 29200, options [mss 1460,sackOK,TS val 83112554 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:40:13.503377 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3296733769, win 29200, options [mss 1460,sackOK,TS val 83114560 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:40:41.599396 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3782733652, win 29200, options [mss 1460,sackOK,TS val 83142656 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:40:42.601376 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3782733652, win 29200, options [mss 1460,sackOK,TS val 83143658 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:40:44.607377 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3782733652, win 29200, options [mss 1460,sackOK,TS val 83145664 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:41:33.695391 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 301766284, win 29200, options [mss 1460,sackOK,TS val 83194752 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:41:34.697377 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 301766284, win 29200, options [mss 1460,sackOK,TS val 83195754 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:41:36.703375 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 301766284, win 29200, options [mss 1460,sackOK,TS val 83197760 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:42:25.791393 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 1115766302, win 29200, options [mss 1460,sackOK,TS val 83246848 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:42:26.793376 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 1115766302, win 29200, options [mss 1460,sackOK,TS val 83247850 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:42:28.799378 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 1115766302, win 29200, options [mss 1460,sackOK,TS val 83249856 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:43:17.887397 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 1929766369, win 29200, options [mss 1460,sackOK,TS val 83298944 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:43:18.889376 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 1929766369, win 29200, options [mss 1460,sackOK,TS val 83299946 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:43:20.895377 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 1929766369, win 29200, options [mss 1460,sackOK,TS val 83301952 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:44:09.983399 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2743766395, win 29200, options [mss 1460,sackOK,TS val 83351040 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:44:10.985377 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2743766395, win 29200, options [mss 1460,sackOK,TS val 83352042 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:44:12.991383 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 2743766395, win 29200, options [mss 1460,sackOK,TS val 83354048 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:45:02.079401 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3557766342, win 29200, options [mss 1460,sackOK,TS val 83403136 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:45:03.081377 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3557766342, win 29200, options [mss 1460,sackOK,TS val 83404138 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:45:05.087378 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 3557766342, win 29200, options [mss 1460,sackOK,TS val 83406144 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">02:45:54.175399 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 76799092, win 29200, options [mss 1460,sackOK,TS val 83455232 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:45:55.177379 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 76799092, win 29200, options [mss 1460,sackOK,TS val 83456234 ecr 0,nop,wscale 7], length 0</span><br><span class="line">02:45:57.183379 IP nfs_client.917 &gt; nfs_server.nfs: Flags [S], seq 76799092, win 29200, options [mss 1460,sackOK,TS val 83458240 ecr 0,nop,wscale 7], length 0</span><br><span class="line"></span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:1000 mss:524 rcvmss:88 advmss:1460 cwnd:10 segs_out:1 lastsnd:83559872 lastrcv:83559872 lastack:83559872 unacked:1</span><br><span class="line">716</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:2000 backoff:1 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:2 lastsnd:83560877 lastrcv:83560877 lastack:83560877 unacked:1 retrans:1/1 lost:1</span><br><span class="line">717</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:2000 backoff:1 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:2 lastsnd:83561882 lastrcv:83561882 lastack:83561882 unacked:1 retrans:1/1 lost:1</span><br><span class="line">718</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:4000 backoff:2 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:3 lastsnd:83562886 lastrcv:83562886 lastack:83562886 unacked:1 retrans:1/2 lost:1</span><br><span class="line">719</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:4000 backoff:2 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:3 lastsnd:83563892 lastrcv:83563892 lastack:83563892 unacked:1 retrans:1/2 lost:1</span><br><span class="line">720</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:4000 backoff:2 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:3 lastsnd:83564897 lastrcv:83564897 lastack:83564897 unacked:1 retrans:1/2 lost:1</span><br><span class="line">721</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:4000 backoff:2 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:3 lastsnd:83565902 lastrcv:83565902 lastack:83565902 unacked:1 retrans:1/2 lost:1</span><br><span class="line"></span><br><span class="line"><span class="comment"># -------------------------&gt;&gt; after 45s, begin to try again</span></span><br><span class="line"></span><br><span class="line">767</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:1000 mss:524 rcvmss:88 advmss:1460 cwnd:10 segs_out:1 lastsnd:83612024 lastrcv:83612024 lastack:83612024 unacked:1</span><br><span class="line">768</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:2000 backoff:1 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:2 lastsnd:83613029 lastrcv:83613029 lastack:83613029 unacked:1 retrans:1/1 lost:1</span><br><span class="line">769</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:2000 backoff:1 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:2 lastsnd:83614034 lastrcv:83614034 lastack:83614034 unacked:1 retrans:1/1 lost:1</span><br><span class="line">770</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:4000 backoff:2 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:3 lastsnd:83615039 lastrcv:83615039 lastack:83615039 unacked:1 retrans:1/2 lost:1</span><br><span class="line">771</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:4000 backoff:2 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:3 lastsnd:83616043 lastrcv:83616043 lastack:83616043 unacked:1 retrans:1/2 lost:1</span><br><span class="line">772</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:4000 backoff:2 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:3 lastsnd:83617049 lastrcv:83617049 lastack:83617049 unacked:1 retrans:1/2 lost:1</span><br><span class="line">773</span><br><span class="line">tcp    SYN-SENT   0      1      nfs_client:917                  nfs_server:nfs</span><br><span class="line">	 cubic rto:4000 backoff:2 mss:524 rcvmss:88 advmss:1460 cwnd:1 ssthresh:7 segs_out:3 lastsnd:83618054 lastrcv:83618054 lastack:83618054 unacked:1 retrans:1/2 lost:1</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/ext4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/11/13/ext4/" class="post-title-link" itemprop="url">ext4 info</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-13 09:02:56" itemprop="dateCreated datePublished" datetime="2018-11-13T09:02:56+08:00">2018-11-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-24 17:25:02" itemprop="dateModified" datetime="2020-03-24T17:25:02+08:00">2020-03-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/filesystem/" itemprop="url" rel="index">
+                    <span itemprop="name">filesystem</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/13/ext4/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/13/ext4/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>14 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="mkfs-ext4-for-stripe"><a href="#mkfs-ext4-for-stripe" class="headerlink" title="mkfs ext4 for stripe"></a>mkfs ext4 for stripe</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkfs.ext4 -E stride=8,stripe-width=128,lazy_itable_init=0,lazy_journal_init=0 /dev/sdxx1</span><br></pre></td></tr></table></figure>
+
+<p>Oh, shit , data loss, here is lustre ldiskfs</p>
+<p>backup data<br>When backing up operating system partitions, the partition must be unmounted.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/mapper/3600a098000b5ea3e000006065be52460 of=3600a098000b5ea3e000006065be52460 bs=1M conv=sparse</span><br><span class="line">or you could </span><br><span class="line">$ dump -0uf /backup-files/sda3.dump /dev/sda3</span><br><span class="line">$ dump -0u -f - /dev/sda1 | ssh root@<span class="built_in">test</span>-server dd of=/tmp/sda1.dump</span><br><span class="line"><span class="comment"># recovery </span></span><br><span class="line">$ mount -t ext3 /dev/sda3 /mnt/sda3</span><br><span class="line">$ <span class="built_in">cd</span> /mnt/sda3</span><br><span class="line">restore -rf /backup-files/sda3.dump</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/13/ext4/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/isdct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/07/isdct/" class="post-title-link" itemprop="url">intel isdct</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-07 14:00:27" itemprop="dateCreated datePublished" datetime="2018-08-07T14:00:27+08:00">2018-08-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-06 22:51:57" itemprop="dateModified" datetime="2020-01-06T22:51:57+08:00">2020-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hardware/" itemprop="url" rel="index">
+                    <span itemprop="name">hardware</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/08/07/isdct/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/08/07/isdct/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>5.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Show-all-info"><a href="#Show-all-info" class="headerlink" title="Show all info"></a>Show all info</h3><p><a href="https://www.intel.com/content/dam/support/us/en/documents/memory-and-storage/Intel_SSD_DCT_3_0_x_User_Guide.pdf" target="_blank" rel="noopener">isdct</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">$ nvme list</span><br><span class="line">Node             SN                   Model                                    Namespace Usage                      Format           FW Rev</span><br><span class="line">---------------- -------------------- ---------------------------------------- --------- -------------------------- ---------------- --------</span><br><span class="line">&#x2F;dev&#x2F;nvme0n1     FUKS731100771P5CGN   INTEL SSDPED1K015TA                      1           1.50  TB &#x2F;   1.50  TB    512   B +  0 B   E2010435</span><br><span class="line"></span><br><span class="line">$ isdct  show -a -intelssd 1</span><br><span class="line"></span><br><span class="line">- Intel SSD DC S3510 Series BTWA650406RK480FGN -</span><br><span class="line"></span><br><span class="line">AccessibleMaxAddressSupported : True</span><br><span class="line">AggregationThreshold : Device does not support this command set.</span><br><span class="line">AggregationTime : Device does not support this command set.</span><br><span class="line">ArbitrationBurst : Device does not support this command set.</span><br><span class="line">CoalescingDisable : Device does not support this command set.</span><br><span class="line">DIPMEnabled : False</span><br><span class="line">DIPMSupported : False</span><br><span class="line">DevicePath : &#x2F;dev&#x2F;sg0</span><br><span class="line">DeviceStatus : Healthy</span><br><span class="line">DigitalFenceSupported : False</span><br><span class="line">DownloadMicrocodePossible : True</span><br><span class="line">DynamicMMIOEnabled : The selected drive does not support this feature.</span><br><span class="line">EDriveSupported : False</span><br><span class="line">EnduranceAnalyzer : 7195.06 years</span><br><span class="line">ErrorString :</span><br><span class="line">Firmware : G201DL2B</span><br><span class="line">FirmwareActivationNoticesConfiguration : Device does not support this command set.</span><br><span class="line">FirmwareUpdateAvailable : Please contact your Intel representative about firmware update for this drive.</span><br><span class="line">HDD : False</span><br><span class="line">HighPriorityWeightArbitration : Device does not support this command set.</span><br><span class="line">IOCompletionQueuesRequested : Device does not support this command set.</span><br><span class="line">IOSubmissionQueuesRequested : Device does not support this command set.</span><br><span class="line">Index : 1</span><br><span class="line">Intel : True</span><br><span class="line">IntelGen3SATA : True</span><br><span class="line">IntelNVMe : False</span><br><span class="line">InterruptVector : Device does not support this command set.</span><br><span class="line">IsDualPort : False</span><br><span class="line">LatencyTrackingEnabled : False</span><br><span class="line">LowPriorityWeightArbitration : Device does not support this command set.</span><br><span class="line">MaximumLBA : 937703087</span><br><span class="line">MediumPriorityWeightArbitration : Device does not support this command set.</span><br><span class="line">ModelNumber : INTEL SSDSC2BB480G6R</span><br><span class="line">NVMePowerState : Device does not support this command set.</span><br><span class="line">NamespaceAttributeNoticesConfiguration : Device does not support this command set.</span><br><span class="line">NativeMaxLBA : 937703087</span><br><span class="line">OEM : Dell</span><br><span class="line">PLITestTimeInterval : 10080 minutes</span><br><span class="line">PhyConfig : 0 (Default Enterprise Settings)</span><br><span class="line">PhySpeed : 6.0 Gbps</span><br><span class="line">PhysicalSectorSize : 4096 bytes</span><br><span class="line">PhysicalSize : 480103981056</span><br><span class="line">PowerGovernorAveragePower : 8500 milliwatts</span><br><span class="line">PowerGovernorBurstPower : 8500 milliwatts</span><br><span class="line">PowerGovernorMode : 0 Unconstrained. Limited by maximum budget</span><br><span class="line">Product : HaleyvilleSE L95</span><br><span class="line">ProductFamily : Intel SSD DC S3510 Series</span><br><span class="line">ProductProtocol : ATA</span><br><span class="line">ReadErrorRecoveryTimer : 80</span><br><span class="line">RemoteSecureEraseSupported : False</span><br><span class="line">SMARTEnabled : True</span><br><span class="line">SMARTHealthCriticalWarningsConfiguration : Device does not support this command set.</span><br><span class="line">SMARTSelfTestSupported : True</span><br><span class="line">SMBusAddress : Device does not support this command set.</span><br><span class="line">SMI : False</span><br><span class="line">SSCEnabled : False</span><br><span class="line">SanitizeBlockEraseSupported : True</span><br><span class="line">SanitizeCryptoScrambleSupported : False</span><br><span class="line">SanitizeSupported : True</span><br><span class="line">SataGen1 : True</span><br><span class="line">SataGen2 : True</span><br><span class="line">SataGen3 : True</span><br><span class="line">SataNegotiatedSpeed : 6.0 Gbs</span><br><span class="line">SectorSize : 512</span><br><span class="line">SecurityEnabled : False</span><br><span class="line">SecurityFrozen : True</span><br><span class="line">SecurityLocked : False</span><br><span class="line">SecuritySupported : True</span><br><span class="line">SerialNumber : xxxxxxxxxxxxxxxxxxx</span><br><span class="line">TCGSupported : False</span><br><span class="line">TelemetryLogNoticesConfiguration : Device does not support this command set.</span><br><span class="line">TelemetryLogSupported : True</span><br><span class="line">TempThreshold : Device does not support this command set.</span><br><span class="line">TemperatureLoggingInterval : 1 minute(s)</span><br><span class="line">ThermalThrottleEnabled : Device does not support this command set.</span><br><span class="line">TimeLimitedErrorRecovery : Device does not support this command set.</span><br><span class="line">TrimSize : 4</span><br><span class="line">TrimSupported : True</span><br><span class="line">VolatileWriteCacheEnabled : Device does not support this command set.</span><br><span class="line">WWID : 934300737939264973</span><br><span class="line">WriteAtomicityDisableNormal : Device does not support this command set.</span><br><span class="line">WriteCacheEnabled : False</span><br><span class="line">WriteCacheReorderingStateEnabled : True</span><br><span class="line">WriteCacheState : 1</span><br><span class="line">WriteCacheSupported : True</span><br><span class="line">WriteErrorRecoveryTimer : 80</span><br></pre></td></tr></table></figure>
+
+<h4 id="Enable-write-cache"><a href="#Enable-write-cache" class="headerlink" title="Enable write cache"></a>Enable write cache</h4><p>1: Write cache state is determined by ATA Set Features<br>2: Write cache is enabled.<br>3: Write cache is disabled.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$ isdct <span class="built_in">set</span> -intelssd 1 WriteCacheState=3</span><br><span class="line">Set WriteCacheState successful. Completed successfully.</span><br><span class="line"></span><br><span class="line">$ isdct  show -a -intelssd 1  | grep -i writecache</span><br><span class="line">VolatileWriteCacheEnabled : Device does not support this <span class="built_in">command</span> <span class="built_in">set</span>.</span><br><span class="line">WriteCacheEnabled : False</span><br><span class="line">WriteCacheReorderingStateEnabled : True</span><br><span class="line">WriteCacheState : 3</span><br><span class="line">WriteCacheSupported : True</span><br><span class="line"></span><br><span class="line">$ isdct <span class="built_in">set</span> -intelssd 1 WriteCacheState=2</span><br><span class="line">Set WriteCacheState successful. Completed successfully.</span><br><span class="line"></span><br><span class="line">$ isdct  show -a -intelssd 1  | grep -i writecache</span><br><span class="line">VolatileWriteCacheEnabled : Device does not support this <span class="built_in">command</span> <span class="built_in">set</span>.</span><br><span class="line">WriteCacheEnabled : True</span><br><span class="line">WriteCacheReorderingStateEnabled : True</span><br><span class="line">WriteCacheState : 2</span><br><span class="line">WriteCacheSupported : True</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## I don 't know why "WriteCacheEnabled" not work....</span></span><br><span class="line"></span><br><span class="line">$ isdct <span class="built_in">set</span> -intelssd 1 WriteCacheEnabled=<span class="literal">false</span></span><br><span class="line">Set WriteCacheEnabled successful. Completed successfully.</span><br><span class="line"></span><br><span class="line">$ isdct  show -a -intelssd 1  | grep -i writecache</span><br><span class="line">VolatileWriteCacheEnabled : Device does not support this <span class="built_in">command</span> <span class="built_in">set</span>.</span><br><span class="line">WriteCacheEnabled : True</span><br><span class="line">WriteCacheReorderingStateEnabled : True</span><br><span class="line">WriteCacheState : 2</span><br><span class="line">WriteCacheSupported : True</span><br></pre></td></tr></table></figure>
+
+<h4 id="Trim-feature"><a href="#Trim-feature" class="headerlink" title="Trim feature"></a>Trim feature</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ isdct  show -a -intelssd 1  | grep -i TrimSupported</span><br><span class="line">TrimSupported : True</span><br></pre></td></tr></table></figure>
+
+<h4 id="Intel-ssd-secure-erase"><a href="#Intel-ssd-secure-erase" class="headerlink" title="Intel ssd secure erase"></a>Intel ssd secure erase</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">isdct  show -intelssd 5</span><br><span class="line">- Intel Optane(TM) SSD DC P4800X Series PHKS7413003T375AGN -</span><br><span class="line"></span><br><span class="line">Bootloader : EB3B0306</span><br><span class="line">DevicePath : /dev/nvme5n1</span><br><span class="line">DeviceStatus : Healthy</span><br><span class="line">Firmware : E2010324</span><br><span class="line">FirmwareUpdateAvailable : The selected Intel SSD contains current firmware as of this tool release.</span><br><span class="line">Index : 5</span><br><span class="line"></span><br><span class="line">isdct  start -nvmeformat -intelssd 5 SecureEraseSetting = 0</span><br><span class="line">isdct delete  -intelssd 5</span><br><span class="line">isdct  start -nvmeformat -intelssd 5</span><br></pre></td></tr></table></figure>
+
+<h4 id="get-smart"><a href="#get-smart" class="headerlink" title="get smart"></a>get smart</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ isdct  show -smart -intelssd 0</span><br></pre></td></tr></table></figure>
+
+<h4 id="intel-nvme-switch-to-AF"><a href="#intel-nvme-switch-to-AF" class="headerlink" title="intel nvme switch to AF"></a>intel nvme switch to AF</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#change 512 Bytes to 4096 Bytes</span></span><br><span class="line">$ isdct start -intelssd 0 Function=NVMEFormat LBAForma=3 SecureEraseSetting=0 ProtectionInformation=0 MetaDataSetting=0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/numa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/06/numa/" class="post-title-link" itemprop="url">numa</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-06 19:32:04" itemprop="dateCreated datePublished" datetime="2018-08-06T19:32:04+08:00">2018-08-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-05 22:53:23" itemprop="dateModified" datetime="2020-01-05T22:53:23+08:00">2020-01-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hardware/" itemprop="url" rel="index">
+                    <span itemprop="name">hardware</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/08/06/numa/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/08/06/numa/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Get-hardware-status-from-numactl"><a href="#Get-hardware-status-from-numactl" class="headerlink" title="Get hardware status from numactl"></a>Get hardware status from numactl</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">$ lspci -tvv</span><br><span class="line"> \-[0000:00]-+-00.0  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D DMI2</span><br><span class="line">             +-01.0-[01-02]----00.0  LSI Logic / Symbios Logic SAS3008 PCI-Express Fusion-MPT SAS-3</span><br><span class="line">             +-02.0-[03-04]--+-00.0  Intel Corporation Ethernet Controller X710 <span class="keyword">for</span> 10GbE SFP+</span><br><span class="line">             |               \-00.1  Intel Corporation Ethernet Controller X710 <span class="keyword">for</span> 10GbE SFP+</span><br><span class="line">             +-02.2-[05-06]--+-00.0  Intel Corporation Ethernet Controller 10-Gigabit X540-AT2</span><br><span class="line">             |               \-00.1  Intel Corporation Ethernet Controller 10-Gigabit X540-AT2</span><br><span class="line">             +-03.0-[07]--</span><br><span class="line">             +-03.2-[08]----00.0  Intel Corporation I210 Gigabit Network Connection</span><br><span class="line">             +-04.0  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 0</span><br><span class="line">             +-04.1  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 1</span><br><span class="line">             +-04.2  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 2</span><br><span class="line">             +-04.3  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 3</span><br><span class="line">             +-04.4  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 4</span><br><span class="line">             +-04.5  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 5</span><br><span class="line">             +-04.6  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 6</span><br><span class="line">             +-04.7  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Crystal Beach DMA Channel 7</span><br><span class="line">             +-05.0  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D Map/VTd_Misc/System Management</span><br><span class="line">             +-05.1  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D IIO Hot Plug</span><br><span class="line">             +-05.2  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D IIO RAS/Control Status/Global Errors</span><br><span class="line">             +-05.4  Intel Corporation Xeon E7 v4/Xeon E5 v4/Xeon E3 v4/Xeon D I/O APIC</span><br><span class="line">             +-11.0  Intel Corporation C610/X99 series chipset SPSR</span><br><span class="line">             +-11.3  Intel Corporation C610/X99 series chipset MS SMBus 2</span><br><span class="line">             +-11.4  Intel Corporation C610/X99 series chipset sSATA Controller [AHCI mode]</span><br><span class="line">             +-14.0  Intel Corporation C610/X99 series chipset USB xHCI Host Controller</span><br><span class="line">             +-16.0  Intel Corporation C610/X99 series chipset MEI Controller <span class="comment">#1</span></span><br><span class="line">             +-16.1  Intel Corporation C610/X99 series chipset MEI Controller <span class="comment">#2</span></span><br><span class="line">             +-1a.0  Intel Corporation C610/X99 series chipset USB Enhanced Host Controller <span class="comment">#2</span></span><br><span class="line">             +-1c.0-[09]--</span><br><span class="line">             +-1c.2-[0a-0b]----00.0-[0b]----00.0  ASPEED Technology, Inc. ASPEED Graphics Family</span><br><span class="line">             +-1d.0  Intel Corporation C610/X99 series chipset USB Enhanced Host Controller <span class="comment">#1</span></span><br><span class="line">             +-1f.0  Intel Corporation C610/X99 series chipset LPC Controller</span><br><span class="line">             +-1f.2  Intel Corporation C610/X99 series chipset 6-Port SATA Controller [AHCI mode]</span><br><span class="line">             +-1f.3  Intel Corporation C610/X99 series chipset SMBus Controller</span><br><span class="line">             \-1f.6  Intel Corporation C610/X99 series chipset Thermal Subsystem</span><br><span class="line"></span><br><span class="line">$ numactl --prefer pci:0000:00:01.0 --show</span><br><span class="line">policy: preferred</span><br><span class="line">preferred node: 0</span><br><span class="line">physcpubind: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19</span><br><span class="line">cpubind: 0 1</span><br><span class="line">nodebind: 0 1</span><br><span class="line">membind: 0 1</span><br><span class="line"></span><br><span class="line">$ numactl --prefer pci:0000:00:02.0-04 --show</span><br><span class="line">policy: preferred</span><br><span class="line">preferred node: 0</span><br><span class="line">physcpubind: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19</span><br><span class="line">cpubind: 0 1</span><br><span class="line">nodebind: 0 1</span><br><span class="line">membind: 0 1</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/08/06/numa/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/29/pcie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -460,7 +1140,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-25 08:53:59" itemprop="dateModified" datetime="2020-02-25T08:53:59+08:00">2020-02-25</time>
+                <time title="Modified: 2020-03-15 13:28:51" itemprop="dateModified" datetime="2020-03-15T13:28:51+08:00">2020-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -494,14 +1174,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>112k</span>
+              <span>123k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1:41</span>
+              <span>1:52</span>
             </span>
 
         </div>
@@ -649,691 +1329,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/nic_ethernet_tuning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/01/nic_ethernet_tuning/" class="post-title-link" itemprop="url">ethernet nic tuning</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-06-01 10:49:42" itemprop="dateCreated datePublished" datetime="2018-06-01T10:49:42+08:00">2018-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-27 09:03:03" itemprop="dateModified" datetime="2020-02-27T09:03:03+08:00">2020-02-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/06/01/nic_ethernet_tuning/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/01/nic_ethernet_tuning/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>85k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1:18</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="slot-status"><a href="#slot-status" class="headerlink" title="slot status"></a>slot status</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ 05:00.0 Ethernet controller: Intel Corporation Ethernet Controller XXV710 <span class="keyword">for</span> 25GbE SFP28 (rev 02)</span><br><span class="line">$ lspci -s 05:00.0 -vvv | grep -Ei <span class="string">'8G|MSI-X'</span></span><br><span class="line">      Capabilities: [70] MSI-X: Enable+ Count=129 Masked-</span><br><span class="line">              LnkCap: Port <span class="comment">#0, Speed 8GT/s, Width x8, ASPM L1, Latency L0 &lt;2us, L1 &lt;16us</span></span><br><span class="line">              LnkSta: Speed 8GT/s, Width x8, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-</span><br><span class="line"></span><br><span class="line"><span class="comment">## RSS support</span></span><br><span class="line">$ lspci -v -s 83:00.0 | grep <span class="string">"MSI-X: Enable+"</span></span><br><span class="line">83:00.0 Ethernet controller: Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (rev 01)</span><br><span class="line">        Flags: bus master, fast devsel, latency 0, IRQ 247, NUMA node 1</span><br><span class="line">        I/O ports at d020 [size=32]</span><br><span class="line">        Capabilities: [50] MSI: Enable- Count=1/1 Maskable+ 64bit+</span><br><span class="line">        Capabilities: [70] MSI-X: Enable+ Count=64 Masked-</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/06/01/nic_ethernet_tuning/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/ipmi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/27/ipmi/" class="post-title-link" itemprop="url">ipmitool</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-05-27 15:35:59" itemprop="dateCreated datePublished" datetime="2018-05-27T15:35:59+08:00">2018-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-27 11:23:30" itemprop="dateModified" datetime="2020-02-27T11:23:30+08:00">2020-02-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ipmi/" itemprop="url" rel="index">
-                    <span itemprop="name">ipmi</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/05/27/ipmi/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/27/ipmi/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>8.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>8 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="set-boot-dev"><a href="#set-boot-dev" class="headerlink" title="set boot dev"></a>set boot dev</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ] options=persistent</span><br><span class="line">Ipmitool -I lanplus -H x.x.x.x -U USER -P PASSWORD chassis bootdev bios [ pxe | cdrom ]</span><br><span class="line">ipmitool chassis bootdev none options=<span class="built_in">help</span></span><br><span class="line">Legal options settings are:</span><br><span class="line">	<span class="built_in">help</span>:	<span class="built_in">print</span> this message</span><br><span class="line">	valid:	Boot flags valid</span><br><span class="line">	persistent:	Changes are persistent <span class="keyword">for</span> all future boots</span><br><span class="line">	efiboot:	Extensible Firmware Interface Boot (EFI)</span><br><span class="line">	clear-cmos:	CMOS clear</span><br><span class="line">	lockkbd:	Lock Keyboard</span><br><span class="line">	screenblank:	Screen Blank</span><br><span class="line">	lockoutreset:	Lock out Resetbuttons</span><br><span class="line">	lockout_power:	Lock out (power off/sleep request) via Power Button</span><br><span class="line">	verbose=default:	Request quiet BIOS display</span><br><span class="line">	verbose=no:	Request quiet BIOS display</span><br><span class="line">	verbose=yes:	Request verbose BIOS display</span><br><span class="line">	force_pet:	Force progress event traps</span><br><span class="line">	upw_bypass:	User password bypass</span><br><span class="line">	lockout_sleep:	Log Out Sleep Button</span><br><span class="line">	cons_redirect=default:	Console redirection occurs per BIOS configuration setting</span><br><span class="line">	cons_redirect=skip:	Suppress (skip) console redirection <span class="keyword">if</span> enabled</span><br><span class="line">	cons_redirect=<span class="built_in">enable</span>:	Suppress (skip) console redirection <span class="keyword">if</span> enabled</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/27/ipmi/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/cpu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/27/cpu/" class="post-title-link" itemprop="url">cpu</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-05-27 15:35:59" itemprop="dateCreated datePublished" datetime="2018-05-27T15:35:59+08:00">2018-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-08 16:07:06" itemprop="dateModified" datetime="2020-02-08T16:07:06+08:00">2020-02-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hardware/" itemprop="url" rel="index">
-                    <span itemprop="name">hardware</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/05/27/cpu/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/27/cpu/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>14k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>13 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="E3-v6-Turbo-not-work-in-CentOS6"><a href="#E3-v6-Turbo-not-work-in-CentOS6" class="headerlink" title="E3 v6 Turbo not work in CentOS6"></a>E3 v6 Turbo not work in CentOS6</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">$ cpupower frequency-set --governor ondemand/powersave/performance</span><br><span class="line"></span><br><span class="line">CentOS 6</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line">3701000</span><br><span class="line"></span><br><span class="line">CentOS 7</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">4100000</span><br><span class="line">$ cat /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_cur_freq</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br><span class="line">3899859</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/27/cpu/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/bios/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/27/bios/" class="post-title-link" itemprop="url">BIOS</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-05-27 06:54:45" itemprop="dateCreated datePublished" datetime="2018-05-27T06:54:45+08:00">2018-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 11:49:37" itemprop="dateModified" datetime="2020-01-05T11:49:37+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bios/" itemprop="url" rel="index">
-                    <span itemprop="name">bios</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/05/27/bios/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/27/bios/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>5.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>C-state disabled. Ensure that the CPUs are always in the C0 (fully operational) state. Each CPU has several power modes and they are collectively called “C-states” or “C-modes.”.<br><del>~ *P-state disabled. The processor P-state is the capability of running the processor at different voltage and/or frequency levels. Generally, P0 is the highest state resulting in maximum performance, while P1, P2, and so on, will save power but at some penalty to CPU performance. ~</del><ul>
-<li>I can ‘t agree it, I will active the P-state</li>
-</ul>
-</li>
-<li>Hyper-threading enabled/disabled<ul>
-<li>it ‘s depends your application<br><del>~ * Turbo Boost Disabled. Turbo Boost has a series of dynamic frequency scaling technologies enabling the processor to run above its base operating frequency via dynamic control. Although Turbo Boost (overclocking) would increase the performance, not all cores would be running at the turbo frequency and it would impact the consistency of the performance tests, thus it would not be a real representation of the platform performance. ~</del></li>
-<li>I can ‘t agree it, From Xeon E5 v2 to Scalable Xeon, intel just write single core turbo in ark, but it ‘s not means all cores could bot be turbo.  Eg: I enabled all core turbo for E5 2630v4, the performance same with not enable Turbo from E5 2640v4. I have test E7-4890v2, default cpu frequency only 2.8GHz, All cores turbo could reach 3.2GHz</li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/27/bios/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/12/ansible/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/12/ansible/" class="post-title-link" itemprop="url">Ansible</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-04-12 15:23:03" itemprop="dateCreated datePublished" datetime="2018-04-12T15:23:03+08:00">2018-04-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-27 12:43:00" itemprop="dateModified" datetime="2020-02-27T12:43:00+08:00">2020-02-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ansible/" itemprop="url" rel="index">
-                    <span itemprop="name">ansible</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/04/12/ansible/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/04/12/ansible/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>10k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>9 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Get-all-variables-for-this-group"><a href="#Get-all-variables-for-this-group" class="headerlink" title="Get all variables for this group"></a>Get all variables for this group</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible <span class="built_in">test</span> -m setup</span><br></pre></td></tr></table></figure>
-
-<h4 id="Got-NIC-info"><a href="#Got-NIC-info" class="headerlink" title="Got NIC info"></a>Got NIC info</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line">cat ../../host_vars/192.168.8.2</span><br><span class="line">network_bond_interfaces:</span><br><span class="line"> - device: bond0</span><br><span class="line">   address: 192.168.1.2</span><br><span class="line">   netmask: 225.255.225.0</span><br><span class="line">   gateway: 192.168.1.1</span><br><span class="line">   bootproto: static</span><br><span class="line">   bond_mode: 4</span><br><span class="line">   bond_miimon: 1000</span><br><span class="line">   bond_slaves: [enp1s0f0,enp1s0f1]</span><br><span class="line">network_ether_interfaces:</span><br><span class="line"> - device: eno1</span><br><span class="line">   bootproto: static</span><br><span class="line">   address: 192.168.1.20</span><br><span class="line">   netmask: 255.255.0.0</span><br><span class="line">   route:</span><br><span class="line">    - network: 192.168.200.0</span><br><span class="line">      netmask: 24</span><br><span class="line">      gateway: 192.168.200.1</span><br><span class="line">    - network: 192.168.100.0</span><br><span class="line">      netmask: 24</span><br><span class="line">      gateway: 192.168.100.1</span><br><span class="line"> - device: eno2</span><br><span class="line">   bootproto: static</span><br><span class="line">   address: 192.168.1.21</span><br><span class="line">   netmask: 255.255.0.0</span><br><span class="line">   route:</span><br><span class="line">    - network: 192.168.200.0</span><br><span class="line">      netmask: 24</span><br><span class="line">      gateway: 192.168.200.2</span><br><span class="line">    - network: 192.168.100.0</span><br><span class="line">      netmask: 24</span><br><span class="line">      gateway: 192.168.100.2</span><br><span class="line"></span><br><span class="line">- debug:</span><br><span class="line">    msg:</span><br><span class="line">    - "&#123;&#123; network_bond_interfaces &#125;&#125;"</span><br><span class="line"></span><br><span class="line">- debug:</span><br><span class="line">    msg:</span><br><span class="line">    - "&#123;&#123; ansible_os_family &#125;&#125;"</span><br><span class="line">    - "&#123;&#123; item.device &#125;&#125;"</span><br><span class="line">    - "&#123;&#123; item.address &#125;&#125;"</span><br><span class="line">    - "&#123;&#123; item.bond_slaves.0 &#125;&#125;"</span><br><span class="line">    - "&#123;&#123; item.bond_slaves.1 &#125;&#125;"</span><br><span class="line">    - "&#123;&#123; item.bond_slaves &#125;&#125;"</span><br><span class="line">    - "&#123;&#123; hostvars[inventory_hostname]['ansible_' + item.bond_slaves.0 ].macaddress &#125;&#125;"</span><br><span class="line">  with_items:</span><br><span class="line">     - "&#123;&#123; network_bond_interfaces &#125;&#125;"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &#123;</span><br><span class="line">    <span class="attr">"msg"</span>: [</span><br><span class="line">        [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"address"</span>: <span class="string">"192.168.1.2"</span>,</span><br><span class="line">                <span class="attr">"bond_miimon"</span>: <span class="number">1000</span>,</span><br><span class="line">                <span class="attr">"bond_mode"</span>: <span class="number">4</span>,</span><br><span class="line">                <span class="attr">"bond_slaves"</span>: [</span><br><span class="line">                    <span class="string">"enp1s0f0"</span>,</span><br><span class="line">                    <span class="string">"enp1s0f1"</span></span><br><span class="line">                ],</span><br><span class="line">                <span class="attr">"bootproto"</span>: <span class="string">"static"</span>,</span><br><span class="line">                <span class="attr">"device"</span>: <span class="string">"bond0"</span>,</span><br><span class="line">                <span class="attr">"gateway"</span>: <span class="string">"192.168.1.1"</span>,</span><br><span class="line">                <span class="attr">"netmask"</span>: <span class="string">"225.255.225.0"</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">TASK [network : debug] ************************************************************************************************************************************************************************</span><br><span class="line">ok: [10.53.128.224] =&gt; (item=&#123;u'bond_miimon': 1000, u'bond_slaves': [u'enp1s0f0', u'enp1s0f1'], u'bond_mode': 4, u'netmask': u'225.255.225.0', u'bootproto': u'static', u'address': u'192.168.1.2', u'device': u'bond0', u'gateway': u'192.168.1.1'&#125;) =&gt; &#123;</span><br><span class="line">    "msg": [</span><br><span class="line">        "RedHat",</span><br><span class="line">        "bond0",</span><br><span class="line">        "192.168.1.2",</span><br><span class="line">        "enp1s0f0",</span><br><span class="line">        "enp1s0f1",</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"enp1s0f0"</span>,</span><br><span class="line">            <span class="string">"enp1s0f1"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"3c:fd:fe:15:08:40"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">## create bonding</span><br><span class="line">- name: Write configuration files for route configuration</span><br><span class="line">  template: src=route_&#123;&#123; ansible_os_family &#125;&#125;.j2 dest=&#123;&#123; net_path &#125;&#125;/route-&#123;&#123; item.device &#125;&#125;</span><br><span class="line">  with_items:</span><br><span class="line">     - "&#123;&#123; network_bond_interfaces &#125;&#125;"</span><br><span class="line">  when: network_bond_interfaces is defined and item.route is defined and ansible_os_family == 'RedHat'</span><br><span class="line"></span><br><span class="line">- name: Create the network configuration file for slave in the bond devices</span><br><span class="line">  template: src=bond_slave_&#123;&#123; ansible_os_family &#125;&#125;.j2 dest=&#123;&#123; net_path &#125;&#125;/ifcfg-&#123;&#123; item.1 &#125;&#125;</span><br><span class="line">  with_subelements:</span><br><span class="line">   - "&#123;&#123; network_bond_interfaces &#125;&#125;"</span><br><span class="line">   - bond_slaves</span><br><span class="line">  when: network_bond_interfaces is defined</span><br><span class="line">  register: bond_port_result</span><br><span class="line"></span><br><span class="line">- debug: msg="&#123;&#123; bond_port_result &#125;&#125;"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- shell: ifdown bond_slave &#123;&#123; item.item.1 &#125;&#125;; ifup &#123;&#123; item.item.1 &#125;&#125;</span><br><span class="line">  with_items:</span><br><span class="line">    - "&#123;&#123; bond_port_result.results &#125;&#125;"</span><br><span class="line">  when: network_bond_interfaces is defined and bond_slaves is defined</span><br><span class="line">  register: if_slave</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- debug:</span><br><span class="line">    msg:</span><br><span class="line">    - "&#123;&#123; item.route.1 &#125;&#125;"</span><br><span class="line">  with_items:</span><br><span class="line">     - "&#123;&#123; network_ether_interfaces &#125;&#125;"</span><br><span class="line"></span><br><span class="line"> =&gt; (item=&#123;u'device': u'eno1', u'netmask': u'255.255.0.0', u'bootproto': u'static', u'route': [&#123;u'netmask': 24, u'network': u'192.168.200.0', u'gateway': u'192.168.200.1'&#125;, &#123;u'netmask': 24, u'network': u'192.168.100.0', u'gateway': u'192.168.100.1'&#125;], u'address': u'192.168.1.20'&#125;) =&gt; &#123;</span><br><span class="line">    "msg": [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"gateway"</span>: <span class="string">"192.168.100.1"</span>,</span><br><span class="line">            <span class="attr">"netmask"</span>: <span class="number">24</span>,</span><br><span class="line">            <span class="attr">"network"</span>: <span class="string">"192.168.100.0"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">ok: [10.53.128.224] =&gt; (item=&#123;u'device': u'eno2', u'netmask': u'255.255.0.0', u'bootproto': u'static', u'route': [&#123;u'netmask': 24, u'network': u'192.168.200.0', u'gateway': u'192.168.200.2'&#125;, &#123;u'netmask': 24, u'network': u'192.168.100.0', u'gateway': u'192.168.100.2'&#125;], u'address': u'192.168.1.21'&#125;) =&gt; &#123;</span><br><span class="line">    "msg": [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"gateway"</span>: <span class="string">"192.168.100.2"</span>,</span><br><span class="line">            <span class="attr">"netmask"</span>: <span class="number">24</span>,</span><br><span class="line">            <span class="attr">"network"</span>: <span class="string">"192.168.100.0"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Continue-run"><a href="#Continue-run" class="headerlink" title="Continue run"></a>Continue run</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible-playbook playbook.yml --start-at=<span class="string">"install packages"</span></span><br><span class="line">ansible-playbook playbook.yml --step <span class="comment">## every step will ask you</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/04/12/ansible/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/21/linux_errno/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/11/21/linux_errno/" class="post-title-link" itemprop="url">linux_errno</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-11-21 14:03:54" itemprop="dateCreated datePublished" datetime="2017-11-21T14:03:54+08:00">2017-11-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 20:56:49" itemprop="dateModified" datetime="2020-01-05T20:56:49+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/debug/" itemprop="url" rel="index">
-                    <span itemprop="name">debug</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2017/11/21/linux_errno/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/21/linux_errno/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>5.9k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Get it from<br>/usr/include/asm-generic/errno.h</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/11/21/linux_errno/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1401,20 +1401,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1449,13 +1449,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">820k</span>
+    <span title="Symbols count total">925k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">12:25</span>
+    <span title="Reading time total">14:01</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
