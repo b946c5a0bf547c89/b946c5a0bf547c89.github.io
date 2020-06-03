@@ -206,6 +206,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/01/mdadm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/01/mdadm/" class="post-title-link" itemprop="url">backup the mdraid info</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-01 12:40:20 / Modified: 14:12:18" itemprop="dateCreated datePublished" datetime="2020-06-01T12:40:20+08:00">2020-06-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mdraid/" itemprop="url" rel="index">
+                    <span itemprop="name">mdraid</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/06/01/mdadm/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/06/01/mdadm/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="How-to-backup-mdraid-info-by-dd"><a href="#How-to-backup-mdraid-info-by-dd" class="headerlink" title="How to backup mdraid info by dd"></a><a href="https://raid.wiki.kernel.org/index.php/RAID_superblock_formats" target="_blank" rel="noopener">How to backup mdraid info by dd</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">md8 : active raid1 sde1[1] sda1[0]</span><br><span class="line">      468717568 blocks super 1.2 [2/2] [UU]</span><br><span class="line">      bitmap: 0/4 pages [0KB], 65536KB chunk</span><br><span class="line"></span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/sda1 of=./sda1 bs=1M count=1</span><br><span class="line"></span><br><span class="line">$ hexdump -C sda1 | head -n 20</span><br><span class="line">00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">*</span><br><span class="line">Per-Array Identification &amp; Configuration area:16 Bytes</span><br><span class="line">                                                  0xc~0xf: padding block 0 </span><br><span class="line">00001000  <span class="built_in">fc</span> 4e 2b a9 01 00 00 00      01 00 00 00 00 00 00 00  |.N+.............|</span><br><span class="line">Magic num: a92b4efc Major version:1    0x8~0xb bit fearure_map:value 1 offset 0  raid map is used</span><br><span class="line">                                                   value 2 offset 1  raid recovery is progress</span><br><span class="line">                                                   value 4 offset 2 raid reshape is <span class="keyword">in</span> progress</span><br><span class="line">                                                   the others: undefined/reserved</span><br><span class="line"></span><br><span class="line">section: Per-Array Identification &amp; Configuration area 84 Bytes  </span><br><span class="line">          &lt;----------------------uuid--------------------&gt; 0x10-0x1f 16</span><br><span class="line">00001010  cb df 6a 02 54 1a 01 76  9b 9c 29 fe ab 08 8c a0  |..j.T..v..).....|</span><br><span class="line">/dev/sda1: UUID=<span class="string">"cbdf6a02-541a-0176-9b9c-29feab088ca0"</span></span><br><span class="line"></span><br><span class="line">&lt;--------------------------name <span class="keyword">for</span> the array------------&gt; 0x20-0x3f 32</span><br><span class="line">00001020  74 65 73 74 2d 74 65 73  74 2d 61 31 31 2d 32 2e  |<span class="built_in">test</span>-test-a11-2.|</span><br><span class="line">00001030  74 65 73 74 2e 73 7a 2e  68 70 63 3a 38 00 00 00  |test.sz.hpc:8...|</span><br><span class="line"></span><br><span class="line">ctime(lower 40bit are secs,high 24 bits are microsecs)</span><br><span class="line">                    |               raid1       0 means left asymmetric</span><br><span class="line">                    |                 |            |</span><br><span class="line">00001040  10 77 cc 5e 00 00 00 00  01 00 00 00 00 00 00 00  |.w.^............|a</span><br><span class="line"></span><br><span class="line">         size of component devices(<span class="keyword">in</span> <span class="comment"># of 512-byte sectors),echo $((16#37e02000))=937435136</span></span><br><span class="line">                     |             chucksize not used <span class="keyword">in</span> raid1,linear,multipath</span><br><span class="line">                     |                  |        raid disk(02 means low bit, only 2 x devs to mirror)</span><br><span class="line">00001050  00 20 e0 37 00 00 00 00  00 00 00 00 02 00 00 00  |. .7............|</span><br><span class="line"></span><br><span class="line">          of sectors after superblock that bitmap starts</span><br><span class="line">               |     </span><br><span class="line">00001060  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line"></span><br><span class="line">Section: RAID-Reshape In-Process Metadata Storage/Recovery area 28 Bytes</span><br><span class="line">         he new RAID level being reshaped-to</span><br><span class="line">                           |       Next address of the array to reshape</span><br><span class="line">                                              |</span><br><span class="line">00001060              00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">     	change <span class="keyword">in</span> <span class="comment"># of raid disks</span></span><br><span class="line">               |   new layout <span class="keyword">for</span> array</span><br><span class="line">               |           |      New chunk size; padding block</span><br><span class="line">               |           |            |           |</span><br><span class="line">00001070  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Section: This-Component-Device Information area 64Bytes</span><br><span class="line"> the sector <span class="comment"># upon which data starts, sectors in the device that are used for data</span></span><br><span class="line">                     |                        |</span><br><span class="line">00001080  00 08 04 00 00 00 00 00  00 20 e0 37 00 00 00 00  |......... .7....|</span><br><span class="line">of the sector upon <span class="built_in">which</span> this superblock starts</span><br><span class="line">                     |              sectors before this offset (from data_offset) have been recovered</span><br><span class="line">00001090  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line"></span><br><span class="line">           dev_number</span><br><span class="line">               |      Number of <span class="built_in">read</span>-errors that were corrected by re-writing</span><br><span class="line">               |           |                uuid</span><br><span class="line">000010a0  00 00 00 00 00 00 00 00  07 a8 e4 bf b5 6f c7 d6  |.............o..|</span><br><span class="line">                   uuid           devflags  Padding block 2(1 bit)</span><br><span class="line">                    |              |  Padding block 2 (7 bit)</span><br><span class="line">000010b0  90 d1 9b 62 bf 89 <span class="built_in">cd</span> e7  00 00 08 00 10 00 00 00  |...b............|</span><br><span class="line"></span><br><span class="line">Section: Array-State Information area 64Btes</span><br><span class="line">Time of last superblock update    Event Count <span class="keyword">for</span> the Array</span><br><span class="line">                     |                        |</span><br><span class="line">000010c0  5a 73 d4 5e 00 00 00 00  e6 05 00 00 00 00 00 00  |Zs.^............|</span><br><span class="line"></span><br><span class="line">      Event Count <span class="keyword">for</span> the Array    sb_csum        max_dev 0x80=128</span><br><span class="line">                     |                  |           |</span><br><span class="line">000010d0  ff ff ff ff ff ff ff ff  cf 29 76 cf 80 00 00 00  |.........)v.....|</span><br><span class="line"></span><br><span class="line">&lt;----32Bytes------------zero---------padding-------------&gt;</span><br><span class="line">000010e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">000010f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line"></span><br><span class="line">Section: Device-Roles (Positions-in-Array) area</span><br><span class="line">Length: Variable number of bytes (but at least 768 bytes?)</span><br><span class="line">2 Bytes per device <span class="keyword">in</span> the array, including both spare-devices and faulty-devices</span><br><span class="line">*</span><br><span class="line">00001100  00 00 01 00 ff ff ff ff  ff ff ff ff ff ff ff ff  |................|</span><br><span class="line">00001110  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">          of sectors after superblock that bitmap starts</span><br><span class="line">               |</span><br><span class="line">00001060  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br></pre></td></tr></table></figure>
+
+<p>In mdraid superblock, you could see bitmap starts at 8 x 512B=4096<br>You could see “bitm” magic num start at 0x1000=4096</p>
+<p>You could see the data update from 0x1200, so you could backup first 4608 Bytes in raid1<br>dd if=/dev/sdb1 of=sdb1_superblock bs=1 count=4608</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">*</span><br><span class="line">00001000  fc 4e 2b a9 01 00 00 00  01 00 00 00 00 00 00 00  |.N+.............|</span><br><span class="line">00001010  a3 00 8f 75 49 1d ee e6  38 e6 cb d0 e5 3b 8b d2  |...uI...8....;..|</span><br><span class="line">00001020  74 65 73 74 2d 74 65 73  74 2d 61 31 31 2d 32 2e  |test-test-a11-2.|</span><br><span class="line">00001030  74 65 73 74 2e 73 7a 2e  68 70 63 3a 30 00 00 00  |test.sz.hpc:0...|</span><br><span class="line">00001040  16 71 cc 5e 00 00 00 00  01 00 00 00 00 00 00 00  |.q.^............|</span><br><span class="line">00001050  00 00 49 ba 00 00 00 00  00 00 00 00 02 00 00 00  |..I.............|</span><br><span class="line">00001060  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">00001070  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">00001080  00 08 04 00 00 00 00 00  00 00 49 ba 00 00 00 00  |..........I.....|</span><br><span class="line">00001090  08 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">000010a0  00 00 00 00 00 00 00 00  d5 31 5f 6a c9 58 c2 a0  |.........1_j.X..|</span><br><span class="line">000010b0  55 50 81 dc 35 4b d1 e3  00 00 08 00 10 00 00 00  |UP..5K..........|</span><br><span class="line">000010c0  5a 99 d4 5e 00 00 00 00  0b 0d 00 00 00 00 00 00  |Z..^............|</span><br><span class="line">000010d0  ff ff ff ff ff ff ff ff  b5 64 59 a7 80 00 00 00  |.........dY.....|</span><br><span class="line">000010e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|</span><br><span class="line">*</span><br><span class="line">00001100  00 00 01 00 ff ff ff ff  ff ff ff ff ff ff ff ff  |................|</span><br><span class="line">00001110  ff ff ff ff ff ff ff ff  ff ff ff ff ff ff ff ff  |................|</span><br><span class="line">*</span><br><span class="line">00001200  e8 0f a4 c4 ee 8d 1a 13  fd 81 a0 d0 6b ef c3 10  |............k...|</span><br><span class="line">00001210  3f 90 15 39 9d 95 0d 1d  07 32 03 df 28 16 cc 06  |?..9.....2..(...|</span><br><span class="line">00001220  40 e6 dc 82 43 13 36 1e  c8 9c 3b fd f9 00 e5 15  |@...C.6...;.....|</span><br><span class="line">00001230  99 73 43 71 81 a1 b7 19  73 ee 5b 74 8e 3b 65 09  |.sCq....s.[t.;e.|</span><br><span class="line">00001240  ce fd 51 d7 43 6d ca 07  b9 3f 03 7c ff 61 79 1f  |..Q.Cm...?.|.ay.|</span><br><span class="line">00001250  f7 e7 a3 4f 3e 6e be 16  fe fc f8 d5              |...O&gt;n......|</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/24/system_tools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -858,7 +962,7 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-27 22:31:29" itemprop="dateModified" datetime="2020-03-27T22:31:29+08:00">2020-03-27</time>
+                <time title="Modified: 2020-05-19 12:10:54" itemprop="dateModified" datetime="2020-05-19T12:10:54+08:00">2020-05-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -892,7 +996,7 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>505</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -911,7 +1015,9 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="print-argv"><a href="#print-argv" class="headerlink" title="print argv"></a><a href="https://wizardforcel.gitbooks.io/100-gdb-tips/set-program-args.html" target="_blank" rel="noopener">print argv</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g3 walk1.c -o walk</span><br><span class="line">$ gdb ./walk <span class="comment"># or you could $ gdb -args ./walk /tmp 10</span></span><br><span class="line">Reading symbols from /root/walk...done.</span><br><span class="line"></span><br><span class="line">(gdb) b main</span><br><span class="line">Breakpoint 1 at 0x400bb8: file walk1.c, line 73.</span><br><span class="line">(gdb) r /tmp 10 <span class="comment">#  or you could (gdb) set args /tmp 10</span></span><br><span class="line">Starting program: /root/./walk /tmp 10</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main (argc=3, argv=0x7fffffffe138) at walk1.c:73</span><br><span class="line">73	    <span class="keyword">if</span>(argc != 3)</span><br><span class="line">(gdb) p argc</span><br><span class="line"><span class="variable">$1</span> = 3</span><br><span class="line">(gdb) p argv</span><br><span class="line"><span class="variable">$2</span> = (char **) 0x7fffffffe138</span><br><span class="line">(gdb) p argv[0]</span><br><span class="line"><span class="variable">$3</span> = 0x7fffffffe414 <span class="string">"/root/./walk"</span></span><br><span class="line">(gdb) p argv[1]</span><br><span class="line"><span class="variable">$4</span> = 0x7fffffffe421 <span class="string">"/tmp"</span></span><br><span class="line">(gdb) p argv[2]</span><br><span class="line"><span class="variable">$5</span> = 0x7fffffffe426 <span class="string">"10"</span></span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+          <h3 id="print-argv"><a href="#print-argv" class="headerlink" title="print argv"></a><a href="https://wizardforcel.gitbooks.io/100-gdb-tips/set-program-args.html" target="_blank" rel="noopener">print argv</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g3 walk1.c -o walk</span><br><span class="line">$ gdb ./walk <span class="comment"># or you could $ gdb -args ./walk /tmp 10</span></span><br><span class="line">Reading symbols from /root/walk...done.</span><br><span class="line"></span><br><span class="line">(gdb) b main</span><br><span class="line">Breakpoint 1 at 0x400bb8: file walk1.c, line 73.</span><br><span class="line">(gdb) r /tmp 10 <span class="comment">#  or you could (gdb) set args /tmp 10</span></span><br><span class="line">Starting program: /root/./walk /tmp 10</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main (argc=3, argv=0x7fffffffe138) at walk1.c:73</span><br><span class="line">73	    <span class="keyword">if</span>(argc != 3)</span><br><span class="line">(gdb) p argc</span><br><span class="line"><span class="variable">$1</span> = 3</span><br><span class="line">(gdb) p argv</span><br><span class="line"><span class="variable">$2</span> = (char **) 0x7fffffffe138</span><br><span class="line">(gdb) p argv[0]</span><br><span class="line"><span class="variable">$3</span> = 0x7fffffffe414 <span class="string">"/root/./walk"</span></span><br><span class="line">(gdb) p argv[1]</span><br><span class="line"><span class="variable">$4</span> = 0x7fffffffe421 <span class="string">"/tmp"</span></span><br><span class="line">(gdb) p argv[2]</span><br><span class="line"><span class="variable">$5</span> = 0x7fffffffe426 <span class="string">"10"</span></span><br><span class="line">(gdb)</span><br><span class="line"></span><br><span class="line"><span class="comment"># attach args</span></span><br><span class="line">$ gdb --args /bin/bash -c <span class="string">'ls -l'</span></span><br><span class="line">$ <span class="built_in">set</span> listsize 50</span><br><span class="line">$ p *args@4 </span><br><span class="line"></span><br><span class="line"><span class="comment"># if the software was install by source, you could add --directory for import debug symbol</span></span><br><span class="line"><span class="comment"># re-complie bash</span></span><br><span class="line"></span><br><span class="line">$ gdb --args /usr/<span class="built_in">local</span>/bin/bash -c <span class="string">'echo [1g]'</span> --directory ~/tools/bash-4.4</span><br><span class="line">(gdb) la src</span><br><span class="line"></span><br><span class="line"><span class="comment">## if you want disable optimze</span></span><br><span class="line">$ CFLAGS=<span class="string">"-g -O0"</span> CXXFLAGS=<span class="string">"-g -O0"</span> LDFLAGS=<span class="string">"-g"</span>  ./configure --<span class="built_in">enable</span>-debugger</span><br><span class="line">$ CFLAGS=<span class="string">"-g -O0"</span> CXXFLAGS=<span class="string">"-g -O0"</span> LDFLAGS=<span class="string">"-g"</span>  ./make -j 2</span><br><span class="line"></span><br><span class="line"><span class="comment">## set debug directory</span></span><br><span class="line">(gdb) <span class="built_in">set</span> debug-file-directory &lt;directory&gt;</span><br><span class="line">(gdb) show debug-file-directory</span><br><span class="line">(gdb) <span class="built_in">set</span> debug-file-directory /usr/lib/debug</span><br><span class="line">add-symbol-file filename address</span><br><span class="line">add-symbol-file filename address [ -readnow ] [ -mapped ]</span><br><span class="line">add-symbol-file filename -ssection address ...</span><br></pre></td></tr></table></figure>
+
+
 
       
     </div>
@@ -1055,7 +1161,7 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-30 23:01:57" itemprop="dateModified" datetime="2020-03-30T23:01:57+08:00">2020-03-30</time>
+                <time title="Modified: 2020-05-29 17:37:09" itemprop="dateModified" datetime="2020-05-29T17:37:09+08:00">2020-05-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1089,14 +1195,14 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>33k</span>
+              <span>34k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>30 mins.</span>
+              <span>31 mins.</span>
             </span>
 
         </div>
@@ -1110,11 +1216,130 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
       
           <h3 id="format"><a href="#format" class="headerlink" title="format"></a>format</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mdt</span></span><br><span class="line">FSNAME=lustre</span><br><span class="line">MDS1NID=0.0.0.0@tcp</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> mkfs.lustre --reformat --mgs --backfstype=zfs --fsname=<span class="variable">$&#123;FSNAME&#125;</span> --servicenode=<span class="variable">$&#123;MDS1NID&#125;</span> mdt_0/mgt_0</span><br><span class="line"><span class="built_in">echo</span> mkfs.lustre --reformat --mdt --backfstype=zfs --mgsnode=<span class="variable">$&#123;MDS1NID&#125;</span> --fsname=<span class="variable">$&#123;FSNAME&#125;</span> --servicenode=<span class="variable">$&#123;MDS1NID&#125;</span> --index=0 mdt_0/mdt_0</span><br><span class="line"></span><br><span class="line"><span class="comment"># ost</span></span><br><span class="line">FSNAME=lustre</span><br><span class="line">MDS1NID=1.1.1.1@tcp</span><br><span class="line">MDS2NID=2.2.2.2@tcp</span><br><span class="line">OSS1NID=3.3.3.3@tcp </span><br><span class="line">OSS2NID=4.4.4.4@tcp </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;0..6&#125;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> mkfs.lustre --reformat --backfstype=zfs --ost  --index=<span class="variable">$i</span>  --fsname=<span class="variable">$&#123;FSNAME&#125;</span> --servicenode=<span class="variable">$&#123;OSS1NID&#125;</span> --servicenode=<span class="variable">$&#123;OSS2NID&#125;</span> --mgsnode=<span class="variable">$&#123;MDS1NID&#125;</span>  ost_<span class="variable">$i</span>/ost_<span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="Enable-large-dir-feature"><a href="#Enable-large-dir-feature" class="headerlink" title="Enable large_dir feature"></a>Enable large_dir feature</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ tune2fs -O large_dir /dev/nvme0n1p1</span><br><span class="line">$ dumpe2fs -h /dev/nvme0n1p1 | grep feat</span><br><span class="line">$ dumpe2fs 1.45.2.wc1 (27-May-2019)</span><br><span class="line">Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery mmp flex_bg ea_inode dirdata large_dir sparse_super large_file huge_file uninit_bg dir_nlink quota</span><br><span class="line">Journal features:         journal_incompat_revoke</span><br></pre></td></tr></table></figure>
+
+<h3 id="set-stripe-size-for-tiny-files"><a href="#set-stripe-size-for-tiny-files" class="headerlink" title="set stripe size for tiny files"></a>set stripe size for tiny files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lfs setstripe -S 65536 /tfs10</span><br></pre></td></tr></table></figure>
+
+<h3 id="change-ipaddr"><a href="#change-ipaddr" class="headerlink" title="change ipaddr"></a>change ipaddr</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tunefs.lustre --erase-params --mgsnode=<span class="variable">$new_mgs_ip</span>@tcp --servicenode=<span class="variable">$new_service_ip</span>@tcp0 --writeconf /dev/md4</span><br></pre></td></tr></table></figure>
+
 <h3 id="Public"><a href="#Public" class="headerlink" title="Public"></a>Public</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">options lnet networks=tcp(bond0)</span><br><span class="line">options ptlrpc ldlm_num_threads=16</span><br><span class="line">options ptlrpc at_max=300</span><br><span class="line">options ptlrpc at_min=50</span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*net_latency, net_latency + quiescent_time) +\\ 2*service_time</span></span><br><span class="line"><span class="comment"># ldlm_enqueue_min = max(2*50, 50 + 140) + 2*50 = 50+140 + 100 = 290</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#at_max The largest potential RPC timeout that a client can set is 2*at_max. By lowering at_max from 600 to 400 seconds we reduce the worst case I/O delay from 1200 seconds, or 20 minutes, to 800 seconds or just over 13 minutes.</span></span><br><span class="line"><span class="comment">#at_min The 40 second value factors into our calculation for an appropriate LDLM timeout as discussed in section LDLM Timeouts. Our recommendation for Lustre servers is also 40 seconds</span></span><br><span class="line"><span class="comment">#Adaptive Timeouts: In a Lustre file system servers keep track of the time it takes for RPCs to be completed</span></span><br><span class="line"><span class="comment">#The quiescent_time in this formula is to account for the time it takes all Lustre clients to reestablish connections with all Lustre targets following an HSN quiesce. We've experimentally determined an average time to be approximately 140 seconds, but it is possible that this value may vary based on different factors such as the number of Lustre clients, the number of Lustre targets, the number of Lustre file systems mounted on each client, etc. Thus, given an at_min of 40 seconds</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">options ptlrpc ldlm_enqueue_min=250</span><br><span class="line"></span><br><span class="line"><span class="comment"># readonly mount</span></span><br><span class="line">$ mount.lfs <span class="variable">$zpool</span> /ost0 -o rdonly_dev</span><br></pre></td></tr></table></figure>
 <p><a href="http://wiki.lfs.org/Lustre_Resiliency:_Understanding_Lustre_Message_Loss_and_Tuning_for_Resiliency#Tuning_Lustre_for_Resiliency" target="_blank" rel="noopener">Understanding Lustre Message Loss and Tuning for Resiliency</a></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/12/29/lfs_command/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/xfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/logo-4-blog.png">
+      <meta itemprop="name" content="Ginger">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="b946c5a0bf547c89">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/26/xfs/" class="post-title-link" itemprop="url">xfs</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-26 16:12:19" itemprop="dateCreated datePublished" datetime="2019-11-26T16:12:19+08:00">2019-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-21 00:12:54" itemprop="dateModified" datetime="2020-04-21T00:12:54+08:00">2020-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/filesystem/" itemprop="url" rel="index">
+                    <span itemprop="name">filesystem</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/11/26/xfs/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/26/xfs/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>22k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>20 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://fibrevillage.com/storage" target="_blank" rel="noopener">reference</a></p>
+<h4 id="format"><a href="#format" class="headerlink" title="format"></a>format</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Raid 60  24 HDD ，12HDD/per raid6   （12-2）× 2 ， Raid stripe size 64KB</span></span><br><span class="line">$ mkfs.xfs -f -d sunit=64,swidth=$((64*20)) /dev/sdxx1</span><br><span class="line"><span class="comment">#su: Stripe unit, which is the RAID chunk size, in bytes</span></span><br><span class="line"><span class="comment">#sw: Multiplier of the stripe unit, i.e. number of data disks</span></span><br><span class="line"></span><br><span class="line">$ mkfs.xfs /dev/device</span><br><span class="line">$ mkfs. xfs -d su= 64k,sw= 4 /dev/device</span><br></pre></td></tr></table></figure>
+<p>su = value<br>    Specifies a stripe unit or RAID chunk size. The value must be specified in bytes, with an optional k, m, or g suffix.<br>sw= value<br>    Specifies the number of data disks in a RAID device, or the number of stripe units in the stripe.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/26/xfs/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1245,223 +1470,6 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/26/xfs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/26/xfs/" class="post-title-link" itemprop="url">xfs</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-26 16:12:19" itemprop="dateCreated datePublished" datetime="2019-11-26T16:12:19+08:00">2019-11-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-18 02:05:48" itemprop="dateModified" datetime="2020-04-18T02:05:48+08:00">2020-04-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/filesystem/" itemprop="url" rel="index">
-                    <span itemprop="name">filesystem</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2019/11/26/xfs/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/26/xfs/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>17k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>16 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="http://fibrevillage.com/storage" target="_blank" rel="noopener">reference</a></p>
-<h4 id="format"><a href="#format" class="headerlink" title="format"></a>format</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Raid 60  24 HDD ，12HDD/per raid6   （12-2）× 2 ， Raid stripe size 64KB</span></span><br><span class="line">$ mkfs.xfs -f -d sunit=64,swidth=$((64*20)) /dev/sdxx1</span><br><span class="line"><span class="comment">#su: Stripe unit, which is the RAID chunk size, in bytes</span></span><br><span class="line"><span class="comment">#sw: Multiplier of the stripe unit, i.e. number of data disks</span></span><br><span class="line"></span><br><span class="line">$ mkfs.xfs /dev/device</span><br><span class="line">$ mkfs. xfs -d su= 64k,sw= 4 /dev/device</span><br></pre></td></tr></table></figure>
-<p>su = value<br>    Specifies a stripe unit or RAID chunk size. The value must be specified in bytes, with an optional k, m, or g suffix.<br>sw= value<br>    Specifies the number of data disks in a RAID device, or the number of stripe units in the stripe.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/26/xfs/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/31/bcc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/logo-4-blog.png">
-      <meta itemprop="name" content="Ginger">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="b946c5a0bf547c89">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/31/bcc/" class="post-title-link" itemprop="url">bcc tools</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-10-31 16:25:34" itemprop="dateCreated datePublished" datetime="2019-10-31T16:25:34+08:00">2019-10-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 23:18:41" itemprop="dateModified" datetime="2020-01-05T23:18:41+08:00">2020-01-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/debug/" itemprop="url" rel="index">
-                    <span itemprop="name">debug</span>
-                  </a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2019/10/31/bcc/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/31/bcc/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>67</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="not-make-sure"><a href="#not-make-sure" class="headerlink" title="not make sure"></a>not make sure</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/bcc/tools/funclatency -T -m -d 3600 dsl_pool_sync</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1541,13 +1549,13 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1582,13 +1590,13 @@ trans            transpose an N × N matrix</code></pre><h4 id="performance-info
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">925k</span>
+    <span title="Symbols count total">965k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">14:01</span>
+    <span title="Reading time total">14:37</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

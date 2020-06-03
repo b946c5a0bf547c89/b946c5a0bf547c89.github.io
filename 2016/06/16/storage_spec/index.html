@@ -46,12 +46,12 @@
   };
 </script>
 
-  <meta name="description" content="PCI&#x2F;PCI-X speed   Bus and frequency 32 bit transfer rate 64 bit Transfer rate    33-MHz PCI 1064Mb&#x2F;s 2128Mb&#x2F;s   66-MHz PCI 2128Mb&#x2F;s 4256Mb&#x2F;s   100-MHz PCI-X Not applicable 6400Mb&#x2F;s   133-MHz PCI-X Not">
+  <meta name="description" content="Device parameters(MTBF) Mean Time Between FailureMTBF, however, can be subject to misinterpretation. For example, an HDD might carry a 1M-hour MTBF, causing some customers to erroneously assume that t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="storage spec">
 <meta property="og:url" content="http://yoursite.com/2016/06/16/storage_spec/index.html">
 <meta property="og:site_name" content="b946c5a0bf547c89">
-<meta property="og:description" content="PCI&#x2F;PCI-X speed   Bus and frequency 32 bit transfer rate 64 bit Transfer rate    33-MHz PCI 1064Mb&#x2F;s 2128Mb&#x2F;s   66-MHz PCI 2128Mb&#x2F;s 4256Mb&#x2F;s   100-MHz PCI-X Not applicable 6400Mb&#x2F;s   133-MHz PCI-X Not">
+<meta property="og:description" content="Device parameters(MTBF) Mean Time Between FailureMTBF, however, can be subject to misinterpretation. For example, an HDD might carry a 1M-hour MTBF, causing some customers to erroneously assume that t">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/img/Dt9p6.jpg">
 <meta property="og:image" content="http://yoursite.com/img/sfp-10bt-1.png">
@@ -71,7 +71,7 @@
 <meta property="og:image" content="http://yoursite.com/img/hdd-spec.png">
 <meta property="og:image" content="http://yoursite.com/img/sector-size.png">
 <meta property="article:published_time" content="2016-06-16T07:35:11.000Z">
-<meta property="article:modified_time" content="2020-03-24T15:27:39.000Z">
+<meta property="article:modified_time" content="2020-05-31T03:04:54.000Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="hardware">
 <meta name="twitter:card" content="summary">
@@ -259,7 +259,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-24 23:27:39" itemprop="dateModified" datetime="2020-03-24T23:27:39+08:00">2020-03-24</time>
+                <time title="Modified: 2020-05-31 11:04:54" itemprop="dateModified" datetime="2020-05-31T11:04:54+08:00">2020-05-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,14 +300,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>18k</span>
+              <span>20k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>16 mins.</span>
+              <span>19 mins.</span>
             </span>
 
         </div>
@@ -319,7 +319,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="PCI-PCI-X-speed"><a href="#PCI-PCI-X-speed" class="headerlink" title="PCI/PCI-X speed"></a>PCI/PCI-X speed</h3><table>
+        <h3 id="Device-parameters"><a href="#Device-parameters" class="headerlink" title="Device parameters"></a><a href="https://www.seagate.com/www-content/surveillance-center/files/Understanding-Reliability-Metrics.pdf" target="_blank" rel="noopener">Device parameters</a></h3><h4 id="MTBF-Mean-Time-Between-Failure"><a href="#MTBF-Mean-Time-Between-Failure" class="headerlink" title="(MTBF) Mean Time Between Failure"></a>(MTBF) Mean Time Between Failure</h4><p>MTBF, however, can be subject to misinterpretation. For example, an HDD might carry a 1M-hour MTBF, causing some customers to erroneously assume that the drive should be able to run 24 hours a day for a century or more. Obviously, this is theoretical.</p>
+<p>MTBF is actually reached by dividing the total time a population of samples is under observation by the number of failures. If you have 1000 drives running for 1000 hours each, and five of them fail (1000×1000/5 ), you’ve then derived a 200K-hour MTBF. Because MTBF is typically calculated during an HDD’s useful life, consider a graph of failure rate over time, starting when a population of HDDs rolls off of the manufacturing line. </p>
+<h4 id="AFR-Annualized-Failure-Rate"><a href="#AFR-Annualized-Failure-Rate" class="headerlink" title="(AFR) Annualized Failure Rate"></a>(AFR) Annualized Failure Rate</h4><p>Recently, Seagate began offering AFR specs on some drives in addition to conventional MTBF ratings. Although the two metrics are similar, AFR is a percentage estimate of the products that will likely fail due to a defect over a 1-year period. The subtle distinction lies in a switch from averages to percentages. MTBF is based on probabilities; AFR relies on HDD return numbers and analyses for its estimates. AFRs don’t include HDDs returned without issues, those subjected to excessive shock or HDDs that were mishandled. Seagate expects AFR to help facilitate better service plans and spare unit strategies.<br>Remember: AFR, as with any reliability metric, makes specific assumptions about how many hours an HDD is running per year, endured motor start/stop cycles, and internal temperature, all of which affect reliability. But AFR doesn’t necessarily help you get to the bottom of which HDD is right for your application. Enter the annualized workload rate (WRL).</p>
+<h4 id="WRL-Workload-Rate-Limit"><a href="#WRL-Workload-Rate-Limit" class="headerlink" title="(WRL) Workload Rate Limit"></a>(WRL) Workload Rate Limit</h4><p>Seagate specifies a WRL—that is, the maximum read/write workload (also in terabytes per year) a given HDD is designed to accommodate. Enterprise-class drives feature a WRL of 300TB to 550TB/year. Specialty-tuned drives, including NAS, archive, video and surveillance families, are rated for 180TB/year; Seagate’s client portfolio (desktop and laptop HDDs) has a workload rate limit of 55TB/year, which is still a formidable amount of data within the client market segment.</p>
+<p>Consider environmental conditions in your reliability projections. An insufficiently-cooled storage device, even operating under its WRL, will experience a higher failure rate than those at or under manufacturer specifications. Similarly, using a desktop HDD in a highly active chassis with significant vibration levels can also take a toll on the performance and reliability of the drive.</p>
+<p><a href="https://www.seagate.com/support/kb/annualized-workload-rate-005902en/" target="_blank" rel="noopener">Annualized Workload Rate</a> = (Lifetime Writes + Lifetime Reads) * (8760 / Lifetime Power On Hours)<br>8760 are the number of hours in a year.  The Workload Rate becomes an annualized average expressed as TB/year.</p>
+<p>Enterprise                300~550TB/year<br>NAS/archive/surveillance  180TB/year<br>desktop/laptop            55TB/year</p>
+<h3 id="PCI-PCI-X-speed"><a href="#PCI-PCI-X-speed" class="headerlink" title="PCI/PCI-X speed"></a>PCI/PCI-X speed</h3><table>
 <thead>
 <tr>
 <th>Bus and frequency</th>
@@ -1521,7 +1528,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCI-PCI-X-speed"><span class="nav-number">1.</span> <span class="nav-text">PCI&#x2F;PCI-X speed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware-index"><span class="nav-number">2.</span> <span class="nav-text">Hardware index</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JBOD"><span class="nav-number">2.1.</span> <span class="nav-text">JBOD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Raid"><span class="nav-number">2.2.</span> <span class="nav-text">Raid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSI-Fusion-MPT"><span class="nav-number">2.3.</span> <span class="nav-text">LSI Fusion-MPT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSI-ARM-arch-SAS-SATA-NVME"><span class="nav-number">2.4.</span> <span class="nav-text">LSI ARM arch, SAS, SATA, NVME</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NVME-SAS-SSD"><span class="nav-number">2.5.</span> <span class="nav-text">NVME&#x2F;SAS SSD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SATA-SSD"><span class="nav-number">2.6.</span> <span class="nav-text">SATA SSD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMI-3-0"><span class="nav-number">3.</span> <span class="nav-text">DMI 3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NIC"><span class="nav-number">4.</span> <span class="nav-text">NIC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10GbE"><span class="nav-number">4.1.</span> <span class="nav-text">10GbE</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">5.</span> <span class="nav-text">SSD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NVME-Interface-reference"><span class="nav-number">5.1.</span> <span class="nav-text">NVME Interface reference</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#supermicro-benchmark"><span class="nav-number">5.2.</span> <span class="nav-text">supermicro benchmark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Risks-of-unexpected-power-loss-on-solid-state-drives"><span class="nav-number">5.3.</span> <span class="nav-text">Risks of unexpected power loss on solid state drives</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dell-Solid-State-Drive-FAQ"><span class="nav-number">5.4.</span> <span class="nav-text">Dell Solid-State-Drive-FAQ</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enterprise-HDD"><span class="nav-number">6.</span> <span class="nav-text">Enterprise HDD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rotational-Speed-10K～15K"><span class="nav-number">6.1.</span> <span class="nav-text">Rotational Speed 10K～15K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rotational-Speed-7200"><span class="nav-number">6.2.</span> <span class="nav-text">Rotational Speed 7200</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SATA-all-parameters"><span class="nav-number">7.</span> <span class="nav-text">SATA all parameters</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Device-parameters"><span class="nav-number">1.</span> <span class="nav-text">Device parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MTBF-Mean-Time-Between-Failure"><span class="nav-number">1.1.</span> <span class="nav-text">(MTBF) Mean Time Between Failure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AFR-Annualized-Failure-Rate"><span class="nav-number">1.2.</span> <span class="nav-text">(AFR) Annualized Failure Rate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WRL-Workload-Rate-Limit"><span class="nav-number">1.3.</span> <span class="nav-text">(WRL) Workload Rate Limit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCI-PCI-X-speed"><span class="nav-number">2.</span> <span class="nav-text">PCI&#x2F;PCI-X speed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware-index"><span class="nav-number">3.</span> <span class="nav-text">Hardware index</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JBOD"><span class="nav-number">3.1.</span> <span class="nav-text">JBOD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Raid"><span class="nav-number">3.2.</span> <span class="nav-text">Raid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSI-Fusion-MPT"><span class="nav-number">3.3.</span> <span class="nav-text">LSI Fusion-MPT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LSI-ARM-arch-SAS-SATA-NVME"><span class="nav-number">3.4.</span> <span class="nav-text">LSI ARM arch, SAS, SATA, NVME</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NVME-SAS-SSD"><span class="nav-number">3.5.</span> <span class="nav-text">NVME&#x2F;SAS SSD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SATA-SSD"><span class="nav-number">3.6.</span> <span class="nav-text">SATA SSD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DMI-3-0"><span class="nav-number">4.</span> <span class="nav-text">DMI 3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NIC"><span class="nav-number">5.</span> <span class="nav-text">NIC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10GbE"><span class="nav-number">5.1.</span> <span class="nav-text">10GbE</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">6.</span> <span class="nav-text">SSD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NVME-Interface-reference"><span class="nav-number">6.1.</span> <span class="nav-text">NVME Interface reference</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#supermicro-benchmark"><span class="nav-number">6.2.</span> <span class="nav-text">supermicro benchmark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Risks-of-unexpected-power-loss-on-solid-state-drives"><span class="nav-number">6.3.</span> <span class="nav-text">Risks of unexpected power loss on solid state drives</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dell-Solid-State-Drive-FAQ"><span class="nav-number">6.4.</span> <span class="nav-text">Dell Solid-State-Drive-FAQ</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enterprise-HDD"><span class="nav-number">7.</span> <span class="nav-text">Enterprise HDD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rotational-Speed-10K～15K"><span class="nav-number">7.1.</span> <span class="nav-text">Rotational Speed 10K～15K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rotational-Speed-7200"><span class="nav-number">7.2.</span> <span class="nav-text">Rotational Speed 7200</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SATA-all-parameters"><span class="nav-number">8.</span> <span class="nav-text">SATA all parameters</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1544,13 +1551,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1585,13 +1592,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">925k</span>
+    <span title="Symbols count total">965k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">14:01</span>
+    <span title="Reading time total">14:37</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

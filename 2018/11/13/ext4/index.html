@@ -54,7 +54,7 @@
 <meta property="og:description" content="mkfs ext4 for stripe1$ mkfs.ext4 -E stride&#x3D;8,stripe-width&#x3D;128,lazy_itable_init&#x3D;0,lazy_journal_init&#x3D;0 &#x2F;dev&#x2F;sdxx1  Oh, shit , data loss, here is lustre ldiskfs backup dataWhen backing up operating syste">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-11-13T01:02:56.000Z">
-<meta property="article:modified_time" content="2020-03-24T09:25:02.000Z">
+<meta property="article:modified_time" content="2020-04-20T04:14:18.000Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="ext4">
 <meta property="article:tag" content="fsck">
@@ -242,7 +242,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-24 17:25:02" itemprop="dateModified" datetime="2020-03-24T17:25:02+08:00">2020-03-24</time>
+                <time title="Modified: 2020-04-20 12:14:18" itemprop="dateModified" datetime="2020-04-20T12:14:18+08:00">2020-04-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -333,6 +333,8 @@
 
 <h3 id="check-ext4-fragment"><a href="#check-ext4-fragment" class="headerlink" title="check ext4 fragment"></a>check ext4 fragment</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ e4defrag -c /mnt</span><br><span class="line">&lt;Fragmented files&gt;                             now/best       size/ext</span><br><span class="line">1. /mnt/rw.24.9                                313/1            104 KB</span><br><span class="line">2. /mnt/rw.4.89                                265/1            123 KB</span><br><span class="line">3. /mnt/rw.29.99                               319/1            102 KB</span><br><span class="line">4. /mnt/rw.23.7                                291/1            112 KB</span><br><span class="line">5. /mnt/rw.31.71                               366/1             89 KB</span><br><span class="line"></span><br><span class="line"> Total/best extents				1184802/4096</span><br><span class="line"> Average size per extent			113 KB</span><br><span class="line"> Fragmentation score				28</span><br><span class="line"> [0-30 no problem: 31-55 a little bit fragmented: 56- needs defrag]</span><br><span class="line"> This directory (/mnt) does not need defragmentation.</span><br><span class="line"> Done.</span><br><span class="line"></span><br><span class="line">$ e4defrag /dev/sda &amp;</span><br></pre></td></tr></table></figure>
 
+<h3 id="mount-the-backup-superblock"><a href="#mount-the-backup-superblock" class="headerlink" title="mount the backup superblock"></a>mount the backup superblock</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$  dumpe2fs /dev/sda2 | grep superblock</span><br><span class="line">$  fsck -b 32768 /dev/sda2</span><br><span class="line">or you could </span><br><span class="line">$  mount sb=32768 /dev/sda2 /mnt</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -352,12 +354,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2018/08/07/isdct/" rel="prev" title="intel isdct">
-      <i class="fa fa-chevron-left"></i> intel isdct
+    <a href="/2018/11/13/nfs/" rel="prev" title="nfs info">
+      <i class="fa fa-chevron-left"></i> nfs info
     </a></div>
       <div class="post-nav-item">
-    <a href="/2018/11/13/nfs/" rel="next" title="nfs info">
-      nfs info <i class="fa fa-chevron-right"></i>
+    <a href="/2018/11/22/ftrace/" rel="next" title="ftrace">
+      ftrace <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -425,7 +427,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mkfs-ext4-for-stripe"><span class="nav-number">1.</span> <span class="nav-text">mkfs ext4 for stripe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For-huge-parttion-there-is-no-enough-memory-it-will-cause-slow"><span class="nav-number">2.</span> <span class="nav-text">For huge parttion, there is no enough memory, it will cause slow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guess-partion-start"><span class="nav-number">3.</span> <span class="nav-text">guess partion start</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Found-ext-magic-number"><span class="nav-number">4.</span> <span class="nav-text">Found ext magic number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#because-there-is-no-any-parttion-in-this-block-dev"><span class="nav-number">5.</span> <span class="nav-text">because there is no any parttion in this block dev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#You-can’t-fsck-by-default"><span class="nav-number">6.</span> <span class="nav-text">You can’t fsck by default</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Found-some-info-form-superblock"><span class="nav-number">7.</span> <span class="nav-text">Found some info form superblock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#You-have-to-disable-ext-journal-make-it-like-ext2-all-blocks-full-scan"><span class="nav-number">8.</span> <span class="nav-text">You have to disable ext journal, make it like ext2, all blocks full scan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Looks-like-the-block-dev-has-be-destroy-by-hardware-raid-controller-all-data-has-messed"><span class="nav-number">9.</span> <span class="nav-text">Looks like the block dev has be destroy by hardware raid controller, all data has messed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debugfs"><span class="nav-number">10.</span> <span class="nav-text">debugfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-ext4-fragment"><span class="nav-number">11.</span> <span class="nav-text">check ext4 fragment</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mkfs-ext4-for-stripe"><span class="nav-number">1.</span> <span class="nav-text">mkfs ext4 for stripe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For-huge-parttion-there-is-no-enough-memory-it-will-cause-slow"><span class="nav-number">2.</span> <span class="nav-text">For huge parttion, there is no enough memory, it will cause slow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guess-partion-start"><span class="nav-number">3.</span> <span class="nav-text">guess partion start</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Found-ext-magic-number"><span class="nav-number">4.</span> <span class="nav-text">Found ext magic number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#because-there-is-no-any-parttion-in-this-block-dev"><span class="nav-number">5.</span> <span class="nav-text">because there is no any parttion in this block dev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#You-can’t-fsck-by-default"><span class="nav-number">6.</span> <span class="nav-text">You can’t fsck by default</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Found-some-info-form-superblock"><span class="nav-number">7.</span> <span class="nav-text">Found some info form superblock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#You-have-to-disable-ext-journal-make-it-like-ext2-all-blocks-full-scan"><span class="nav-number">8.</span> <span class="nav-text">You have to disable ext journal, make it like ext2, all blocks full scan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Looks-like-the-block-dev-has-be-destroy-by-hardware-raid-controller-all-data-has-messed"><span class="nav-number">9.</span> <span class="nav-text">Looks like the block dev has be destroy by hardware raid controller, all data has messed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#debugfs"><span class="nav-number">10.</span> <span class="nav-text">debugfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#check-ext4-fragment"><span class="nav-number">11.</span> <span class="nav-text">check ext4 fragment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mount-the-backup-superblock"><span class="nav-number">12.</span> <span class="nav-text">mount the backup superblock</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -448,13 +450,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -489,13 +491,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">925k</span>
+    <span title="Symbols count total">965k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">14:01</span>
+    <span title="Reading time total">14:37</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

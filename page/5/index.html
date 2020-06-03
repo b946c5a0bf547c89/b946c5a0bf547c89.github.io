@@ -662,7 +662,7 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-24 23:29:23" itemprop="dateModified" datetime="2020-03-24T23:29:23+08:00">2020-03-24</time>
+                <time title="Modified: 2020-06-02 17:01:46" itemprop="dateModified" datetime="2020-06-02T17:01:46+08:00">2020-06-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -696,14 +696,14 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>35k</span>
+              <span>43k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>32 mins.</span>
+              <span>39 mins.</span>
             </span>
 
         </div>
@@ -884,7 +884,7 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-30 23:12:18" itemprop="dateModified" datetime="2020-03-30T23:12:18+08:00">2020-03-30</time>
+                <time title="Modified: 2020-05-31 11:11:29" itemprop="dateModified" datetime="2020-05-31T11:11:29+08:00">2020-05-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -918,7 +918,7 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>52k</span>
+              <span>53k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1112,7 +1112,7 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-24 23:27:39" itemprop="dateModified" datetime="2020-03-24T23:27:39+08:00">2020-03-24</time>
+                <time title="Modified: 2020-05-31 11:04:54" itemprop="dateModified" datetime="2020-05-31T11:04:54+08:00">2020-05-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1146,14 +1146,14 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>18k</span>
+              <span>20k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>16 mins.</span>
+              <span>19 mins.</span>
             </span>
 
         </div>
@@ -1165,7 +1165,14 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="PCI-PCI-X-speed"><a href="#PCI-PCI-X-speed" class="headerlink" title="PCI/PCI-X speed"></a>PCI/PCI-X speed</h3><table>
+          <h3 id="Device-parameters"><a href="#Device-parameters" class="headerlink" title="Device parameters"></a><a href="https://www.seagate.com/www-content/surveillance-center/files/Understanding-Reliability-Metrics.pdf" target="_blank" rel="noopener">Device parameters</a></h3><h4 id="MTBF-Mean-Time-Between-Failure"><a href="#MTBF-Mean-Time-Between-Failure" class="headerlink" title="(MTBF) Mean Time Between Failure"></a>(MTBF) Mean Time Between Failure</h4><p>MTBF, however, can be subject to misinterpretation. For example, an HDD might carry a 1M-hour MTBF, causing some customers to erroneously assume that the drive should be able to run 24 hours a day for a century or more. Obviously, this is theoretical.</p>
+<p>MTBF is actually reached by dividing the total time a population of samples is under observation by the number of failures. If you have 1000 drives running for 1000 hours each, and five of them fail (1000×1000/5 ), you’ve then derived a 200K-hour MTBF. Because MTBF is typically calculated during an HDD’s useful life, consider a graph of failure rate over time, starting when a population of HDDs rolls off of the manufacturing line. </p>
+<h4 id="AFR-Annualized-Failure-Rate"><a href="#AFR-Annualized-Failure-Rate" class="headerlink" title="(AFR) Annualized Failure Rate"></a>(AFR) Annualized Failure Rate</h4><p>Recently, Seagate began offering AFR specs on some drives in addition to conventional MTBF ratings. Although the two metrics are similar, AFR is a percentage estimate of the products that will likely fail due to a defect over a 1-year period. The subtle distinction lies in a switch from averages to percentages. MTBF is based on probabilities; AFR relies on HDD return numbers and analyses for its estimates. AFRs don’t include HDDs returned without issues, those subjected to excessive shock or HDDs that were mishandled. Seagate expects AFR to help facilitate better service plans and spare unit strategies.<br>Remember: AFR, as with any reliability metric, makes specific assumptions about how many hours an HDD is running per year, endured motor start/stop cycles, and internal temperature, all of which affect reliability. But AFR doesn’t necessarily help you get to the bottom of which HDD is right for your application. Enter the annualized workload rate (WRL).</p>
+<h4 id="WRL-Workload-Rate-Limit"><a href="#WRL-Workload-Rate-Limit" class="headerlink" title="(WRL) Workload Rate Limit"></a>(WRL) Workload Rate Limit</h4><p>Seagate specifies a WRL—that is, the maximum read/write workload (also in terabytes per year) a given HDD is designed to accommodate. Enterprise-class drives feature a WRL of 300TB to 550TB/year. Specialty-tuned drives, including NAS, archive, video and surveillance families, are rated for 180TB/year; Seagate’s client portfolio (desktop and laptop HDDs) has a workload rate limit of 55TB/year, which is still a formidable amount of data within the client market segment.</p>
+<p>Consider environmental conditions in your reliability projections. An insufficiently-cooled storage device, even operating under its WRL, will experience a higher failure rate than those at or under manufacturer specifications. Similarly, using a desktop HDD in a highly active chassis with significant vibration levels can also take a toll on the performance and reliability of the drive.</p>
+<p><a href="https://www.seagate.com/support/kb/annualized-workload-rate-005902en/" target="_blank" rel="noopener">Annualized Workload Rate</a> = (Lifetime Writes + Lifetime Reads) * (8760 / Lifetime Power On Hours)<br>8760 are the number of hours in a year.  The Workload Rate becomes an annualized average expressed as TB/year.</p>
+<p>Enterprise                300~550TB/year<br>NAS/archive/surveillance  180TB/year<br>desktop/laptop            55TB/year</p>
+<h3 id="PCI-PCI-X-speed"><a href="#PCI-PCI-X-speed" class="headerlink" title="PCI/PCI-X speed"></a>PCI/PCI-X speed</h3><table>
 <thead>
 <tr>
 <th>Bus and frequency</th>
@@ -1311,7 +1318,7 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-28 09:29:31" itemprop="dateModified" datetime="2020-03-28T09:29:31+08:00">2020-03-28</time>
+                <time title="Modified: 2020-05-31 11:05:47" itemprop="dateModified" datetime="2020-05-31T11:05:47+08:00">2020-05-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1345,7 +1352,7 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.5k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -1364,7 +1371,11 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Sort-array-by-awk"><a href="#Sort-array-by-awk" class="headerlink" title="Sort array by awk"></a>Sort array by awk</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$</span> <span class="string">cat</span> <span class="string">file</span></span><br><span class="line"><span class="string">port</span> <span class="number">12</span></span><br><span class="line"><span class="string">zest</span> <span class="number">2</span></span><br><span class="line"><span class="string">status</span> <span class="number">4</span></span><br><span class="line"><span class="string">flash</span> <span class="number">4</span></span><br><span class="line"><span class="string">hero</span> <span class="number">3</span></span><br><span class="line"><span class="string">awk</span> <span class="number">3</span></span><br><span class="line"><span class="string">innovation</span> <span class="number">10</span></span><br><span class="line"><span class="string">test</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+          <h3 id="Set-awk-env"><a href="#Set-awk-env" class="headerlink" title="Set awk env"></a>Set awk env</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> AWKBUFSIZE=$((1024*1024)) </span><br><span class="line"><span class="comment">#you could strace</span></span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"B2000712/17B2000712.TPM2.data\t34"</span>..., 1048576) = 1048576</span><br></pre></td></tr></table></figure>
+
+<h3 id="write-file-in-awk"><a href="#write-file-in-awk" class="headerlink" title="write file in awk"></a>write file in awk</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ awk <span class="string">'&#123;print $2 &gt;"text.out"&#125;'</span> text.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sort-array-by-awk"><a href="#Sort-array-by-awk" class="headerlink" title="Sort array by awk"></a>Sort array by awk</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">$</span> <span class="string">cat</span> <span class="string">file</span></span><br><span class="line"><span class="string">port</span> <span class="number">12</span></span><br><span class="line"><span class="string">zest</span> <span class="number">2</span></span><br><span class="line"><span class="string">status</span> <span class="number">4</span></span><br><span class="line"><span class="string">flash</span> <span class="number">4</span></span><br><span class="line"><span class="string">hero</span> <span class="number">3</span></span><br><span class="line"><span class="string">awk</span> <span class="number">3</span></span><br><span class="line"><span class="string">innovation</span> <span class="number">10</span></span><br><span class="line"><span class="string">test</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2016/04/04/awk/#more" rel="contents">
@@ -1422,7 +1433,7 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-05 19:33:58" itemprop="dateModified" datetime="2020-01-05T19:33:58+08:00">2020-01-05</time>
+                <time title="Modified: 2020-05-22 15:04:04" itemprop="dateModified" datetime="2020-05-22T15:04:04+08:00">2020-05-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1577,13 +1588,13 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1618,13 +1629,13 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">925k</span>
+    <span title="Symbols count total">965k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">14:01</span>
+    <span title="Reading time total">14:37</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>

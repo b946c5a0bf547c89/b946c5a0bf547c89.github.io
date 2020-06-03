@@ -46,15 +46,15 @@
   };
 </script>
 
-  <meta name="description" content="print argv12345678910111213141516171819202122$ gcc -g3 walk1.c -o walk$ gdb .&#x2F;walk # or you could $ gdb -args .&#x2F;walk &#x2F;tmp 10Reading symbols from &#x2F;root&#x2F;walk...done.(gdb) b mainBreakpoint 1 at 0x400bb8:">
+  <meta name="description" content="print argv123456789101112131415161718192021222324252627282930313233343536373839404142434445$ gcc -g3 walk1.c -o walk$ gdb .&#x2F;walk # or you could $ gdb -args .&#x2F;walk &#x2F;tmp 10Reading symbols from &#x2F;root&#x2F;wal">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GDB tips">
 <meta property="og:url" content="http://yoursite.com/2020/03/03/gdb/index.html">
 <meta property="og:site_name" content="b946c5a0bf547c89">
-<meta property="og:description" content="print argv12345678910111213141516171819202122$ gcc -g3 walk1.c -o walk$ gdb .&#x2F;walk # or you could $ gdb -args .&#x2F;walk &#x2F;tmp 10Reading symbols from &#x2F;root&#x2F;walk...done.(gdb) b mainBreakpoint 1 at 0x400bb8:">
+<meta property="og:description" content="print argv123456789101112131415161718192021222324252627282930313233343536373839404142434445$ gcc -g3 walk1.c -o walk$ gdb .&#x2F;walk # or you could $ gdb -args .&#x2F;walk &#x2F;tmp 10Reading symbols from &#x2F;root&#x2F;wal">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-03T14:17:33.000Z">
-<meta property="article:modified_time" content="2020-03-27T14:31:29.000Z">
+<meta property="article:modified_time" content="2020-05-19T04:10:54.000Z">
 <meta property="article:author" content="Ginger">
 <meta property="article:tag" content="debug">
 <meta name="twitter:card" content="summary">
@@ -241,7 +241,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-03-27 22:31:29" itemprop="dateModified" datetime="2020-03-27T22:31:29+08:00">2020-03-27</time>
+                <time title="Modified: 2020-05-19 12:10:54" itemprop="dateModified" datetime="2020-05-19T12:10:54+08:00">2020-05-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,7 +282,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>505</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -301,7 +301,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="print-argv"><a href="#print-argv" class="headerlink" title="print argv"></a><a href="https://wizardforcel.gitbooks.io/100-gdb-tips/set-program-args.html" target="_blank" rel="noopener">print argv</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g3 walk1.c -o walk</span><br><span class="line">$ gdb ./walk <span class="comment"># or you could $ gdb -args ./walk /tmp 10</span></span><br><span class="line">Reading symbols from /root/walk...done.</span><br><span class="line"></span><br><span class="line">(gdb) b main</span><br><span class="line">Breakpoint 1 at 0x400bb8: file walk1.c, line 73.</span><br><span class="line">(gdb) r /tmp 10 <span class="comment">#  or you could (gdb) set args /tmp 10</span></span><br><span class="line">Starting program: /root/./walk /tmp 10</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main (argc=3, argv=0x7fffffffe138) at walk1.c:73</span><br><span class="line">73	    <span class="keyword">if</span>(argc != 3)</span><br><span class="line">(gdb) p argc</span><br><span class="line"><span class="variable">$1</span> = 3</span><br><span class="line">(gdb) p argv</span><br><span class="line"><span class="variable">$2</span> = (char **) 0x7fffffffe138</span><br><span class="line">(gdb) p argv[0]</span><br><span class="line"><span class="variable">$3</span> = 0x7fffffffe414 <span class="string">"/root/./walk"</span></span><br><span class="line">(gdb) p argv[1]</span><br><span class="line"><span class="variable">$4</span> = 0x7fffffffe421 <span class="string">"/tmp"</span></span><br><span class="line">(gdb) p argv[2]</span><br><span class="line"><span class="variable">$5</span> = 0x7fffffffe426 <span class="string">"10"</span></span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+        <h3 id="print-argv"><a href="#print-argv" class="headerlink" title="print argv"></a><a href="https://wizardforcel.gitbooks.io/100-gdb-tips/set-program-args.html" target="_blank" rel="noopener">print argv</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -g3 walk1.c -o walk</span><br><span class="line">$ gdb ./walk <span class="comment"># or you could $ gdb -args ./walk /tmp 10</span></span><br><span class="line">Reading symbols from /root/walk...done.</span><br><span class="line"></span><br><span class="line">(gdb) b main</span><br><span class="line">Breakpoint 1 at 0x400bb8: file walk1.c, line 73.</span><br><span class="line">(gdb) r /tmp 10 <span class="comment">#  or you could (gdb) set args /tmp 10</span></span><br><span class="line">Starting program: /root/./walk /tmp 10</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main (argc=3, argv=0x7fffffffe138) at walk1.c:73</span><br><span class="line">73	    <span class="keyword">if</span>(argc != 3)</span><br><span class="line">(gdb) p argc</span><br><span class="line"><span class="variable">$1</span> = 3</span><br><span class="line">(gdb) p argv</span><br><span class="line"><span class="variable">$2</span> = (char **) 0x7fffffffe138</span><br><span class="line">(gdb) p argv[0]</span><br><span class="line"><span class="variable">$3</span> = 0x7fffffffe414 <span class="string">"/root/./walk"</span></span><br><span class="line">(gdb) p argv[1]</span><br><span class="line"><span class="variable">$4</span> = 0x7fffffffe421 <span class="string">"/tmp"</span></span><br><span class="line">(gdb) p argv[2]</span><br><span class="line"><span class="variable">$5</span> = 0x7fffffffe426 <span class="string">"10"</span></span><br><span class="line">(gdb)</span><br><span class="line"></span><br><span class="line"><span class="comment"># attach args</span></span><br><span class="line">$ gdb --args /bin/bash -c <span class="string">'ls -l'</span></span><br><span class="line">$ <span class="built_in">set</span> listsize 50</span><br><span class="line">$ p *args@4 </span><br><span class="line"></span><br><span class="line"><span class="comment"># if the software was install by source, you could add --directory for import debug symbol</span></span><br><span class="line"><span class="comment"># re-complie bash</span></span><br><span class="line"></span><br><span class="line">$ gdb --args /usr/<span class="built_in">local</span>/bin/bash -c <span class="string">'echo [1g]'</span> --directory ~/tools/bash-4.4</span><br><span class="line">(gdb) la src</span><br><span class="line"></span><br><span class="line"><span class="comment">## if you want disable optimze</span></span><br><span class="line">$ CFLAGS=<span class="string">"-g -O0"</span> CXXFLAGS=<span class="string">"-g -O0"</span> LDFLAGS=<span class="string">"-g"</span>  ./configure --<span class="built_in">enable</span>-debugger</span><br><span class="line">$ CFLAGS=<span class="string">"-g -O0"</span> CXXFLAGS=<span class="string">"-g -O0"</span> LDFLAGS=<span class="string">"-g"</span>  ./make -j 2</span><br><span class="line"></span><br><span class="line"><span class="comment">## set debug directory</span></span><br><span class="line">(gdb) <span class="built_in">set</span> debug-file-directory &lt;directory&gt;</span><br><span class="line">(gdb) show debug-file-directory</span><br><span class="line">(gdb) <span class="built_in">set</span> debug-file-directory /usr/lib/debug</span><br><span class="line">add-symbol-file filename address</span><br><span class="line">add-symbol-file filename address [ -readnow ] [ -mapped ]</span><br><span class="line">add-symbol-file filename -ssection address ...</span><br></pre></td></tr></table></figure>
+
+
 
     </div>
 
@@ -417,13 +419,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -458,13 +460,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">925k</span>
+    <span title="Symbols count total">965k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">14:01</span>
+    <span title="Reading time total">14:37</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
