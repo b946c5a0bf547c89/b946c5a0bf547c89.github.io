@@ -662,7 +662,7 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-02 17:01:46" itemprop="dateModified" datetime="2020-06-02T17:01:46+08:00">2020-06-02</time>
+                <time title="Modified: 2020-06-04 21:57:22" itemprop="dateModified" datetime="2020-06-04T21:57:22+08:00">2020-06-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -696,14 +696,14 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>43k</span>
+              <span>44k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>39 mins.</span>
+              <span>40 mins.</span>
             </span>
 
         </div>
@@ -715,7 +715,33 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="How-many-devices-in-single-raidz-zpool"><a href="#How-many-devices-in-single-raidz-zpool" class="headerlink" title="How many devices in single raidz zpool"></a>How many devices in single raidz zpool</h3><p>2^n + parity<br>raidz2 2^3+2=10 2^4+2=18 , we have 14 x HDDs in single raidz2 zpool in production<br>raidz3 2^3+3=11 2^4+3=19 , next we will choice 19 x HDDs in single raidz3</p>
+          <h3 id="Why-ZFS"><a href="#Why-ZFS" class="headerlink" title="Why ZFS"></a><a href="https://www.fujitsu.com/global/Images/ZFS%20Overview%20and%20Design%20Guide.pdf" target="_blank" rel="noopener">Why ZFS</a></h3><ul>
+<li>Transaction file system(Data consistency guaranteed)<ul>
+<li>Manages writing of data with copy-on-write method</li>
+<li>Does not overwrite original data</li>
+<li>Commits or ignores sequential processing completely<ul>
+<li>No data inconsistency</li>
+</ul>
+</li>
+<li>Consistency check not required for the file system</li>
+<li>Asynchronous writing to disks<ul>
+<li>The system writes to the disk (I/O) after the end of sequential processing, so a check of the actual disk capacity (by a command such as df or du) may find that it is different.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>End-to-end checksum(Invalid data detected Data self-corrected)<ul>
+<li>Stores checksum of data block in its parent block</li>
+<li>Restores data from redundant block when error is detected</li>
+<li>Also detects and corrects logical inconsistencies (software bugs)</li>
+<li>Data cannot be recovered when the data corruption range includes the checksum</li>
+<li>The data and checksum are physically separated and read individually. The checksum itself can be recovered from the higher-level block.</li>
+<li>ZFS not only detects the read errors caused by a disk fault, but also detects and corrects logical inconsistencies caused by a software bug</li>
+<li>When read or written, invalid data is detected by the checksum. When invalid data is detected, if the system is in a redundant configuration (RAID 1 (mirroring), RAID-Z, RAID-Z2, or RAID-Z3), the data is automatically recovered (selfhealing)</li>
+</ul>
+</li>
+</ul>
+<h3 id="How-many-devices-in-single-raidz-zpool"><a href="#How-many-devices-in-single-raidz-zpool" class="headerlink" title="How many devices in single raidz zpool"></a>How many devices in single raidz zpool</h3><p>2^n + parity<br>raidz2 2^3+2=10 2^4+2=18 , we have 14 x HDDs in single raidz2 zpool in production<br>raidz3 2^3+3=11 2^4+3=19 , next we will choice 19 x HDDs in single raidz3</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2016/12/04/openzfs-tips/#more" rel="contents">
@@ -1629,13 +1655,13 @@ TCP switches between the two modes depending on the current congestion.<br>Some 
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">965k</span>
+    <span title="Symbols count total">976k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">14:37</span>
+    <span title="Reading time total">14:48</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
